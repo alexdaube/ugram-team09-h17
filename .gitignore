@@ -168,3 +168,6 @@ jspm_packages
 
 
 # End of https://www.gitignore.io/api/webstorm,linux,windows,macos,node
+
+#App Specific
+dist
