@@ -9,8 +9,7 @@ Avant de commencer, jetez un coup d'oeil aux ressources suivantes:
 # Tutoriels recommandés
 * [Backbone Tutorial - Beginner](https://www.youtube.com/watch?v=FZSjvWtUxYk) (vu en GLO-3102)
 
-*Si utilisation de WebStorm
-# Compiler
+# Compiler (pour runner avec WebStorm)
 ```sh
 npm install
 gulp
@@ -19,8 +18,7 @@ gulp
 Ouvrir `index.html` avec le serveur intégré de webstorm.
 Le message `Hello GLO-3112 WEB!` devrais s'afficher dans votre navigateur, vous êtes prêt à développer!
 
-*Si utilisation d'un autre IDE (ou si vous voulez le runner en localHost)
-# Compiler
+# Compiler (pour runner en localhost)
 ```sh
 npm install
 gulp serve
