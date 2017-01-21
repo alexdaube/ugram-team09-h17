@@ -9,17 +9,23 @@ Avant de commencer, jetez un coup d'oeil aux ressources suivantes:
 # Tutoriels recommandés
 * [Backbone Tutorial - Beginner](https://www.youtube.com/watch?v=FZSjvWtUxYk) (vu en GLO-3102)
 
+*Si utilisation de WebStorm
 # Compiler
-
 ```sh
 npm install
 gulp
 ```
-
 # Exécuter
-
 Ouvrir `index.html` avec le serveur intégré de webstorm.
 Le message `Hello GLO-3112 WEB!` devrais s'afficher dans votre navigateur, vous êtes prêt à développer!
+
+*Si utilisation d'un autre IDE (ou si vous voulez le runner en localHost)
+# Compiler
+```sh
+npm install
+gulp serve
+```
+Votre navigateur par défaut ouvrira `index.html` en localhost
 
 # Inclure un template avec webpack
 Voir [`HelloWorldView`](https://github.com/GLO3112/starter-packs/blob/master/backbone-starter/src/views/HelloWorldView.ts)
