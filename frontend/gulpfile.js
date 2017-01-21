@@ -54,7 +54,7 @@ gulp.task('connect', function() {
 
 gulp.task('open', ['connect'], function() {
   gulp.src('./index.html')
-  .pipe(open({uri: 'http://localhost:8000', app: 'Google Chrome'}));
+  .pipe(open({uri: 'http://localhost:8000'}));
 });
 
 gulp.task('serve', ['clean','ts', 'sass', 'open', 'watch'], function() {});
