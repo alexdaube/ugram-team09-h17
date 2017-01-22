@@ -10,22 +10,23 @@ export class UserProfileView extends Backbone.View<UserProfileModel> {
         }, options));
         this.template = require('./UserProfileTemplate.ejs') as Function;
 
-        this.userProfileModel = options["model"];
+        //this.userProfileModel = options["model"];
     }
 
     render() {
 
-        this.userProfileModel.fetch({
+        var that = this;
+        this.model.fetch({
             success: function(userProfile){
                 console.log("fetch successfull");
                 //console.log(userProfile.attributes);
+                that.$el.html(that.template(that.model.toJSON()));
             },
             error: function(){
                 console.log("Shit happened");
             }
         });
 
-        this.$el.html(this.template({model: this.userProfileModel.toJSON()}));
         return this;
     }
 }

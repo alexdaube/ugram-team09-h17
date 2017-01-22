@@ -26,6 +26,7 @@ export class UserProfileModel extends Backbone.Model {
 
 
 
+
     get userName(): string {
         return this.get("userName");
     }
