@@ -9,7 +9,12 @@
 
     </div>
     <div class="userProfile-infos">
-        User Name: <%= console.log("firstName: " + firstName) %><br>
-        First Name: <%- firstName %><br>
+        <% console.log(userProfile); %>
+        User Name: <%-  userProfile.id %><br>
+        First Name: <%- userProfile.firstName %><br>
+        Last Name: <%- userProfile.lastName %><br>
+        Email Name: <%- userProfile.email %><br>
+        Phone Number: <%- userProfile.phoneNumber %><br>
+        Inscription Date: <%- userProfile.inscriptionDate %><br>
     </div>
 </div>

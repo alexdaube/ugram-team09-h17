@@ -1,5 +1,3 @@
-import {HelloWorldView} from './views/HelloWorldView'
-import {HelloWorldModel} from './models/HelloWorldModel';
 
 import {UserProfileView} from "./views/UserProfileView";
 import {UserProfileModel} from "./models/UserProfileModel";

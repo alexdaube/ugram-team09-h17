@@ -1,4 +1,4 @@
-
+import {StringFormatter} from '../util/StringFormatter';
 
 export interface UserProfileAttributes {
     userName: string;
@@ -12,36 +12,6 @@ export interface UserProfileAttributes {
 export class UserProfileModel extends Backbone.Model {
 
     url: string;
-
-    //userName: string;
-    // firstName: string;
-    // lastName: string;
-    // email: string;
-    // phoneNumber: string;
-    // inscriptionDate: string;
-
-
-
-
-
-
-
-
-    get userName(): string {
-        return this.get("userName");
-    }
-
-    set userName(userName: string){
-        this.set("userName", userName);
-    }
-
-    get firstName(): string {
-        return this.get("firstName");
-    }
-
-    set firstName(firstName: string){
-        this.set("firstName", firstName);
-    }
 
     constructor(options?: any) {
         super(options);
@@ -58,5 +28,78 @@ export class UserProfileModel extends Backbone.Model {
             inscriptionDate: ""
         }
     }
+
+    get userName(): string {
+        return this.get("id");
+    }
+
+    set userName(userName: string){
+        this.set("id", userName);
+    }
+
+    get firstName(): string {
+        return this.get("firstName");
+    }
+
+    set firstName(firstName: string){
+        this.set("firstName", firstName);
+    }
+
+    get lastName(): string {
+        return this.get("lastName");
+    }
+
+    set lastName(lastName: string){
+        this.set("lastName", lastName);
+    }
+
+    get email(): string {
+        return this.get("email");
+    }
+
+    set email(email: string){
+        this.set("email", email);
+    }
+
+    get phoneNumber(): string {
+        return this.get("phoneNumber");
+    }
+
+    set phoneNumber(phoneNumber: string){
+        this.set("phoneNumber", phoneNumber);
+    }
+
+    get inscriptionDate(): string {
+        var bufferDate = this.get("registrationDate");
+        var formattedDate = StringFormatter.formatMilisecondDateToMMDDYYYY(new Date(bufferDate));
+        return formattedDate;
+    }
+
+    set inscriptionDate(inscriptionDate: string){
+        this.set("registrationDate", inscriptionDate);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
