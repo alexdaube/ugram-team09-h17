@@ -1,11 +1,11 @@
-export interface HelloWorldModelAttributes {
+export interface HelloWorldAttributes {
     firstname: string;
     lastname: string;
 }
 
 export class HelloWorldModel extends Backbone.Model {
 
-    constructor(attributes: HelloWorldModelAttributes, options?: any) {
+    constructor(attributes: HelloWorldAttributes, options?: any) {
         super(attributes, options);
     }
 
