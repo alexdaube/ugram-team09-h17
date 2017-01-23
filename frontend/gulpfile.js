@@ -11,6 +11,7 @@ var uglify = require('gulp-uglify');
 var clean = require('gulp-clean');
 var cssnano = require('gulp-cssnano');
 var livereload = require('gulp-livereload');
+var argv = require('yargs').argv;
 
 gulp.task('ts', function() {
     return gulp.src('src/Index.ts')
@@ -47,16 +48,18 @@ gulp.task('watch', function() {
 gulp.task('connect', function() {
   connect.server({
     root: '',
-    port: '8000',
+    port: (argv.port ? argv.port : '8000'),
     livereload: true,
   });
 });
 
 gulp.task('open', ['connect'], function() {
   gulp.src('./index.html')
-  .pipe(open({uri: 'http://localhost:8000'}));
+  .pipe(open({uri: 'http://localhost:' + (argv.port ? argv.port : '8000')}));
 });
 
 gulp.task('serve', ['clean','ts', 'sass', 'open', 'watch'], function() {});
+
+gulp.task('smart-serve', ['clean','ts', 'sass', 'connect', 'watch'], function() {});
 
 gulp.task('default', ['clean', 'ts', 'sass', 'watch'], function() {});
