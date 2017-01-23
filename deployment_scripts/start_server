@@ -1,4 +1,5 @@
 #!/bin/bash
+killall gulp &&
 cd /www &&
 npm install --unsafe-perm &&
 npm install gulp -D &&
