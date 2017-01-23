@@ -1,8 +1,8 @@
 #!/bin/bash
-killall gulp &&
+killall -s SIGKILL -I gulp &&
 cd /www &&
 npm install --unsafe-perm &&
 npm install gulp -D &&
 npm install gulp-cli -g &&
 chmod -R 777 ./ &&
-gulp smart-serve --port 80
+nohup gulp smart-serve --port 80 &

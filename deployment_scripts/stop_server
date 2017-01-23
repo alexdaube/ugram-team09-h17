@@ -1,2 +1,2 @@
 #!/bin/bash
-killall gulp
+killall -s SIGKILL -I gulp
