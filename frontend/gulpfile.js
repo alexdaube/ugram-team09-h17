@@ -60,6 +60,6 @@ gulp.task('open', ['connect'], function() {
 
 gulp.task('serve', ['clean','ts', 'sass', 'open', 'watch'], function() {});
 
-gulp.task('smart-serve', ['clean','ts', 'sass', 'connect', 'watch'], function() {});
+gulp.task('smart-serve', ['clean','ts', 'sass', 'connect'], function() {});
 
 gulp.task('default', ['clean', 'ts', 'sass', 'watch'], function() {});
