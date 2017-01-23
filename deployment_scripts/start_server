@@ -4,4 +4,4 @@ npm install --unsafe-perm &&
 npm install gulp -D &&
 npm install gulp-cli -g &&
 chmod -R 777 ./ &&
-gulp serve --port 80
+gulp smart-serve --port 80
