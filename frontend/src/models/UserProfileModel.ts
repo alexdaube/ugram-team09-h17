@@ -13,9 +13,11 @@ export class UserProfileModel extends Backbone.Model {
 
     url: string;
 
+
+
     constructor(options?: any) {
         super(options);
-        this.url = "http://api.ugram.net/users/derp";
+        this.url = "http://api.ugram.net/users/jlabonte";
     };
 
     defaults() {
@@ -61,11 +63,11 @@ export class UserProfileModel extends Backbone.Model {
         this.set("email", email);
     }
 
-    get phoneNumber(): string {
+    get phoneNumber(): number {
         return this.get("phoneNumber");
     }
 
-    set phoneNumber(phoneNumber: string){
+    set phoneNumber(phoneNumber: number){
         this.set("phoneNumber", phoneNumber);
     }
 
