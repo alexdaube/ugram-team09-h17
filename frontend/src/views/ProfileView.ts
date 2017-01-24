@@ -5,7 +5,7 @@ export class ProfileView extends Backbone.View<ProfileModel> {
 
     constructor(options?: Backbone.ViewOptions<ProfileModel>) {
         super(_.extend({
-            el: '#app'
+            el: '#content'
         }, options));
         this.template = require('./ProfileTemplate.ejs') as Function;
     }

@@ -10,17 +10,13 @@ import {FeedModel} from './models/FeedModel';
 import {ProfileView} from './views/ProfileView'
 import {ProfileModel} from './models/ProfileModel';
 
-import {EditProfileView} from './views/EditProfileView'
-import {EditProfileModel} from './models/EditProfileModel';
+import {SettingView} from './views/SettingView'
+import {SettingModel} from './models/SettingModel';
 
 import {FooterView} from './views/FooterView'
 import {FooterModel} from './models/FooterModel';
 
 $(document).ready(() => {
-    // let helloWorldModel = new HelloWorldModel({firstname: 'GLO-3120', lastname: 'WEB'});
-    // let helloWorldView = new HelloWorldView({model: helloWorldModel});
-    // helloWorldView.render();
-
     let headerModel = new HeaderModel({});
     let headerView = new HeaderView({model: headerModel});
     headerView.render();
@@ -33,9 +29,9 @@ $(document).ready(() => {
     // let profileView = new ProfileView({model: profileModel});
     // profileView.render();
 
-    // let editProfileModel = new EditProfileModel({});
-    // let editProfileView = new EditProfileView({model: editProfileModel});
-    // editProfileView.render();
+    // let settingModel = new SettingModel({});
+    // let settingView = new SettingView({model: settingModel});
+    // settingView.render();
 
     let footerModel = new FooterModel({});
     let footerView = new FooterView({model: footerModel});
