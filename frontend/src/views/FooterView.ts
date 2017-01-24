@@ -5,7 +5,7 @@ export class FooterView extends Backbone.View<FooterModel> {
 
     constructor(options?: Backbone.ViewOptions<FooterModel>) {
         super(_.extend({
-            el: '#app'
+            el: '#footer'
         }, options));
         this.template = require('./FooterTemplate.ejs') as Function;
     }

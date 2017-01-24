@@ -5,7 +5,7 @@ export class HeaderView extends Backbone.View<HeaderModel> {
 
     constructor(options?: Backbone.ViewOptions<HeaderModel>) {
         super(_.extend({
-            el: '#app'
+            el: '#header'
         }, options));
         this.template = require('./HeaderTemplate.ejs') as Function;
     }

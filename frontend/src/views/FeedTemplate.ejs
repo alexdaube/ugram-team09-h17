@@ -115,16 +115,12 @@ header,
 main,
 nav,
 section {
-	-webkit-box-align: stretch;
 	-ms-flex-align: stretch;
 	align-items: stretch;
 	border: 0 solid #000;
 	box-sizing: border-box;
-	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
 	-ms-flex-direction: column;
 	flex-direction: column;
 	-ms-flex-negative: 0;
@@ -183,7 +179,6 @@ a:active {
 	background-position: -207px -229px
 }
 @media (min-device-pixel-ratio: 1.5),
-(-webkit-min-device-pixel-ratio: 1.5),
 (min-resolution: 144dpi) {
 	.optionIcon {
 		background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/175db9.png);
@@ -229,7 +224,6 @@ a:active {
 }
 .sizeImageFeed {
 	height: 100%;
-	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
@@ -292,14 +286,6 @@ a.heightTextFeed2:visited {
 .likeTextFeed {
 	font-weight: 600
 }
-.inputTextFeed {
-	-webkit-appearance: none
-}
-.inputTextFeed::-webkit-input-placeholder {
-	color: #999;
-	font-weight: 300;
-	opacity: 1
-}
 .inputTextFeed::-moz-placeholder {
 	color: #999;
 	font-weight: 300;
@@ -335,10 +321,6 @@ a.heightTextFeed2:visited {
 	outline: none;
 	width: 100%
 }
-.inputCommentFeed::-webkit-input-placeholder,
-.inputCommentFeed:focus::-webkit-input-placeholder {
-	color: #999
-}
 .inputCommentFeed::-moz-placeholder,
 .inputCommentFeed:focus::-moz-placeholder {
 	color: #999
@@ -368,20 +350,15 @@ a.heightTextFeed2:visited {
 	flex-shrink: 1
 }
 .flexCommentFeed {
-	-webkit-box-flex: 1;
 	-ms-flex-positive: 1;
 	flex-grow: 1
 }
 .addCommentFeed {
-	-webkit-box-align: center;
 	-ms-flex-align: center;
 	align-items: center;
 	border-top: 1px solid #efefef;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
 	-ms-flex-direction: row;
 	flex-direction: row;
-	-webkit-box-pack: center;
 	-ms-flex-pack: center;
 	justify-content: center
 }
@@ -406,7 +383,6 @@ a.heightTextFeed2:visited {
 }
 .optionPostFeed,
 .likeButtonFeed {
-	-webkit-box-flex: 0;
 	-ms-flex-positive: 0;
 	flex-grow: 0;
 	-ms-flex-negative: 0;
@@ -452,9 +428,7 @@ a.heightTextFeed2:visited {
 	.likeButtonFeed {
 		margin-left: -9px;
 		margin-right: -1px;
-		-webkit-transform: translate3d(0, 0, 0) scale(.834);
 		transform: translate3d(0, 0, 0) scale(.834);
-		-webkit-transform-origin: left;
 		transform-origin: left
 	}
 }
@@ -471,11 +445,8 @@ a.heightTextFeed2:visited {
 	width: 100%
 }
 .topAlignFeed {
-	-webkit-box-align: center;
 	-ms-flex-align: center;
 	align-items: center;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
 	-ms-flex-direction: row;
 	flex-direction: row
 }
@@ -493,7 +464,6 @@ a.heightTextFeed2:visited {
 }
 .userNameFeed {
 	display: block;
-	-webkit-box-flex: 1;
 	-ms-flex-positive: 1;
 	flex-grow: 1;
 	-ms-flex-negative: 1;
@@ -526,7 +496,6 @@ a.heightTextFeed2:visited {
 	flex-shrink: 0
 }
 .contentFeed {
-	-webkit-box-flex: 1;
 	-ms-flex-positive: 1;
 	flex-grow: 1;
 	margin: 0 auto;
@@ -579,24 +548,24 @@ a.heightTextFeed2:visited {
 		<article class="borderFeed topFeed">
 			<header class="topAlignFeed">
 			<a class="userImageFeed userAlignFeed logoSize" href=""><img class="logoUserFeed" src="https://scontent-yyz1-1.cdninstagram.com/t51.2885-19/s150x150/15034714_1617210441916856_7699009232070246400_a.jpg"></a>
-			<div class="userNameFeed"><a class="heightTextFeed widthTextFeed" title="barbegazifest" href="">barbegazifest</a><a class="heightTextFeed2 widthTextFeed2" title="BARBEGAZI" href="">BARBEGAZI</a></div>
-			<a class="hourFeed" href=""><time datetime="2017-01-21T20:20:26.000Z" title="21 janvier 2017">1 h</time></a>
+			<div class="userNameFeed"><a class="heightTextFeed widthTextFeed" href="">{user name post}</a></div>
+			<a class="hourFeed" href=""><time datetime="2017-01-21T20:20:26.000Z">{time post}</time></a>
 			</header>
 			<div class="imageFeed">
-				<div class="imagePaddingFeed"><img alt="Avec la température d'aujourd'hui, on se croirait dans le temps des sucres ! On s'ennui de la tireeee ! #tire #sucre #sugar #winter #snow #yum #miam #delicious #festival #qc #mtl #mtlcity" class="sizeImageFeed" src="https://scontent-yyz1-1.cdninstagram.com/t51.2885-15/e35/16123684_1319527648110388_4282290962018861056_n.jpg?ig_cache_key=MTQzMjg1ODE3MzM0MTA5NjgyMA%3D%3D.2"></div>
+				<div class="imagePaddingFeed"><img class="sizeImageFeed" src="https://scontent-yyz1-1.cdninstagram.com/t51.2885-15/e35/16123684_1319527648110388_4282290962018861056_n.jpg?ig_cache_key=MTQzMjg1ODE3MzM0MTA5NjgyMA%3D%3D.2"></div>
 			</div>
 			<div class="textContentFeed">
 			<section class="paddingLikeFeed">
-				<span class="likeTextFeed">11 mentions J’aime</span>
+				<span class="likeTextFeed">{number like} mentions J’aime</span>
 			</section>
 			<ul>
 				<li class="textCommentFeed">
-					<a class="heightTextFeed blackTextFeed" title="barbegazifest" href="">barbegazifest</a>
-					<span>Avec la température d'aujourd'hui, on se croirait dans le temps des sucres ! On s'ennui de la tireeee !</span>
+					<a class="heightTextFeed blackTextFeed" href="">{user name post}</a>
+					<span>{text post}</span>
 				</li>
 				<li class="textCommentFeed">
-					<a class="heightTextFeed blackTextFeed" title="livingwanderlost" href="">livingwanderlost</a>
-					<span>Beyond well done with this one! killer shot!</span>
+					<a class="heightTextFeed blackTextFeed" href="">{user name comment}</a>
+					<span>{text comment}</span>
 				</li>
 			</ul>
 			<section class="addCommentFeed commentPaddingFeed">
