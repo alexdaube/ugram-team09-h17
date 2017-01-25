@@ -17,19 +17,18 @@ import {SettingModel} from './models/SettingModel';
 import {FooterView} from './views/FooterView'
 import {FooterModel} from './models/FooterModel';
 
-$(document).ready(() => {
+import {AppRouter} from "./routeur"
 
-    // let userProfileModel = new UserProfileModel();
-    //
-    // let userProfileView = new UserProfileView({
-    //     model: userProfileModel
-    // });
-    //
-    // userProfileView.render();
+$(document).ready(() => {
 
     let headerModel = new HeaderModel({});
     let headerView = new HeaderView({model: headerModel});
     headerView.render();
+
+    let footerModel = new FooterModel({});
+    let footerView = new FooterView({model: footerModel});
+    footerView.render();
+
 
     // let feedModel = new FeedModel({});
     // let feedView = new FeedView({model: feedModel});
@@ -43,76 +42,26 @@ $(document).ready(() => {
     // let settingView = new SettingView({model: settingModel});
     // settingView.render();
 
-    let footerModel = new FooterModel({});
-    let footerView = new FooterView({model: footerModel});
-    footerView.render();
-});
+    var app_router = new AppRouter();
 
-// class AppRouter extends Backbone.Router {
-//     routes = {
-//         "*feed": "defaultRoute",
-//         // 'profile': 'showProfile',
-//         // 'setting': 'showSetting'
-//     }
-//
-//     constructor(){
-//     	super();
-//     	(<any>this)._bindRoutes();
-//     }
-//
-//     defaultRoute() {
-//         let feedModel = new FeedModel({});
-//         let feedView = new FeedView({model: feedModel});
-//         feedView.render();
-//     }
-//
-//     // showProfile(param: string = '') {
-//     //     let profileModel = new ProfileModel({});
-//     //     let profileView = new ProfileView({model: profileModel});
-//     //     profileView.render();
-//     // }
-//
-//     // showSetting(param: string = '') {
-//     //     let settingModel = new SettingModel({});
-//     //     let settingView = new SettingView({model: settingModel});
-//     //     settingView.render();
-//     // }
-// }
-
-class AppRouter extends Backbone.Router {
-
-    routes: any;
-    constructor(options?: Backbone.RouterOptions) {
-
-        this.routes = {
-            "*actions": "defaultRoute",
-            'profile': 'showProfile',
-            'setting': 'showSetting'
-        };
-
-        super(options);
-    }
-
-    initialize() {
-        // can put more init code here to run after constructor
-    }
-
-    defaultRoute() {
+    app_router.on("route:defaultRoute", function() {
         let feedModel = new FeedModel({});
         let feedView = new FeedView({model: feedModel});
         feedView.render();
-    }
-    showProfile(param: string = '') {
+    });
+
+
+    app_router.on("route:showProfile", function() {
         let profileModel = new ProfileModel({});
         let profileView = new ProfileView({model: profileModel});
         profileView.render();
-    }
-    showSetting(param: string = '') {
+    });
+
+    app_router.on("route:showSetting", function() {
         let settingModel = new SettingModel({});
         let settingView = new SettingView({model: settingModel});
         settingView.render();
-    }
-}
+    });
 
-var app_router = new AppRouter();
-Backbone.history.start();
+    Backbone.history.start();
+});

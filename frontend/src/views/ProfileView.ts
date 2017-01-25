@@ -11,6 +11,7 @@ export class ProfileView extends Backbone.View<ProfileModel> {
     }
 
     render() {
+        console.log("ProfileModel render");
         this.$el.html(this.template(this.model.toJSON()));
         return this;
     }
