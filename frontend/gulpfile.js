@@ -13,9 +13,16 @@ var cssnano = require('gulp-cssnano');
 var livereload = require('gulp-livereload');
 var argv = require('yargs').argv;
 
+var SERVER_PORT = '8000';
+
+function swallowError(error) {
+    console.log(error.toString());
+    this.emit('end')
+}
+
 gulp.task('ts', function() {
     return gulp.src('src/Index.ts')
-        .pipe(webpack(config))
+        .pipe(webpack(config)).on('error', swallowError)
         .pipe(rename({ suffix: '.min' }))
         .pipe(uglify())
         .pipe(gulp.dest('.'))
@@ -48,14 +55,14 @@ gulp.task('watch', function() {
 gulp.task('connect', function() {
   connect.server({
     root: '',
-    port: (argv.port ? argv.port : '8000'),
-    livereload: true,
+    port: (argv.port ? argv.port : SERVER_PORT),
+    livereload: true
   });
 });
 
 gulp.task('open', ['connect'], function() {
   gulp.src('./index.html')
-  .pipe(open({uri: 'http://localhost:' + (argv.port ? argv.port : '8000')}));
+  .pipe(open({uri: 'http://localhost:' + (argv.port ? argv.port : SERVER_PORT)}));
 });
 
 gulp.task('serve', ['clean','ts', 'sass', 'open', 'watch'], function() {});
