@@ -1,3 +1,6 @@
+import * as Backbone from 'backbone';
+import * as _ from 'underscore';
+
 import {HeaderModel} from '../models/HeaderModel';
 
 export class HeaderView extends Backbone.View<HeaderModel> {
@@ -7,6 +10,7 @@ export class HeaderView extends Backbone.View<HeaderModel> {
         super(_.extend({
             el: '#header'
         }, options));
+        debugger;
         this.template = require('./HeaderTemplate.ejs') as Function;
     }
 

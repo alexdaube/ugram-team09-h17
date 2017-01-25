@@ -1,3 +1,6 @@
+import * as Backbone from 'backbone';
+import * as _ from 'underscore';
+
 import {ProfileModel} from '../models/ProfileModel';
 
 export class ProfileView extends Backbone.View<ProfileModel> {

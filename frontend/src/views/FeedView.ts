@@ -1,3 +1,6 @@
+import * as Backbone from 'backbone';
+import * as _ from 'underscore';
+
 import {FeedModel} from '../models/FeedModel';
 
 export class FeedView extends Backbone.View<FeedModel> {
