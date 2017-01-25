@@ -27,7 +27,7 @@ textarea {
 }
 .navContent {
     -ms-flex-order: 1;
-    order: 1
+    order: 1;
     padding: 0
 }
 .navAlign {
@@ -180,7 +180,7 @@ textarea {
 .navActivity,
 .navExplore,
 .navLogo {
-    background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/e05e5e.png);
+    background-image: url(/img/instagram.png);
     background-repeat: no-repeat;
     background-position: -239px -256px;
     height: 11px;
@@ -203,7 +203,7 @@ textarea {
     width: 176px
 }
 .searchIcon {
-	background-image:url(//instagramstatic-a.akamaihd.net/h1/sprites/core/e05e5e.png);
+	background-image:url(/img/instagram.png);
 	background-repeat:no-repeat;
 	background-position:-225px -256px;
 	height:15px;
@@ -230,7 +230,7 @@ textarea {
 	width:10px
 }
 .navProfile {
-    background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/e05e5e.png);
+    background-image: url(/img/instagram.png);
     background-repeat: no-repeat;
     background-position: 0 -279px;
     height: 24px;

@@ -1,19 +1,6 @@
 
-import {UserProfileView} from "./views/UserProfileView";
-import {UserProfileModel} from "./models/UserProfileModel";
-
-// $(document).ready(() => {
-//     let helloWorldModel = new HelloWorldModel({
-//         firstname: 'GLO-3120',
-//         lastname: 'WEB'
-//     });
-
-//     let helloWorldView = new HelloWorldView({
-//         model: helloWorldModel
-//     });
-
-//     helloWorldView.render();
-// });
+// import {UserProfileView} from "./views/UserProfileView";
+// import {UserProfileModel} from "./models/UserProfileModel";
 
 import {HeaderView} from './views/HeaderView'
 import {HeaderModel} from './models/HeaderModel';
@@ -32,21 +19,21 @@ import {FooterModel} from './models/FooterModel';
 
 $(document).ready(() => {
 
-    let userProfileModel = new UserProfileModel();
-
-    let userProfileView = new UserProfileView({
-        model: userProfileModel
-    });
-
-    userProfileView.render();
+    // let userProfileModel = new UserProfileModel();
+    //
+    // let userProfileView = new UserProfileView({
+    //     model: userProfileModel
+    // });
+    //
+    // userProfileView.render();
 
     let headerModel = new HeaderModel({});
     let headerView = new HeaderView({model: headerModel});
     headerView.render();
 
-    let feedModel = new FeedModel({});
-    let feedView = new FeedView({model: feedModel});
-    feedView.render();
+    // let feedModel = new FeedModel({});
+    // let feedView = new FeedView({model: feedModel});
+    // feedView.render();
 
     // let profileModel = new ProfileModel({});
     // let profileView = new ProfileView({model: profileModel});
@@ -60,3 +47,72 @@ $(document).ready(() => {
     let footerView = new FooterView({model: footerModel});
     footerView.render();
 });
+
+// class AppRouter extends Backbone.Router {
+//     routes = {
+//         "*feed": "defaultRoute",
+//         // 'profile': 'showProfile',
+//         // 'setting': 'showSetting'
+//     }
+//
+//     constructor(){
+//     	super();
+//     	(<any>this)._bindRoutes();
+//     }
+//
+//     defaultRoute() {
+//         let feedModel = new FeedModel({});
+//         let feedView = new FeedView({model: feedModel});
+//         feedView.render();
+//     }
+//
+//     // showProfile(param: string = '') {
+//     //     let profileModel = new ProfileModel({});
+//     //     let profileView = new ProfileView({model: profileModel});
+//     //     profileView.render();
+//     // }
+//
+//     // showSetting(param: string = '') {
+//     //     let settingModel = new SettingModel({});
+//     //     let settingView = new SettingView({model: settingModel});
+//     //     settingView.render();
+//     // }
+// }
+
+class AppRouter extends Backbone.Router {
+
+    routes: any;
+    constructor(options?: Backbone.RouterOptions) {
+
+        this.routes = {
+            "*actions": "defaultRoute",
+            'profile': 'showProfile',
+            'setting': 'showSetting'
+        };
+
+        super(options);
+    }
+
+    initialize() {
+        // can put more init code here to run after constructor
+    }
+
+    defaultRoute() {
+        let feedModel = new FeedModel({});
+        let feedView = new FeedView({model: feedModel});
+        feedView.render();
+    }
+    showProfile(param: string = '') {
+        let profileModel = new ProfileModel({});
+        let profileView = new ProfileView({model: profileModel});
+        profileView.render();
+    }
+    showSetting(param: string = '') {
+        let settingModel = new SettingModel({});
+        let settingView = new SettingView({model: settingModel});
+        settingView.render();
+    }
+}
+
+var app_router = new AppRouter();
+Backbone.history.start();
