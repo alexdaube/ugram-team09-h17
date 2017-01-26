@@ -8,15 +8,15 @@
          </div>
          <div class="paddingNameProfile">
             <div class="borderLogoProfile">
-               <h1 class="textNameProfile">{username}</h1>
+               <h1 class="textNameProfile"><%- userProfile.userName %></h1>
                <div class="paddingOptionProfile"><button class="styleOptionProfile coreSpriteEllipsis textOptionProfile">Options</button></div>
             </div>
             <div class="editButtonProfile"><a href=""><span><button class="styleButtonProfile colorButtonProfile sizeButtonProfile">Update profile</button></span></a></div>
          </div>
       </header>
       <div class="paddingBioProfile">
-         <h2 class="boldTextProfile">{name}</h2>
-         <span>{bio text}</span>
+         <h2 class="boldTextProfile"><%- userProfile.firstName %> <%- userProfile.lastName %></h2>
+         <span><%- userProfile.email %> <%- userProfile.phoneNumber %> inscription date: <%- userProfile.inscriptionDate %></span>
          <a class="boldLinkProfile" href="" target="_blank">{website}</a>
       </div>
       <br />
