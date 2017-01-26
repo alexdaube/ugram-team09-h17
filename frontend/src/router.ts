@@ -1,3 +1,5 @@
+import * as Backbone from 'backbone';
+
 import {ProfileView} from './views/ProfileView'
 import {ProfileModel} from './models/ProfileModel';
 
