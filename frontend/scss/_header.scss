@@ -96,7 +96,6 @@ body, button, input, textarea {
   position: absolute;
   text-align: center;
   top: 0;
-  z-index: 2;
 }
 
 .inputSearch {
@@ -106,14 +105,12 @@ body, button, input, textarea {
   font-size: 14px;
   outline: none;
   padding: 3px 10px 3px 26px;
-  z-index: 2;
   border: solid 1px #dbdbdb;
   border-radius: 3px;
   color: #262626;
   font-size: 14px;
   outline: none;
   padding: 3px 10px 3px 26px;
-  z-index: 2;
 }
 
 .colorSearch {

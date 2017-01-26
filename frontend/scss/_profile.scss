@@ -14,11 +14,6 @@ ol, ul {
   list-style: none;
 }
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
 article, div, footer, header, main, nav, section {
   -ms-flex-align: stretch;
   align-items: stretch;
@@ -36,7 +31,6 @@ article, div, footer, header, main, nav, section {
 }
 
 body {
-  overflow-y: scroll;
   height: 100%;
 }
 
@@ -65,7 +59,6 @@ a {
 
 .divImgProfile {
   display: block;
-  overflow: hidden;
   padding-bottom: 100%;
 }
 
@@ -74,15 +67,10 @@ a {
   position: absolute;
   top: 0;
   height: 100%;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  width: 100%;
 }
 
 .textOptionProfile {
   display: block;
-  overflow: hidden;
   text-indent: 110%;
   white-space: nowrap;
 }
@@ -103,24 +91,6 @@ a {
   }
 }
 
-@media (min-width: 736px) {
-  .showImgProfile {
-    margin-right: 28px;
-  }
-  .imgProfile {
-    margin-bottom: 28px;
-  }
-}
-
-@media (max-width: 735px) {
-  .showImgProfile {
-    margin-right: 3px;
-  }
-  .imgProfile {
-    margin-bottom: 3px;
-  }
-}
-
 .moreTextProfile {
   display: block;
   font-size: 14px;
@@ -128,7 +98,6 @@ a {
   padding: 60px 9px;
   position: relative;
   text-align: center;
-  z-index: 1;
   font-weight: 600;
   color: #3897f0;
   &:visited {
@@ -165,55 +134,18 @@ a {
   border-width: 1px;
   font-weight: 600;
   outline: none;
-  overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
 }
 
 .colorButtonProfile {
   background: 0 0;
-  border-color: #999;
-  color: #999;
-  background: 0 0;
-  border-color: #737373;
-  color: #737373;
-}
-
-@media (min-width: 736px) {
-  .sizeButtonProfile {
-    line-height: 29px;
-    padding: 0 11px;
-  }
-  .styleButtonProfile {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 735px) {
-  .sizeButtonProfile {
-    line-height: 24px;
-    padding: 0 9px;
-  }
-  .styleButtonProfile {
-    font-size: 14px;
-  }
+  border-color: #3897f0;
+  color: #3897f0;
 }
 
 .sizeButtonProfile {
   padding: 0 8px;
-}
-
-@media (min-width: 736px) {
-  .sizeButtonProfile {
-    line-height: 28px;
-  }
-}
-
-@media (max-width: 735px) {
-  .sizeButtonProfile {
-    line-height: 26px;
-  }
 }
 
 .fontStatsProfile {
@@ -347,7 +279,6 @@ a {
   flex-shrink: 1;
   min-width: 0;
   font-weight: 300;
-  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
@@ -363,10 +294,26 @@ a {
 }
 
 @media (min-width: 736px) {
+  .showImgProfile {
+    margin-right: 28px;
+  }
+  .imgProfile {
+    margin-bottom: 28px;
+  }
+  .sizeButtonProfile {
+    line-height: 29px;
+    padding: 0 11px;
+  }
+  .styleButtonProfile {
+    font-size: 16px;
+  }
   .contentProfile {
     box-sizing: content-box;
     padding: 40px 20px 0;
     width: calc(100% - 40px);
+  }
+  .sizeButtonProfile {
+    line-height: 28px;
   }
   .paddingProfile.contentProfile {
     padding-top: 60px;
@@ -424,6 +371,22 @@ a {
 }
 
 @media (max-width: 735px) {
+  .showImgProfile {
+    margin-right: 3px;
+  }
+  .imgProfile {
+    margin-bottom: 3px;
+  }
+  .sizeButtonProfile {
+    line-height: 24px;
+    padding: 0 9px;
+  }
+  .styleButtonProfile {
+    font-size: 14px;
+  }
+  .sizeButtonProfile {
+    line-height: 26px;
+  }
   .paddingNameProfile {
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
@@ -449,8 +412,6 @@ a {
     font-size: 14px;
     line-height: 17px;
     margin-top: 7px;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
   .paddingProfile .paddingBioProfile {
     margin: 0 20px 12px;

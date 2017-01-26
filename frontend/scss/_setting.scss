@@ -14,11 +14,6 @@ ol, ul {
   list-style: none;
 }
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
 article, div, footer, header, main, nav, section {
   -ms-flex-align: stretch;
   align-items: stretch;
@@ -37,7 +32,6 @@ article, div, footer, header, main, nav, section {
 }
 
 body {
-  overflow-y: scroll;
   height: 100%;
 }
 
@@ -64,8 +58,6 @@ a {
   border-width: 1px;
   font-weight: 600;
   outline: none;
-  overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
 }
@@ -76,40 +68,8 @@ a {
   color: #3897f0;
 }
 
-@media (min-width: 736px) {
-  .sizeButtonSetting {
-    line-height: 29px;
-    padding: 0 11px;
-  }
-  .styleButtonSetting {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 735px) {
-  .sizeButtonSetting {
-    line-height: 24px;
-    padding: 0 9px;
-  }
-  .styleButtonSetting {
-    font-size: 14px;
-  }
-}
-
 .sizeButtonSetting {
   padding: 0 8px;
-}
-
-@media (min-width: 736px) {
-  .sizeButtonSetting {
-    line-height: 28px;
-  }
-}
-
-@media (max-width: 735px) {
-  .sizeButtonSetting {
-    line-height: 26px;
-  }
 }
 
 .sizeLogoSetting {
@@ -126,20 +86,6 @@ a {
   justify-content: flex-start;
 }
 
-@media (min-width: 736px) {
-  .infoSetting {
-    -ms-flex-direction: row;
-    flex-direction: row;
-  }
-}
-
-@media (max-width: 735px) {
-  .infoSetting {
-    -ms-flex-direction: column;
-    flex-direction: column;
-  }
-}
-
 .paddingInfoSetting {
   box-sizing: border-box;
   color: #262626;
@@ -151,25 +97,6 @@ a {
   flex: 0 0 194px;
 }
 
-@media (min-width: 736px) {
-  .paddingInfoSetting {
-    padding-left: 32px;
-    padding-right: 32px;
-    text-align: right;
-  }
-}
-
-@media (max-width: 735px) {
-  .paddingInfoSetting {
-    -ms-flex-preferred-size: 25px;
-    flex-basis: 25px;
-    padding: 0 20px;
-  }
-  .privateSetting {
-    display: none;
-  }
-}
-
 .widthSetting {
   color: #262626;
   -ms-flex-positive: 1;
@@ -177,26 +104,6 @@ a {
   font-size: 16px;
   -ms-flex-pack: start;
   justify-content: flex-start;
-}
-
-@media (min-width: 736px) {
-  .widthSetting {
-    -ms-flex-preferred-size: 355px;
-    flex-basis: 355px;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    padding-right: 60px;
-  }
-}
-
-@media (max-width: 735px) {
-  .widthSetting {
-    -ms-flex-preferred-size: auto;
-    flex-basis: auto;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    padding: 0 20px;
-  }
 }
 
 .usernameSetting {
@@ -210,18 +117,6 @@ a {
 .paddingLogoSetting {
   height: 38px;
   width: 38px;
-}
-
-@media (min-width: 736px) {
-  .paddingLogoSetting {
-    margin: 0 32px 0 124px;
-  }
-}
-
-@media (max-width: 735px) {
-  .paddingLogoSetting {
-    margin: 0 32px 0 20px;
-  }
 }
 
 .userTextSetting {
@@ -262,12 +157,6 @@ a {
   }
 }
 
-@media (max-width: 735px) {
-  .menuSetting {
-    display: none;
-  }
-}
-
 .contentSetting {
   background-color: #fff;
   border: 1px solid #dbdbdb;
@@ -280,7 +169,6 @@ a {
   justify-content: stretch;
   margin: 60px auto 0;
   max-width: 935px;
-  overflow: hidden;
   width: 100%;
 }
 
@@ -336,6 +224,7 @@ a {
 }
 
 .buttonSetting {
+  cursor: pointer;
   -ms-flex-align: center;
   align-items: center;
   -ms-flex-direction: row;
@@ -343,7 +232,74 @@ a {
   margin-top: 16px;
 }
 
+@media (min-width: 736px) {
+  .paddingLogoSetting {
+    margin: 0 32px 0 124px;
+  }
+  .widthSetting {
+    -ms-flex-preferred-size: 355px;
+    flex-basis: 355px;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    padding-right: 60px;
+  }
+    .paddingInfoSetting {
+    padding-left: 32px;
+    padding-right: 32px;
+    text-align: right;
+  }
+    .infoSetting {
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+    .sizeButtonSetting {
+    line-height: 28px;
+  }
+  .sizeButtonSetting {
+    line-height: 29px;
+    padding: 0 11px;
+  }
+  .styleButtonSetting {
+    font-size: 16px;
+  }
+}
+
 @media (max-width: 735px) {
+  .menuSetting {
+    display: none;
+  }
+  .paddingLogoSetting {
+    margin: 0 32px 0 20px;
+  }
+  .widthSetting {
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    padding: 0 20px;
+  }
+  .paddingInfoSetting {
+    -ms-flex-preferred-size: 25px;
+    flex-basis: 25px;
+    padding: 0 20px;
+  }
+  .privateSetting {
+    display: none;
+  }
+  .infoSetting {
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  .sizeButtonSetting {
+    line-height: 26px;
+  }
+  .sizeButtonSetting {
+    line-height: 24px;
+    padding: 0 9px;
+  }
+  .styleButtonSetting {
+    font-size: 14px;
+  }
   .buttonSetting {
     -ms-flex-pack: justify;
     justify-content: space-between;
