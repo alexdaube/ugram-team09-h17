@@ -90,21 +90,10 @@ ol,
 ul {
 	list-style: none
 }
-blockquote,
-q {
-	quotes: none
-}
-blockquote:after,
-blockquote:before,
-q:after,
-q:before {
-	content: none
-}
 table {
 	border-collapse: collapse;
 	border-spacing: 0
 }
-#react-root,
 article,
 div,
 footer,
@@ -141,7 +130,7 @@ a:active {
 	opacity: .5
 }
 .optionIcon {
-	background-image: url(/img/instagram.png);
+	background-image: url(/img/ugram.png);
 	background-repeat: no-repeat;
 	background-position: -316px -115px;
 	height: 6px;
@@ -156,7 +145,7 @@ a:active {
 	width: 44px
 }
 .heartIcon {
-	background-image: url(/img/instagram.png);
+	background-image: url(/img/ugram.png);
 	background-repeat: no-repeat;
 	background-position: 0 -136px;
 	height: 42px;
@@ -178,7 +167,7 @@ a:active {
 @media (min-device-pixel-ratio: 1.5),
 (min-resolution: 144dpi) {
 	.optionIcon {
-		background-image: url(/img/instagram.png);
+		background-image: url(/img/ugram.png);
 		background-size: 352px 311px;
 		background-position: -312px -103px
 	}
@@ -192,7 +181,7 @@ a:active {
 		background-position: -56px -176px
 	}
 	.heartIcon {
-		background-image: url(/img/instagram.png);
+		background-image: url(/img/ugram.png);
 		background-size: 352px 311px;
 		background-position: -255px -176px
 	}

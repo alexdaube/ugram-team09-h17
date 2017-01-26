@@ -1,3 +1,6 @@
+import * as Backbone from 'backbone';
+import * as _ from 'underscore';
+
 import {FooterModel} from '../models/FooterModel';
 
 export class FooterView extends Backbone.View<FooterModel> {

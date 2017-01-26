@@ -1,3 +1,6 @@
+import * as Backbone from 'backbone';
+import * as _ from 'underscore';
+
 import {SettingModel} from '../models/SettingModel';
 
 export class SettingView extends Backbone.View<SettingModel> {

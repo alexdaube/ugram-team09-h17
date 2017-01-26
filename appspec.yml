@@ -1,0 +1,14 @@
+version: 0.0
+os: linux
+files:
+  - source: /frontend
+    destination: /www
+hooks:
+  AfterInstall:
+    - location: deployment_scripts/start_server
+      timeout: 300
+      runas: root
+  ApplicationStop:
+    - location: deployment_scripts/stop_server
+      timeout: 300
+      runas: root

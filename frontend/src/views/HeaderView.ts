@@ -1,3 +1,6 @@
+import * as Backbone from 'backbone';
+import * as _ from 'underscore';
+
 import {HeaderModel} from '../models/HeaderModel';
 
 export class HeaderView extends Backbone.View<HeaderModel> {
