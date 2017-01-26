@@ -1,0 +1,352 @@
+a, abbr, acronym, address, article, aside, audio, b, big, blockquote, body, canvas, caption, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+article, div, footer, header, main, nav, section {
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  border: 0 solid #000;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+body {
+  overflow-y: scroll;
+  height: 100%;
+}
+
+html {
+  height: 100%;
+}
+
+body, button, input, textarea {
+  font-family: "proxima-nova", "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: #003569;
+  text-decoration: none;
+  &:visited {
+    color: #003569;
+    text-decoration: none;
+  }
+}
+
+.styleButtonSetting {
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  font-weight: 600;
+  outline: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.colorButtonSetting {
+  background: 0 0;
+  border-color: #3897f0;
+  color: #3897f0;
+}
+
+@media (min-width: 736px) {
+  .sizeButtonSetting {
+    line-height: 29px;
+    padding: 0 11px;
+  }
+  .styleButtonSetting {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 735px) {
+  .sizeButtonSetting {
+    line-height: 24px;
+    padding: 0 9px;
+  }
+  .styleButtonSetting {
+    font-size: 14px;
+  }
+}
+
+.sizeButtonSetting {
+  padding: 0 8px;
+}
+
+@media (min-width: 736px) {
+  .sizeButtonSetting {
+    line-height: 28px;
+  }
+}
+
+@media (max-width: 735px) {
+  .sizeButtonSetting {
+    line-height: 26px;
+  }
+}
+
+.sizeLogoSetting {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.infoSetting {
+  margin-bottom: 16px;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+@media (min-width: 736px) {
+  .infoSetting {
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 735px) {
+  .infoSetting {
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+.paddingInfoSetting {
+  box-sizing: border-box;
+  color: #262626;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 18px;
+  margin-top: 6px;
+  -ms-flex: 0 0 194px;
+  flex: 0 0 194px;
+}
+
+@media (min-width: 736px) {
+  .paddingInfoSetting {
+    padding-left: 32px;
+    padding-right: 32px;
+    text-align: right;
+  }
+}
+
+@media (max-width: 735px) {
+  .paddingInfoSetting {
+    -ms-flex-preferred-size: 25px;
+    flex-basis: 25px;
+    padding: 0 20px;
+  }
+  .privateSetting {
+    display: none;
+  }
+}
+
+.widthSetting {
+  color: #262626;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  font-size: 16px;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+@media (min-width: 736px) {
+  .widthSetting {
+    -ms-flex-preferred-size: 355px;
+    flex-basis: 355px;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    padding-right: 60px;
+  }
+}
+
+@media (max-width: 735px) {
+  .widthSetting {
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    padding: 0 20px;
+  }
+}
+
+.usernameSetting {
+  -ms-flex-direction: row;
+  flex-direction: row;
+  margin: 32px 0 16px;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+.paddingLogoSetting {
+  height: 38px;
+  width: 38px;
+}
+
+@media (min-width: 736px) {
+  .paddingLogoSetting {
+    margin: 0 32px 0 124px;
+  }
+}
+
+@media (max-width: 735px) {
+  .paddingLogoSetting {
+    margin: 0 32px 0 20px;
+  }
+}
+
+.userTextSetting {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 38px;
+}
+
+.menuSetting {
+  border-right: 1px solid #dbdbdb;
+  -ms-flex-preferred-size: 236px;
+  flex-basis: 236px;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.textMenuSetting {
+  border-left: 2px solid transparent;
+  display: block;
+  font-size: 16px;
+  height: 100%;
+  line-height: 20px;
+  padding: 16px 16px 16px 30px;
+  width: calc(100% - 48px);
+}
+
+.boldTextSetting {
+  border-left-color: #262626;
+  font-weight: 600;
+}
+
+.textMenuSetting {
+  color: #262626;
+  &:active, &:hover, &:visited {
+    color: #262626;
+  }
+}
+
+@media (max-width: 735px) {
+  .menuSetting {
+    display: none;
+  }
+}
+
+.contentSetting {
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -ms-flex-pack: stretch;
+  justify-content: stretch;
+  margin: 60px auto 0;
+  max-width: 935px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.inputSizeSetting {
+  -ms-flex: 1 1 400px;
+  flex: 1 1 400px;
+  min-width: 50px;
+}
+
+@media (max-width: 450px) {
+  .contentSetting {
+    border: 0;
+    margin-top: 0;
+  }
+}
+
+.textPrivateSetting {
+  color: #999;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.heightSetting {
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-bottom: 16px;
+  margin-top: 32px;
+}
+
+.inputSetting {
+  background: 0 0;
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  box-sizing: border-box;
+  color: #262626;
+  -ms-flex: 0 1 355px;
+  flex: 0 1 355px;
+  font-size: 16px;
+  height: 32px;
+  padding: 0 10px;
+  &:focus {
+    border: 1px solid #b2b2b2;
+  }
+}
+
+.private2Setting {
+  margin-top: 16px;
+}
+
+.buttonSetting {
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  margin-top: 16px;
+}
+
+@media (max-width: 735px) {
+  .buttonSetting {
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
