@@ -2,6 +2,9 @@ import * as Backbone from 'backbone';
 
 import {ProfileView} from './views/ProfileView'
 import {ProfileModel} from './models/ProfileModel';
+import {ProfileCollection} from './collections/ProfileCollection';
+
+import {UserView} from './views/UserView';
 
 import {FeedView} from './views/FeedView'
 import {FeedModel} from './models/FeedModel';
@@ -20,7 +23,8 @@ export class AppRouter extends Backbone.Router {
     routes = {
         '': 'defaultRoute',
         'profile': 'showProfile',
-        'setting': 'showSetting'
+        'setting': 'showSetting',
+        'users': 'showUsers'
     }
 
     constructor() {
@@ -45,7 +49,7 @@ export class AppRouter extends Backbone.Router {
     }
 
     showProfile(param: string = '') {
-        let profileModel = new ProfileModel({});
+        let profileModel = new ProfileModel({id:'jlabonte'});
         let profileView = new ProfileView({model: profileModel});
         profileView.render();
     }
@@ -54,5 +58,18 @@ export class AppRouter extends Backbone.Router {
         let settingModel = new SettingModel({});
         let settingView = new SettingView({model: settingModel});
         settingView.render();
+    }
+
+    showUsers(param: string = '') {
+        let profileCollection = new ProfileCollection({});
+        profileCollection.fetch({
+            success: function(response) {
+                response.models.forEach(function (profileModel){
+                    let userView = new UserView({model: profileModel});
+                    $('#content').append(userView.$el);
+                    userView.render();
+                })
+            }
+        });
     }
 }

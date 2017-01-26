@@ -1,11 +1,13 @@
 /**
  * Created by jeromelabonte on 2017-01-21.
  */
-import {UserModel} from '../models/UserModel';
-export class UserCollection extends Backbone.Collection<UserModel>{
+import {ProfileModel} from '../models/ProfileModel';
+import * as Backbone from "backbone"
+
+export class ProfileCollection extends Backbone.Collection<ProfileModel>{
     constructor(options?: any) {
         super(options);
-        this.model = UserModel;
+        this.model = ProfileModel;
         this.url = "http://api.ugram.net/users";
     }
 

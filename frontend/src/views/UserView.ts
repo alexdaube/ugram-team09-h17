@@ -1,11 +1,13 @@
-import {UserModel} from '../models/UserModel';
+import * as Backbone from 'backbone';
+import * as _ from 'underscore';
+import {ProfileModel} from '../models/ProfileModel';
 
-export class UserView extends Backbone.View<UserModel> {
+export class UserView extends Backbone.View<ProfileModel> {
     template: Function;
 
-    constructor(options?: Backbone.ViewOptions<UserModel>) {
+    constructor(options?: Backbone.ViewOptions<ProfileModel>) {
         super(_.extend({
-            el: '#app'
+            tagname: 'div'
         }, options));
         this.template = require('./UserTemplate.ejs') as Function;
     }

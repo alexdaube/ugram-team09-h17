@@ -151,6 +151,10 @@ a:active {
     height: 44px;
     width: 44px
 }
+
+.profile-picture {
+    width: 60px;
+}
 @media (min-device-pixel-ratio: 1.5),
 (min-resolution: 144dpi) {
     .coreSpriteEllipsis {
@@ -624,4 +628,5 @@ a:active {
     .textNameProfile {
         font-size: 21px
     }
+
 }
