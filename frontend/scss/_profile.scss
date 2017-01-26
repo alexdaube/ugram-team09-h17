@@ -75,8 +75,7 @@ tr,
 tt,
 u,
 ul,
-var,
-video {
+var {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -132,9 +131,6 @@ a,
 a:visited {
     color: #003569;
     text-decoration: none
-}
-a:active {
-    opacity: .5
 }
 .coreSpriteEllipsis {
     background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/e05e5e.png);
@@ -288,10 +284,6 @@ a:active {
     border-color: #737373;
     color: #737373
 }
-.styleButtonProfile.zeroclipboard-is-active,
-.styleButtonProfile:active {
-    opacity: .5
-}
 @media (min-width: 736px) {
     .sizeButtonProfile {
         line-height: 29px;
@@ -310,9 +302,6 @@ a:active {
         font-size: 14px
     }
 }
-.styleButtonProfile:active {
-    opacity: .7
-}
 .sizeButtonProfile {
     padding: 0 8px
 }
@@ -325,53 +314,6 @@ a:active {
     .sizeButtonProfile {
         line-height: 26px
     }
-}
-.tagTransition-enter,
-.tagTransition-leave {
-    transform-origin: center top;
-    transition-duration: .2s;
-    transition-property: transform, opacity;
-    transition-timing-function: cubic-bezier(.16, 1.275, .725, 1.255)
-}
-.tagTransition-enter,
-.tagTransition-leave-active {
-    opacity: 0;
-    transform: scale(0)
-}
-.tagTransition-enter-active {
-    transform: scale(1);
-    opacity: 1
-}
-.indicatorTransition-enter,
-.indicatorTransition-leave {
-    transition-duration: .2s;
-    transition-property: opacity
-}
-.indicatorTransition-enter,
-.indicatorTransition-leave-active {
-    opacity: 0
-}
-.indicatorTransition-enter-active {
-    opacity: 1
-}
-.videoSpritePlayButton {
-    background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/video/196b78.png);
-    background-repeat: no-repeat;
-    background-position: 0 0;
-    height: 135px;
-    width: 135px
-}
-@media (min-device-pixel-ratio: 1.5),
-(min-resolution: 144dpi) {
-    .videoSpritePlayButton {
-        background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/video/583a07.png);
-        background-size: 135px 135px;
-        background-position: 0 0
-    }
-}
-
-.video-js {
-    position: static
 }
 .text-track-display,
 .vjs-big-play-button,

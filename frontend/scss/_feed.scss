@@ -75,8 +75,7 @@ tr,
 tt,
 u,
 ul,
-var,
-video {
+var {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -125,9 +124,6 @@ a,
 a:visited {
 	color: #003569;
 	text-decoration: none
-}
-a:active {
-	opacity: .5
 }
 .optionIcon {
 	background-image: url(/img/ugram.png);
@@ -275,17 +271,14 @@ a.heightTextFeed2:visited {
 .inputTextFeed::-moz-placeholder {
 	color: #999;
 	font-weight: 300;
-	opacity: 1
 }
 .inputTextFeed:-ms-input-placeholder {
 	color: #999;
 	font-weight: 300;
-	opacity: 1
 }
 .inputTextFeed::placeholder {
 	color: #999;
 	font-weight: 300;
-	opacity: 1
 }
 .inputTextFeed::-ms-clear {
 	display: none;
@@ -348,10 +341,6 @@ a.heightTextFeed2:visited {
 	-ms-flex-pack: center;
 	justify-content: center
 }
-.commentPaddingFeed:first-child {
-	border-top: none;
-	margin-top: 0
-}
 .likeButtonFeed {
 	margin-left: -9px;
 	margin-right: 3px
@@ -383,9 +372,6 @@ a.heightTextFeed2:visited {
 	.textContentFeed {
 		padding: 0 24px
 	}
-	.paddingLikeFeed:first-child {
-		margin-top: 20px
-	}
 	.addCommentFeed {
 		min-height: 68px
 	}
@@ -401,9 +387,6 @@ a.heightTextFeed2:visited {
 	}
 	.textContentFeed {
 		padding: 0 20px
-	}
-	.paddingLikeFeed:first-child {
-		margin-top: 16px
 	}
 	.addCommentFeed {
 		min-height: 48px

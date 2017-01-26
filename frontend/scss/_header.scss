@@ -60,9 +60,6 @@ textarea {
     overflow: hidden;
     position: relative
 }
-.phoneLogo:active {
-    opacity: 1
-}
 .navHeader {
     display: block;
     overflow: hidden;
@@ -173,9 +170,6 @@ textarea {
     flex-direction: row;
     padding-left: 24px;
     white-space: nowrap
-}
-.marginNav:not(:first-child) {
-    margin-left: 30px
 }
 .navActivity,
 .navExplore,
