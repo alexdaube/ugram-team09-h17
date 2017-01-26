@@ -1,10 +1,4 @@
-
-
-
-
 export module StringFormatter {
-
-
      export function formatMilisecondDateToMMDDYYYY(date: Date): string {
 
         var dd = date.getDate().toString();
@@ -20,8 +14,6 @@ export module StringFormatter {
         }
 
         var formattedDate = mm1.toString() + '/' + dd.toString() + '/' + yyyy.toString();
-
         return formattedDate;
-
     }
 }
