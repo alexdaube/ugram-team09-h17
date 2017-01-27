@@ -8,6 +8,7 @@ export interface ProfileAttributes {
     lastName: string;
     email: string;
     phoneNumber: string;
+    pictureUrl: string;
     inscriptionDate: string;
 }
 
@@ -17,7 +18,7 @@ export class ProfileModel extends Backbone.Model {
 
     constructor(options?: any) {
         super(options);
-        this.url = "http://api.ugram.net/users/jlabonte";
+        this.urlRoot = "http://api.ugram.net/users";
     };
 
     defaults() {
