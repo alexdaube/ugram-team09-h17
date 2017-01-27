@@ -1,259 +1,116 @@
-a,
-abbr,
-acronym,
-address,
-article,
-aside,
-audio,
-b,
-big,
-blockquote,
-body,
-canvas,
-caption,
-cite,
-code,
-dd,
-del,
-details,
-dfn,
-div,
-dl,
-dt,
-em,
-embed,
-fieldset,
-figcaption,
-figure,
-footer,
-form,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-header,
-hgroup,
-html,
-i,
-iframe,
-img,
-ins,
-kbd,
-label,
-legend,
-li,
-mark,
-menu,
-nav,
-object,
-ol,
-output,
-p,
-pre,
-q,
-ruby,
-s,
-samp,
-section,
-small,
-span,
-strike,
-strong,
-sub,
-summary,
-sup,
-table,
-tbody,
-td,
-tfoot,
-th,
-thead,
-time,
-tr,
-tt,
-u,
-ul,
-var,
-video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font: inherit;
-	vertical-align: baseline
-}
-body {
-    line-height: 1
-}
-ol,
-ul {
-    list-style: none
-}
-table {
-    border-collapse: collapse;
-    border-spacing: 0
-}
-article,
-div,
-footer,
-header,
-main,
-nav,
-section {
-    -ms-flex-align: stretch;
-    align-items: stretch;
-    border: 0 solid #000;
-    box-sizing: border-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -ms-flex-negative: 0;
-    flex-shrink: 0;
-    margin: 0;
-    padding: 0;
-    position: relative
-}
-body {
-    overflow-y: scroll
-}
-body,
-html {
-    height: 100%
-}
-body,
-button,
-input,
-textarea {
-    font-family: 'proxima-nova', 'Helvetica Neue', Arial, Helvetica, sans-serif
-}
-a,
-a:visited {
-    color: #003569;
-    text-decoration: none
-}
-a:active {
-    opacity: .5
-}
-.coreSpriteEllipsis {
-    background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/e05e5e.png);
-    background-repeat: no-repeat;
-    background-position: -316px -115px;
-    height: 6px;
-    width: 9px
-}
-.coreSpriteEllipsis {
-    background-position: -283px -115px
-}
-.coreSpriteEllipsis {
-    background-position: -308px -37px;
-    height: 44px;
-    width: 44px
+a, abbr, acronym, address, article, aside, audio, b, big, blockquote, body, canvas, caption, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
 }
 
-.profile-picture {
-    width: 60px;
+body {
+  line-height: 1;
 }
-@media (min-device-pixel-ratio: 1.5),
-(min-resolution: 144dpi) {
-    .coreSpriteEllipsis {
-        background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/core/175db9.png);
-        background-size: 352px 311px;
-        background-position: -312px -103px
-    }
-    .coreSpriteEllipsis {
-        background-position: -332px -103px
-    }
-    .coreSpriteEllipsis {
-        background-position: -302px -103px
-    }
-    .coreSpriteEllipsis {
-        background-position: -56px -176px
-    }
+
+ol, ul {
+  list-style: none;
 }
+
+article, div, footer, header, main, nav, section {
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  border: 0 solid #000;
+  box-sizing: border-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+body {
+  height: 100%;
+}
+
+html {
+  height: 100%;
+}
+
+body, button, input, textarea {
+  font-family: "proxima-nova", "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: #003569;
+  text-decoration: none;
+  &:visited {
+    color: #003569;
+    text-decoration: none;
+  }
+}
+
 .displayImgProfile {
-    background-color: #edeeee;
-    display: block;
-    width: 100%
+  background-color: #edeeee;
+  display: block;
+  width: 100%;
 }
+
 .divImgProfile {
-    display: block;
-    overflow: hidden;
-    padding-bottom: 100%
+  display: block;
+  padding-bottom: 100%;
 }
+
 .pictureProfile {
-    left: 0;
-    position: absolute;
-    top: 0
+  left: 0;
+  position: absolute;
+  top: 0;
+  height: 100%;
 }
-.pictureProfile {
-    height: 100%;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    width: 100%
-}
+
 .textOptionProfile {
-    display: block;
-    overflow: hidden;
-    text-indent: 110%;
-    white-space: nowrap
+  display: block;
+  text-indent: 110%;
+  white-space: nowrap;
 }
+
 .imgProfile {
-    -ms-flex-direction: row;
-    flex-direction: row
+  -ms-flex-direction: row;
+  flex-direction: row;
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
-.imgProfile:last-child {
-    margin-bottom: 0
-}
+
 .showImgProfile {
-    -ms-flex: 1 0 0%;
-    flex: 1 0 0%
+  -ms-flex: 1 0 0%;
+  flex: 1 0 0%;
+  &:last-child {
+    margin-right: 0;
+  }
 }
-.showImgProfile:last-child {
-    margin-right: 0
-}
-@media (min-width: 736px) {
-    .showImgProfile {
-        margin-right: 28px
-    }
-    .imgProfile {
-        margin-bottom: 28px
-    }
-}
-@media (max-width: 735px) {
-    .showImgProfile {
-        margin-right: 3px
-    }
-    .imgProfile {
-        margin-bottom: 3px
-    }
-}
+
 .moreTextProfile {
-    display: block;
-    font-size: 14px;
-    margin: -60px 0;
-    padding: 60px 9px;
-    position: relative;
-    text-align: center;
-    vertical-align: middle;
-    z-index: 1
+  display: block;
+  font-size: 14px;
+  margin: -60px 0;
+  padding: 60px 9px;
+  position: relative;
+  text-align: center;
+  font-weight: 600;
+  color: #3897f0;
+  &:visited {
+    color: #3897f0;
+  }
 }
-.moreTextProfile {
-    font-weight: 600
-}
-.moreTextProfile,
-.moreTextProfile:visited {
-    color: #3897f0
-}
+
 .addMoreProfile {
-    -ms-flex-pack: center;
-    justify-content: center;
-    margin: 60px auto 0;
-    position: relative
-}
-.addMoreProfile::before {
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin: 60px auto 0;
+  position: relative;
+  &::before {
     border-radius: 50%;
     border-style: solid;
     border-width: 2px;
@@ -261,372 +118,320 @@ a:active {
     content: '';
     left: 0;
     position: absolute;
-    top: 0
-}
-.addMoreProfile,
-.addMoreProfile::before {
+    top: 0;
     height: 120px;
-    width: 120px
-}
-.addMoreProfile::before {
-    border-color: #3897f0
-}
-.styleButtonProfile {
-    border-radius: 3px;
-    border-style: solid;
-    border-width: 1px;
-    font-weight: 600;
-    outline: none;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 100%;
-}
-.colorButtonProfile {
-    background: 0 0;
-    border-color: #999;
-    color: #999
-}
-.colorButtonProfile {
-    background: 0 0;
-    border-color: #737373;
-    color: #737373
-}
-.styleButtonProfile.zeroclipboard-is-active,
-.styleButtonProfile:active {
-    opacity: .5
-}
-@media (min-width: 736px) {
-    .sizeButtonProfile {
-        line-height: 29px;
-        padding: 0 11px
-    }
-    .styleButtonProfile {
-        font-size: 16px
-    }
-}
-@media (max-width: 735px) {
-    .sizeButtonProfile {
-        line-height: 24px;
-        padding: 0 9px
-    }
-    .styleButtonProfile {
-        font-size: 14px
-    }
-}
-.styleButtonProfile:active {
-    opacity: .7
-}
-.sizeButtonProfile {
-    padding: 0 8px
-}
-@media (min-width: 736px) {
-    .sizeButtonProfile {
-        line-height: 28px
-    }
-}
-@media (max-width: 735px) {
-    .sizeButtonProfile {
-        line-height: 26px
-    }
-}
-.tagTransition-enter,
-.tagTransition-leave {
-    transform-origin: center top;
-    transition-duration: .2s;
-    transition-property: transform, opacity;
-    transition-timing-function: cubic-bezier(.16, 1.275, .725, 1.255)
-}
-.tagTransition-enter,
-.tagTransition-leave-active {
-    opacity: 0;
-    transform: scale(0)
-}
-.tagTransition-enter-active {
-    transform: scale(1);
-    opacity: 1
-}
-.indicatorTransition-enter,
-.indicatorTransition-leave {
-    transition-duration: .2s;
-    transition-property: opacity
-}
-.indicatorTransition-enter,
-.indicatorTransition-leave-active {
-    opacity: 0
-}
-.indicatorTransition-enter-active {
-    opacity: 1
-}
-.videoSpritePlayButton {
-    background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/video/196b78.png);
-    background-repeat: no-repeat;
-    background-position: 0 0;
-    height: 135px;
-    width: 135px
-}
-@media (min-device-pixel-ratio: 1.5),
-(min-resolution: 144dpi) {
-    .videoSpritePlayButton {
-        background-image: url(//instagramstatic-a.akamaihd.net/h1/sprites/video/583a07.png);
-        background-size: 135px 135px;
-        background-position: 0 0
-    }
+    width: 120px;
+    border-color: #3897f0;
+  }
+  height: 120px;
+  width: 120px;
 }
 
-.video-js {
-    position: static
+.styleButtonProfile {
+  cursor: pointer;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  font-weight: 600;
+  outline: none;
+  white-space: nowrap;
+  width: 100%;
 }
-.text-track-display,
-.vjs-big-play-button,
-.vjs-control,
-.vjs-control-bar,
-.vjs-loading-spinner {
-    display: none!important
+
+.colorButtonProfile {
+  background: 0 0;
+  border-color: #3897f0;
+  color: #3897f0;
 }
+
+.sizeButtonProfile {
+  padding: 0 8px;
+}
+
 .fontStatsProfile {
-    color: #262626;
-    font-weight: 600
+  color: #262626;
+  font-weight: 600;
 }
+
 .blockStatsProfile {
-    display: block
+  display: block;
 }
+
 .stlyeLogoProfile {
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
+
 .statsProfile {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: row;
-    flex-direction: row
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  padding: 17px 0;
+  margin-bottom: 12px;
+  padding: 0;
 }
-.statsProfile {
-    -ms-flex-pack: distribute;
-    justify-content: space-around;
-    padding: 17px 0
-}
-.statsProfile {
-    margin-bottom: 12px;
-    padding: 0
-}
-.paddingStatsProfile:last-child {
-    margin-right: 0
-}
+
 .paddingStatsProfile {
-    text-align: center;
-    width: 33.3%
+  &:last-child {
+    margin-right: 0;
+    width: 33.4%;
+  }
+  text-align: center;
+  width: 33.3%;
+  color: #999;
+  font-size: 14px;
 }
-.paddingStatsProfile:last-child {
-    width: 33.4%
-}
-.paddingStatsProfile {
-    color: #999;
-    font-size: 14px
-}
+
 .contentProfile {
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    margin: 0 auto 30px;
-    max-width: 935px;
-    width: 100%
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  margin: 0 auto 30px;
+  max-width: 935px;
+  width: 100%;
 }
+
 .editButtonProfile {
-    -ms-flex-direction: row;
-    flex-direction: row;
-    margin-top: 11px
+  -ms-flex-direction: row;
+  flex-direction: row;
+  margin-top: 11px;
 }
+
 .paddingProfile .editButtonProfile {
-    margin-top: 0
+  margin-top: 0;
 }
+
 .paddingNameProfile {
-    color: #262626;
-    -ms-flex-negative: 1;
-    flex-shrink: 1;
-    min-width: 0
+  color: #262626;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
+  min-width: 0;
 }
+
 .logoProfile {
-    display: block;
-    margin-left: auto;
-    margin-right: auto
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
+
 .logoPaddingProfile {
-    -ms-flex-negative: 0;
-    flex-shrink: 0
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
+
 .paddingBioProfile {
-    display: block
-}
-.paddingBioProfile:empty {
-    display: none
+  display: block;
+  &:empty {
+    display: none;
+  }
 }
 
 .boldTextProfile {
-    display: inline;
-    font-weight: 600
+  display: inline;
+  font-weight: 600;
 }
-.headerProfile {
-    -ms-flex-direction: row;
-    flex-direction: row
-}
-.headerProfile {
-    border-bottom-color: #efefef;
-    border-bottom-width: 1px;
-    padding-bottom: 30px
-}
-.paddingProfile .headerProfile {
-    border-bottom: none;
-    margin-bottom: 24px;
-    padding-bottom: 0
-}
-.paddingOptionProfile {
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -ms-flex-negative: 0;
-    flex-shrink: 0;
-    height: 0;
-    margin-left: 5px;
-    margin-right: -10px
-}
-.styleOptionProfile {
-    background-color: transparent;
-    border: 0;
-    cursor: pointer;
-    padding: 0;
-    margin-top: -22px
-}
-.borderLogoProfile,
-.textNameProfile {
-    -ms-flex-negative: 1;
-    flex-shrink: 1;
-    min-width: 0
-}
-.textNameProfile {
-    font-weight: 300;
-    text-overflow: ellipsis;
-    white-space: nowrap
-}
-.borderLogoProfile {
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-direction: row;
-    flex-direction: row
-}
-.boldLinkProfile {
-    font-weight: 600
-}
-@media (min-width: 736px) {
-    .contentProfile {
-        box-sizing: content-box;
-        padding: 40px 20px 0;
-        width: calc(100% - 40px)
-    }
-    .paddingProfile.contentProfile {
-        padding-top: 60px
-    }
-    .paddingNameProfile {
-        -ms-flex-preferred-size: 30px;
-        flex-basis: 30px;
-        -ms-flex-positive: 2;
-        flex-grow: 2
-    }
-    .logoProfile {
-        height: 152px;
-        margin-bottom: -7px;
-        margin-top: -7px;
-        width: 152px
-    }
-    .paddingProfile .logoProfile {
-        margin-bottom: 0;
-        margin-top: 0
-    }
-    .logoPaddingProfile {
-        -ms-flex-preferred-size: 0;
-        flex-basis: 0;
-        -ms-flex-positive: 1;
-        flex-grow: 1;
-        margin-right: 30px
-    }
-    .paddingBioProfile {
-        font-size: 17px;
-        line-height: 24px;
-        margin-top: 14px
-    }
-    .paddingProfile .paddingBioProfile {
-        margin: 0
-    }
-    .headerProfile {
-        padding: 20px 0
-    }
-    .paddingProfile {
-        padding: 0;
-        margin-bottom: 44px
-    }
-    .borderLogoProfile {
-        margin-bottom: 2px;
-        margin-top: 2px
-    }
-    .paddingProfile .borderLogoProfile {
-        margin-bottom: 20px;
-        margin-top: 0
-    }
-    .textNameProfile {
-        font-size: 34px;
-        line-height: 40px
-    }
-}
-@media (max-width: 735px) {
-    .paddingNameProfile {
-        -ms-flex-preferred-size: 0;
-        flex-basis: 0;
-        -ms-flex-positive: 1;
-        flex-grow: 1
-    }
-    .logoProfile {
-        height: 77px;
-        margin-bottom: -6px;
-        margin-top: -6px;
-        width: 77px
-    }
-    .paddingProfile .logoProfile {
-        margin: 0
-    }
-    .logoPaddingProfile {
-        margin-right: 25px
-    }
-    .paddingProfile .logoPaddingProfile {
-        margin-right: 28px
-    }
-    .paddingBioProfile {
-        font-size: 14px;
-        line-height: 17px;
-        margin-top: 7px;
-        overflow: hidden;
-        text-overflow: ellipsis
-    }
-    .paddingProfile .paddingBioProfile {
-        margin: 0 20px 12px;
-        padding-bottom: 24px;
-        border-bottom: 1px solid #dbdbdb
-    }
-    .headerProfile {
-        margin-left: 20px;
-        margin-right: 20px;
-        margin-top: 30px
-    }
-    .borderLogoProfile {
-        margin-bottom: 11px;
-        margin-top: 12px
-    }
-    .paddingProfile .borderLogoProfile {
-        margin-bottom: 12px;
-        margin-top: 0
-    }
-    .textNameProfile {
-        font-size: 21px
-    }
 
+.headerProfile {
+  -ms-flex-direction: row;
+  flex-direction: row;
+  border-bottom-color: #efefef;
+  border-bottom-width: 1px;
+  padding-bottom: 30px;
+}
+
+.paddingProfile .headerProfile {
+  border-bottom: none;
+  margin-bottom: 24px;
+  padding-bottom: 0;
+}
+
+.paddingOptionProfile {
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  height: 0;
+  margin-left: 5px;
+  margin-right: -10px;
+}
+
+.styleOptionProfile {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  margin-top: -22px;
+}
+
+.borderLogoProfile {
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.textNameProfile {
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
+  min-width: 0;
+  font-weight: 300;
+  white-space: nowrap;
+}
+
+.borderLogoProfile {
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.boldLinkProfile {
+  font-weight: 600;
+}
+
+@media (min-width: 736px) {
+  .showImgProfile {
+    margin-right: 28px;
+  }
+  .imgProfile {
+    margin-bottom: 28px;
+  }
+  .sizeButtonProfile {
+    line-height: 29px;
+    padding: 0 11px;
+  }
+  .styleButtonProfile {
+    font-size: 16px;
+  }
+  .contentProfile {
+    box-sizing: content-box;
+    padding: 40px 20px 0;
+    width: calc(100% - 40px);
+  }
+  .sizeButtonProfile {
+    line-height: 28px;
+  }
+  .paddingProfile.contentProfile {
+    padding-top: 60px;
+  }
+  .paddingNameProfile {
+    -ms-flex-preferred-size: 30px;
+    flex-basis: 30px;
+    -ms-flex-positive: 2;
+    flex-grow: 2;
+  }
+  .logoProfile {
+    height: 152px;
+    margin-bottom: -7px;
+    margin-top: -7px;
+    width: 152px;
+  }
+  .paddingProfile .logoProfile {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+  .logoPaddingProfile {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    margin-right: 30px;
+  }
+  .paddingBioProfile {
+    font-size: 17px;
+    line-height: 24px;
+    margin-top: 14px;
+  }
+  .paddingProfile .paddingBioProfile {
+    margin: 0;
+  }
+  .headerProfile {
+    padding: 20px 0;
+  }
+  .paddingProfile {
+    padding: 0;
+    margin-bottom: 44px;
+  }
+  .borderLogoProfile {
+    margin-bottom: 2px;
+    margin-top: 2px;
+  }
+  .paddingProfile .borderLogoProfile {
+    margin-bottom: 20px;
+    margin-top: 0;
+  }
+  .textNameProfile {
+    font-size: 34px;
+    line-height: 40px;
+  }
+}
+
+@media (max-width: 735px) {
+  .showImgProfile {
+    margin-right: 3px;
+  }
+  .imgProfile {
+    margin-bottom: 3px;
+  }
+  .sizeButtonProfile {
+    line-height: 24px;
+    padding: 0 9px;
+  }
+  .styleButtonProfile {
+    font-size: 14px;
+  }
+  .sizeButtonProfile {
+    line-height: 26px;
+  }
+  .paddingNameProfile {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+  }
+  .logoProfile {
+    height: 77px;
+    margin-bottom: -6px;
+    margin-top: -6px;
+    width: 77px;
+  }
+  .paddingProfile .logoProfile {
+    margin: 0;
+  }
+  .logoPaddingProfile {
+    margin-right: 25px;
+  }
+  .paddingProfile .logoPaddingProfile {
+    margin-right: 28px;
+  }
+  .paddingBioProfile {
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 7px;
+  }
+  .paddingProfile .paddingBioProfile {
+    margin: 0 20px 12px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #dbdbdb;
+  }
+  .headerProfile {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 30px;
+  }
+  .borderLogoProfile {
+    margin-bottom: 11px;
+    margin-top: 12px;
+  }
+  .paddingProfile .borderLogoProfile {
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+  .textNameProfile {
+    font-size: 21px;
+  }
 }

@@ -1,95 +1,67 @@
-article,
-div,
-footer,
-header,
-main,
-nav,
-section {
-    -ms-flex-align: stretch;
-    align-items: stretch;
-    border: 0 solid #000;
-    box-sizing: border-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -ms-flex-negative: 0;
-    flex-shrink: 0;
-    margin: 0;
-    padding: 0;
-    position: relative
-}
-body,
-button,
-input,
-textarea {
-    font-family: 'proxima-nova', 'Helvetica Neue', Arial, Helvetica, sans-serif
-}
 ul {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font: inherit;
-    vertical-align: baseline
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
 }
-.footerContent {
-	-ms-flex-order: 4;
-	order: 4;
-	padding: 0 20px
-}
+
 .textFooter {
-	font-size: 12px;
-	font-weight: 600;
-	margin: 0 auto;
-	text-transform: uppercase;
-	width: 100%
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0 auto;
+  text-transform: uppercase;
+  width: 100%;
 }
+
 .paddingFooter {
-	padding: 10px 0;
-	text-align: center
+  padding: 10px 0;
+  text-align: center;
+  .flexFooter {
+    -ms-flex-pack: center;
+    margin: 0 auto;
+    max-width: 360px;
+  }
 }
-.paddingFooter .flexFooter {
-	-ms-flex-pack: center;
-	justify-content: center;
-	margin: 0 auto;
-	max-width: 360px
-}
+
 .flexFooter {
-	-ms-flex-positive: 1;
-	flex-grow: 1;
-	margin-bottom: 3px
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  margin-bottom: 3px;
 }
+
 .paddingFooter .flexFooter {
-	-ms-flex-pack: center;
-	justify-content: center;
-	margin: 0 auto;
-	max-width: 360px
+  -ms-flex-pack: center;
+  margin: 0 auto;
+  max-width: 360px;
 }
+
 .marginFooter {
-	display: inline-block;
-	margin-bottom: 7px;
-	margin-right: 16px
+  display: inline-block;
+  margin-bottom: 7px;
+  margin-right: 16px;
+  &:last-child {
+    margin-right: 0;
+  }
 }
-.marginFooter:last-child {
-	margin-right: 0
-}
+
 .copyrightFooter {
-	color: #999
+  color: #999;
 }
 
 @media (min-width: 875px) {
-	._pcuq6 .mobileFooter {
-		max-width: 100%
-	}
-    ._pcuq6 .flexFooter {
-		margin-right: 16px
-	}
+  .mobileFooter {
+    max-width: 100%;
+  }
+  .flexFooter {
+    margin-right: 16px;
+  }
 }
+
 @media (max-width: 874px) {
-	._pcuq6 .flexFooter {
-		-ms-flex-pack: center;
-		justify-content: center;
-		margin: 0 auto;
-		max-width: 360px
-	}
+  .flexFooter {
+    -ms-flex-pack: center;
+    margin: 0 auto;
+    max-width: 360px;
+  }
 }
