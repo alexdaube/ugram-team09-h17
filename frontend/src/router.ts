@@ -64,6 +64,7 @@ export class AppRouter extends Backbone.Router {
         let profileCollection = new ProfileCollection({});
         profileCollection.fetch({
             success: function(response) {
+                $('#content').html("");
                 response.models.forEach(function (profileModel){
                     let userView = new UserView({model: profileModel});
                     $('#content').append(userView.$el);
