@@ -11,51 +11,51 @@ export class UserProfileSettingsView extends Backbone.View<UserModel> {
 
     constructor(options?: Backbone.ViewOptions<UserModel>) {
         super(_.extend({
-            el: "#content"
+            el: "#content",
         }, options));
         this.template = require("./UserProfileSettingsTemplate.ejs") as Function;
         this.userModel = options["model"];
     }
 
     public render() {
-        let that = this;
+        const that = this;
         this.userModel.fetch({
-            success: function() {
+            success() {
                 that.$el.html(that.template({userModel: that.userModel}));
             },
-            error: function() {
-
-            }
+            error() {
+                //TODO Handle error
+            },
         });
         return this;
     }
 
-    private events(){
+    public events() {
         return <Backbone.EventsHash> {
-            "click #saveProfile": "saveUserInfos"
-        }
+            "click #saveProfile": "saveUserInfos",
+        };
     }
 
     private saveUserInfos(ev) {
         ev.preventDefault();
-        let that = this;
+        const that = this;
 
-        let obj = {
+        const obj = {
             email :  $("#pepEmail").val(),
             firstName : $("#pepFirstName").val(),
             lastName : $("#pepLastName").val(),
-            phoneNumber : $("#pepPhone").val()
+            phoneNumber : $("#pepPhone").val(),
         };
 
         this.userModel.save(obj, {
             beforeSend: HeaderRequestGenerator.setContentTypeToJSON,
-            success: function() {
+            success() {
                 alert("The user profile was successfully updated");
                 that.render();
             },
-            error: function() {
-
-            }
+            error() {
+                //TODO Handle error
+            },
         });
     }
 }

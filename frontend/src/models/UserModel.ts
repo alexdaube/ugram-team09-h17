@@ -71,7 +71,6 @@ export class UserModel extends Backbone.Model {
     }
 
     get profilePictureUrl(): string{
-        
         return this.get("pictureUrl");
     }
 }

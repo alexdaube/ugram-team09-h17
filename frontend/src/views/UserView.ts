@@ -1,10 +1,10 @@
 
-import * as Backbone from 'backbone';
-import * as _ from 'underscore';
-import {UserModel} from '../models/UserModel';
+import * as Backbone from "backbone";
+import * as _ from "underscore";
+import {UserModel} from "../models/UserModel";
 
 export class UserView extends Backbone.View<UserModel> {
-    template: Function;
+    private template: Function;
 
     constructor(options?: Backbone.ViewOptions<UserModel>) {
         super(_.extend({
