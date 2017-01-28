@@ -3,7 +3,7 @@ import * as _ from "underscore";
 
 import {UserModel} from "../models/UserModel";
 
-export class UserProfileView extends Backbone.View<UserModel> {
+export class LoggedUserProfileView extends Backbone.View<UserModel> {
     private template: Function;
     private userProfileModel: UserModel;
 
@@ -11,7 +11,7 @@ export class UserProfileView extends Backbone.View<UserModel> {
         super(_.extend({
             el: "#content",
         }, options));
-        this.template = require("./UserProfileTemplate.ejs") as Function;
+        this.template = require("./LoggedUserProfileTemplate.ejs") as Function;
         this.userProfileModel = options["model"];
     }
 

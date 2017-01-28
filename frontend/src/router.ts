@@ -1,6 +1,6 @@
 import * as Backbone from 'backbone';
 
-import {UserProfileView} from './views/UserProfileView'
+import {LoggedUserProfileView} from './views/LoggedUserProfileView'
 import {UserModel} from './models/UserModel';
 import {UserCollection} from './collections/UserCollection';
 
@@ -9,7 +9,7 @@ import {UserView} from './views/UserView';
 import {FeedView} from './views/FeedView'
 import {FeedModel} from './models/FeedModel';
 
-import {UserProfileSettingsView} from './views/UserProfileSettingsView'
+import {LoggedUserProfileSettingsView} from './views/LoggedUserProfileSettingsView'
 
 import {HeaderView} from './views/HeaderView'
 import {HeaderModel} from './models/HeaderModel';
@@ -21,8 +21,8 @@ export class AppRouter extends Backbone.Router {
 
     routes = {
         '': 'defaultRoute',
-        'profile': 'showProfile',
-        'setting': 'showSetting',
+        'profile': 'showLoggedUserProfile',
+        'setting': 'showLoggedUserSetting',
         'users': 'showUsers'
     }
 
@@ -47,16 +47,16 @@ export class AppRouter extends Backbone.Router {
         feedView.render();
     }
 
-    showProfile(param: string = '') {
+    showLoggedUserProfile(param: string = '') {
         let userModel = new UserModel({id:'jlabonte'});
-        let userProfileView = new UserProfileView({model: userModel});
-        userProfileView.render();
+        let loggedUserProfileView = new LoggedUserProfileView({model: userModel});
+        loggedUserProfileView.render();
     }
 
-    showSetting(param: string = '') {
+    showLoggedUserSetting(param: string = '') {
         let userModel = new UserModel({id:'jlabonte'});
-        let userProfileSettingsView = new UserProfileSettingsView({model: userModel});
-        userProfileSettingsView.render();
+        let loggedUserProfileSettingsView = new LoggedUserProfileSettingsView({model: userModel});
+        loggedUserProfileSettingsView.render();
     }
 
     showUsers(param: string = '') {
