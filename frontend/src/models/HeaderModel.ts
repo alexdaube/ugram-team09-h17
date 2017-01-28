@@ -1,16 +1,17 @@
-import * as Backbone from 'backbone';
+import * as Backbone from "backbone";
 
-export interface HeaderModelAttributes {
+/*  tslint:disable:no-empty-interface */
+export interface IHeaderModelAttributes {
 }
 
 export class HeaderModel extends Backbone.Model {
 
-    constructor(attributes: HeaderModelAttributes, options?: any) {
+    constructor(attributes: IHeaderModelAttributes, options?: any) {
         super(attributes, options);
     }
 
-    defaults() {
+    public defaults() {
         return {
-        }
+        };
     }
 }

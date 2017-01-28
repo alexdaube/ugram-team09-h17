@@ -1,16 +1,17 @@
-import * as Backbone from 'backbone';
+import * as Backbone from "backbone";
 
-export interface SettingModelAttributes {
+/*  tslint:disable:no-empty-interface */
+export interface ISettingModelAttributes {
 }
 
 export class SettingModel extends Backbone.Model {
 
-    constructor(attributes: SettingModelAttributes, options?: any) {
+    constructor(attributes: ISettingModelAttributes, options?: any) {
         super(attributes, options);
     }
 
-    defaults() {
+    public defaults() {
         return {
-        }
+        };
     }
 }

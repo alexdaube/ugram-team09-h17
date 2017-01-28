@@ -1,64 +1,66 @@
-import * as Backbone from 'backbone';
-import * as _ from 'underscore';
+import * as Backbone from "backbone";
 import * as $ from "jquery";
+import * as _ from "underscore";
 
-import {ProfileModel} from '../models/ProfileModel';
-import {HeaderRequestGenerator} from '../util/HeaderRequestGenerator';
+import {ProfileModel} from "../models/ProfileModel";
+import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 
 export class ProfileView extends Backbone.View<ProfileModel> {
-    template: Function;
-    profileModel: ProfileModel;
+    private template: Function;
+    private profileModel: ProfileModel;
 
     constructor(options?: Backbone.ViewOptions<ProfileModel>) {
         super(_.extend({
-            el: '#content'
+            el: "#content",
         }, options));
-        this.template = require('./ProfileTemplate.ejs') as Function;
-        this.profileModel = options["model"];
+        this.template = require("./ProfileTemplate.ejs") as Function;
+
+        const modelOption = "model";
+        this.profileModel = options[modelOption];
     }
 
-    render() {
-        var that = this;
+    public render() {
+        const that = this;
         this.profileModel.fetch({
-            success: function(){
+            success() {
                 console.log("fetch successfull");
                 that.$el.html(that.template({userProfile: that.profileModel}));
             },
-            error: function(){
+            error() {
                 console.log("Shit happened");
-            }
+            },
         });
         return this;
     }
 
-    events(){
-        return <Backbone.EventsHash> {
+    public events() {
+        return {
             "click #edit-user-profil": "editUserInfos",
-            "click #save-user-profil": "saveUserInfos"
-        }
+            "click #save-user-profil": "saveUserInfos",
+        } as Backbone.EventsHash;
     }
-    editUserInfos(ev) {
+    public editUserInfos(ev) {
         ev.preventDefault();
     }
-    saveUserInfos(ev){
+    public saveUserInfos(ev) {
         ev.preventDefault();
         console.log("save was clicked");
 
-        var obj = {
-            "email" :  "jlabonte@mail.com",
-            "firstName" : "Jérôme",
-            "lastName" : "Labonté",
-            "phoneNumber" : 4188333914
+        const obj = {
+            email :  "jlabonte@mail.com",
+            firstName : "Jérôme",
+            lastName : "Labonté",
+            phoneNumber : 4188333914,
         };
 
         this.profileModel.save(obj, {
             beforeSend: HeaderRequestGenerator.setContentTypeToJSON,
-            success: function() {
+            success() {
                 console.log("Save successfull");
             },
-            error: function(er) {
+            error(er) {
                 console.log("Shit happened while saving: " + er.message);
-            }
-        })
+            },
+        });
     }
 }

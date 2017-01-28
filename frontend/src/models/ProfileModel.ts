@@ -1,35 +1,34 @@
-import * as Backbone from "backbone"
+import * as Backbone from "backbone";
+import {StringFormatter} from "../util/StringFormatter";
 
-import {StringFormatter} from '../util/StringFormatter';
-
-export interface ProfileAttributes {
-    userName: string;
-    firstName: string;
-    lastName: string;
+export interface IProfileAttributes {
     email: string;
+    firstName: string;
+    inscriptionDate: string;
+    lastName: string;
     phoneNumber: string;
     pictureUrl: string;
-    inscriptionDate: string;
+    userName: string;
 }
 
 export class ProfileModel extends Backbone.Model {
 
-    url: string;
+    public  url: string;
 
     constructor(options?: any) {
         super(options);
         this.urlRoot = "http://api.ugram.net/users";
     };
 
-    defaults() {
+    public  defaults() {
         return {
-            userName: "",
-            firstName: "",
-            lastName: "",
             email: "",
+            firstName: "",
+            inscriptionDate: "",
+            lastName: "",
             phoneNumber: "",
-            inscriptionDate: ""
-        }
+            userName: "",
+        };
     }
 
     get userName(): string {
@@ -73,8 +72,8 @@ export class ProfileModel extends Backbone.Model {
     }
 
     get inscriptionDate(): string {
-        var bufferDate = this.get("registrationDate");
-        var formattedDate = StringFormatter.formatMilisecondDateToMMDDYYYY(new Date(bufferDate));
+        const bufferDate = this.get("registrationDate");
+        const formattedDate = StringFormatter.formatMillisecondDateToMMDDYYYY(new Date(bufferDate));
         return formattedDate;
     }
 
