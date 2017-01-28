@@ -2,8 +2,8 @@ import * as Backbone from "backbone";
 import * as _ from "underscore";
 import * as $ from "jquery";
 
-import {UserModel} from "../models/UserModel";
 import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
+import {UserModel} from "../models/UserModel";
 
 export class UserProfileSettingsView extends Backbone.View<UserModel> {
     private template: Function;
@@ -24,7 +24,7 @@ export class UserProfileSettingsView extends Backbone.View<UserModel> {
                 that.$el.html(that.template({userModel: that.userModel}));
             },
             error() {
-                //TODO Handle error
+                // TODO Handle error
             },
         });
         return this;
@@ -54,7 +54,7 @@ export class UserProfileSettingsView extends Backbone.View<UserModel> {
                 that.render();
             },
             error() {
-                //TODO Handle error
+                // TODO Handle error
             },
         });
     }

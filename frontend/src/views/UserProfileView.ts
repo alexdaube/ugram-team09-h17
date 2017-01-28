@@ -18,11 +18,11 @@ export class UserProfileView extends Backbone.View<UserModel> {
     public render() {
         const that = this;
         this.userProfileModel.fetch({
-            success: function() {
+            success() {
                 that.$el.html(that.template({userModel: that.userProfileModel}));
             },
-            error: function() {
-                //TODO handle error
+            error() {
+                // TODO handle error
             },
         });
         return this;
