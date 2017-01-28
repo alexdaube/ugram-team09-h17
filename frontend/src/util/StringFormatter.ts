@@ -1,4 +1,4 @@
-export module StringFormatter {
+export namespace StringFormatter {
     export function formatMillisecondDateToMMDDYYYY(date: Date): string {
 
         let dd = date.getDate().toString();

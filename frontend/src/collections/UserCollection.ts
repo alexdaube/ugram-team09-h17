@@ -1,10 +1,10 @@
 /**
  * Created by jeromelabonte on 2017-01-21.
  */
-import {UserModel} from '../models/UserModel';
-import * as Backbone from "backbone"
+import * as Backbone from "backbone";
+import {UserModel} from "../models/UserModel";
 
-export class UserCollection extends Backbone.Collection<UserModel>{
+export class UserCollection extends Backbone.Collection<UserModel> {
     constructor(options?: any) {
         super(options);
         this.model = UserModel;
