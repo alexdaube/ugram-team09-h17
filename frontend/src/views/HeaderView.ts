@@ -1,19 +1,19 @@
-import * as Backbone from 'backbone';
-import * as _ from 'underscore';
+import * as Backbone from "backbone";
+import * as _ from "underscore";
 
-import {HeaderModel} from '../models/HeaderModel';
+import {HeaderModel} from "../models/HeaderModel";
 
 export class HeaderView extends Backbone.View<HeaderModel> {
-    template: Function;
+    private template: Function;
 
     constructor(options?: Backbone.ViewOptions<HeaderModel>) {
         super(_.extend({
-            el: '#header'
+            el: "#header",
         }, options));
-        this.template = require('./HeaderTemplate.ejs') as Function;
+        this.template = require("./HeaderTemplate.ejs") as Function;
     }
 
-    render() {
+    public render() {
         this.$el.html(this.template(this.model.toJSON()));
         return this;
     }

@@ -1,6 +1,6 @@
-import * as Backbone from "backbone"
+import * as Backbone from "backbone";
 
-import {StringFormatter} from '../util/StringFormatter';
+import {StringFormatter} from "../util/StringFormatter";
 
 export class UserModel extends Backbone.Model {
 
@@ -9,15 +9,15 @@ export class UserModel extends Backbone.Model {
         this.urlRoot = "http://api.ugram.net/users";
     };
 
-    defaults() {
+    public  defaults() {
         return {
-            userName: "",
-            firstName: "",
-            lastName: "",
             email: "",
+            firstName: "",
+            inscriptionDate: "",
+            lastName: "",
             phoneNumber: "",
-            inscriptionDate: ""
-        }
+            userName: "",
+        };
     }
 
     get userName(): string {
@@ -61,8 +61,8 @@ export class UserModel extends Backbone.Model {
     }
 
     get inscriptionDate(): string {
-        var bufferDate = this.get("registrationDate");
-        var formattedDate = StringFormatter.formatMilisecondDateToMMDDYYYY(new Date(bufferDate));
+        const bufferDate = this.get("registrationDate");
+        const formattedDate = StringFormatter.formatMillisecondDateToMMDDYYYY(new Date(bufferDate));
         return formattedDate;
     }
 
