@@ -51,6 +51,7 @@ export class UserProfileSettingsView extends Backbone.View<UserModel> {
         this.userModel.save(obj, {
             beforeSend: HeaderRequestGenerator.setContentTypeToJSON,
             success: function() {
+                alert("The user profile was successfully updated");
                 that.render();
             },
             error: function() {

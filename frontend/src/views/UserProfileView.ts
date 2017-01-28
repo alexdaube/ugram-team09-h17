@@ -7,6 +7,7 @@ export class UserProfileView extends Backbone.View<UserModel> {
     template: Function;
     userProfileModel: UserModel;
 
+
     constructor(options?: Backbone.ViewOptions<UserModel>) {
         super(_.extend({
             el: '#content'
