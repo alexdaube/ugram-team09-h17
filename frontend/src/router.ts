@@ -9,7 +9,7 @@ import {UserView} from './views/UserView';
 import {FeedView} from './views/FeedView'
 import {FeedModel} from './models/FeedModel';
 
-import {UserEditView} from './views/UserEditView'
+import {UserProfileSettingsView} from './views/UserProfileSettingsView'
 
 import {HeaderView} from './views/HeaderView'
 import {HeaderModel} from './models/HeaderModel';
@@ -55,8 +55,8 @@ export class AppRouter extends Backbone.Router {
 
     showSetting(param: string = '') {
         let userModel = new UserModel({id:'jlabonte'});
-        let userEditView = new UserEditView({model: userModel});
-        userEditView.render();
+        let userProfileSettingsView = new UserProfileSettingsView({model: userModel});
+        userProfileSettingsView.render();
     }
 
     showUsers(param: string = '') {

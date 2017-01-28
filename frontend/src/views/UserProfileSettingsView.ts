@@ -5,7 +5,7 @@ import * as $ from "jquery";
 import {UserModel} from '../models/UserModel';
 import {HeaderRequestGenerator} from '../util/HeaderRequestGenerator';
 
-export class UserEditView extends Backbone.View<UserModel> {
+export class UserProfileSettingsView extends Backbone.View<UserModel> {
     template: Function;
     userModel: UserModel;
 
@@ -13,7 +13,7 @@ export class UserEditView extends Backbone.View<UserModel> {
         super(_.extend({
             el: '#content'
         }, options));
-        this.template = require('./UserEditTemplate.ejs') as Function;
+        this.template = require('./UserProfileSettingsTemplate.ejs') as Function;
         this.userModel = options["model"];
     }
 
