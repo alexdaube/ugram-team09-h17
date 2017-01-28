@@ -1,6 +1,6 @@
 export class StringFormatter {
 
-    static formatMillisecondDateToMMDDYYYY(date: Date): string {
+    public static formatMillisecondDateToMMDDYYYY(date: Date): string {
 
         let dd = date.getDate().toString();
         const mm = date.getMonth() + 1;

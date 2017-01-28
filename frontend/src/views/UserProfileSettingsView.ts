@@ -1,9 +1,10 @@
+import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
+import {UserModel} from "../models/UserModel";
+
 import * as Backbone from "backbone";
 import * as _ from "underscore";
 import * as $ from "jquery";
 
-import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
-import {UserModel} from "../models/UserModel";
 
 export class UserProfileSettingsView extends Backbone.View<UserModel> {
 
