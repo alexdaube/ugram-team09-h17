@@ -8,16 +8,16 @@
             <div class="paddingLogoSetting">
                <button><img class="sizeLogoSetting" src="/img/test2.jpg"></button>
             </div>
-            <h1 class="userTextSetting">{username}</h1>
+            <h1 class="userTextSetting"><%- userModel.userName %></h1>
          </div>
          <form class="heightSetting">
             <div class="infoSetting">
-               <aside class="paddingInfoSetting"><label>Name</label></aside>
-               <div class="widthSetting"><input class="inputSetting" id="pepName" value="" type="text"></div>
+               <aside class="paddingInfoSetting"><label>First Name</label></aside>
+               <div class="widthSetting"><input class="inputSetting" id="pepFirstName" value="<%- userModel.firstName %>" type="text"></div>
             </div>
             <div class="infoSetting">
-               <aside class="paddingInfoSetting"><label>Username</label></aside>
-               <div class="widthSetting"><input class="inputSetting" id="pepUsername" value="" type="text"></div>
+               <aside class="paddingInfoSetting"><label>Last Name</label></aside>
+               <div class="widthSetting"><input class="inputSetting" id="pepLastName" value="<%- userModel.lastName %>" type="text"></div>
             </div>
             <div class="infoSetting">
                <aside class="paddingInfoSetting privateSetting"><label></label></aside>
@@ -29,16 +29,16 @@
             </div>
             <div class="infoSetting">
                <aside class="paddingInfoSetting"><label>Email</label></aside>
-               <div class="widthSetting"><input class="inputSetting" id="pepEmail" value="" type="text"></div>
+               <div class="widthSetting"><input class="inputSetting" id="pepEmail" value="<%- userModel.email %>" type="text"></div>
             </div>
             <div class="infoSetting">
                <aside class="paddingInfoSetting"><label>Phone</label></aside>
-               <div class="widthSetting"><input class="inputSetting" id="pepPhone" value="" type="text"></div>
+               <div class="widthSetting"><input class="inputSetting" id="pepPhone" value="<%- userModel.phoneNumber %>" type="text"></div>
             </div>
             <div class="infoSetting">
                <aside class="paddingInfoSetting privateSetting"><label></label></aside>
                <div class="widthSetting">
-                  <div class="buttonSetting"><span><button class="styleButtonSetting colorButtonSetting sizeButtonSetting">Update</button></span></div>
+                  <div class="buttonSetting"><span><button class="styleButtonSetting colorButtonSetting sizeButtonSetting" id="saveProfile">Update</button></span></div>
                </div>
             </div>
          </form>

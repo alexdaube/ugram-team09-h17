@@ -2,19 +2,7 @@ import * as Backbone from "backbone"
 
 import {StringFormatter} from '../util/StringFormatter';
 
-export interface ProfileAttributes {
-    userName: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    phoneNumber: string;
-    pictureUrl: string;
-    inscriptionDate: string;
-}
-
-export class ProfileModel extends Backbone.Model {
-
-    url: string;
+export class UserModel extends Backbone.Model {
 
     constructor(options?: any) {
         super(options);

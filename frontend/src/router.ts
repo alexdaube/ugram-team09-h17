@@ -1,16 +1,15 @@
 import * as Backbone from 'backbone';
 
-import {ProfileView} from './views/ProfileView'
-import {ProfileModel} from './models/ProfileModel';
-import {ProfileCollection} from './collections/ProfileCollection';
+import {UserProfileView} from './views/UserProfileView'
+import {UserModel} from './models/UserModel';
+import {UserCollection} from './collections/UserCollection';
 
 import {UserView} from './views/UserView';
 
 import {FeedView} from './views/FeedView'
 import {FeedModel} from './models/FeedModel';
 
-import {SettingView} from './views/SettingView'
-import {SettingModel} from './models/SettingModel';
+import {UserEditView} from './views/UserEditView'
 
 import {HeaderView} from './views/HeaderView'
 import {HeaderModel} from './models/HeaderModel';
@@ -49,20 +48,20 @@ export class AppRouter extends Backbone.Router {
     }
 
     showProfile(param: string = '') {
-        let profileModel = new ProfileModel({id:'jlabonte'});
-        let profileView = new ProfileView({model: profileModel});
-        profileView.render();
+        let userModel = new UserModel({id:'jlabonte'});
+        let userProfileView = new UserProfileView({model: userModel});
+        userProfileView.render();
     }
 
     showSetting(param: string = '') {
-        let settingModel = new SettingModel({});
-        let settingView = new SettingView({model: settingModel});
-        settingView.render();
+        let userModel = new UserModel({id:'jlabonte'});
+        let userEditView = new UserEditView({model: userModel});
+        userEditView.render();
     }
 
     showUsers(param: string = '') {
-        let profileCollection = new ProfileCollection({});
-        profileCollection.fetch({
+        let userCollection = new UserCollection({});
+        userCollection.fetch({
             success: function(response) {
                 $('#content').html("");
                 response.models.forEach(function (profileModel){
