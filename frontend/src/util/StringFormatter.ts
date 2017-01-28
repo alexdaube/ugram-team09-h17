@@ -1,5 +1,6 @@
-export module StringFormatter {
-    export function formatMillisecondDateToMMDDYYYY(date: Date): string {
+export class StringFormatter {
+
+    public static formatMillisecondDateToMMDDYYYY(date: Date): string {
 
         let dd = date.getDate().toString();
         const mm = date.getMonth() + 1;

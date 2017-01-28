@@ -10,7 +10,10 @@
     /*
      * Any rules specified here will override those from the base config we are extending.
      */
-    "curly": true
+    "curly": true,
+    "no-string-literal": false,
+    "ordered-imports": false,
+    "no-angle-bracket-type-assertion": false
   },
   "jsRules": {
     /*

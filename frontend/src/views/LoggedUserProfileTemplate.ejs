@@ -3,27 +3,26 @@
       <header class=" headerProfile">
          <div class="logoPaddingProfile">
             <div class="logoProfile">
-               <button><img class="stlyeLogoProfile" src="/img/test2.jpg"></button>
+               <button><img class="stlyeLogoProfile" src="<%- userModel.profilePictureUrl %>"></button>
             </div>
          </div>
          <div class="paddingNameProfile">
             <div class="borderLogoProfile">
-               <h1 class="textNameProfile"><%- userProfile.userName %></h1>
-               <div class="paddingOptionProfile"><button class="styleOptionProfile coreSpriteEllipsis textOptionProfile">Options</button></div>
+               <h1 class="textNameProfile"><%- userModel.userName %></h1><br>
             </div>
+             <div class="paddingBioProfile">
+                 <h2 class="boldTextProfile"><%- userModel.firstName %> <%- userModel.lastName %></h2><br>
+                 <span>Inscription date: <%- userModel.inscriptionDate %></span>
+             </div>
+             <br>
             <div class="editButtonProfile"><a href=""><a href="#setting"><span><button class="styleButtonProfile colorButtonProfile sizeButtonProfile">Update profile</button></span></a></div>
          </div>
       </header>
-      <div class="paddingBioProfile">
-         <h2 class="boldTextProfile"><%- userProfile.firstName %> <%- userProfile.lastName %></h2>
-         <span><%- userProfile.email %> <%- userProfile.phoneNumber %> inscription date: <%- userProfile.inscriptionDate %></span>
-         <a class="boldLinkProfile" href="" target="_blank">{website}</a>
-      </div>
       <br />
       <ul class="statsProfile statsSizeProfile">
-         <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Posts</span></li>
-         <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Followers</a></li>
-         <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Following</a></li>
+         <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Posts</li>
+         <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Followers</li>
+         <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Following</li>
       </ul>
       <div>
         <div class="imgProfile">
