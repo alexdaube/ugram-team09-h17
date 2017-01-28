@@ -1,8 +1,6 @@
 
 export class HeaderRequestGenerator {
 
-    private static token: string = "bearer 24d6e087-51a0-465a-a19b-ce9570ad3169";
-
     public static setContentTypeToJSON(xhr) {
         xhr.setRequestHeader("Content-Type", ("application/json"));
         xhr.setRequestHeader("Authorization", HeaderRequestGenerator.token);
@@ -12,4 +10,6 @@ export class HeaderRequestGenerator {
         xhr.setRequestHeader("Content-Type", ("application/x-www-form-urlencoded"));
         xhr.setRequestHeader("Authorization", HeaderRequestGenerator.token);
     }
+
+    private static token: string = "bearer 24d6e087-51a0-465a-a19b-ce9570ad3169";
 }
