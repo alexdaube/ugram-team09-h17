@@ -6,10 +6,6 @@ a, abbr, acronym, address, article, aside, audio, b, big, blockquote, body, canv
   vertical-align: baseline;
 }
 
-body {
-  line-height: 1;
-}
-
 ol, ul {
   list-style: none;
 }
@@ -28,14 +24,6 @@ article, div, footer, header, main, nav, section {
   margin: 0;
   padding: 0;
   position: relative;
-}
-
-body {
-  height: 100%;
-}
-
-html {
-  height: 100%;
 }
 
 body, button, input, textarea {
