@@ -6,6 +6,7 @@ import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 import {UserModel} from "../models/UserModel";
 
 export class UserProfileSettingsView extends Backbone.View<UserModel> {
+
     private template: Function;
     private userModel: UserModel;
 
