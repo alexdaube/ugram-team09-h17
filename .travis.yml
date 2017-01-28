@@ -9,3 +9,5 @@ script:
   - gulp --cwd ./frontend ts
   - gulp --cwd ./frontend sass
   - tslint frontend/src/**/*.ts{,x}
+after_success:
+  - ./deployment_scripts/merge.sh $GIT_USER $GIT_PASS
