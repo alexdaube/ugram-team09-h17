@@ -13,7 +13,7 @@
     "curly": true,
     "no-string-literal": false,
     "ordered-imports": false,
-    "no-angle-bracket-type-assertion": true
+    "no-angle-bracket-type-assertion": false
   },
   "jsRules": {
     /*
