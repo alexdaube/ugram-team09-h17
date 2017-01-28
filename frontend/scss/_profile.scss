@@ -131,13 +131,18 @@ a {
   font-weight: 600;
   outline: none;
   white-space: nowrap;
-  width: 100%;
 }
 
 .colorButtonProfile {
   background: 0 0;
   border-color: #3897f0;
   color: #3897f0;
+}
+
+.colorAddButtonProfile {
+  background: 0 0;
+  border-color: #32CD32;
+  color: #32CD32;
 }
 
 .sizeButtonProfile {
