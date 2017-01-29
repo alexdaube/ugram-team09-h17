@@ -290,10 +290,6 @@ a {
   flex-direction: row;
 }
 
-.boldLinkProfile {
-  font-weight: 600;
-}
-
 @media (min-width: 736px) {
   .showImgProfile {
     margin-right: 28px;
@@ -435,4 +431,57 @@ a {
   .textNameProfile {
     font-size: 21px;
   }
+}
+
+
+
+
+
+.divPopupContent {
+    background-color: rgba(0, 0, 0, .5);
+    bottom: 0;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    left: 0;
+    overflow-y: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1
+}
+.closeButtonPopup {
+    background: 0 0;
+    border: none;
+    cursor: pointer;
+    height: 36px;
+    outline: none;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2
+}
+.closeButtonPopup::before {
+    color: #fff;
+    content: '\00D7';
+    display: block;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 36px;
+    padding: 0;
+    margin: 0
+}
+.centerPopup {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin: auto;
+    max-width: 935px;
+    pointer-events: auto;
+    width: 80%
+}
+.popupContent {
+    position: relative;
+    z-index: 1;
 }

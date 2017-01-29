@@ -1,5 +1,5 @@
 <main>
-   <article class="contentProfile paddingProfile">
+   <div class="contentProfile paddingProfile">
       <header class=" headerProfile">
          <div class="logoPaddingProfile">
             <div class="logoProfile">
@@ -12,19 +12,15 @@
                <div class="paddingOptionProfile"><button class="styleOptionProfile coreSpriteEllipsis textOptionProfile"></button></div>
             </div>
             <div class="editButtonProfile"><a href="">
-                <a href="#setting">
-                    <span>
-                        <button class="styleButtonProfile colorButtonProfile sizeButtonProfile">Update profile</button>
-                        <button class="styleButtonProfile colorAddButtonProfile sizeButtonProfile">Add</button>
-                    </span>
-                </a>
+                <a href="#setting"><button class="styleButtonProfile colorButtonProfile sizeButtonProfile">Update profile</button></a>
+                &nbsp;&nbsp;
+                <a href=""><button class="styleButtonProfile colorAddButtonProfile sizeButtonProfile">Add picture</button></a>
             </div>
          </div>
       </header>
       <div class="paddingBioProfile">
          <h2 class="boldTextProfile"><%- userProfile.firstName %> <%- userProfile.lastName %></h2>
          <span><%- userProfile.email %> <%- userProfile.phoneNumber %> inscription date: <%- userProfile.inscriptionDate %></span>
-         <a class="boldLinkProfile" href="" target="_blank">{website}</a>
       </div>
       <br /><br />
       <ul class="statsProfile statsSizeProfile">
@@ -52,5 +48,35 @@
         </div>
          <div class="addMoreProfile"><a class="moreTextProfile" href="">Show more</a></div>
       </div>
-   </article>
+   </div>
 </main>
+   
+<!--div id="popupContent" class="popupContent">
+   <div class="divPopupContent">
+         <div class="centerPopup">
+            <div class="contentSetting">
+                <div class="inputSizeSetting">
+                    <div class="usernameSetting">
+                        <div class="paddingLogoSetting">
+                        <button><img class="sizeLogoSetting" src="/img/test2.jpg"></button>
+                        </div>
+                        <h1 class="userTextSetting"><%- userProfile.userName %></h1>
+                    </div>
+                    <form class="heightSetting">
+                        <div class="infoSetting">
+                            <aside class="paddingInfoSetting"><label>Text</label></aside>
+                            <div class="widthSetting"><input class="inputSetting" id="pepName" value="" type="text"></div>
+                        </div>
+                        <div class="infoSetting">
+                            <aside class="paddingInfoSetting privateSetting"><label></label></aside>
+                            <div class="widthSetting">
+                            <div class="buttonSetting"><span><button class="styleButtonSetting colorButtonSetting sizeButtonSetting">Post</button></span></div>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+         </div>
+      <button class="closeButtonPopup">Fermer</button>
+   </div>
+</div-->
