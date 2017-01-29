@@ -1,16 +1,15 @@
 import * as Backbone from 'backbone';
 
-import {ProfileView} from './views/ProfileView'
-import {ProfileModel} from './models/ProfileModel';
-import {ProfileCollection} from './collections/ProfileCollection';
+import {LoggedUserProfileView} from './views/LoggedUserProfileView'
+import {UserModel} from './models/UserModel';
+import {UserCollection} from './collections/UserCollection';
 
 import {UserView} from './views/UserView';
 
 import {FeedView} from './views/FeedView'
 import {FeedModel} from './models/FeedModel';
 
-import {SettingView} from './views/SettingView'
-import {SettingModel} from './models/SettingModel';
+import {LoggedUserProfileSettingsView} from './views/LoggedUserProfileSettingsView'
 
 import {HeaderView} from './views/HeaderView'
 import {HeaderModel} from './models/HeaderModel';
@@ -22,8 +21,8 @@ export class AppRouter extends Backbone.Router {
 
     routes = {
         '': 'defaultRoute',
-        'profile': 'showProfile',
-        'setting': 'showSetting',
+        'profile': 'showLoggedUserProfile',
+        'setting': 'showLoggedUserSetting',
         'users': 'showUsers'
     }
 
@@ -48,28 +47,30 @@ export class AppRouter extends Backbone.Router {
         feedView.render();
     }
 
-    showProfile(param: string = '') {
-        let profileModel = new ProfileModel({id:'jlabonte'});
-        let profileView = new ProfileView({model: profileModel});
-        profileView.render();
+    showLoggedUserProfile(param: string = '') {
+        let userModel = new UserModel({id:'jlabonte'});
+        let loggedUserProfileView = new LoggedUserProfileView({model: userModel});
+        loggedUserProfileView.render();
     }
 
-    showSetting(param: string = '') {
-        let settingModel = new SettingModel({});
-        let settingView = new SettingView({model: settingModel});
-        settingView.render();
+    showLoggedUserSetting(param: string = '') {
+        let userModel = new UserModel({id:'jlabonte'});
+        let loggedUserProfileSettingsView = new LoggedUserProfileSettingsView({model: userModel});
+        loggedUserProfileSettingsView.render();
     }
 
     showUsers(param: string = '') {
-        let profileCollection = new ProfileCollection({});
-        profileCollection.fetch({
+        let userCollection = new UserCollection({});
+        userCollection.fetch({
             success: function(response) {
                 $('#content').html("");
+                //$('#content').append("<div class='contentUser'><ul class='boxUser'><li class='titleUser'><h2 class='textUser'>Meet new people</h2></li>");
                 response.models.forEach(function (profileModel){
                     let userView = new UserView({model: profileModel});
                     $('#content').append(userView.$el);
                     userView.render();
                 })
+                //$('#content').append("</div>");
             }
         });
     }
