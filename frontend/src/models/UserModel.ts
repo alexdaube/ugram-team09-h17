@@ -1,19 +1,8 @@
 import * as Backbone from "backbone";
+
 import {StringFormatter} from "../util/StringFormatter";
 
-export interface IProfileAttributes {
-    email: string;
-    firstName: string;
-    inscriptionDate: string;
-    lastName: string;
-    phoneNumber: string;
-    pictureUrl: string;
-    userName: string;
-}
-
-export class ProfileModel extends Backbone.Model {
-
-    public  url: string;
+export class UserModel extends Backbone.Model {
 
     constructor(options?: any) {
         super(options);
@@ -79,5 +68,9 @@ export class ProfileModel extends Backbone.Model {
 
     set inscriptionDate(inscriptionDate: string){
         this.set("registrationDate", inscriptionDate);
+    }
+
+    get profilePictureUrl(): string{
+        return this.get("pictureUrl");
     }
 }
