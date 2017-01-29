@@ -164,12 +164,25 @@
 }
 
 .buttonSetting {
-  cursor: pointer;
   -ms-flex-align: center;
   align-items: center;
   -ms-flex-direction: row;
   flex-direction: row;
   margin-top: 16px;
+}
+
+.validationTextSize {
+  cursor: default;
+  font-size:14px;
+  line-height:16px;
+}
+
+.successTextColor {
+  color:#4e9f2e;
+}
+
+.errorTextColor {
+  color: #B20000;
 }
 
 @media (min-width: 736px) {
@@ -243,7 +256,6 @@
   .buttonSetting {
     -ms-flex-pack: justify;
     justify-content: space-between;
-    width: 100%;
   }
 }
 
