@@ -14,4 +14,4 @@ export class UserCollection extends Backbone.Collection<UserModel> {
     public parse(response) {
         return response.items;
     }
-};
+}

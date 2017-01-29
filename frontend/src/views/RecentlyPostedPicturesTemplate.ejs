@@ -1,0 +1,19 @@
+<div class="contentProfile paddingProfile">
+    <div>
+        <div class="imgProfile">
+            <% for(var i = 0; i < numberToShow; i++) { %>
+            <a class="showImgProfile" href="">
+                <div class="displayImgProfile">
+                    <div class="divImgProfile">
+                        <img class="pictureProfile"
+                             height="150" width="150"
+                             id="<%- 'recentlyPostedPicture_' + pictures[i].attributes.id.toString() %>"
+                             src="<%- pictures[i].attributes.url %>" />
+                    </div>
+                </div>
+            </a>
+            <% } %>
+        </div>
+        <div class="addMoreProfile"><a class="moreTextProfile">Show more</a></div>
+    </div>
+</div>
