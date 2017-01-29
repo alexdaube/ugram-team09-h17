@@ -249,6 +249,14 @@
   flex-direction: row;
 }
 
+.popupVisibleAdd {
+  display: none;
+}
+
+.popupVisibleExit {
+  display: none;
+}
+
 @media (min-width: 736px) {
   .showImgProfile {
     margin-right: 28px;
@@ -392,23 +400,6 @@
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // POPUP ADD PICTURE
 
 .divPopupContent {
@@ -459,19 +450,6 @@
     position: relative;
     z-index: 1;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // POPUP DECONNEXION
 
