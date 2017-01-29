@@ -25,8 +25,6 @@ export class LoggedUserProfileSettingsView extends Backbone.View<UserModel> {
                 that.$el.html(that.template({userModel: that.userModel}));
                 $(document).ready(function(){
                     // TODO show and hide #textSaveSetting and #textErrorSetting (popup)
-                    //$("#textSaveSetting").hide();
-                    //$("#textErrorSetting").hide();
                 });
             },
             error() {
@@ -59,12 +57,10 @@ export class LoggedUserProfileSettingsView extends Backbone.View<UserModel> {
                 alert("The user profile was successfully updated");
                     // TODO Valider les champs contre le hacking
                     // Voir https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet#Preventing_XSS_and_Content_Security_Policy
-                    //$("#textSaveSetting").show();
                 that.render();
             },
             error() {
                 // TODO Handle error
-                //$("#textErrorSetting").show();
             },
         });
     }

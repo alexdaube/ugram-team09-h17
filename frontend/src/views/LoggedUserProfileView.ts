@@ -21,11 +21,45 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
         this.userProfileModel.fetch({
             success() {
                 that.$el.html(that.template({userModel: that.userProfileModel}));
-                $(document).ready(function(){
-                    // TODO show and hide #popupAddContent and #popupCloseContent (popup)
-                    // voir public events() dans LoggedUserSettingsView.ts
-                    $("#popupAddContent").hide();
-                    $("#popupCloseContent").hide();
+                $('#buttonAddPicture').click(function () {
+                    var d = $('#popupAddContent');
+                    if (d.hasClass('popupVisibleAdd')) {
+                        d.removeClass('popupVisibleAdd');
+                    } else {
+                        d.addClass('popupVisibleAdd');
+                    }
+                });
+                $('#closeAddButtonPopup').click(function () {
+                    var d = $('#popupAddContent');
+                    if (d.hasClass('popupVisibleAdd')) {
+                        d.removeClass('popupVisibleAdd');
+                    } else {
+                        d.addClass('popupVisibleAdd');
+                    }
+                });
+                $('#buttonExitUgram').click(function () {
+                    var d = $('#popupCloseContent');
+                    if (d.hasClass('popupVisibleExit')) {
+                        d.removeClass('popupVisibleExit');
+                    } else {
+                        d.addClass('popupVisibleExit');
+                    }
+                });
+                $('#closeExitButtonPopup').click(function () {
+                    var d = $('#popupCloseContent');
+                    if (d.hasClass('popupVisibleExit')) {
+                        d.removeClass('popupVisibleExit');
+                    } else {
+                        d.addClass('popupVisibleExit');
+                    }
+                });
+                $('#closeCancelButtonPopup').click(function () {
+                    var d = $('#popupCloseContent');
+                    if (d.hasClass('popupVisibleExit')) {
+                        d.removeClass('popupVisibleExit');
+                    } else {
+                        d.addClass('popupVisibleExit');
+                    }
                 });
             },
             error() {
