@@ -14,7 +14,7 @@ export class LoggedUserProfileSettingsView extends Backbone.View<UserModel> {
         super(_.extend({
             el: "#content",
         }, options));
-        this.template = require("./LoggedUserProfileSettingsTemplate.ejs") as Function;
+        this.template = require("./LoggedUserSettingsTemplate.ejs") as Function;
         this.userModel = options["model"];
     }
 

@@ -9,7 +9,7 @@ import {UserView} from './views/UserView';
 import {FeedView} from './views/FeedView'
 import {FeedModel} from './models/FeedModel';
 
-import {LoggedUserProfileSettingsView} from './views/LoggedUserProfileSettingsView'
+import {LoggedUserProfileSettingsView} from './views/LoggedUserSettingsView'
 
 import {HeaderView} from './views/HeaderView'
 import {HeaderModel} from './models/HeaderModel';
