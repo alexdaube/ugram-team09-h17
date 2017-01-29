@@ -4,11 +4,12 @@ import {LoggedUserProfileView} from './views/LoggedUserProfileView'
 import {UserModel} from './models/UserModel';
 import {UserCollection} from './collections/UserCollection';
 
-import {UserView} from './views/UserView';
 
 import {FeedView} from './views/FeedView'
 import {FeedModel} from './models/FeedModel';
 
+import {UserView} from './views/UserView';
+import {UserProfileView} from './views/UserProfileView';
 import {LoggedUserProfileSettingsView} from './views/LoggedUserProfileSettingsView'
 
 import {HeaderView} from './views/HeaderView'
@@ -23,7 +24,8 @@ export class AppRouter extends Backbone.Router {
         '': 'defaultRoute',
         'profile': 'showLoggedUserProfile',
         'setting': 'showLoggedUserSetting',
-        'users': 'showUsers'
+        'users': 'showUsers',
+        'users/:id': 'showUserProfile'
     }
 
     constructor() {
@@ -71,5 +73,12 @@ export class AppRouter extends Backbone.Router {
                 })
             }
         });
+    }
+
+    showUserProfile(param: string) {
+        console.log(param);
+        let userModel = new UserModel({id: param});
+        let userProfileView = new UserProfileView({model: userModel});
+        userProfileView.render();
     }
 }
