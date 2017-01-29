@@ -1,16 +1,17 @@
-import * as Backbone from 'backbone';
+import * as Backbone from "backbone";
 
-export interface FeedModelAttributes {
+/*  tslint:disable:no-empty-interface */
+export interface IFeedModelAttributes {
 }
 
 export class FeedModel extends Backbone.Model {
 
-    constructor(attributes: FeedModelAttributes, options?: any) {
+    constructor(attributes: IFeedModelAttributes, options?: any) {
         super(attributes, options);
     }
 
-    defaults() {
+    public defaults() {
         return {
-        }
+        };
     }
 }

@@ -1,0 +1,274 @@
+.styleButtonSetting {
+  cursor: pointer;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  font-weight: 600;
+  outline: none;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.colorButtonSetting {
+  background: 0 0;
+  border-color: #3897f0;
+  color: #3897f0;
+}
+
+.sizeButtonSetting {
+  padding: 0 8px;
+}
+
+.sizeLogoSetting {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.infoSetting {
+  margin-bottom: 16px;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+.paddingInfoSetting {
+  box-sizing: border-box;
+  color: #262626;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 18px;
+  margin-top: 6px;
+  -ms-flex: 0 0 194px;
+  flex: 0 0 194px;
+}
+
+.widthSetting {
+  color: #262626;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  font-size: 16px;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+.usernameSetting {
+  -ms-flex-direction: row;
+  flex-direction: row;
+  margin: 32px 0 16px;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+.paddingLogoSetting {
+  height: 38px;
+  width: 38px;
+}
+
+.userTextSetting {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 38px;
+}
+
+.menuSetting {
+  border-right: 1px solid #dbdbdb;
+  -ms-flex-preferred-size: 236px;
+  flex-basis: 236px;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.textMenuSetting {
+  border-left: 2px solid transparent;
+  display: block;
+  font-size: 16px;
+  height: 100%;
+  line-height: 20px;
+  padding: 16px 16px 16px 30px;
+  width: calc(100% - 48px);
+}
+
+.boldTextSetting {
+  border-left-color: #262626;
+  font-weight: 600;
+}
+
+.textMenuSetting {
+  color: #262626;
+  &:active, &:hover, &:visited {
+    color: #262626;
+  }
+}
+
+.contentSetting {
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -ms-flex-pack: stretch;
+  justify-content: stretch;
+  margin: 0 auto 0;
+  max-width: 935px;
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.inputSizeSetting {
+  background-color: #fff;
+  -ms-flex: 1 1 400px;
+  flex: 1 1 400px;
+  min-width: 50px;
+}
+
+.textPrivateSetting {
+  color: #999;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.heightSetting {
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-bottom: 16px;
+  margin-top: 32px;
+}
+
+.inputSetting {
+  background: 0 0;
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  box-sizing: border-box;
+  color: #262626;
+  -ms-flex: 0 1 355px;
+  flex: 0 1 355px;
+  font-size: 16px;
+  height: 32px;
+  padding: 0 10px;
+  &:focus {
+    border: 1px solid #b2b2b2;
+  }
+}
+
+.private2Setting {
+  margin-top: 16px;
+}
+
+.buttonSetting {
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  margin-top: 16px;
+}
+
+.validationTextSize {
+  cursor: default;
+  font-size:14px;
+  line-height:16px;
+}
+
+.successTextColor {
+  color:#4e9f2e;
+}
+
+.errorTextColor {
+  color: #B20000;
+}
+
+@media (min-width: 640px) {
+  .contentPaddingSetting {
+      padding-top: 60px;
+  }
+}
+
+@media (min-width: 736px) {
+  .paddingLogoSetting {
+    margin: 0 32px 0 124px;
+  }
+  .widthSetting {
+    -ms-flex-preferred-size: 355px;
+    flex-basis: 355px;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    padding-right: 60px;
+  }
+    .paddingInfoSetting {
+    padding-left: 32px;
+    padding-right: 32px;
+    text-align: right;
+  }
+    .infoSetting {
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+    .sizeButtonSetting {
+    line-height: 28px;
+  }
+  .sizeButtonSetting {
+    line-height: 29px;
+    padding: 0 11px;
+  }
+  .styleButtonSetting {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 735px) {
+  .menuSetting {
+    display: none;
+  }
+  .paddingLogoSetting {
+    margin: 0 32px 0 20px;
+  }
+  .widthSetting {
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    padding: 0 20px;
+  }
+  .paddingInfoSetting {
+    -ms-flex-preferred-size: 25px;
+    flex-basis: 25px;
+    padding: 0 20px;
+  }
+  .privateSetting {
+    display: none;
+  }
+  .infoSetting {
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  .sizeButtonSetting {
+    line-height: 26px;
+  }
+  .sizeButtonSetting {
+    line-height: 24px;
+    padding: 0 9px;
+  }
+  .styleButtonSetting {
+    font-size: 14px;
+  }
+  .buttonSetting {
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 450px) {
+  .contentSetting {
+    border: 0;
+    margin-top: 0;
+  }
+}

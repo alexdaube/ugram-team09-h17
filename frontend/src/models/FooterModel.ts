@@ -1,16 +1,17 @@
-import * as Backbone from 'backbone';
+import * as Backbone from "backbone";
 
-export interface FooterModelAttributes {
+/*  tslint:disable:no-empty-interface */
+export interface IFooterModelAttributes {
 }
 
 export class FooterModel extends Backbone.Model {
 
-    constructor(attributes: FooterModelAttributes, options?: any) {
+    constructor(attributes: IFooterModelAttributes, options?: any) {
         super(attributes, options);
     }
 
-    defaults() {
+    public defaults() {
         return {
-        }
+        };
     }
 }

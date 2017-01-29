@@ -1,19 +1,19 @@
-import * as Backbone from 'backbone';
-import * as _ from 'underscore';
+import * as Backbone from "backbone";
+import * as _ from "underscore";
 
-import {FooterModel} from '../models/FooterModel';
+import {FooterModel} from "../models/FooterModel";
 
 export class FooterView extends Backbone.View<FooterModel> {
-    template: Function;
+    private template: Function;
 
     constructor(options?: Backbone.ViewOptions<FooterModel>) {
         super(_.extend({
-            el: '#footer'
+            el: "#footer",
         }, options));
-        this.template = require('./FooterTemplate.ejs') as Function;
+        this.template = require("./FooterTemplate.ejs") as Function;
     }
 
-    render() {
+    public render() {
         this.$el.html(this.template(this.model.toJSON()));
         return this;
     }
