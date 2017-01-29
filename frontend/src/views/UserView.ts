@@ -1,6 +1,7 @@
 
 import * as Backbone from "backbone";
 import * as _ from "underscore";
+
 import {UserModel} from "../models/UserModel";
 
 export class UserView extends Backbone.View<UserModel> {
