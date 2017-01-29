@@ -20,6 +20,10 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
         this.userProfileModel.fetch({
             success() {
                 that.$el.html(that.template({userModel: that.userProfileModel}));
+                $(document).ready(function(){
+                    $("#popupAddContent").hide();
+                    $("#popupCloseContent").hide();
+                });
             },
             error() {
                 // TODO handle error

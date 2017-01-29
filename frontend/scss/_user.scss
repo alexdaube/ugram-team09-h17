@@ -45,6 +45,15 @@
   overflow: hidden;
 }
 
+.roundImgUser {
+    background-color: #fafafa;
+    border-radius: 50%;
+    border: 1px solid #dbdbdb;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+}
+
 .textUser {
   color: #999;
   font-size: 14px;
