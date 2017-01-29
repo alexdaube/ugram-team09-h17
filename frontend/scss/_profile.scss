@@ -6,10 +6,6 @@ a, abbr, acronym, address, article, aside, audio, b, big, blockquote, body, canv
   vertical-align: baseline;
 }
 
-body {
-  line-height: 1;
-}
-
 ol, ul {
   list-style: none;
 }
@@ -28,14 +24,6 @@ article, div, footer, header, main, nav, section {
   margin: 0;
   padding: 0;
   position: relative;
-}
-
-body {
-  height: 100%;
-}
-
-html {
-  height: 100%;
 }
 
 body, button, input, textarea {
@@ -105,6 +93,14 @@ a {
   }
 }
 
+.coreSpriteEllipsis {
+    background-image: url(/img/ugram.png);
+    background-repeat: no-repeat;
+    background-position: -308px -37px;
+    height: 44px;
+    width: 44px
+}
+
 .addMoreProfile {
   -ms-flex-pack: center;
   justify-content: center;
@@ -135,13 +131,18 @@ a {
   font-weight: 600;
   outline: none;
   white-space: nowrap;
-  width: 100%;
 }
 
 .colorButtonProfile {
   background: 0 0;
   border-color: #3897f0;
   color: #3897f0;
+}
+
+.colorAddButtonProfile {
+  background: 0 0;
+  border-color: #32CD32;
+  color: #32CD32;
 }
 
 .sizeButtonProfile {
@@ -289,10 +290,6 @@ a {
   flex-direction: row;
 }
 
-.boldLinkProfile {
-  font-weight: 600;
-}
-
 @media (min-width: 736px) {
   .showImgProfile {
     margin-right: 28px;
@@ -434,4 +431,157 @@ a {
   .textNameProfile {
     font-size: 21px;
   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// POPUP ADD PICTURE
+
+.divPopupContent {
+    background-color: rgba(0, 0, 0, .5);
+    bottom: 0;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    left: 0;
+    overflow-y: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1
+}
+.closeButtonPopup {
+    background: 0 0;
+    border: none;
+    cursor: pointer;
+    height: 36px;
+    outline: none;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2
+}
+.closeButtonPopup::before {
+    color: #fff;
+    content: '\00D7';
+    display: block;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 36px;
+    padding: 0;
+    margin: 0
+}
+.centerPopup {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin: auto;
+    max-width: 935px;
+    pointer-events: auto;
+    width: 80%
+}
+.popupContent {
+    position: relative;
+    z-index: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// POPUP DECONNEXION
+
+.heightPopup {
+    display: -ms-flexbox;
+    display: flex;
+    min-height: 100%;
+    overflow: auto;
+    width: auto;
+    z-index: 1
+}
+@media (min-width: 481px) {
+    .heightPopup {
+        padding: 0 40px;
+        pointer-events: none;
+        transform: translate3d(0, 0, 0)
+    }
+    .heightPopup::after,
+    .heightPopup::before {
+        content: '';
+        display: block;
+        -ms-flex-preferred-size: 40px;
+        flex-basis: 40px;
+        -ms-flex-negative: 0;
+        flex-shrink: 0
+    }
+}
+.height2Popup {
+    -ms-flex-align: center;
+    align-items: center;
+    margin: auto;
+    max-width: 935px;
+    pointer-events: auto;
+    width: 100%
+}
+@media (min-width: 414px) and (max-width: 735px) {
+    .lineQuitPopup {
+        width: 100%
+    }
+}
+
+.lineQuitPopup {
+    background-color: #fff;
+    border-bottom: 1px solid #dbdbdb
+}
+.lineQuitPopup:last-child {
+    border-bottom-width: 0
+}
+@media (min-width: 736px) {
+    .lineQuitPopup {
+        min-width: 510px
+    }
+}
+.buttonQuitPopup {
+    background: #fff;
+    border: none;
+    color: #262626;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 50px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0 16px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%
+}
+.buttonQuitPopup:hover {
+    background-color: #efefef
 }

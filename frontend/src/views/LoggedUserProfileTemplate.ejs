@@ -1,5 +1,5 @@
 <main>
-   <article class="contentProfile paddingProfile">
+   <div class="contentProfile paddingProfile">
       <header class=" headerProfile">
          <div class="logoPaddingProfile">
             <div class="logoProfile">
@@ -8,6 +8,7 @@
          </div>
          <div class="paddingNameProfile">
             <div class="borderLogoProfile">
+<<<<<<< HEAD:frontend/src/views/LoggedUserProfileTemplate.ejs
                <h1 class="textNameProfile"><%- userModel.userName %></h1><br>
             </div>
              <div class="paddingBioProfile">
@@ -19,6 +20,25 @@
          </div>
       </header>
       <br />
+=======
+               <h1 class="textNameProfile"><%- userProfile.userName %></h1>
+               <div class="paddingOptionProfile">
+                  <a><button class="styleOptionProfile coreSpriteEllipsis textOptionProfile"></button></a>
+               </div>
+            </div>
+            <div class="editButtonProfile"><a href="">
+                <a href="#setting"><button class="styleButtonProfile colorButtonProfile sizeButtonProfile">Update profile</button></a>
+                &nbsp;&nbsp;
+                <a><button class="styleButtonProfile colorAddButtonProfile sizeButtonProfile">Add picture</button></a>
+            </div>
+         </div>
+      </header>
+      <div class="paddingBioProfile">
+         <h2 class="boldTextProfile"><%- userProfile.firstName %> <%- userProfile.lastName %></h2>
+         <span><%- userProfile.email %> <%- userProfile.phoneNumber %> inscription date: <%- userProfile.inscriptionDate %></span>
+      </div>
+      <br /><br />
+>>>>>>> 250a30c9d6f11389aea547e221e9d17472decd1d:frontend/src/views/ProfileTemplate.ejs
       <ul class="statsProfile statsSizeProfile">
          <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Posts</li>
          <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Followers</li>
@@ -44,5 +64,54 @@
         </div>
          <div class="addMoreProfile"><a class="moreTextProfile" href="">Show more</a></div>
       </div>
-   </article>
+   </div>
 </main>
+
+
+
+   
+<!--div id="popupContent" class="popupContent">
+   <div class="divPopupContent">
+         <div class="centerPopup">
+            <div class="contentSetting">
+                <div class="inputSizeSetting">
+                    <div class="usernameSetting">
+                        <div class="paddingLogoSetting">
+                        <button><img class="sizeLogoSetting" src="/img/test2.jpg"></button>
+                        </div>
+                        <h1 class="userTextSetting"><%- userProfile.userName %></h1>
+                    </div>
+                    <form class="heightSetting">
+                        <div class="infoSetting">
+                            <aside class="paddingInfoSetting"><label>Text</label></aside>
+                            <div class="widthSetting"><input class="inputSetting" id="pepName" value="" type="text"></div>
+                        </div>
+                        <div class="infoSetting">
+                            <aside class="paddingInfoSetting privateSetting"><label></label></aside>
+                            <div class="widthSetting">
+                            <div class="buttonSetting"><span><button class="styleButtonSetting colorButtonSetting sizeButtonSetting">Post</button></span></div>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+         </div>
+      <button class="closeButtonPopup">Fermer</button>
+   </div>
+</div-->
+    
+
+
+<!--div id="popupCloseContent" class="popupContent">
+   <div class="divPopupContent">
+    <div class="heightPopup">
+        <div class="height2Popup">
+            <ul>
+                <li class="lineQuitPopup"><button class="buttonQuitPopup">Déconnexion</button></li>
+                <li class="lineQuitPopup"><button class="buttonQuitPopup">Annuler</button></li>
+            </ul>
+        </div>
+    </div>
+    <button class="closeButtonPopup">Fermer</button>
+   </div>
+</div-->

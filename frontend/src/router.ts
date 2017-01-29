@@ -64,11 +64,13 @@ export class AppRouter extends Backbone.Router {
         userCollection.fetch({
             success: function(response) {
                 $('#content').html("");
+                //$('#content').append("<div class='contentUser'><ul class='boxUser'><li class='titleUser'><h2 class='textUser'>Meet new people</h2></li>");
                 response.models.forEach(function (profileModel){
                     let userView = new UserView({model: profileModel});
                     $('#content').append(userView.$el);
                     userView.render();
                 })
+                //$('#content').append("</div>");
             }
         });
     }
