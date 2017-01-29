@@ -1,5 +1,6 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
+import * as $ from "jquery";
 
 import {UserModel} from "../models/UserModel";
 
@@ -21,6 +22,8 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
             success() {
                 that.$el.html(that.template({userModel: that.userProfileModel}));
                 $(document).ready(function(){
+                    // TODO show and hide #popupAddContent and #popupCloseContent (popup)
+                    // voir public events() dans LoggedUserSettingsView.ts
                     $("#popupAddContent").hide();
                     $("#popupCloseContent").hide();
                 });
