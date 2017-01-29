@@ -437,6 +437,21 @@ a {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// POPUP ADD PICTURE
+
 .divPopupContent {
     background-color: rgba(0, 0, 0, .5);
     bottom: 0;
@@ -484,4 +499,89 @@ a {
 .popupContent {
     position: relative;
     z-index: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// POPUP DECONNEXION
+
+.heightPopup {
+    display: -ms-flexbox;
+    display: flex;
+    min-height: 100%;
+    overflow: auto;
+    width: auto;
+    z-index: 1
+}
+@media (min-width: 481px) {
+    .heightPopup {
+        padding: 0 40px;
+        pointer-events: none;
+        transform: translate3d(0, 0, 0)
+    }
+    .heightPopup::after,
+    .heightPopup::before {
+        content: '';
+        display: block;
+        -ms-flex-preferred-size: 40px;
+        flex-basis: 40px;
+        -ms-flex-negative: 0;
+        flex-shrink: 0
+    }
+}
+.height2Popup {
+    -ms-flex-align: center;
+    align-items: center;
+    margin: auto;
+    max-width: 935px;
+    pointer-events: auto;
+    width: 100%
+}
+@media (min-width: 414px) and (max-width: 735px) {
+    .lineQuitPopup {
+        width: 100%
+    }
+}
+
+.lineQuitPopup {
+    background-color: #fff;
+    border-bottom: 1px solid #dbdbdb
+}
+.lineQuitPopup:last-child {
+    border-bottom-width: 0
+}
+@media (min-width: 736px) {
+    .lineQuitPopup {
+        min-width: 510px
+    }
+}
+.buttonQuitPopup {
+    background: #fff;
+    border: none;
+    color: #262626;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 50px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0 16px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%
+}
+.buttonQuitPopup:hover {
+    background-color: #efefef
 }
