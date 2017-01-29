@@ -10,8 +10,22 @@
             <div class="borderLogoProfile">
                <h1 class="textNameProfile"><%- userProfile.userName %></h1>
                <div class="paddingOptionProfile"><button class="styleOptionProfile coreSpriteEllipsis textOptionProfile">Options</button></div>
+                <button id="add-picture-button">Add picture</button>
             </div>
             <div class="editButtonProfile"><a href="#setting"><span><button class="styleButtonProfile colorButtonProfile sizeButtonProfile">Update profile</button></span></a></div>
+             <div id="dialog" style="display:none">
+                 <form class="pure-form pure-form-stacked" id="upload-file-form">
+                     <label>User: </label> <input type="text" id="userId">
+                     <label>Description:</label>
+                     <input type="text" name="description" id="description">
+                     <label for="upload-file-input">Upload your file:</label>
+                     <input id="upload-file-input" type="file" name="file" accept="image/*">
+
+                     <input id="submit-picture-button" class="pure-button" type="submit" id="submit" value="Submit">
+                 </form>
+
+                 <div id="result"></div>
+             </div>
          </div>
       </header>
       <div class="paddingBioProfile">

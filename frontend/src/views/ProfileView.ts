@@ -25,6 +25,16 @@ export class ProfileView extends Backbone.View<ProfileModel> {
             success() {
                 console.log("fetch successfull");
                 that.$el.html(that.template({userProfile: that.profileModel}));
+                $('#add-picture-button').click( function() {
+                    $('#dialog').attr("style", "display:block");
+                    $('#add-picture-button').html("cancel");
+                    }
+                );
+                $('#submit-picture-button').click(that.uploadFile)
+
+                    $(document).ready(function () {
+                        $("#submit").on("click", that.uploadFile);
+                    });
             },
             error() {
                 console.log("Shit happened");
@@ -62,5 +72,13 @@ export class ProfileView extends Backbone.View<ProfileModel> {
                 console.log("Shit happened while saving: " + er.message);
             },
         });
+    }
+
+    public uploadFile() {
+    var userId = $("#userId").val();
+
+    //Do ajax call
+
+    return false;
     }
 }
