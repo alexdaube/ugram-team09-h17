@@ -61,7 +61,7 @@ export class RecentlyPostedPicturesView extends Backbone.View<any> {
     private renderPictures() {
         let picturesHtml : string = '';
         this.recentlyPostedPictures.each((picture) => {
-            picturesHtml += `<a class="showImgProfile"><div class="displayImgProfile"><div class="divImgProfile"><img class="pictureProfile" height="150" width="150" id="recentlyPostedPicture_${picture.id}" src="${picture.url}" /></div></div></a>`
+            picturesHtml += `<div class="recent-img"><a><img id="recentlyPostedPicture_${picture.id}" src="${picture.url}" /></a></div>`;
         });
         $('#most-recent-posted-pictures').append(picturesHtml);
         this.numberOfPicturesShown += this.recentlyPostedPictures.length;
