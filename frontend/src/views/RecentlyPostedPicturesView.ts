@@ -5,7 +5,12 @@ import {RecentlyPostedPictureCollection} from "../collections/RecentlyPostedPict
 export class RecentlyPostedPicturesView extends Backbone.View<any> {
     private template: Function;
     private recentlyPostedPictures: RecentlyPostedPictureCollection;
-    private numberToShow : number = 6;
+    private picturesPerPage: number = 6;
+    private numberOfPicturesShown: number = 0;
+    private nextPageToFetch: number = 1;
+    private totalEntries: number;
+    private totalPages: number;
+    // http://api.ugram.net/pictures?page=1&perPage=10
 
     constructor(options?: any) {
         super(_.extend({
@@ -14,30 +19,54 @@ export class RecentlyPostedPicturesView extends Backbone.View<any> {
         this.recentlyPostedPictures = options["recentlyPostedPictures"];
         this.template = require("./RecentlyPostedPicturesTemplate.ejs") as Function;
         this.recentlyPostedPictures.fetch({
-            success: () => {
+            data: {
+                page: this.nextPageToFetch,
+                perPage: this.picturesPerPage
+            },
+            success: (collection, data) => {
+                this.totalEntries = data.totalEntries;
+                this.totalPages = data.totalPages;
+                this.nextPageToFetch += 1;
                 this.render();
+                this.renderPictures();
             }
         });
     }
 
+    render() {
+        let html = this.template({pictures: this.recentlyPostedPictures.models});
+        this.$el.html(html);
+        return this;
+    }
+
     events() {
         return <Backbone.EventsHash> {
-            "click .moreTextProfile": "showMore",
+            "click .moreTextProfile": "showMorePictures",
         };
     }
 
-    showMore() {
-        debugger;
-        this.numberToShow = this.recentlyPostedPictures.length >= this.numberToShow + 6 ? this.numberToShow + 6 : this.recentlyPostedPictures.length;
-        this.render();
+    showMorePictures() {
+        this.recentlyPostedPictures.fetch({
+            data: {
+                page: this.nextPageToFetch,
+                perPage: this.picturesPerPage
+            },
+            success: () => {
+                this.nextPageToFetch += 1;
+                this.renderPictures();
+            }
+        });
     }
 
-    render() {
-        let html = this.template({
-            pictures: this.recentlyPostedPictures.models,
-            numberToShow: this.numberToShow
+    private renderPictures() {
+        let picturesHtml : string = '';
+        this.recentlyPostedPictures.each((picture) => {
+            picturesHtml += `<a class="showImgProfile"><div class="displayImgProfile"><div class="divImgProfile"><img class="pictureProfile" height="150" width="150" id="recentlyPostedPicture_${picture.id}" src="${picture.url}" /></div></div></a>`
         });
-        this.$el.html(html);
-        return this;
+        $('#most-recent-posted-pictures').append(picturesHtml);
+        this.numberOfPicturesShown += this.recentlyPostedPictures.length;
+        if (this.numberOfPicturesShown === this.totalEntries || this.recentlyPostedPictures.length < this.picturesPerPage) {
+            $('.addMoreProfile').hide();
+        }
     }
 }
