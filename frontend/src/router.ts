@@ -19,6 +19,8 @@ import {HeaderModel} from './models/HeaderModel';
 
 import {FooterView} from './views/FooterView'
 import {FooterModel} from './models/FooterModel';
+import {RecentlyPostedPictureCollection} from "./collections/RecentlyPostedPictureCollection";
+import {RecentlyPostedPicturesView} from "./views/RecentlyPostedPicturesView";
 
 export class AppRouter extends Backbone.Router {
 
@@ -26,8 +28,9 @@ export class AppRouter extends Backbone.Router {
         '': 'defaultRoute',
         'profile': 'showLoggedUserProfile',
         'setting': 'showLoggedUserSetting',
-        'users': 'showUsers'
-    }
+        'users': 'showUsers',
+        'recent' : 'showRecentPostedPictures'
+    };
 
     constructor() {
         super();
@@ -67,5 +70,11 @@ export class AppRouter extends Backbone.Router {
         let userCollectionForView = new UserCollectionForView(userCollection);
         let userCollectionView = new UserCollectionView({model:userCollectionForView});
         userCollectionView.render();
+    }
+
+    showRecentPostedPictures(param: string = '') {
+        let recentlyPostedPictureCollection = new RecentlyPostedPictureCollection();
+        let recentlyPostedPicturesView = new RecentlyPostedPicturesView({recentlyPostedPictures: recentlyPostedPictureCollection});
+        recentlyPostedPicturesView.render();
     }
 }
