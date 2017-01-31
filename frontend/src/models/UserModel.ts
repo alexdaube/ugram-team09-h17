@@ -17,7 +17,7 @@ export class UserModel extends Backbone.Model {
             email: "",
             phoneNumber: "",
             inscriptionDate: "",
-            profilePictureUrl: ""
+            profilePictureUrl: "",
         };
     }
 

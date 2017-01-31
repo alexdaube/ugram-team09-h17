@@ -19,7 +19,7 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
         const that = this;
         this.userProfileModel.fetch({
             success() {
-                $("#buttonAddPicture").click(function() {
+                $("#buttonAddPicture").click(() => {
                     const d = $("#popupAddContent");
                     if (d.hasClass("popupVisibleAdd")) {
                         d.removeClass("popupVisibleAdd");
@@ -28,7 +28,7 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
                     }
                 });
 
-                $("#closeAddButtonPopup").click(function() {
+                $("#closeAddButtonPopup").click(() => {
                     const d = $("#popupAddContent");
                     if (d.hasClass("popupVisibleAdd")) {
                         d.removeClass("popupVisibleAdd");
@@ -37,7 +37,7 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
                     }
                 });
 
-                $("#buttonExitUgram").click(function() {
+                $("#buttonExitUgram").click(() => {
                     const d = $("#popupCloseContent");
                     if (d.hasClass("popupVisibleExit")) {
                         d.removeClass("popupVisibleExit");
@@ -46,7 +46,7 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
                     }
                 });
 
-                $("#closeExitButtonPopup").click(function() {
+                $("#closeExitButtonPopup").click(() => {
                     const d = $("#popupCloseContent");
                     if (d.hasClass("popupVisibleExit")) {
                         d.removeClass("popupVisibleExit");
@@ -55,7 +55,7 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
                     }
                 });
 
-                $("#closeCancelButtonPopup").click(function() {
+                $("#closeCancelButtonPopup").click(() => {
                     const d = $("#popupCloseContent");
                     if (d.hasClass("popupVisibleExit")) {
                         d.removeClass("popupVisibleExit");

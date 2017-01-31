@@ -17,14 +17,14 @@ export class UserCollectionView extends Backbone.View<UserCollectionForView> {
         this.$el.html(this.template());
         const userCollection = this.model.getCollection();
         userCollection.fetch({
-            success: function(response) {
+            success(response) {
                 $("#usersList").html("");
-                response.models.forEach(function(userModel) {
+                response.models.forEach((userModel) =>{
                     const userView = new UserView({model: userModel});
                     $("#usersList").append(userView.$el);
                     userView.render();
                 });
-            }
+            },
         });
 
         return this;

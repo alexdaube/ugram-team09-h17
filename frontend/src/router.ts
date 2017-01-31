@@ -4,7 +4,7 @@ import {LoggedUserProfileView} from './views/LoggedUserProfileView'
 import {UserModel} from './models/UserModel';
 import {UserCollection} from './collections/UserCollection';
 
-import {UserCollectionForView} from './collections/UserCollection';
+import {UserCollectionForView} from './collections/UserCollectionForView';
 import {UserCollectionView} from './views/UserCollectionView';
 
 import {UserView} from './views/UserView';

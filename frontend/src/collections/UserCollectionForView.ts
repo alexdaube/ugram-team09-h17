@@ -9,7 +9,7 @@ export class UserCollectionForView extends Backbone.Model {
         super(options);
     }
 
-    public getCollection() : UserCollection {
+    public getCollection(): UserCollection {
         return this.get("innerCollection");
     }
 };
