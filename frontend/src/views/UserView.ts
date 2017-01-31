@@ -1,13 +1,10 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
-import * as $ from "jquery";
 
 import {UserModel} from "../models/UserModel";
-import {UserCollection} from "../collections/UserCollection";
 
 export class UserView extends Backbone.View<UserModel> {
     private template: Function;
-    private userCollection: UserCollection;
 
     constructor(options?: Backbone.ViewOptions<UserModel>) {
         super(_.extend({}, options));

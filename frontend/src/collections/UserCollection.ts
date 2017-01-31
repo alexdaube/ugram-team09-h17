@@ -9,7 +9,7 @@ export class UserCollection extends Backbone.Collection<UserModel> {
         this.url = "http://api.ugram.net/users";
     }
 
-    public parse(response) {
+    parse(response) {
         return response.items;
     }
 };
