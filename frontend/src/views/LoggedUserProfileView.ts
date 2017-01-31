@@ -10,9 +10,7 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
     private userProfileModel: UserModel;
 
     constructor(options?: Backbone.ViewOptions<UserModel>) {
-        super(_.extend({
-            el: "#content",
-        }, options));
+        super(_.extend({el: "#content"}, options));
         this.template = require("./LoggedUserProfileTemplate.ejs") as Function;
         this.userProfileModel = options["model"];
     }
