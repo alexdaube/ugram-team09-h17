@@ -10,9 +10,9 @@ export class PictureModel extends Backbone.Model {
 
     public defaults() {
         return {
-            postedDate: "",
             description: "",
             mentions: [],
+            postedDate: "",
             tags: [],
             url: "",
             userId: "",
