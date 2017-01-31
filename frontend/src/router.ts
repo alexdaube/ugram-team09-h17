@@ -4,6 +4,9 @@ import {LoggedUserProfileView} from './views/LoggedUserProfileView'
 import {UserModel} from './models/UserModel';
 import {UserCollection} from './collections/UserCollection';
 
+import {UserCollectionForView} from './collections/UserCollection';
+import {UserCollectionView} from './views/UserCollectionView';
+
 import {UserView} from './views/UserView';
 
 import {FeedView} from './views/FeedView'
@@ -60,8 +63,9 @@ export class AppRouter extends Backbone.Router {
     }
 
     showUsers(param: string = '') {
-        let userModel = new UserModel({id:'jlabonte'});
-        let userView = new UserView({model: userModel});
-        userView.render();
+        let userCollection = new UserCollection;
+        let userCollectionForView = new UserCollectionForView(userCollection);
+        let userCollectionView = new UserCollectionView({model:userCollectionForView});
+        userCollectionView.render();
     }
 }

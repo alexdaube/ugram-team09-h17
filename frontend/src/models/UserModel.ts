@@ -71,7 +71,7 @@ export class UserModel extends Backbone.Model {
         this.set("registrationDate", inscriptionDate);
     }
 
-    get profilePictureUrl(): string{
+    get profilePictureUrl(): string {
         return this.get("pictureUrl");
     }
 
