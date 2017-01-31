@@ -1,5 +1,6 @@
 var config = require('./webpack.config.js');
 var gulp = require('gulp');
+var gzip = require('gulp-gzip');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 var webpack = require('webpack-stream');
@@ -25,6 +26,8 @@ gulp.task('ts', function() {
         .pipe(webpack(config)).on('error', swallowError)
         .pipe(rename({ suffix: '.min' }))
         .pipe(uglify())
+		.pipe(gulp.dest('.'))
+		.pipe(gzip())
         .pipe(gulp.dest('.'))
         .pipe(livereload());
 });
@@ -37,6 +40,8 @@ gulp.task('sass', function() {
         .pipe(rename('app.min.css'))
         .pipe(cssnano())
         .pipe(sourcemaps.write())
+        .pipe(gulp.dest('./dist/css'))
+		.pipe(gzip())
         .pipe(gulp.dest('./dist/css'))
         .pipe(livereload());
 });
