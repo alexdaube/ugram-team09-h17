@@ -81,5 +81,6 @@ export class AppRouter extends Backbone.Router {
     showRecentPostedPictures(param: string = '') {
         let recentlyPostedPictureCollection = new RecentlyPostedPictureCollection();
         let recentlyPostedPicturesView = new RecentlyPostedPicturesView({recentlyPostedPictures: recentlyPostedPictureCollection});
+        recentlyPostedPicturesView.render();
     }
 }
