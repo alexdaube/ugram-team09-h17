@@ -19,7 +19,7 @@ export class UserCollectionView extends Backbone.View<UserCollectionForView> {
         userCollection.fetch({
             success(response) {
                 $("#usersList").html("");
-                response.models.forEach((userModel) =>{
+                response.models.forEach((userModel) => {
                     const userView = new UserView({model: userModel});
                     $("#usersList").append(userView.$el);
                     userView.render();

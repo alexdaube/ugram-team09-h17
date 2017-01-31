@@ -21,7 +21,7 @@ export class LoggedUserSettingsView extends Backbone.View<UserModel> {
         this.userModel.fetch({
             success() {
                 that.$el.html(that.template({userModel: that.userModel}));
-                $(document).ready(function() {
+                $(document).ready(() => {
                     // TODO show and hide #textSaveSetting and #textErrorSetting (popup)
                 });
             },
