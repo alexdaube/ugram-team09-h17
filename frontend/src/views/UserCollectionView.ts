@@ -1,10 +1,11 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
 
-import {UserCollectionForView} from "../collections/UserCollection";
+import {UserCollectionForView} from "../collections/UserCollectionForView";
 import {UserView} from "./UserView";
 
 export class UserCollectionView extends Backbone.View<UserCollectionForView> {
+    
     private template: Function;
 
     constructor(options?: Backbone.ViewOptions<UserCollectionForView>) {

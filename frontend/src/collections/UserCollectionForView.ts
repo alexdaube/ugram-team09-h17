@@ -10,6 +10,6 @@ export class UserCollectionForView extends Backbone.Model {
     }
 
     public getCollection() : UserCollection {
-        return this.get('innerCollection');
+        return this.get("innerCollection");
     }
 };
