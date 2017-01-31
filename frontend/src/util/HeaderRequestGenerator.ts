@@ -1,4 +1,3 @@
-
 export class HeaderRequestGenerator {
 
     public static setContentTypeToJSON(xhr) {

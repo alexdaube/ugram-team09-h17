@@ -7,9 +7,7 @@ export class FeedView extends Backbone.View<FeedModel> {
     private template: Function;
 
     constructor(options?: Backbone.ViewOptions<FeedModel>) {
-        super(_.extend({
-            el: "#content",
-        }, options));
+        super(_.extend({el: "#content"}, options));
         this.template = require("./FeedTemplate.ejs") as Function;
     }
 
