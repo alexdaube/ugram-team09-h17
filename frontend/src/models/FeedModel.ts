@@ -6,7 +6,7 @@ export class FeedModel extends Backbone.Model {
         super(options);
     }
 
-    public defaults() {
+    defaults() {
         return {};
     }
 }
