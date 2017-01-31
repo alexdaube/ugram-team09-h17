@@ -2,9 +2,9 @@ import * as Backbone from 'backbone';
 
 import {LoggedUserProfileView} from './views/LoggedUserProfileView'
 import {UserModel} from './models/UserModel';
-import {UserCollection} from './collections/UserCollection';
+import {UserCollection, UserCollectionForView} from './collections/UserCollection';
 
-import {UserView} from './views/UserView';
+import {UserCollectionView} from './views/UserCollectionView';
 
 import {FeedView} from './views/FeedView'
 import {FeedModel} from './models/FeedModel';
@@ -61,17 +61,8 @@ export class AppRouter extends Backbone.Router {
 
     showUsers(param: string = '') {
         let userCollection = new UserCollection({});
-        userCollection.fetch({
-            success: function(response) {
-                $('#content').html("");
-                //$('#content').append("<div class='contentUser'><ul class='boxUser'><li class='titleUser'><h2 class='textUser'>Meet new people</h2></li>");
-                response.models.forEach(function (profileModel){
-                    let userView = new UserView({model: profileModel});
-                    $('#content').append(userView.$el);
-                    userView.render();
-                })
-                //$('#content').append("</div>");
-            }
-        });
+        let userCollectionForView = new UserCollectionForView(userCollection);
+        let userCollectionView = new UserCollectionView({model:userCollectionForView});
+        userCollectionView.render();
     }
 }

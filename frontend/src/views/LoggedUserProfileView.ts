@@ -20,11 +20,22 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
         this.userProfileModel.fetch({
             success() {
                 that.$el.html(that.template({userModel: that.userProfileModel}));
+                $('#addPictureButton').click(function () {
+                    $('#popupContent').show();
+                });
+                $('#closeButtonPopup').click(function () {
+                    $('#popupContent').hide();
+                });
+                $('#postPictureButton').click(that.postPicture);
             },
             error() {
                 // TODO handle error
             },
         });
         return this;
+    }
+
+    public postPicture() {
+        console.log("Posting a picture !");
     }
 }

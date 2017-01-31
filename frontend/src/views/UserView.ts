@@ -1,4 +1,3 @@
-
 import * as Backbone from "backbone";
 import * as _ from "underscore";
 

@@ -16,7 +16,7 @@
             <div class="editButtonProfile"><a href="">
                 <a href="#setting"><button class="styleButtonProfile colorButtonProfile sizeButtonProfile">Update profile</button></a>
                 &nbsp;&nbsp;
-                <a><button class="styleButtonProfile colorAddButtonProfile sizeButtonProfile">Add picture</button></a>
+                <a><button id ="addPictureButton" class="styleButtonProfile colorAddButtonProfile sizeButtonProfile">Add picture</button></a>
             </div>
          </div>
       </header>
@@ -56,35 +56,46 @@
 
 
    
-<!--div id="popupContent" class="popupContent">
-   <div class="divPopupContent">
+<div class="popupContent">
+   <div id="popupContent" class="divPopupContent">
          <div class="centerPopup">
             <div class="contentSetting">
                 <div class="inputSizeSetting">
                     <div class="usernameSetting">
                         <div class="paddingLogoSetting">
-                        <button><img class="sizeLogoSetting" src="/img/test2.jpg"></button>
+                        <button><img class="sizeLogoSetting" src="<%-userModel.profilePictureUrl%>"></button>
                         </div>
                         <h1 class="userTextSetting"><%- userModel.userName %></h1>
                     </div>
-                    <form class="heightSetting">
+                    <form id="uploadPictureForm" class="heightSetting">
                         <div class="infoSetting">
-                            <aside class="paddingInfoSetting"><label>Text</label></aside>
-                            <div class="widthSetting"><input class="inputSetting" id="pepName" value="" type="text"></div>
+                            <aside class="paddingInfoSetting"><label>Description:</label></aside>
+                            <div class="widthSetting"><input id="description" class="inputSetting" type="text" name="description"></div>
+                        </div>
+                        <div class="infoSetting">
+                            <aside class="paddingInfoSetting"><label>Mentions:</label></aside>
+                            <div class="widthSetting"><input id="mentions" class="inputSetting" type="text" name="mentions"></div>
+                        </div>
+                        <div class="infoSetting">
+                            <aside class="paddingInfoSetting"><label>Tags:</label></aside>
+                            <div class="widthSetting"><input id="tags" class="inputSetting" type="text" name="tags"></div>
+                        </div>
+                        <div class="infoSetting">
+                            <aside class="paddingInfoSetting"><label for="upload-file-input">Upload your file:</label></aside>
+                            <div class="widthSetting"><input id="upload-file-input" class="inputSetting" type="file" name="file" accept="image/*"></div>
                         </div>
                         <div class="infoSetting">
                             <aside class="paddingInfoSetting privateSetting"><label></label></aside>
-                            <div class="widthSetting">
-                            <div class="buttonSetting"><span><button class="styleButtonSetting colorButtonSetting sizeButtonSetting">Post</button></span></div>
-                        </div>
+                            <div class="buttonSetting"><span><button id="postPictureButton" class="styleButtonSetting colorButtonSetting sizeButtonSetting">Post</button></span></div>
                         </div>
                     </form>
+
                 </div>
             </div>
          </div>
-      <button class="closeButtonPopup">Fermer</button>
+      <button id="closeButtonPopup" class="closeButtonPopup">Fermer</button>
    </div>
-</div-->
+</div>
     
 
 
