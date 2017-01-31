@@ -9,7 +9,7 @@ export class UserModel extends Backbone.Model {
         this.urlRoot = "http://api.ugram.net/users";
     };
 
-    defaults() {
+    public defaults() {
         return {
             userName: "",
             firstName: "",

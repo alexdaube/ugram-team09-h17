@@ -21,8 +21,8 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
         const that = this;
         this.userProfileModel.fetch({
             success() {
-                $("#buttonAddPicture").click(function () {
-                    let d = $("#popupAddContent");
+                $("#buttonAddPicture").click(function() {
+                    const d = $("#popupAddContent");
                     if (d.hasClass("popupVisibleAdd")) {
                         d.removeClass("popupVisibleAdd");
                     } else {
@@ -30,8 +30,8 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
                     }
                 });
 
-                $("#closeAddButtonPopup").click(function () {
-                    let d = $("#popupAddContent");
+                $("#closeAddButtonPopup").click(function() {
+                    const d = $("#popupAddContent");
                     if (d.hasClass("popupVisibleAdd")) {
                         d.removeClass("popupVisibleAdd");
                     } else {
@@ -39,8 +39,8 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
                     }
                 });
 
-                $("#buttonExitUgram").click(function () {
-                    let d = $("#popupCloseContent");
+                $("#buttonExitUgram").click(function() {
+                    const d = $("#popupCloseContent");
                     if (d.hasClass("popupVisibleExit")) {
                         d.removeClass("popupVisibleExit");
                     } else {
@@ -48,8 +48,8 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
                     }
                 });
 
-                $("#closeExitButtonPopup").click(function () {
-                    let d = $("#popupCloseContent");
+                $("#closeExitButtonPopup").click(function() {
+                    const d = $("#popupCloseContent");
                     if (d.hasClass("popupVisibleExit")) {
                         d.removeClass("popupVisibleExit");
                     } else {
@@ -57,8 +57,8 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
                     }
                 });
 
-                $("#closeCancelButtonPopup").click(function () {
-                    let d = $("#popupCloseContent");
+                $("#closeCancelButtonPopup").click(function() {
+                    const d = $("#popupCloseContent");
                     if (d.hasClass("popupVisibleExit")) {
                         d.removeClass("popupVisibleExit");
                     } else {

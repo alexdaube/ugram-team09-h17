@@ -6,7 +6,7 @@ export class HeaderModel extends Backbone.Model {
         super(options);
     }
 
-    defaults() {
+    public defaults() {
         return {};
     }
 }
