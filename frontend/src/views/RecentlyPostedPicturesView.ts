@@ -16,45 +16,45 @@ export class RecentlyPostedPicturesView extends Backbone.View<any> {
         this.template = require("./RecentlyPostedPicturesTemplate.ejs") as Function;
     }
 
-    render() {
-        let html = this.template({pictures: this.recentlyPostedPictures.models});
+    public render() {
+        const html = this.template({pictures: this.recentlyPostedPictures.models});
         this.$el.html(html);
         this.showMorePictures();
         return this;
     }
 
-    events() {
+    public events() {
         return <Backbone.EventsHash> {
             "click .moreTextProfile": "showMorePictures",
         };
     }
 
-    showMorePictures() {
+    private showMorePictures() {
         this.recentlyPostedPictures.fetch({
             data: {
                 page: this.nextPageToFetch,
-                perPage: this.picturesPerPage
+                perPage: this.picturesPerPage,
             },
             success: () => {
                 this.nextPageToFetch += 1;
                 this.renderPictures();
-            }
+            },
         });
     }
 
     private renderPictures() {
-        let picturesHtml : string = '';
+        let picturesHtml: string = "";
         this.recentlyPostedPictures.each((picture) => {
             picturesHtml += `<div class="recentImg"><a><img id="recentlyPostedPicture_${picture.id}" \
                 src="${picture.url}" /></a></div>`;
         });
-        $('#most-recent-posted-pictures').append(picturesHtml);
+        $("#most-recent-posted-pictures").append(picturesHtml);
         this.checkForMorePicturesAvailable();
     }
 
     private checkForMorePicturesAvailable() {
         if (this.recentlyPostedPictures.length < this.picturesPerPage) {
-            $('.addMoreProfile').hide();
+            $(".addMoreProfile").hide();
         }
     }
 }

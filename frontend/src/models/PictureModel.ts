@@ -15,13 +15,8 @@ export class PictureModel extends Backbone.Model {
             mentions: [],
             tags: [],
             url: "",
-            userId: ""
+            userId: "",
         };
-    }
-
-    get postedDate(): string {
-        const createdDate = this.get("createdDate");
-        return StringFormatter.formatMillisecondDateToMMDDYYYY(new Date(createdDate));
     }
 
     get description(): string {
@@ -32,19 +27,24 @@ export class PictureModel extends Backbone.Model {
         this.set("description", description);
     }
 
-    get mentions(): Array<string> {
+    get mentions(): string[] {
         return this.get("mentions");
     }
 
-    set mentions(mentions: Array<string>){
+    set mentions(mentions: string[]){
         this.set("description", mentions);
     }
 
-    get tags(): Array<string> {
+    get postedDate(): string {
+        const createdDate = this.get("createdDate");
+        return StringFormatter.formatMillisecondDateToMMDDYYYY(new Date(createdDate));
+    }
+
+    get tags(): string[] {
         return this.get("tags");
     }
 
-    set tags(tags: Array<string>){
+    set tags(tags: string[]){
         this.set("description", tags);
     }
 
