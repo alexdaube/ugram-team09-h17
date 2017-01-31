@@ -2,13 +2,13 @@ version: 0.0
 os: linux
 files:
   - source: /frontend
-    destination: /www
+    destination: /home/ec2-user/deployment/
 hooks:
   AfterInstall:
     - location: deployment_scripts/start_server
       timeout: 300
-      runas: root
+      runas: ec2-user
   ApplicationStop:
     - location: deployment_scripts/stop_server
       timeout: 300
-      runas: root
+      runas: ec2-user
