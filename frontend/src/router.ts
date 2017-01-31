@@ -60,18 +60,8 @@ export class AppRouter extends Backbone.Router {
     }
 
     showUsers(param: string = '') {
-        let userCollection = new UserCollection({});
-        userCollection.fetch({
-            success: function(response) {
-                $('#content').html("");
-                $('#content').append("<div class='contentUser contentUser2'><ul class='boxUser'><li class='titleUser'><h2 class='textUser'>Meet new people</h2></li></ul></div>");
-                response.models.forEach(function (profileModel){
-                    let userView = new UserView({model: profileModel});
-                    $('#content').append(userView.$el);
-                    userView.render();
-                })
-                $('#content').append("<div class='addMoreProfile'><a class='moreTextProfile' href=''>Show more</a></div>");
-            }
-        });
+        let userModel = new UserModel({id:'jlabonte'});
+        let userView = new UserView({model: userModel});
+        userView.render();
     }
 }
