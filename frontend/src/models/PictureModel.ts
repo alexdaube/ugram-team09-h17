@@ -24,10 +24,6 @@ export class PictureModel extends Backbone.Model {
         return StringFormatter.formatMillisecondDateToMMDDYYYY(new Date(createdDate));
     }
 
-    set postedDate(postedDate: string){
-        this.set("createdDate", postedDate);
-    }
-
     get description(): string {
         return this.get("description");
     }
