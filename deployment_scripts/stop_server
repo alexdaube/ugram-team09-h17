@@ -1,3 +1,0 @@
-#!/bin/bash
-rm -R /www/*
-rm -R /home/ec2-user/deployment/*
