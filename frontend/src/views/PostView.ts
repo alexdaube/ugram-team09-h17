@@ -7,7 +7,7 @@ export class PostView extends Backbone.View<PictureModel> {
     private template: Function;
 
     constructor(options?: Backbone.ViewOptions<PictureModel>) {
-        super(_.extend({el: "#content"}, options));
+        super(_.extend({}, options));
         this.template = require("./PostTemplate.ejs") as Function;
     }
 

@@ -63,8 +63,7 @@ export class UserModel extends Backbone.Model {
 
     get inscriptionDate(): string {
         const bufferDate = this.get("registrationDate");
-        const formattedDate = StringFormatter.formatMillisecondDateToMMDDYYYY(new Date(bufferDate));
-        return formattedDate;
+        return StringFormatter.formatMillisecondDateToMMDDYYYY(new Date(bufferDate));
     }
 
     set inscriptionDate(inscriptionDate: string) {
