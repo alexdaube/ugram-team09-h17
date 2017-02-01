@@ -1,10 +1,11 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
-import {RecentlyPostedPictureCollection} from "../collections/RecentlyPostedPictureCollection";
+
+import {FeedCollection} from "../collections/FeedCollection";
 
 export class RecentlyPostedPicturesView extends Backbone.View<any> {
     private template: Function;
-    private recentlyPostedPictures: RecentlyPostedPictureCollection;
+    private recentlyPostedPictures: FeedCollection;
     private picturesPerPage: number = 8;
     private nextPageToFetch: number = 1;
 
@@ -17,7 +18,7 @@ export class RecentlyPostedPicturesView extends Backbone.View<any> {
     }
 
     public render() {
-        const html = this.template({pictures: this.recentlyPostedPictures.models});
+        const html = this.template();
         this.$el.html(html);
         this.showMorePictures();
         return this;

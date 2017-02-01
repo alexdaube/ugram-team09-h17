@@ -9,7 +9,9 @@ import {UserCollectionView} from './views/UserCollectionView';
 
 import {UserView} from './views/UserView';
 
-import {FeedView} from './views/FeedView'
+import {FeedCollectionView} from './views/FeedCollectionView'
+import {FeedCollectionForView} from './collections/FeedCollectionForView'
+
 import {FeedModel} from './models/FeedModel';
 
 import {LoggedUserSettingsView} from './views/LoggedUserSettingsView'
@@ -19,7 +21,7 @@ import {HeaderModel} from './models/HeaderModel';
 
 import {FooterView} from './views/FooterView'
 import {FooterModel} from './models/FooterModel';
-import {RecentlyPostedPictureCollection} from "./collections/RecentlyPostedPictureCollection";
+import {FeedCollection} from "./collections/FeedCollection";
 import {RecentlyPostedPicturesView} from "./views/RecentlyPostedPicturesView";
 
 export class AppRouter extends Backbone.Router {
@@ -29,7 +31,8 @@ export class AppRouter extends Backbone.Router {
         'profile': 'showLoggedUserProfile',
         'setting': 'showLoggedUserSetting',
         'users': 'showUsers',
-        'recent' : 'showRecentPostedPictures'
+        'recent': 'showRecentPostedPictures',
+        'feed' : 'showFeed',
     };
 
     constructor() {
@@ -48,9 +51,9 @@ export class AppRouter extends Backbone.Router {
     }
 
     defaultRoute() {
-        let feedModel = new FeedModel({});
-        let feedView = new FeedView({model: feedModel});
-        feedView.render();
+        // let feedModel = new FeedModel({});
+        // let feedView = new FeedCollectionView({model: feedModel});
+        // feedView.render();
     }
 
     showLoggedUserProfile(param: string = '') {
@@ -72,9 +75,10 @@ export class AppRouter extends Backbone.Router {
         userCollectionView.render();
     }
 
-    showRecentPostedPictures(param: string = '') {
-        let recentlyPostedPictureCollection = new RecentlyPostedPictureCollection();
-        let recentlyPostedPicturesView = new RecentlyPostedPicturesView({recentlyPostedPictures: recentlyPostedPictureCollection});
-        recentlyPostedPicturesView.render();
+    showFeed(param: string = '') {
+        let feedCollection = new FeedCollection;
+        let feedCollectionForView = new FeedCollectionForView(feedCollection);
+        let feedCollectionView = new FeedCollectionView({model:feedCollectionForView});
+        feedCollectionView.render();
     }
 }

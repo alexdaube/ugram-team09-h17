@@ -1,14 +1,14 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
 
-import {FeedModel} from "../models/FeedModel";
+import {PictureModel} from "../models/PictureModel";
 
-export class FeedView extends Backbone.View<FeedModel> {
+export class PostView extends Backbone.View<PictureModel> {
     private template: Function;
 
-    constructor(options?: Backbone.ViewOptions<FeedModel>) {
+    constructor(options?: Backbone.ViewOptions<PictureModel>) {
         super(_.extend({el: "#content"}, options));
-        this.template = require("./FeedTemplate.ejs") as Function;
+        this.template = require("./PostTemplate.ejs") as Function;
     }
 
     public render() {

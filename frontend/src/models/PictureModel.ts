@@ -2,9 +2,18 @@ import * as Backbone from "backbone";
 
 import {StringFormatter} from "../util/StringFormatter";
 
+export interface PictureModelAttributes {
+    description: string,
+    mentions: string[],
+    postedDate: string,
+    tags: string[],
+    url: string,
+    userId: string,
+}
+
 export class PictureModel extends Backbone.Model {
 
-    constructor(options?: any) {
+    constructor(attributes: PictureModelAttributes, options?: any) {
         super(options);
     }
 
