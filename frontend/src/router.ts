@@ -34,7 +34,6 @@ export class AppRouter extends Backbone.Router {
         'users': 'showUsers',
         'users/:id': 'showUserProfile',
         'recent' : 'showRecentPostedPictures',
-        'feed' : 'showFeed',
     };
 
     constructor() {
@@ -53,9 +52,10 @@ export class AppRouter extends Backbone.Router {
     }
 
     defaultRoute() {
-        // let feedModel = new FeedModel({});
-        // let feedView = new FeedCollectionView({model: feedModel});
-        // feedView.render();
+        let feedCollection = new FeedCollection;
+        let feedCollectionForView = new FeedCollectionForView(feedCollection);
+        let feedCollectionView = new FeedCollectionView({model:feedCollectionForView});
+        feedCollectionView.render();
     }
 
     showLoggedUserProfile(param: string = '') {
@@ -77,14 +77,7 @@ export class AppRouter extends Backbone.Router {
         userCollectionView.render();
     }
 
-    showFeed(param: string = '') {
-        let feedCollection = new FeedCollection;
-        let feedCollectionForView = new FeedCollectionForView(feedCollection);
-        let feedCollectionView = new FeedCollectionView({model:feedCollectionForView});
-        feedCollectionView.render();
-    }
-
-    showUserProfile(param: string = '') {
+    showUserProfile(param: string) {
         console.log(param);
         let userModel = new UserModel({id: param});
         let userProfileView = new UserProfileView({model: userModel});
