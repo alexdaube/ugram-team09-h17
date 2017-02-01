@@ -28,7 +28,7 @@ export class AppRouter extends Backbone.Router {
         "profile": "showLoggedUserProfile",
         "setting": "showLoggedUserSetting",
         "users": "showUsers",
-        "users/:id": "showUserProfile",
+        "users/:userId": "showUserProfile",
         "users/:userId/pictures/:pictureId": "showFeed",
     };
 
@@ -63,10 +63,10 @@ export class AppRouter extends Backbone.Router {
         postView.render();
     }
 
-    public showLoggedUserProfile(param: string = "") {
+    public showLoggedUserProfile(userId: string = "") {
         const userModel = new UserModel({id: "jlabonte"});
-        // const feedCollection = new FeedCollection({url: "http://api.ugram.net/users/" + jlabonte + "pictures"});
-        const loggedUserProfileView = new LoggedUserProfileView({model: userModel});
+        const feedCollection = new FeedCollection({url: "http://api.ugram.net/users/" + userModel.id + "pictures"});
+        const loggedUserProfileView = new LoggedUserProfileView({model: userModel, collection: feedCollection});
         loggedUserProfileView.render();
     }
 
@@ -83,9 +83,10 @@ export class AppRouter extends Backbone.Router {
         userCollectionView.render();
     }
 
-    public showUserProfile(param: string) {
-        const userModel = new UserModel({id: param});
-        const userProfileView = new UserProfileView({model: userModel});
+    public showUserProfile(userId: string) {
+        const userModel = new UserModel({id: userId});
+        const feedCollection = new FeedCollection({url: "http://api.ugram.net/users/" + userModel.id + "/pictures"});
+        const userProfileView = new UserProfileView({model: userModel, collection: feedCollection});
         userProfileView.render();
     }
 }

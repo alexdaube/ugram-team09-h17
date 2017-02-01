@@ -1,6 +1,3 @@
-/**
- * Created by alexdaube on 2017-02-01.
- */
 import * as Backbone from "backbone";
 import * as _ from "underscore";
 
