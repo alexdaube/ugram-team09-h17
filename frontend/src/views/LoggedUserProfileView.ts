@@ -3,7 +3,6 @@ import * as _ from "underscore";
 import * as $ from "jquery";
 
 import {UserModel} from "../models/UserModel";
-import {EditPictureModel} from "../models/EditPictureModel";
 
 export class LoggedUserProfileView extends Backbone.View<UserModel> {
 
