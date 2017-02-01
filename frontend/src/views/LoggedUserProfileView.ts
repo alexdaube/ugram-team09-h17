@@ -19,53 +19,14 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
         const that = this;
         this.userProfileModel.fetch({
             success() {
-                $("#buttonAddPicture").click(() => {
-                    const d = $("#popupAddContent");
-                    if (d.hasClass("popupVisibleAdd")) {
-                        d.removeClass("popupVisibleAdd");
-                    } else {
-                        d.addClass("popupVisibleAdd");
-                    }
-                });
-
-                $("#closeAddButtonPopup").click(() => {
-                    const d = $("#popupAddContent");
-                    if (d.hasClass("popupVisibleAdd")) {
-                        d.removeClass("popupVisibleAdd");
-                    } else {
-                        d.addClass("popupVisibleAdd");
-                    }
-                });
-
-                $("#buttonExitUgram").click(() => {
-                    const d = $("#popupCloseContent");
-                    if (d.hasClass("popupVisibleExit")) {
-                        d.removeClass("popupVisibleExit");
-                    } else {
-                        d.addClass("popupVisibleExit");
-                    }
-                });
-
-                $("#closeExitButtonPopup").click(() => {
-                    const d = $("#popupCloseContent");
-                    if (d.hasClass("popupVisibleExit")) {
-                        d.removeClass("popupVisibleExit");
-                    } else {
-                        d.addClass("popupVisibleExit");
-                    }
-                });
-
-                $("#closeCancelButtonPopup").click(() => {
-                    const d = $("#popupCloseContent");
-                    if (d.hasClass("popupVisibleExit")) {
-                        d.removeClass("popupVisibleExit");
-                    } else {
-                        d.addClass("popupVisibleExit");
-                    }
-                });
-
                 that.$el.html(that.template({userModel: that.userProfileModel}));
-                $("#addPictureButton").click(() => {
+                $("#buttonExitUgram").click(() => {
+                    $("#popupContent").show();
+                });
+                $("#closeExitButtonPopup").click(() => {
+                    $("#popupContent").hide();
+                });
+                $("#buttonAddPicture").click(() => {
                     $("#popupContent").show();
                 });
                 $("#closeButtonPopup").click(() => {
