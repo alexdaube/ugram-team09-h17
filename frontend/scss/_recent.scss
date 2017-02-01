@@ -1,0 +1,46 @@
+.recentImgContainer {
+  padding: .5vw;
+  font-size: 0;
+  flex-direction: column;
+  flex-flow: row wrap;
+  display: flex;
+}
+
+.recentImg {
+  opacity: 1;
+  flex: auto;
+  width: 200px;
+  margin: .5vw;
+  transition: .2s ease-in-out;
+  &:hover {
+    opacity: .5;
+  }
+  img {
+    width: 100%;
+    height: 216px;
+  }
+}
+
+.recentDesc {
+  padding: 15px;
+  text-align: center;
+}
+
+.recentShowMoreButton {
+  margin-top: 20px;
+  opacity: 1;
+  background-color: white;
+
+  &:hover {
+    opacity: .5;
+  }
+}
+
+@media screen and(max-width: 400px) {
+  .recentImg {
+    margin: 0;
+  }
+  .recentImgContainer {
+    padding: 0;
+  }
+}

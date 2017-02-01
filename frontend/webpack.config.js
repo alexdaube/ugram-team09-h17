@@ -17,6 +17,12 @@ module.exports = {
         })
     ],
     module: {
+        preLoaders: [
+            {
+                test: /\.ts$/,
+                loader: 'tslint-loader'
+            }
+        ],
         loaders: [
             {test: /\.tsx?$/, loader: 'ts-loader'},
             { test: /\.ejs$/, loader: 'ejs-loader' }

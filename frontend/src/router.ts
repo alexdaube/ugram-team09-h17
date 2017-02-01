@@ -4,6 +4,8 @@ import {LoggedUserProfileView} from './views/LoggedUserProfileView'
 import {UserModel} from './models/UserModel';
 import {UserCollection} from './collections/UserCollection';
 
+import {UserCollectionForView} from './collections/UserCollectionForView';
+import {UserCollectionView} from './views/UserCollectionView';
 
 import {FeedView} from './views/FeedView'
 import {FeedModel} from './models/FeedModel';
@@ -17,6 +19,8 @@ import {HeaderModel} from './models/HeaderModel';
 
 import {FooterView} from './views/FooterView'
 import {FooterModel} from './models/FooterModel';
+import {RecentlyPostedPictureCollection} from "./collections/RecentlyPostedPictureCollection";
+import {RecentlyPostedPicturesView} from "./views/RecentlyPostedPicturesView";
 
 export class AppRouter extends Backbone.Router {
 
@@ -25,8 +29,9 @@ export class AppRouter extends Backbone.Router {
         'profile': 'showLoggedUserProfile',
         'setting': 'showLoggedUserSetting',
         'users': 'showUsers',
-        'users/:id': 'showUserProfile'
-    }
+        'users/:id': 'showUserProfile',
+        'recent' : 'showRecentPostedPictures'
+    };
 
     constructor() {
         super();
@@ -62,19 +67,16 @@ export class AppRouter extends Backbone.Router {
     }
 
     showUsers(param: string = '') {
-        let userCollection = new UserCollection({});
-        userCollection.fetch({
-            success: function(response) {
-                $('#content').html("");
-                $('#content').append("<div class='contentUser contentUser2'><ul class='boxUser'><li class='titleUser'><h2 class='textUser'>Meet new people</h2></li></ul></div>");
-                response.models.forEach(function (profileModel){
-                    let userView = new UserView({model: profileModel});
-                    $('#content').append(userView.$el);
-                    userView.render();
-                })
-                $('#content').append("<div class='addMoreProfile'><a class='moreTextProfile' href=''>Show more</a></div>");
-            }
-        });
+        let userCollection = new UserCollection;
+        let userCollectionForView = new UserCollectionForView(userCollection);
+        let userCollectionView = new UserCollectionView({model:userCollectionForView});
+        userCollectionView.render();
+    }
+
+    showRecentPostedPictures(param: string = '') {
+        let recentlyPostedPictureCollection = new RecentlyPostedPictureCollection();
+        let recentlyPostedPicturesView = new RecentlyPostedPicturesView({recentlyPostedPictures: recentlyPostedPictureCollection});
+        recentlyPostedPicturesView.render();
     }
 
     showUserProfile(param: string) {

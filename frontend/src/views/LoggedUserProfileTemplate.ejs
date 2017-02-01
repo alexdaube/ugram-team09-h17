@@ -1,29 +1,28 @@
 <div class="contentProfile paddingProfile">
     <div class=" headerProfile">
         <div class="logoPaddingProfile">
-        <div class="logoProfile">
-            <button><img class="stlyeLogoProfile" src="/img/test2.jpg"></button>
-        </div>
-        </div>
-        <div class="paddingNameProfile">
-        <div class="borderLogoProfile">
-            <h1 class="textNameProfile"><%- userModel.userName %></h1>
-            <div class="paddingOptionProfile">
-                <a><button id="buttonExitUgram" class="styleOptionProfile coreSpriteEllipsis textOptionProfile"></button></a>
+            <div class="logoProfile">
+                <button><img class="stlyeLogoProfile" src="/img/test2.jpg"></button>
             </div>
         </div>
-        <div class="editButtonProfile"><a href="">
-            <a href="#setting"><button class="styleButtonProfile colorButtonProfile sizeButtonProfile">Update profile</button></a>
-            &nbsp;&nbsp;
-            <a><button id="buttonAddPicture" class="styleButtonProfile colorAddButtonProfile sizeButtonProfile">Add picture</button></a>
-        </div>
+        <div class="paddingNameProfile">
+            <div class="borderLogoProfile">
+                <h1 class="textNameProfile"><%- userModel.userName %></h1>
+                <div class="paddingOptionProfile">
+                    <a><button id="buttonExitUgram" class="styleOptionProfile coreSpriteEllipsis textOptionProfile"></button></a>
+                </div>
+            </div>
+            <div class="editButtonProfile"><a href="">
+                <a href="#setting"><button class="styleButtonProfile colorButtonProfile sizeButtonProfile">Update profile</button></a>
+                &nbsp;&nbsp;
+                <a><button id="buttonAddPicture" class="styleButtonProfile colorAddButtonProfile sizeButtonProfile">Add picture</button></a>
+            </div>
         </div>
     </div>
     <div class="paddingBioProfile">
         <h2 class="boldTextProfile"><%- userModel.firstName %> <%- userModel.lastName %></h2>
         <span><%- userModel.email %> <%- userModel.phoneNumber %> inscription date: <%- userModel.inscriptionDate %></span>
     </div>
-    <br /><br />
     <ul class="statsProfile statsSizeProfile">
         <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Posts</span></li>
         <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Followers</a></li>
@@ -65,11 +64,11 @@
                     </div>
                     <form class="heightSetting">
                         <div class="infoSetting">
-                            <aside class="paddingInfoSetting"><label>Text</label></aside>
+                            <div class="paddingInfoSetting"><label>Text</label></div>
                             <div class="widthSetting"><input class="inputSetting" id="pepName" value="" type="text"></div>
                         </div>
                         <div class="infoSetting">
-                            <aside class="paddingInfoSetting privateSetting"><label></label></aside>
+                            <div class="paddingInfoSetting privateSetting"><label></label></div>
                             <div class="widthSetting">
                             <div class="buttonSetting"><span><button class="styleButtonSetting colorButtonSetting sizeButtonSetting">Post</button></span></div>
                         </div>
