@@ -13,4 +13,4 @@ export class PostUserCollection extends Backbone.Collection<PictureModel> {
     public parse(response) {
         return response.items;
     }
-};
+}

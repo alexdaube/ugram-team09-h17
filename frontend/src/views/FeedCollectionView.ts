@@ -1,47 +1,32 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
 
-import {FeedCollectionForView} from "../collections/FeedCollectionForView";
-import {FeedCollection} from "../collections/FeedCollection";
+import {ShowMoreView} from "./ShowMoreView";
 import {PostView} from "./PostView";
 
-export class FeedCollectionView extends Backbone.View<FeedCollectionForView> {
-
+export class FeedCollectionView extends Backbone.View<any> {
     private template: Function;
-    private recentlyPostedPictures: FeedCollection;
-    private picturesPerPage: number = 8;
+    private picturesPerPage: number = 4;
     private nextPageToFetch: number = 1;
 
-    constructor(options?: Backbone.ViewOptions<FeedCollectionForView>) {
-        super(_.extend({el: "#content"}, options));
-        this.collection = options["recentlyPostedPictures"];
+    constructor(options?: any) {
+        super(_.extend({}, options));
         this.template = require("./FeedCollectionTemplate.ejs") as Function;
     }
 
     public render() {
-        this.$el.html(this.template());
-        const feedCollection = this.model.getCollection();
-        feedCollection.fetch({
-            success(response) {
-                $("#postsList").html("");
-                response.models.forEach((pictureModel) => {
-                    const postView = new PostView({model: pictureModel});
-                    $("#postsList").append(postView.$el);
-                    postView.render();
-                });
-            },
+        const html = this.template();
+        this.$el.html(html);
+        this.showPictures();
+        const showMoreView = new ShowMoreView({
+            element: "#show-more-container",
+            showMoreCallback: this.showPictures.bind(this),
         });
-        this.showMorePictures();
+        showMoreView.render();
         return this;
     }
 
-    public events() {
-        return <Backbone.EventsHash> {
-            "click .moreTextProfile": "showMorePictures",
-        };
-    }
-
-    private showMorePictures() {
+    private showPictures() {
         this.collection.fetch({
             data: {
                 page: this.nextPageToFetch,
@@ -55,18 +40,16 @@ export class FeedCollectionView extends Backbone.View<FeedCollectionForView> {
     }
 
     private renderPictures() {
-        let picturesHtml: string = "";
         this.collection.each((picture) => {
-            picturesHtml += `<div class="recentImg"><a><img id="recentlyPostedPicture_${picture.id}" \
-                src="${picture.url}" /></a></div>`;
+            const postView = new PostView({el: "#posts-list" , model: picture});
+            postView.append();
         });
-        $("#most-recent-posted-pictures").append(picturesHtml);
         this.checkForMorePicturesAvailable();
     }
 
     private checkForMorePicturesAvailable() {
         if (this.collection.length < this.picturesPerPage) {
-            $(".addMoreProfile").hide();
+            $("#show-more-container").hide();
         }
     }
 }
