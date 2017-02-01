@@ -29,7 +29,6 @@ export class AppRouter extends Backbone.Router {
         "setting": "showLoggedUserSetting",
         "users": "showUsers",
         "users/:id": "showUserProfile",
-        "recent" : "showRecentPostedPictures",
     };
 
     constructor() {
