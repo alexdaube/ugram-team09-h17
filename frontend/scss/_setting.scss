@@ -113,12 +113,14 @@
   flex-grow: 1;
   -ms-flex-pack: stretch;
   justify-content: stretch;
-  margin: 60px auto 0;
+  margin: 0 auto 0;
   max-width: 935px;
   width: 100%;
+  margin-bottom: 60px;
 }
 
 .inputSizeSetting {
+  background-color: #fff;
   -ms-flex: 1 1 400px;
   flex: 1 1 400px;
   min-width: 50px;
@@ -163,12 +165,31 @@
 }
 
 .buttonSetting {
-  cursor: pointer;
   -ms-flex-align: center;
   align-items: center;
   -ms-flex-direction: row;
   flex-direction: row;
   margin-top: 16px;
+}
+
+.validationTextSize {
+  cursor: default;
+  font-size:14px;
+  line-height:16px;
+}
+
+.successTextColor {
+  color:#4e9f2e;
+}
+
+.errorTextColor {
+  color: #B20000;
+}
+
+@media (min-width: 640px) {
+  .contentPaddingSetting {
+      padding-top: 60px;
+  }
 }
 
 @media (min-width: 736px) {
@@ -242,7 +263,6 @@
   .buttonSetting {
     -ms-flex-pack: justify;
     justify-content: space-between;
-    width: 100%;
   }
 }
 

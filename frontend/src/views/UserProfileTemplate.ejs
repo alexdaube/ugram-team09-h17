@@ -1,0 +1,47 @@
+<main>
+    <article class="contentProfile paddingProfile">
+        <header class=" headerProfile">
+            <div class="logoPaddingProfile">
+                <div class="logoProfile">
+                    <button><img class="stlyeLogoProfile" src="<%- userModel.profilePictureUrl %>"></button>
+                </div>
+            </div>
+            <div class="paddingNameProfile">
+                <div class="borderLogoProfile">
+                    <h1 class="textNameProfile"><%- userModel.userName %></h1><br>
+                </div>
+                <div class="paddingBioProfile">
+                    <h2 class="boldTextProfile"><%- userModel.firstName %> <%- userModel.lastName %></h2><br>
+                    <span>Inscription date: <%- userModel.inscriptionDate %></span>
+                </div>
+                <br>
+            </div>
+        </header>
+        <br />
+        <ul class="statsProfile statsSizeProfile">
+            <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Posts</li>
+            <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Followers</li>
+            <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Following</li>
+        </ul>
+        <div>
+            <div class="imgProfile">
+                <a class="showImgProfile" href="">
+                    <div class="displayImgProfile">
+                        <div class="divImgProfile"><img class="pictureProfile" id="pImage_1" src="/img/test3.jpg"></div>
+                    </div>
+                </a>
+                <a class="showImgProfile" href="">
+                    <div class="displayImgProfile">
+                        <div class="divImgProfile"><img class="pictureProfile" id="pImage_2" src="/img/test4.jpg"></div>
+                    </div>
+                </a>
+                <a class="showImgProfile" href="">
+                    <div class="displayImgProfile">
+                        <div class="divImgProfile"><img class="pictureProfile" id="pImage_3" src="/img/test5.jpg"></div>
+                    </div>
+                </a>
+            </div>
+            <div class="addMoreProfile"><a class="moreTextProfile" href="">Show more</a></div>
+        </div>
+    </article>
+</main>

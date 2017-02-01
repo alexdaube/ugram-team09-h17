@@ -1,0 +1,51 @@
+<div class="contentPaddingSetting">
+    <div class="contentSetting">
+        <ul class="menuSetting">
+            <li><a class="textMenuSetting boldTextSetting" href="">Modify profile</a></li>
+        </ul>
+        <div class="inputSizeSetting">         
+            <div class="usernameSetting">
+            <div class="paddingLogoSetting">
+                <button><img class="sizeLogoSetting" src="<%- userModel.profilePictureUrl %>"></button>
+            </div>
+            <h1 class="userTextSetting"><%- userModel.userName %></h1>
+            </div>
+            <form class="heightSetting">
+            <div class="infoSetting">
+                <div class="paddingInfoSetting"><label>First Name</label></div>
+                <div class="widthSetting"><input class="inputSetting" id="pepFirstName" value="<%- userModel.firstName %>" type="text"></div>
+            </div>
+            <div class="infoSetting">
+                <div class="paddingInfoSetting"><label>Last Name</label></div>
+                <div class="widthSetting"><input class="inputSetting" id="pepLastName" value="<%- userModel.lastName %>" type="text"></div>
+            </div>
+            <div class="infoSetting">
+                <div class="paddingInfoSetting privateSetting"><label></label></div>
+                <div class="widthSetting">
+                    <div class="private2Setting">
+                        <h2 class="textPrivateSetting">Private information</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="infoSetting">
+                <div class="paddingInfoSetting"><label>Email</label></div>
+                <div class="widthSetting"><input class="inputSetting" id="pepEmail" value="<%- userModel.email %>" type="text"></div>
+            </div>
+            <div class="infoSetting">
+                <div class="paddingInfoSetting"><label>Phone</label></div>
+                <div class="widthSetting"><input class="inputSetting" id="pepPhone" value="<%- userModel.phoneNumber %>" type="text"></div>
+            </div>
+            <div class="infoSetting">
+                <div class="paddingInfoSetting privateSetting"><label></label></div>
+                <div class="widthSetting">
+                    <div class="buttonSetting"><span><button class="styleButtonSetting colorButtonSetting sizeButtonSetting" id="saveProfile">Update</button></span></div>
+                    &nbsp;&nbsp;&nbsp;
+                    <div class="buttonSetting"><span><p class="validationTextSize successTextColor" id="textSaveSetting">Profile saved</p></span></div>
+                    &nbsp;&nbsp;&nbsp;
+                    <div class="buttonSetting"><span><p class="validationTextSize errorTextColor" id="textErrorSetting">Profile saved</p></span></div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
