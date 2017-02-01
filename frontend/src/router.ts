@@ -10,7 +10,7 @@ import {FeedModel} from './models/FeedModel';
 
 import {UserView} from './views/UserView';
 import {UserProfileView} from './views/UserProfileView';
-import {LoggedUserProfileSettingsView} from './views/LoggedUserProfileSettingsView'
+import {LoggedUserSettingsView} from './views/LoggedUserSettingsView';
 
 import {HeaderView} from './views/HeaderView'
 import {HeaderModel} from './models/HeaderModel';
@@ -57,8 +57,8 @@ export class AppRouter extends Backbone.Router {
 
     showLoggedUserSetting(param: string = '') {
         let userModel = new UserModel({id:'jlabonte'});
-        let loggedUserProfileSettingsView = new LoggedUserProfileSettingsView({model: userModel});
-        loggedUserProfileSettingsView.render();
+        let loggedUserSettingsView = new LoggedUserSettingsView({model: userModel});
+        loggedUserSettingsView.render();
     }
 
     showUsers(param: string = '') {
@@ -66,11 +66,13 @@ export class AppRouter extends Backbone.Router {
         userCollection.fetch({
             success: function(response) {
                 $('#content').html("");
+                $('#content').append("<div class='contentUser contentUser2'><ul class='boxUser'><li class='titleUser'><h2 class='textUser'>Meet new people</h2></li></ul></div>");
                 response.models.forEach(function (profileModel){
                     let userView = new UserView({model: profileModel});
                     $('#content').append(userView.$el);
                     userView.render();
                 })
+                $('#content').append("<div class='addMoreProfile'><a class='moreTextProfile' href=''>Show more</a></div>");
             }
         });
     }

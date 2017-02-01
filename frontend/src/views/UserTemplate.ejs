@@ -1,18 +1,16 @@
-<main>
-    <header class=" headerProfile">
-        <div class="logoPaddingProfile">
-            <div class="logoProfile">
-                <a href="/#users/<%- id %>"><img class="stlyeLogoProfile" src="<%- pictureUrl %>"></a>
+<div class="contentUser">
+    <ul class="boxUser">
+        <li id="userSection" class="titleUser">
+            <div class="paddingUser">
+                <div class="widthUser">
+                    <a class="roundImgUser tabImgUser" href="/#users/<%- id %>"><img src="<%- pictureUrl %>"></a>
+                    <div class="centerTitleUser">
+                        <div><a class="boldNameUser colorNameUser" href="/#users/<%- id %>"><%- id %></a></div>
+                        <div class="fontNameUser"><%- email %></div>
+                    </div>
+                </div>
+                <div class="heightButtonUser"><span><button class="styleButtonUser colorButtonUser sizeButtonUser">Subscribe</button></span></div>
             </div>
-        </div>
-        <div class="paddingNameProfile">
-            <div class="borderLogoProfile">
-                <a href="/#users/<%- id %>"><h1 class="textNameProfile"><%- id %></h1></a>
-            </div>
-            <div class="paddingBioProfile">
-                <h2 class="boldTextProfile"><%- firstName %> <%- lastName %></h2>
-                <span><%- email %></span>
-            </div>
-        </div>
-    </header>
-</main>
+        </li>
+    </ul>
+</div>
