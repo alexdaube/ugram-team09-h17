@@ -7,14 +7,15 @@ import {UserCollection} from './collections/UserCollection';
 import {UserCollectionForView} from './collections/UserCollectionForView';
 import {UserCollectionView} from './views/UserCollectionView';
 
-import {UserView} from './views/UserView';
 
 import {FeedCollectionView} from './views/FeedCollectionView'
 import {FeedCollectionForView} from './collections/FeedCollectionForView'
 
 import {FeedModel} from './models/FeedModel';
 
-import {LoggedUserSettingsView} from './views/LoggedUserSettingsView'
+import {UserView} from './views/UserView';
+import {UserProfileView} from './views/UserProfileView';
+import {LoggedUserSettingsView} from './views/LoggedUserSettingsView';
 
 import {HeaderView} from './views/HeaderView'
 import {HeaderModel} from './models/HeaderModel';
@@ -31,7 +32,8 @@ export class AppRouter extends Backbone.Router {
         'profile': 'showLoggedUserProfile',
         'setting': 'showLoggedUserSetting',
         'users': 'showUsers',
-        'recent': 'showRecentPostedPictures',
+        'users/:id': 'showUserProfile',
+        'recent' : 'showRecentPostedPictures',
         'feed' : 'showFeed',
     };
 
@@ -80,5 +82,12 @@ export class AppRouter extends Backbone.Router {
         let feedCollectionForView = new FeedCollectionForView(feedCollection);
         let feedCollectionView = new FeedCollectionView({model:feedCollectionForView});
         feedCollectionView.render();
+    }
+
+    showUserProfile(param: string = '') {
+        console.log(param);
+        let userModel = new UserModel({id: param});
+        let userProfileView = new UserProfileView({model: userModel});
+        userProfileView.render();
     }
 }
