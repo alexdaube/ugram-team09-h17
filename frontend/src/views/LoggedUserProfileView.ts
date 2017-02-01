@@ -2,6 +2,7 @@ import * as Backbone from "backbone";
 import * as _ from "underscore";
 
 import {UserModel} from "../models/UserModel";
+import {EditPictureModel} from "../models/EditPictureModel";
 
 export class LoggedUserProfileView extends Backbone.View<UserModel> {
     private template: Function;
@@ -20,13 +21,13 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
         this.userProfileModel.fetch({
             success() {
                 that.$el.html(that.template({userModel: that.userProfileModel}));
-                $('#addPictureButton').click(function () {
-                    $('#popupContent').show();
+                $("#addPictureButton").click(function () {
+                    $("#popupContent").show();
                 });
-                $('#closeButtonPopup').click(function () {
-                    $('#popupContent').hide();
+                $("#closeButtonPopup").click(function () {
+                    $("#popupContent").hide();
                 });
-                $('#postPictureButton').click(that.postPicture);
+                $("#postPictureButton").click(that.postPicture);
             },
             error() {
                 // TODO handle error
@@ -36,6 +37,29 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
     }
 
     public postPicture() {
-        console.log("Posting a picture !");
+        let description : string = $("#description").val();
+        let mentions : string[] = description.match(/@\w+/g);
+        let tags : string[] = description.match(/#\w+/g);
+
+        let formData : FormData = new FormData();
+        formData.append('description', description);
+        formData.append('mentions', mentions);
+        formData.append('tags', tags);
+        formData.append('file', (<any>$('input[type=file]')[0]).files[0]);
+        $.ajax({
+            url: "http://api.ugram.net/users/jlabonte/pictures",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            cache: false,
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer 24d6e087-51a0-465a-a19b-ce9570ad3169')
+            }
+        }).done(function () {
+            $("#popupContent").hide();
+        }).fail(function () {
+            $("#error-text").text("Could not upload picture");
+        });
     }
 }

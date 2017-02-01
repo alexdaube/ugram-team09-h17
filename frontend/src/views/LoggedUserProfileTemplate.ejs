@@ -67,29 +67,19 @@
                         </div>
                         <h1 class="userTextSetting"><%- userModel.userName %></h1>
                     </div>
-                    <form id="uploadPictureForm" class="heightSetting">
-                        <div class="infoSetting">
-                            <aside class="paddingInfoSetting"><label>Description:</label></aside>
-                            <div class="widthSetting"><input id="description" class="inputSetting" type="text" name="description"></div>
-                        </div>
-                        <div class="infoSetting">
-                            <aside class="paddingInfoSetting"><label>Mentions:</label></aside>
-                            <div class="widthSetting"><input id="mentions" class="inputSetting" type="text" name="mentions"></div>
-                        </div>
-                        <div class="infoSetting">
-                            <aside class="paddingInfoSetting"><label>Tags:</label></aside>
-                            <div class="widthSetting"><input id="tags" class="inputSetting" type="text" name="tags"></div>
-                        </div>
-                        <div class="infoSetting">
-                            <aside class="paddingInfoSetting"><label for="upload-file-input">Upload your file:</label></aside>
-                            <div class="widthSetting"><input id="upload-file-input" class="inputSetting" type="file" name="file" accept="image/*"></div>
-                        </div>
-                        <div class="infoSetting">
-                            <aside class="paddingInfoSetting privateSetting"><label></label></aside>
-                            <div class="buttonSetting"><span><button id="postPictureButton" class="styleButtonSetting colorButtonSetting sizeButtonSetting">Post</button></span></div>
-                        </div>
-                    </form>
-
+                    <div class="infoSetting">
+                        <aside class="paddingInfoSetting"><label>Description:</label></aside>
+                        <div class="widthSetting"><input id="description" class="inputSetting" type="text" name="description"></div>
+                    </div>
+                    <div class="infoSetting">
+                        <aside class="paddingInfoSetting"><label for="upload-file-input">Upload your file:</label></aside>
+                        <div class="widthSetting"><input id="upload-file-input" class="inputSetting" type="file" name="file" accept="image/*"></div>
+                    </div>
+                    <div class="infoSetting">
+                        <aside class="paddingInfoSetting privateSetting"><label></label></aside>
+                        <div class="buttonSetting"><span><button id="postPictureButton" class="styleButtonSetting colorButtonSetting sizeButtonSetting">Post</button></span></div>
+                    </div>
+                    <div id="error-text"></div>
                 </div>
             </div>
          </div>
