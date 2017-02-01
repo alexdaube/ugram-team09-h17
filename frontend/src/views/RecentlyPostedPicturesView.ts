@@ -1,19 +1,16 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
 
-import {FeedCollection} from "../collections/FeedCollection";
+import {ShowMoreView} from "./ShowMoreView";
+import {PostView} from "./PostView";
 
 export class RecentlyPostedPicturesView extends Backbone.View<any> {
     private template: Function;
-    private recentlyPostedPictures: FeedCollection;
-    private picturesPerPage: number = 8;
+    private picturesPerPage: number = 4;
     private nextPageToFetch: number = 1;
 
     constructor(options?: any) {
-        super(_.extend({
-            el: "#content",
-        }, options));
-        this.recentlyPostedPictures = options["recentlyPostedPictures"];
+        super(_.extend({}, options));
         this.template = require("./RecentlyPostedPicturesTemplate.ejs") as Function;
     }
 
@@ -21,17 +18,16 @@ export class RecentlyPostedPicturesView extends Backbone.View<any> {
         const html = this.template();
         this.$el.html(html);
         this.showMorePictures();
+        const showMoreView = new ShowMoreView({
+            element: "#show-more-container",
+            showMoreCallback: this.showMorePictures.bind(this),
+        });
+        showMoreView.render();
         return this;
     }
 
-    public events() {
-        return <Backbone.EventsHash> {
-            "click .moreTextProfile": "showMorePictures",
-        };
-    }
-
     private showMorePictures() {
-        this.recentlyPostedPictures.fetch({
+        this.collection.fetch({
             data: {
                 page: this.nextPageToFetch,
                 perPage: this.picturesPerPage,
@@ -44,17 +40,15 @@ export class RecentlyPostedPicturesView extends Backbone.View<any> {
     }
 
     private renderPictures() {
-        let picturesHtml: string = "";
-        this.recentlyPostedPictures.each((picture) => {
-            picturesHtml += `<div class="recentImg"><a><img id="recentlyPostedPicture_${picture.id}" \
-                src="${picture.url}" /></a></div>`;
+        this.collection.each((picture) => {
+            const postView = new PostView({el: "#posts-list" , model: picture});
+            postView.append();
         });
-        $("#most-recent-posted-pictures").append(picturesHtml);
         this.checkForMorePicturesAvailable();
     }
 
     private checkForMorePicturesAvailable() {
-        if (this.recentlyPostedPictures.length < this.picturesPerPage) {
+        if (this.collection.length < this.picturesPerPage) {
             $(".addMoreProfile").hide();
         }
     }

@@ -20,6 +20,7 @@ import {HeaderModel} from "./models/HeaderModel";
 
 import {FooterView} from "./views/FooterView";
 import {FooterModel} from "./models/FooterModel";
+import {RecentlyPostedPicturesView} from "./views/RecentlyPostedPicturesView";
 
 export class AppRouter extends Backbone.Router {
 
@@ -29,6 +30,7 @@ export class AppRouter extends Backbone.Router {
         "setting": "showLoggedUserSetting",
         "users": "showUsers",
         "users/:id": "showUserProfile",
+        "test": "showMoreTest",
     };
 
     constructor() {
@@ -76,5 +78,11 @@ export class AppRouter extends Backbone.Router {
         const userModel = new UserModel({id: param});
         const userProfileView = new UserProfileView({model: userModel});
         userProfileView.render();
+    }
+
+    public showMoreTest(param: string) {
+        const tits = new FeedCollection();
+        const titsView = new RecentlyPostedPicturesView({el: "#content", collection: tits});
+        titsView.render();
     }
 }

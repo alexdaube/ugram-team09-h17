@@ -15,4 +15,9 @@ export class PostView extends Backbone.View<PictureModel> {
         this.$el.html(this.template(this.model.toJSON()));
         return this;
     }
+
+    public append() {
+        this.$el.append(this.template({post: this.model}));
+        return this;
+    }
 }

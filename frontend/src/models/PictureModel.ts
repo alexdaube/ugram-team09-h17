@@ -32,7 +32,7 @@ export class PictureModel extends Backbone.Model {
     }
 
     set mentions(mentions: string[]){
-        this.set("description", mentions);
+        this.set("mentions", mentions);
     }
 
     get postedDate(): string {
@@ -45,7 +45,7 @@ export class PictureModel extends Backbone.Model {
     }
 
     set tags(tags: string[]){
-        this.set("description", tags);
+        this.set("tags", tags);
     }
 
     get url(): string {

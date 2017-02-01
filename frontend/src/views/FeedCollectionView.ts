@@ -14,7 +14,7 @@ export class FeedCollectionView extends Backbone.View<FeedCollectionForView> {
 
     constructor(options?: Backbone.ViewOptions<FeedCollectionForView>) {
         super(_.extend({el: "#content"}, options));
-        this.recentlyPostedPictures = options["recentlyPostedPictures"];
+        this.collection = options["recentlyPostedPictures"];
         this.template = require("./FeedCollectionTemplate.ejs") as Function;
     }
 
@@ -42,7 +42,7 @@ export class FeedCollectionView extends Backbone.View<FeedCollectionForView> {
     }
 
     private showMorePictures() {
-        this.recentlyPostedPictures.fetch({
+        this.collection.fetch({
             data: {
                 page: this.nextPageToFetch,
                 perPage: this.picturesPerPage,
@@ -56,7 +56,7 @@ export class FeedCollectionView extends Backbone.View<FeedCollectionForView> {
 
     private renderPictures() {
         let picturesHtml: string = "";
-        this.recentlyPostedPictures.each((picture) => {
+        this.collection.each((picture) => {
             picturesHtml += `<div class="recentImg"><a><img id="recentlyPostedPicture_${picture.id}" \
                 src="${picture.url}" /></a></div>`;
         });
@@ -65,7 +65,7 @@ export class FeedCollectionView extends Backbone.View<FeedCollectionForView> {
     }
 
     private checkForMorePicturesAvailable() {
-        if (this.recentlyPostedPictures.length < this.picturesPerPage) {
+        if (this.collection.length < this.picturesPerPage) {
             $(".addMoreProfile").hide();
         }
     }
