@@ -15,6 +15,7 @@ export class PostView extends Backbone.View<PictureModel> {
         this.model.fetch({
             success: () => {
                 this.$el.html(this.template({post: this.model, isSingleFeed: true}));
+                this.$el.first().addClass("contentFeed");
             },
             error: () => {
                 this.$el.html("There was an error");
