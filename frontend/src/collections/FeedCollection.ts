@@ -1,12 +1,12 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
 
-import {UserModel} from "../models/UserModel";
+import {PictureModel} from "../models/PictureModel";
 
-export class UserCollection extends Backbone.Collection<UserModel> {
+export class FeedCollection extends Backbone.Collection<PictureModel> {
     constructor(options?: any) {
         super(options);
-        this.model = UserModel;
+        this.model = PictureModel;
         this.url = options["url"];
     }
 

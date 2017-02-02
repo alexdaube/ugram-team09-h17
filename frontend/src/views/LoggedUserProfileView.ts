@@ -5,13 +5,12 @@ import * as $ from "jquery";
 import {UserModel} from "../models/UserModel";
 
 export class LoggedUserProfileView extends Backbone.View<UserModel> {
+
     private template: Function;
     private userProfileModel: UserModel;
 
     constructor(options?: Backbone.ViewOptions<UserModel>) {
-        super(_.extend({
-            el: "#content",
-        }, options));
+        super(_.extend({el: "#content"}, options));
         this.template = require("./LoggedUserProfileTemplate.ejs") as Function;
         this.userProfileModel = options["model"];
     }
@@ -21,51 +20,54 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
         this.userProfileModel.fetch({
             success() {
                 that.$el.html(that.template({userModel: that.userProfileModel}));
-                $('#buttonAddPicture').click(function () {
-                    var d = $('#popupAddContent');
-                    if (d.hasClass('popupVisibleAdd')) {
-                        d.removeClass('popupVisibleAdd');
-                    } else {
-                        d.addClass('popupVisibleAdd');
-                    }
+                $("#addPictureButton").click(() => {
+                    $("#popupContent").show();
                 });
-                $('#closeAddButtonPopup').click(function () {
-                    var d = $('#popupAddContent');
-                    if (d.hasClass('popupVisibleAdd')) {
-                        d.removeClass('popupVisibleAdd');
-                    } else {
-                        d.addClass('popupVisibleAdd');
-                    }
+                $("#closeButtonPopup").click(() => {
+                    $("#popupContent").hide();
                 });
-                $('#buttonExitUgram').click(function () {
-                    var d = $('#popupCloseContent');
-                    if (d.hasClass('popupVisibleExit')) {
-                        d.removeClass('popupVisibleExit');
-                    } else {
-                        d.addClass('popupVisibleExit');
-                    }
+                $("#optionButton").click(() => {
+                    $("#popupCloseContent").show();
                 });
-                $('#closeExitButtonPopup').click(function () {
-                    var d = $('#popupCloseContent');
-                    if (d.hasClass('popupVisibleExit')) {
-                        d.removeClass('popupVisibleExit');
-                    } else {
-                        d.addClass('popupVisibleExit');
-                    }
+                $("#closeExitButtonPopup").click(() => {
+                    $("#popupCloseContent").hide();
                 });
-                $('#closeCancelButtonPopup').click(function () {
-                    var d = $('#popupCloseContent');
-                    if (d.hasClass('popupVisibleExit')) {
-                        d.removeClass('popupVisibleExit');
-                    } else {
-                        d.addClass('popupVisibleExit');
-                    }
+                $("#closeCancelButtonPopup").click(() => {
+                    $("#popupCloseContent").hide();
                 });
+                $("#postPictureButton").click(that.postPicture);
             },
             error() {
                 // TODO handle error
             },
         });
         return this;
+    }
+
+    public postPicture() {
+        const description: string = $("#description").val();
+        const mentions: string[] = description.match(/@\w+/g);
+        const tags: string[] = description.match(/#\w+/g);
+
+        const formData: FormData = new FormData();
+        formData.append("description", description);
+        formData.append("mentions", mentions);
+        formData.append("tags", tags);
+        formData.append("file", (<any> $("input[type=file]")[0]).files[0]);
+        $.ajax({
+            url: "http://api.ugram.net/users/jlabonte/pictures",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            cache: false,
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", "Bearer 24d6e087-51a0-465a-a19b-ce9570ad3169");
+            },
+        }).done(() => {
+            $("#popupContent").hide();
+        }).fail(() => {
+            $("#error-text").text("Could not upload picture");
+        });
     }
 }

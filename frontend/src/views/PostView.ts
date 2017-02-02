@@ -1,20 +1,20 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
 
-import {UserModel} from "../models/UserModel";
+import {PictureModel} from "../models/PictureModel";
 
-export class UserView extends Backbone.View<UserModel> {
+export class PostView extends Backbone.View<PictureModel> {
     private template: Function;
 
-    constructor(options?: Backbone.ViewOptions<UserModel>) {
+    constructor(options?: Backbone.ViewOptions<PictureModel>) {
         super(_.extend({}, options));
-        this.template = require("./UserTemplate.ejs") as Function;
+        this.template = require("./PostTemplate.ejs") as Function;
     }
 
     public render() {
         this.model.fetch({
             success: () => {
-                this.$el.html(this.template({user: this.model, isSingleFeed: true}));
+                this.$el.html(this.template({post: this.model, isSingleFeed: true}));
             },
             error: () => {
                 this.$el.html("There was an error");
@@ -24,7 +24,7 @@ export class UserView extends Backbone.View<UserModel> {
     }
 
     public append() {
-        this.$el.append(this.template({user: this.model, isSingleFeed: false}));
+        this.$el.append(this.template({post: this.model, isSingleFeed: false}));
         return this;
     }
 }

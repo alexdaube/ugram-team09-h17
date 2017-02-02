@@ -9,14 +9,15 @@ export class UserModel extends Backbone.Model {
         this.urlRoot = "http://api.ugram.net/users";
     };
 
-    public  defaults() {
+    public defaults() {
         return {
-            email: "",
-            firstName: "",
-            inscriptionDate: "",
-            lastName: "",
-            phoneNumber: "",
             userName: "",
+            firstName: "",
+            lastName: "",
+            email: "",
+            phoneNumber: "",
+            inscriptionDate: "",
+            profilePictureUrl: "",
         };
     }
 
@@ -24,7 +25,7 @@ export class UserModel extends Backbone.Model {
         return this.get("id");
     }
 
-    set userName(userName: string){
+    set userName(userName: string) {
         this.set("id", userName);
     }
 
@@ -32,7 +33,7 @@ export class UserModel extends Backbone.Model {
         return this.get("firstName");
     }
 
-    set firstName(firstName: string){
+    set firstName(firstName: string) {
         this.set("firstName", firstName);
     }
 
@@ -40,7 +41,7 @@ export class UserModel extends Backbone.Model {
         return this.get("lastName");
     }
 
-    set lastName(lastName: string){
+    set lastName(lastName: string) {
         this.set("lastName", lastName);
     }
 
@@ -48,7 +49,7 @@ export class UserModel extends Backbone.Model {
         return this.get("email");
     }
 
-    set email(email: string){
+    set email(email: string) {
         this.set("email", email);
     }
 
@@ -56,21 +57,24 @@ export class UserModel extends Backbone.Model {
         return this.get("phoneNumber");
     }
 
-    set phoneNumber(phoneNumber: number){
+    set phoneNumber(phoneNumber: number) {
         this.set("phoneNumber", phoneNumber);
     }
 
     get inscriptionDate(): string {
         const bufferDate = this.get("registrationDate");
-        const formattedDate = StringFormatter.formatMillisecondDateToMMDDYYYY(new Date(bufferDate));
-        return formattedDate;
+        return StringFormatter.formatMillisecondDateToMMDDYYYY(new Date(bufferDate));
     }
 
-    set inscriptionDate(inscriptionDate: string){
+    set inscriptionDate(inscriptionDate: string) {
         this.set("registrationDate", inscriptionDate);
     }
 
-    get profilePictureUrl(): string{
+    get profilePictureUrl(): string {
         return this.get("pictureUrl");
+    }
+
+    set profilePictureUrl(profilePictureUrl: string) {
+        this.set("pictureUrl", profilePictureUrl);
     }
 }

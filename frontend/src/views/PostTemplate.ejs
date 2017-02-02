@@ -1,0 +1,41 @@
+<div class="marginContentFeed borderFeed topFeed">
+	<div class="topAlignFeed">
+		<a class="userImageFeed userAlignFeed logoSize" href=""><img class="logoUserFeed" src="/img/test2.jpg">
+		</a>
+		<div class="userNameFeed">
+			<a class="heightTextFeed widthTextFeed" href=""><%- post.userId %></a>
+		</div>
+		<a class="hourFeed" href=""><time datetime="2017-01-21T20:20:26.000Z"><%- post.postedDate %></time></a>
+	</div>
+	<div class="imageFeed">
+        	<% if(!isSingleFeed){ %><a href="/#users/<%- post.userId %>/pictures/<%- post.id %>"><% } %>
+		<div class="imagePaddingFeed">
+			<img class="sizeImageFeed" src="<%- post.imageUrl %>" />
+		</div>
+			<% if(!isSingleFeed){ %></a><% } %>
+	</div>
+	<div class="textContentFeed">
+		<div class="paddingLikeFeed">
+			<span class="likeTextFeed"><%- post.tags.length %> liked</span>
+		</div>
+
+        <% if(isSingleFeed){ %>
+		<ul>
+			<li class="textCommentFeed">
+				<a class="heightTextFeed blackTextFeed" href="">{user name post}</a>
+				<span>{text post}</span>
+			</li>
+			<li class="textCommentFeed">
+				<a class="heightTextFeed blackTextFeed" href="">{user name comment}</a>
+				<span>{text comment}</span>
+			</li>
+		</ul>
+		<% } %>
+
+		<div class="addCommentFeed commentPaddingFeed">
+			<a class="likeButtonFeed likePaddingFeed" href=""><span class="likeTextFeed2 heartIcon">J’aime</span></a>
+			<form class="flexCommentFeed"><input type="text" class="inputCommentFeed inputTextFeed" placeholder="Add Comment..." value=""></form>
+			<button class="optionPostFeed optionIcon likeTextFeed2">More Options</button>
+		</div>
+	</div>
+</div>

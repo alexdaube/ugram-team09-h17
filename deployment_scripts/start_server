@@ -1,8 +1,12 @@
 #!/bin/bash
-killall -s SIGKILL -I gulp &&
-cd /www &&
-npm install --unsafe-perm &&
+rm -R -f /www/* &&
+cd /home/ec2-user/deployment/ &&
+sudo chown ec2-user * -R -f &&
+npm install &&
 npm install gulp -D &&
-npm install gulp-cli -g &&
-chmod -R 777 ./ &&
- /usr/local/sbin/daemonize -c /www /usr/bin/gulp smart-serve --port 80
+gulp clean &&
+gulp ts &&
+gulp sass &&
+cp *.html /www/ &&
+cp dist /www/ -R &&
+cp img /www/ -R

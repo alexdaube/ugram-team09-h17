@@ -1,19 +1,17 @@
-import {UserModel} from "../models/UserModel";
-import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
-
 import * as Backbone from "backbone";
 import * as $ from "jquery";
 import * as _ from "underscore";
 
-export class LoggedUserProfileSettingsView extends Backbone.View<UserModel> {
+import {UserModel} from "../models/UserModel";
+import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
+
+export class LoggedUserSettingsView extends Backbone.View<UserModel> {
 
     private template: Function;
     private userModel: UserModel;
 
     constructor(options?: Backbone.ViewOptions<UserModel>) {
-        super(_.extend({
-            el: "#content",
-        }, options));
+        super(_.extend({el: "#content"}, options));
         this.template = require("./LoggedUserSettingsTemplate.ejs") as Function;
         this.userModel = options["model"];
     }
@@ -23,7 +21,7 @@ export class LoggedUserProfileSettingsView extends Backbone.View<UserModel> {
         this.userModel.fetch({
             success() {
                 that.$el.html(that.template({userModel: that.userModel}));
-                $(document).ready(function(){
+                $(document).ready(() => {
                     // TODO show and hide #textSaveSetting and #textErrorSetting (popup)
                 });
             },
@@ -56,7 +54,6 @@ export class LoggedUserProfileSettingsView extends Backbone.View<UserModel> {
             success() {
                 alert("The user profile was successfully updated");
                     // TODO Valider les champs contre le hacking
-                    // Voir https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet#Preventing_XSS_and_Content_Security_Policy
                 that.render();
             },
             error() {

@@ -1,77 +1,90 @@
-import * as Backbone from 'backbone';
+import * as Backbone from "backbone";
 
-import {LoggedUserProfileView} from './views/LoggedUserProfileView'
-import {UserModel} from './models/UserModel';
-import {UserCollection} from './collections/UserCollection';
+import {LoggedUserProfileView} from "./views/LoggedUserProfileView";
+import {LoggedUserSettingsView} from "./views/LoggedUserSettingsView";
 
-import {UserView} from './views/UserView';
+import {UserModel} from "./models/UserModel";
+import {UserCollection} from "./collections/UserCollection";
+import {UserCollectionView} from "./views/UserCollectionView";
+import {UserProfileView} from "./views/UserProfileView";
 
-import {FeedView} from './views/FeedView'
-import {FeedModel} from './models/FeedModel';
+import {FeedCollection} from "./collections/FeedCollection";
+import {FeedCollectionView} from "./views/FeedCollectionView";
 
-import {LoggedUserProfileSettingsView} from './views/LoggedUserSettingsView'
+import {HeaderView} from "./views/HeaderView";
+import {HeaderModel} from "./models/HeaderModel";
 
-import {HeaderView} from './views/HeaderView'
-import {HeaderModel} from './models/HeaderModel';
+import {FooterView} from "./views/FooterView";
+import {FooterModel} from "./models/FooterModel";
+import {PictureModel} from "./models/PictureModel";
 
-import {FooterView} from './views/FooterView'
-import {FooterModel} from './models/FooterModel';
+import {PostView} from "./views/PostView";
 
 export class AppRouter extends Backbone.Router {
 
-    routes = {
-        '': 'defaultRoute',
-        'profile': 'showLoggedUserProfile',
-        'setting': 'showLoggedUserSetting',
-        'users': 'showUsers'
-    }
+    public routes = {
+        "": "defaultRoute",
+        "profile": "showLoggedUserProfile",
+        "setting": "showLoggedUserSetting",
+        "users": "showUsers",
+        "users/:userId": "showUserProfile",
+        "users/:userId/pictures/:pictureId": "showFeed",
+    };
 
     constructor() {
         super();
-        (<any>this)._bindRoutes();
+        (<any> this)._bindRoutes();
     }
 
-    initialize() {
-        let headerModel = new HeaderModel({});
-        let headerView = new HeaderView({model: headerModel});
+    public initialize() {
+        const headerModel = new HeaderModel({});
+        const headerView = new HeaderView({model: headerModel});
         headerView.render();
 
-        let footerModel = new FooterModel({});
-        let footerView = new FooterView({model: footerModel});
+        const footerModel = new FooterModel({});
+        const footerView = new FooterView({model: footerModel});
         footerView.render();
     }
 
-    defaultRoute() {
-        let feedModel = new FeedModel({});
-        let feedView = new FeedView({model: feedModel});
-        feedView.render();
+    public defaultRoute() {
+        this.showAllFeeds();
     }
 
-    showLoggedUserProfile(param: string = '') {
-        let userModel = new UserModel({id:'jlabonte'});
-        let loggedUserProfileView = new LoggedUserProfileView({model: userModel});
+    public showAllFeeds() {
+        const feedCollection = new FeedCollection({url: "http://api.ugram.net/pictures"});
+        const feedCollectionView = new FeedCollectionView({el: "#content", collection: feedCollection});
+        feedCollectionView.render();
+    }
+
+    public showFeed(userId: string, pictureId: string) {
+        const pictureModel = new PictureModel({userFeedId: userId, id: pictureId});
+        const postView = new PostView({el: "#content", model: pictureModel});
+        postView.render();
+    }
+
+    public showLoggedUserProfile(userId: string = "") {
+        const userModel = new UserModel({id: "jlabonte"});
+        const feedCollection = new FeedCollection({url: "http://api.ugram.net/users/" + userModel.id + "pictures"});
+        const loggedUserProfileView = new LoggedUserProfileView({model: userModel, collection: feedCollection});
         loggedUserProfileView.render();
     }
 
-    showLoggedUserSetting(param: string = '') {
-        let userModel = new UserModel({id:'jlabonte'});
-        let loggedUserProfileSettingsView = new LoggedUserProfileSettingsView({model: userModel});
-        loggedUserProfileSettingsView.render();
+    public showLoggedUserSetting(param: string = "") {
+        const userModel = new UserModel({id: "jlabonte"});
+        const loggedUserSettingsView = new LoggedUserSettingsView({model: userModel});
+        loggedUserSettingsView.render();
     }
 
-    showUsers(param: string = '') {
-        let userCollection = new UserCollection({});
-        userCollection.fetch({
-            success: function(response) {
-                $('#content').html("");
-                $('#content').append("<div class='contentUser contentUser2'><ul class='boxUser'><li class='titleUser'><h2 class='textUser'>Meet new people</h2></li></ul></div>");
-                response.models.forEach(function (profileModel){
-                    let userView = new UserView({model: profileModel});
-                    $('#content').append(userView.$el);
-                    userView.render();
-                })
-                $('#content').append("<div class='addMoreProfile'><a class='moreTextProfile' href=''>Show more</a></div>");
-            }
-        });
+    public showUsers(param: string = "") {
+        const userCollection = new UserCollection({url: "http://api.ugram.net/users"});
+        const userCollectionView = new UserCollectionView({el: "#content", collection: userCollection});
+        userCollectionView.render();
+    }
+
+    public showUserProfile(userId: string) {
+        const userModel = new UserModel({id: userId});
+        const feedCollection = new FeedCollection({url: "http://api.ugram.net/users/" + userModel.id + "/pictures"});
+        const userProfileView = new UserProfileView({model: userModel, collection: feedCollection});
+        userProfileView.render();
     }
 }
