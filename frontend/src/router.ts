@@ -77,9 +77,8 @@ export class AppRouter extends Backbone.Router {
     }
 
     public showUsers(param: string = "") {
-        const userCollection = new UserCollection();
-        const userCollectionForView = new UserCollectionForView(userCollection);
-        const userCollectionView = new UserCollectionView({model: userCollectionForView});
+        const userCollection = new UserCollection({url: "http://api.ugram.net/users"});
+        const userCollectionView = new UserCollectionView({el: "#content", collection: userCollection});
         userCollectionView.render();
     }
 

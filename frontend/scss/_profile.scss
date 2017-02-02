@@ -393,8 +393,6 @@
   }
 }
 
-// POPUP ADD PICTURE
-
 .divPopupContent {
     background-color: rgba(0, 0, 0, .5);
     bottom: 0;
@@ -407,7 +405,7 @@
     position: fixed;
     right: 0;
     top: 0;
-    z-index: 1
+    z-index: 1;
 }
 .closeButtonPopup {
     background: 0 0;
@@ -419,7 +417,7 @@
     position: absolute;
     right: 0;
     top: 0;
-    z-index: 2
+    z-index: 2;
 }
 .closeButtonPopup::before {
     color: #fff;
@@ -429,7 +427,7 @@
     font-weight: 600;
     line-height: 36px;
     padding: 0;
-    margin: 0
+    margin: 0;
 }
 .centerPopup {
     -webkit-box-align: center;
@@ -439,14 +437,12 @@
     margin: auto;
     max-width: 935px;
     pointer-events: auto;
-    width: 80%
+    width: 80%;
 }
 .popupContent {
     position: relative;
     z-index: 1;
 }
-
-// POPUP DECONNEXION
 
 .heightPopup {
     display: -ms-flexbox;

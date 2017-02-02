@@ -17,7 +17,6 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
 
     public render() {
         const that = this;
-
         this.userProfileModel.fetch({
             success() {
                 that.$el.html(that.template({userModel: that.userProfileModel}));
@@ -31,6 +30,9 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
                     $("#popupCloseContent").show();
                 });
                 $("#closeExitButtonPopup").click(() => {
+                    $("#popupCloseContent").hide();
+                });
+                $("#closeCancelButtonPopup").click(() => {
                     $("#popupCloseContent").hide();
                 });
                 $("#postPictureButton").click(that.postPicture);
