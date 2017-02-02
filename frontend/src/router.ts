@@ -1,7 +1,6 @@
 import * as Backbone from "backbone";
 
 import {UserSettingsView} from "./views/UserSettingsView";
-
 import {UserModel} from "./models/UserModel";
 import {UserCollection} from "./collections/UserCollection";
 import {UserCollectionView} from "./views/UserCollectionView";
@@ -15,6 +14,7 @@ import {HeaderModel} from "./models/HeaderModel";
 
 import {FooterView} from "./views/FooterView";
 import {FooterModel} from "./models/FooterModel";
+
 import {PictureModel} from "./models/PictureModel";
 
 import {PostView} from "./views/PostView";

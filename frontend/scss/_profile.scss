@@ -67,6 +67,7 @@
   margin: 40px auto 30px;
   position: relative;
   &::before {
+    background-color: #fff;
     border-radius: 50%;
     border-style: solid;
     border-width: 2px;
