@@ -72,7 +72,7 @@ export class AppRouter extends Backbone.Router {
     public showUserProfile2(userId: string) {
         const userModel = new UserModel({id: userId});
         const feedCollection = new FeedCollection({url: "http://api.ugram.net/users/" + userModel.id + "/pictures"});
-        const userProfileView = new UserProfileView({model: userModel, collection: feedCollection});
+        const userProfileView = new UserProfileView({el: "#content", model: userModel, collection: feedCollection});
         userProfileView.render();
     }
 

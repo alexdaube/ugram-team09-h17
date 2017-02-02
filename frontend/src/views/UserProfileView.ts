@@ -11,7 +11,7 @@ export class UserProfileView extends Backbone.View<any> {
     private nextPageToFetch: number = 1;
 
     constructor(options?: any) {
-        super(_.extend({}, options));
+        super(options);
         this.template = require("./UserCollectionTemplate.ejs") as Function;
     }
 
