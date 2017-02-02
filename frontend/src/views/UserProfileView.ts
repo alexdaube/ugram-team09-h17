@@ -15,30 +15,32 @@ export class UserProfileView extends Backbone.View<any> {
         this.template = require("./UserCollectionTemplate.ejs") as Function;
     }
 
+    public events() {
+        return <Backbone.EventsHash> {
+            "click #addPictureButton": () => {this.showOnClick("#popupContent"); },
+            "click #closeButtonPopup": () => {this.hideOnClick("#popupContent"); },
+            "click #optionButton": () => {this.showOnClick("#popupCloseContent"); },
+            "click #closeExitButtonPopup": () => {this.hideOnClick("#popupCloseContent"); },
+            "click #closeCancelButtonPopup": () => {this.hideOnClick("#popupCloseContent"); },
+            "click #postPictureButton": () => {this.postPicture(); },
+        };
+    }
+
+    public showOnClick(element) {
+        $(element).show();
+    }
+
+    public hideOnClick(element) {
+        $(element).hide();
+    }
+
     public render() {
         this.model.fetch({
             success: () => {
                 this.$el.html(this.template({ user: this.model}));
 
-                $("#addPictureButton").click(() => {
-                    $("#popupContent").show();
-                });
-                $("#closeButtonPopup").click(() => {
-                    $("#popupContent").hide();
-                });
-                $("#optionButton").click(() => {
-                    $("#popupCloseContent").show();
-                });
-                $("#closeExitButtonPopup").click(() => {
-                    $("#popupCloseContent").hide();
-                });
-                $("#closeCancelButtonPopup").click(() => {
-                    $("#popupCloseContent").hide();
-                });
-                $("#postPictureButton").click(this.postPicture);
-
                 const showMoreView = new ShowMoreView({
-                    element: "#show-more-container",
+                    el: "#show-more-container",
                     showMoreCallback: this.showPictures.bind(this),
                 });
                 showMoreView.render();

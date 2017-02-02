@@ -19,7 +19,7 @@ export class FeedCollectionView extends Backbone.View<any> {
         this.$el.html(html);
         this.showPictures();
         const showMoreView = new ShowMoreView({
-            element: "#show-more-container",
+            el: "#show-more-container",
             showMoreCallback: this.showPictures.bind(this),
         });
         showMoreView.render();
