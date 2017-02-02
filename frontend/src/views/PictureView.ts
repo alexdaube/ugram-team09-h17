@@ -15,7 +15,7 @@ export class PictureView extends Backbone.View<PictureModel> {
     public render() {
         this.model.fetch({
             success: () => {
-                this.$el.html(this.template({picture: this.model, user: UserModel}));
+                this.$el.html(this.template({picture: this.model}));
             },
             error: () => {
                 this.$el.html("There was an error");
@@ -25,7 +25,7 @@ export class PictureView extends Backbone.View<PictureModel> {
     }
 
     public append() {
-        this.$el.append(this.template({picture: this.model, user: UserModel}));
+        this.$el.append(this.template({picture: this.model}));
         return this;
     }
 }
