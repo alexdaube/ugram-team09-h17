@@ -14,7 +14,7 @@ export class UserView extends Backbone.View<UserModel> {
     public render() {
         this.model.fetch({
             success: () => {
-                this.$el.html(this.template({user: this.model, isSingleFeed: true}));
+                this.$el.html(this.template({user: this.model}));
             },
             error: () => {
                 this.$el.html("There was an error");
@@ -24,7 +24,7 @@ export class UserView extends Backbone.View<UserModel> {
     }
 
     public append() {
-        this.$el.append(this.template({user: this.model, isSingleFeed: false}));
+        this.$el.append(this.template({user: this.model}));
         return this;
     }
 }
