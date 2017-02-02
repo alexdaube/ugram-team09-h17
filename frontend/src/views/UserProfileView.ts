@@ -12,7 +12,7 @@ export class UserProfileView extends Backbone.View<any> {
 
     constructor(options?: any) {
         super(options);
-        this.template = require("./UserCollectionTemplate.ejs") as Function;
+        this.template = require("./UserProfileTemplate.ejs") as Function;
     }
 
     public events() {
