@@ -8,15 +8,20 @@
         <div class="paddingNameProfile">
         <div class="borderLogoProfile">
             <h1 class="textNameProfile"><%- user.userName %></h1>
-            <div class="paddingOptionProfile">
-                <a><button id="optionButton" class="styleOptionProfile coreSpriteEllipsis textOptionProfile"></button></a>
-            </div>
+                <% if(user.userName === "jlabonte"){ %>
+                    <div class="paddingOptionProfile">
+                        <a><button id="optionButton" class="styleOptionProfile coreSpriteEllipsis textOptionProfile"></button></a>
+                    </div>
+                <% } %>
         </div>
-        <div class="editButtonProfile"><a href="">
-            <a class="whiteBackground" href="#setting"><button class="styleButtonProfile colorButtonProfile sizeButtonProfile">Update profile</button></a>
-            &nbsp;&nbsp;
-            <a class="whiteBackground"><button id="addPictureButton" class="styleButtonProfile colorAddButtonProfile sizeButtonProfile">Add picture</button></a>
-        </div>
+
+            <% if(user.userName === "jlabonte"){ %>
+                <div class="editButtonProfile"><a href="">
+                        <a class="whiteBackground" href="#setting"><button class="styleButtonProfile colorButtonProfile sizeButtonProfile">Update profile</button></a>
+                        &nbsp;&nbsp;
+                        <a class="whiteBackground"><button id="addPictureButton" class="styleButtonProfile colorAddButtonProfile sizeButtonProfile">Add picture</button></a>
+                </div>
+            <% } %>
         </div>
     </div>
     <div class="paddingBioProfile">
