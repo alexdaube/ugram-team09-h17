@@ -54,9 +54,10 @@ export class UserProfileView extends Backbone.View<UserModel> {
     private appendPictures() {
         let picturesHtml = "";
         this.collection.each((picture) => {
-            //const postView = new PostView({el: "#posts-list" , model: picture});
-            //postView.append();
-            picturesHtml += `<a class="showImgProfile"><div class="displayImgProfile"><div class="divImgProfile"><img id="profilePicture_${picture.id}" src="${picture["imageUrl"]}" /></div></div></a>`;
+            // const postView = new PostView({el: "#posts-list" , model: picture});
+            // postView.append();
+            picturesHtml += `<a class="showImgProfile"><div class="displayImgProfile"><div class="divImgProfile">
+                <img id="profilePicture_${picture.id}" src="${picture["imageUrl"]}" /></div></div></a>`;
         });
         $("#profile-pictures-list").append(picturesHtml);
         this.checkForMorePicturesAvailable();

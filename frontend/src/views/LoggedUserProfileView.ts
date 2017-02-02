@@ -27,6 +27,12 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
                 $("#closeButtonPopup").click(() => {
                     $("#popupContent").hide();
                 });
+                $("#optionButton").click(() => {
+                    $("#popupCloseContent").show();
+                });
+                $("#closeExitButtonPopup").click(() => {
+                    $("#popupCloseContent").hide();
+                });
                 $("#postPictureButton").click(that.postPicture);
             },
             error() {

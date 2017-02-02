@@ -58,8 +58,8 @@ export class AppRouter extends Backbone.Router {
     }
 
     public showFeed(userId: string, pictureId: string) {
-        const pictureModel = new PictureModel({id: pictureId, userId: userId});
-        const postView = new PostView({el: "#content" , model: pictureModel});
+        const pictureModel = new PictureModel({userId: userId, id: pictureId});
+        const postView = new PostView({el: "#content", model: pictureModel});
         postView.render();
     }
 
