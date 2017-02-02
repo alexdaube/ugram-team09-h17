@@ -5,14 +5,14 @@ import * as _ from "underscore";
 import {UserModel} from "../models/UserModel";
 import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 
-export class LoggedUserSettingsView extends Backbone.View<UserModel> {
+export class UserSettingsView extends Backbone.View<UserModel> {
 
     private template: Function;
     private userModel: UserModel;
 
     constructor(options?: Backbone.ViewOptions<UserModel>) {
         super(_.extend({el: "#content"}, options));
-        this.template = require("./LoggedUserSettingsTemplate.ejs") as Function;
+        this.template = require("./UserSettingsTemplate.ejs") as Function;
         this.userModel = options["model"];
     }
 

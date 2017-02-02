@@ -1,8 +1,6 @@
 import * as Backbone from "backbone";
 
-import {LoggedUserProfileView} from "./views/LoggedUserProfileView";
-import {LoggedUserSettingsView} from "./views/LoggedUserSettingsView";
-
+import {UserSettingsView} from "./views/UserSettingsView";
 import {UserModel} from "./models/UserModel";
 import {UserCollection} from "./collections/UserCollection";
 import {UserCollectionView} from "./views/UserCollectionView";
@@ -16,6 +14,7 @@ import {HeaderModel} from "./models/HeaderModel";
 
 import {FooterView} from "./views/FooterView";
 import {FooterModel} from "./models/FooterModel";
+
 import {PictureModel} from "./models/PictureModel";
 
 import {PostView} from "./views/PostView";
@@ -24,10 +23,10 @@ export class AppRouter extends Backbone.Router {
 
     public routes = {
         "": "defaultRoute",
-        "profile": "showLoggedUserProfile",
-        "setting": "showLoggedUserSetting",
+        "profile": "showUserProfile",
+        "setting": "showUserSetting",
         "users": "showUsers",
-        "users/:userId": "showUserProfile",
+        "users/:userId": "showUserProfile2",
         "users/:userId/pictures/:pictureId": "showFeed",
     };
 
@@ -56,35 +55,36 @@ export class AppRouter extends Backbone.Router {
         feedCollectionView.render();
     }
 
-    public showFeed(userId: string, pictureId: string) {
-        const pictureModel = new PictureModel({userFeedId: userId, id: pictureId});
+    public showFeed(userFeedId: string, pictureId: string) {
+        const pictureModel = new PictureModel({userId: userFeedId, id: pictureId});
         const postView = new PostView({el: "#content", model: pictureModel});
         postView.render();
     }
 
-    public showLoggedUserProfile(userId: string = "") {
-        const userModel = new UserModel({id: "jlabonte"});
-        const feedCollection = new FeedCollection({url: "http://api.ugram.net/users/" + userModel.id + "pictures"});
-        const loggedUserProfileView = new LoggedUserProfileView({model: userModel, collection: feedCollection});
-        loggedUserProfileView.render();
+    public showUserProfile(userId: string = "") {
+        const userModel = new UserModel({id: "abolduc"});
+        const feedCollection = new FeedCollection({url: "http://api.ugram.net/users/" + userModel.id + "/pictures"});
+        const userProfileView = new UserProfileView({el: "#content", model: userModel, collection: feedCollection});
+        userProfileView.render();
     }
 
-    public showLoggedUserSetting(param: string = "") {
+    // TODO remove this and only use showUserProfile with parameter to know if its me or not
+    public showUserProfile2(userId: string) {
+        const userModel = new UserModel({id: userId});
+        const feedCollection = new FeedCollection({url: "http://api.ugram.net/users/" + userModel.id + "/pictures"});
+        const userProfileView = new UserProfileView({el: "#content", model: userModel, collection: feedCollection});
+        userProfileView.render();
+    }
+
+    public showUserSetting(param: string = "") {
         const userModel = new UserModel({id: "jlabonte"});
-        const loggedUserSettingsView = new LoggedUserSettingsView({model: userModel});
-        loggedUserSettingsView.render();
+        const userSettingsView = new UserSettingsView({model: userModel});
+        userSettingsView.render();
     }
 
     public showUsers(param: string = "") {
         const userCollection = new UserCollection({url: "http://api.ugram.net/users"});
         const userCollectionView = new UserCollectionView({el: "#content", collection: userCollection});
         userCollectionView.render();
-    }
-
-    public showUserProfile(userId: string) {
-        const userModel = new UserModel({id: userId});
-        const feedCollection = new FeedCollection({url: "http://api.ugram.net/users/" + userModel.id + "/pictures"});
-        const userProfileView = new UserProfileView({model: userModel, collection: feedCollection});
-        userProfileView.render();
     }
 }

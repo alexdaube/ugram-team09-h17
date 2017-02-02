@@ -3,7 +3,6 @@ import * as Backbone from "backbone";
 import {StringFormatter} from "../util/StringFormatter";
 
 export class PictureModel extends Backbone.Model {
-
     constructor(options?: any) {
         super(options);
         this.urlRoot = "http://api.ugram.net/users/" + this.userId + "/pictures";

@@ -19,7 +19,7 @@ export class FeedCollectionView extends Backbone.View<any> {
         this.$el.html(html);
         this.showPictures();
         const showMoreView = new ShowMoreView({
-            element: "#show-more-container",
+            el: "#show-more-container",
             showMoreCallback: this.showPictures.bind(this),
         });
         showMoreView.render();
@@ -41,7 +41,7 @@ export class FeedCollectionView extends Backbone.View<any> {
 
     private renderPictures() {
         this.collection.each((picture) => {
-            const postView = new PostView({el: "#posts-list" , model: picture});
+            const postView = new PostView({el: "#posts-list", model: picture});
             postView.append();
         });
         this.checkForMorePicturesAvailable();
