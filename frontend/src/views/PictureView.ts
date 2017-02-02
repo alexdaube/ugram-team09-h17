@@ -2,6 +2,7 @@ import * as Backbone from "backbone";
 import * as _ from "underscore";
 
 import {PictureModel} from "../models/PictureModel";
+import {UserModel} from "../models/UserModel";
 
 export class PictureView extends Backbone.View<PictureModel> {
     private template: Function;
@@ -14,7 +15,7 @@ export class PictureView extends Backbone.View<PictureModel> {
     public render() {
         this.model.fetch({
             success: () => {
-                this.$el.html(this.template({picture: this.model}));
+                this.$el.html(this.template({picture: this.model, user: UserModel}));
             },
             error: () => {
                 this.$el.html("There was an error");
@@ -24,7 +25,7 @@ export class PictureView extends Backbone.View<PictureModel> {
     }
 
     public append() {
-        this.$el.append(this.template({picture: this.model}));
+        this.$el.append(this.template({picture: this.model, user: UserModel}));
         return this;
     }
 }
