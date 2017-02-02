@@ -27,3 +27,19 @@ Voir [`HelloWorldView`](https://github.com/GLO3112/starter-packs/blob/master/bac
 ```typescript
 this.template = require('./HelloWorldTemplate.ejs') as Function;
 ```
+
+# Déploiement
+
+Lors du déploiement avec AWS CodeDeploy, l'agent interprète le contenu du fichier appspec.yml :
+* Il copie la partie frontend sur le serveur AWS EC2
+* Il lance le script deployment_scripts/start_server qui transpile, configure et copie le frontend sur /www
+* le serveur utilise s3fs-fuse et un bucket S3 est monté sur /www
+
+Un trigger sur github lance automatiquement les déploiement sur AWS CodeDeploy lorsque la branche master est modifiée
+
+# Intégration
+
+Travis CI évalue le fichier .travis.yml :
+* il installe les dépendances nodejs
+* il lance tslint avec les paramètres "frontend/tslint.json" sur le frontend
+* le tout est intégré avec github
