@@ -5,7 +5,7 @@ import {ShowMoreView} from "./ShowMoreView";
 
 export class UserProfileView extends Backbone.View<any> {
     private template: Function;
-    private picturesPerPage: number = 9;
+    private picturesPerPage: number = 3;
     private nextPageToFetch: number = 1;
 
     constructor(options?: any) {
