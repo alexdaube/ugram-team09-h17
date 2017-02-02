@@ -1,7 +1,5 @@
 import * as Backbone from "backbone";
-import * as _ from "underscore";
 
-import {UserModel} from "../models/UserModel";
 import {PictureView} from "./PictureView";
 import {ShowMoreView} from "./ShowMoreView";
 
