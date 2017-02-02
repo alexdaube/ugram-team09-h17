@@ -1,14 +1,11 @@
 import * as Backbone from "backbone";
-import * as _ from "underscore";
 
 export class ShowMoreView extends Backbone.View<any> {
     private template: Function;
     private onShowMoreCallback: Function;
 
     constructor(options?: any) {
-        super(_.extend({
-            el: options["element"],
-        }, options));
+        super(options);
         this.onShowMoreCallback = options["showMoreCallback"];
         this.template = require("./ShowMoreTemplate.ejs") as Function;
     }
@@ -21,11 +18,7 @@ export class ShowMoreView extends Backbone.View<any> {
 
     public events() {
         return <Backbone.EventsHash> {
-            "click #show-more-button": "handleShowMore",
+            "click #show-more-button": () => { this.onShowMoreCallback(); },
         };
-    }
-
-    private handleShowMore() {
-        this.onShowMoreCallback();
     }
 }

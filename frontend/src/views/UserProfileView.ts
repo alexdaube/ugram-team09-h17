@@ -1,20 +1,27 @@
 import * as Backbone from "backbone";
-import * as _ from "underscore";
 
-import {UserModel} from "../models/UserModel";
-import {UserView} from "./UserView";
+import {PictureView} from "./PictureView";
 import {ShowMoreView} from "./ShowMoreView";
 
-export class UserProfileView extends Backbone.View<UserModel> {
+export class UserProfileView extends Backbone.View<any> {
     private template: Function;
-    private picturesPerPage: number = 10;
+    private picturesPerPage: number = 3;
     private nextPageToFetch: number = 1;
 
-    constructor(options?: Backbone.ViewOptions<UserModel>) {
-        super(_.extend({
-            el: "#content",
-        }, options));
+    constructor(options?: any) {
+        super(options);
         this.template = require("./UserProfileTemplate.ejs") as Function;
+    }
+
+    public events() {
+        return <Backbone.EventsHash> {
+            "click #addPictureButton": () => { $("#popupContent").show(); },
+            "click #closeButtonPopup": () => { $("#popupContent").hide(); },
+            "click #optionButton": () => { $("#popupCloseContent").show(); },
+            "click #closeExitButtonPopup": () => { $("#popupCloseContent").hide(); },
+            "click #closeCancelButtonPopup": () => { $("#popupCloseContent").hide(); },
+            "click #postPictureButton": () => { this.postPicture(); },
+        };
     }
 
     public render() {
@@ -22,25 +29,8 @@ export class UserProfileView extends Backbone.View<UserModel> {
             success: () => {
                 this.$el.html(this.template({ user: this.model}));
 
-                $("#addPictureButton").click(() => {
-                    $("#popupContent").show();
-                });
-                $("#closeButtonPopup").click(() => {
-                    $("#popupContent").hide();
-                });
-                $("#optionButton").click(() => {
-                    $("#popupCloseContent").show();
-                });
-                $("#closeExitButtonPopup").click(() => {
-                    $("#popupCloseContent").hide();
-                });
-                $("#closeCancelButtonPopup").click(() => {
-                    $("#popupCloseContent").hide();
-                });
-                $("#postPictureButton").click(this.postPicture);
-
                 const showMoreView = new ShowMoreView({
-                    element: "#show-more-container",
+                    el: "#show-more-container",
                     showMoreCallback: this.showPictures.bind(this),
                 });
                 showMoreView.render();
@@ -61,7 +51,7 @@ export class UserProfileView extends Backbone.View<UserModel> {
             },
             success: () => {
                 this.nextPageToFetch += 1;
-                this.appendPictures();
+                this.renderPictures();
             },
             error: () => {
                 $("#profile-pictures-list").append("<h3>You have no pictures yet!</h3>");
@@ -70,15 +60,11 @@ export class UserProfileView extends Backbone.View<UserModel> {
         });
     }
 
-    private appendPictures() {
-        let picturesHtml = "";
+    private renderPictures() {
         this.collection.each((picture) => {
-            const postView = new UserView({el: "#profile-pictures-list" , model: picture});
-            postView.append();
-            picturesHtml += `<a class="showImgProfile"><div class="displayImgProfile"><div class="divImgProfile">
-                <img id="profilePicture_${picture.id}" src="${picture["imageUrl"]}" /></div></div></a>`;
+            const pictureView = new PictureView({el: "#profile-pictures-list" , model: picture});
+            pictureView.append();
         });
-        $("#profile-pictures-list").append(picturesHtml);
         this.checkForMorePicturesAvailable();
     }
 
