@@ -6,6 +6,7 @@ export class PictureModel extends Backbone.Model {
 
     constructor(options?: any) {
         super(options);
+        this.urlRoot = "http://api.ugram.net/users/" + this.userId + "/pictures";
     }
 
     public defaults() {
@@ -17,6 +18,12 @@ export class PictureModel extends Backbone.Model {
             url: "",
             userId: "",
         };
+    }
+
+    public parse(response, options) {
+        response["imageUrl"] = response["url"];
+        delete response["url"];
+        return response;
     }
 
     get description(): string {
@@ -32,7 +39,7 @@ export class PictureModel extends Backbone.Model {
     }
 
     set mentions(mentions: string[]){
-        this.set("description", mentions);
+        this.set("mentions", mentions);
     }
 
     get postedDate(): string {
@@ -45,15 +52,15 @@ export class PictureModel extends Backbone.Model {
     }
 
     set tags(tags: string[]){
-        this.set("description", tags);
+        this.set("tags", tags);
     }
 
-    get url(): string {
-        return this.get("url");
+    get imageUrl(): string {
+        return this.get("imageUrl");
     }
 
-    set url(url: string){
-        this.set("url", url);
+    set imageUrl(imageUrl: string){
+        this.set("imageUrl", imageUrl);
     }
 
     get userId(): string {
