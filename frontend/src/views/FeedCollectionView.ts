@@ -41,7 +41,7 @@ export class FeedCollectionView extends Backbone.View<any> {
 
     private renderPictures() {
         this.collection.each((picture) => {
-            const postView = new PostView({el: "#posts-list" , model: picture});
+            const postView = new PostView({el: "#posts-list", model: picture});
             postView.append();
         });
         this.checkForMorePicturesAvailable();

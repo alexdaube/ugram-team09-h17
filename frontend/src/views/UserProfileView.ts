@@ -2,19 +2,17 @@ import * as Backbone from "backbone";
 import * as _ from "underscore";
 
 import {UserModel} from "../models/UserModel";
-import {UserView} from "./UserView";
+import {PictureView} from "./PictureView";
 import {ShowMoreView} from "./ShowMoreView";
 
-export class UserProfileView extends Backbone.View<UserModel> {
+export class UserProfileView extends Backbone.View<any> {
     private template: Function;
-    private picturesPerPage: number = 10;
+    private picturesPerPage: number = 9;
     private nextPageToFetch: number = 1;
 
-    constructor(options?: Backbone.ViewOptions<UserModel>) {
-        super(_.extend({
-            el: "#content",
-        }, options));
-        this.template = require("./UserProfileTemplate.ejs") as Function;
+    constructor(options?: any) {
+        super(_.extend({}, options));
+        this.template = require("./UserCollectionTemplate.ejs") as Function;
     }
 
     public render() {
@@ -61,7 +59,7 @@ export class UserProfileView extends Backbone.View<UserModel> {
             },
             success: () => {
                 this.nextPageToFetch += 1;
-                this.appendPictures();
+                this.renderPictures();
             },
             error: () => {
                 $("#profile-pictures-list").append("<h3>You have no pictures yet!</h3>");
@@ -70,15 +68,11 @@ export class UserProfileView extends Backbone.View<UserModel> {
         });
     }
 
-    private appendPictures() {
-        let picturesHtml = "";
+    private renderPictures() {
         this.collection.each((picture) => {
-            const postView = new UserView({el: "#profile-pictures-list" , model: picture});
-            postView.append();
-            picturesHtml += `<a class="showImgProfile"><div class="displayImgProfile"><div class="divImgProfile">
-                <img id="profilePicture_${picture.id}" src="${picture["imageUrl"]}" /></div></div></a>`;
+            const pictureView = new PictureView({el: "#profile-pictures-list" , model: picture});
+            pictureView.append();
         });
-        $("#profile-pictures-list").append(picturesHtml);
         this.checkForMorePicturesAvailable();
     }
 
