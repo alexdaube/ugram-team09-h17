@@ -17,21 +17,13 @@ export class UserProfileView extends Backbone.View<any> {
 
     public events() {
         return <Backbone.EventsHash> {
-            "click #addPictureButton": () => {this.showOnClick("#popupContent"); },
-            "click #closeButtonPopup": () => {this.hideOnClick("#popupContent"); },
-            "click #optionButton": () => {this.showOnClick("#popupCloseContent"); },
-            "click #closeExitButtonPopup": () => {this.hideOnClick("#popupCloseContent"); },
-            "click #closeCancelButtonPopup": () => {this.hideOnClick("#popupCloseContent"); },
-            "click #postPictureButton": () => {this.postPicture(); },
+            "click #addPictureButton": () => { $("#popupContent").show(); },
+            "click #closeButtonPopup": () => { $("#popupContent").hide(); },
+            "click #optionButton": () => { $("#popupCloseContent").show(); },
+            "click #closeExitButtonPopup": () => { $("#popupCloseContent").hide(); },
+            "click #closeCancelButtonPopup": () => { $("#popupCloseContent").hide(); },
+            "click #postPictureButton": () => { this.postPicture(); },
         };
-    }
-
-    public showOnClick(element) {
-        $(element).show();
-    }
-
-    public hideOnClick(element) {
-        $(element).hide();
     }
 
     public render() {
