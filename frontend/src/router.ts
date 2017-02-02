@@ -5,7 +5,6 @@ import {LoggedUserSettingsView} from "./views/LoggedUserSettingsView";
 
 import {UserModel} from "./models/UserModel";
 import {UserCollection} from "./collections/UserCollection";
-import {UserCollectionForView} from "./collections/UserCollectionForView";
 import {UserCollectionView} from "./views/UserCollectionView";
 import {UserProfileView} from "./views/UserProfileView";
 
@@ -58,7 +57,7 @@ export class AppRouter extends Backbone.Router {
     }
 
     public showFeed(userId: string, pictureId: string) {
-        const pictureModel = new PictureModel({userId: userId, id: pictureId});
+        const pictureModel = new PictureModel({userFeedId: userId, id: pictureId});
         const postView = new PostView({el: "#content", model: pictureModel});
         postView.render();
     }
