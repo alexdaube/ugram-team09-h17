@@ -1,6 +1,6 @@
 import * as Backbone from "backbone";
 
-import {StringFormatter} from "../util/StringFormatter";
+import {InputFormatter} from "../util/InputFormatter";
 
 export class PictureModel extends Backbone.Model {
     constructor(options?: any) {
@@ -43,7 +43,7 @@ export class PictureModel extends Backbone.Model {
 
     get postedDate(): string {
         const createdDate = this.get("createdDate");
-        return StringFormatter.formatMillisecondDateToMMDDYYYY(new Date(createdDate));
+        return InputFormatter.formatMillisecondDateToMMDDYYYY(new Date(createdDate));
     }
 
     get tags(): string[] {

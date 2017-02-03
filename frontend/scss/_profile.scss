@@ -195,6 +195,7 @@
   &:empty {
     display: none;
   }
+  margin-bottom: 10px;
 }
 
 .boldTextProfile {
@@ -307,9 +308,11 @@
     font-size: 17px;
     line-height: 24px;
     margin-top: 14px;
+    margin-bottom: 10px;
   }
   .paddingProfile .paddingBioProfile {
     margin: 0;
+    margin-bottom: 10px;
   }
   .headerProfile {
     padding: 20px 0;
@@ -376,7 +379,7 @@
     margin-top: 7px;
   }
   .paddingProfile .paddingBioProfile {
-    margin: 0 20px 12px;
+    margin-bottom: 12px;
     padding-bottom: 24px;
     border-bottom: 1px solid #dbdbdb;
   }

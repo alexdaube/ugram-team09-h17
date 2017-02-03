@@ -2,6 +2,8 @@ import * as Backbone from "backbone";
 
 import {PictureView} from "./PictureView";
 import {ShowMoreView} from "./ShowMoreView";
+import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
+import {InputValidator} from "../util/InputValidator";
 
 export class UserProfileView extends Backbone.View<any> {
     private template: Function;
@@ -79,6 +81,11 @@ export class UserProfileView extends Backbone.View<any> {
         const mentions: string[] = description.match(/@\w+/g);
         const tags: string[] = description.match(/#\w+/g);
 
+        if(InputValidator.containsScriptInjection(description)){
+            alert("Fack off");
+            return;
+        }
+
         const formData: FormData = new FormData();
         formData.append("description", description);
         formData.append("mentions", mentions);
@@ -91,9 +98,7 @@ export class UserProfileView extends Backbone.View<any> {
             processData: false,
             contentType: false,
             cache: false,
-            beforeSend: (xhr) => {
-                xhr.setRequestHeader("Authorization", "Bearer 24d6e087-51a0-465a-a19b-ce9570ad3169");
-            },
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
         }).done(() => {
             $("#popupContent").hide();
         }).fail(() => {
