@@ -2,6 +2,7 @@ import * as Backbone from "backbone";
 import * as _ from "underscore";
 
 import {PictureModel} from "../models/PictureModel";
+import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 
 export class PostView extends Backbone.View<PictureModel> {
     private template: Function;
@@ -16,6 +17,7 @@ export class PostView extends Backbone.View<PictureModel> {
             "click #optionButtonEdit": () => { $("#popupEditContent").show(); },
             "click #closeExitButtonPopup": () => { $("#popupEditContent").hide(); },
             // "click #optionButton": () => { $("#popupCloseContent").show(); },
+            "click #deleteButtonPopup": () => { this.delete(); },
             // "click #closeExitButtonPopup": () => { $("#popupCloseContent").hide(); },
             // "click #closeCancelButtonPopup": () => { $("#popupCloseContent").hide(); },
             // "click #postPictureButton": () => { this.postPicture(); },
@@ -38,5 +40,22 @@ export class PostView extends Backbone.View<PictureModel> {
     public append() {
         this.$el.append(this.template({post: this.model, isSingleFeed: false}));
         return this;
+    }
+
+    private delete() {
+        $("#popupEditContent").hide();
+        const view = this;
+        this.model.destroy({
+            beforeSend: HeaderRequestGenerator.setContentTypeToJSON,
+            success() {
+                alert("The picture was successfully deleted");
+                // TODO Valider les champs contre le hacking
+                view.render();
+            },
+            error() {
+                alert("didn't work :'c");
+                // TODO Handle error
+            },
+        });
     }
 }
