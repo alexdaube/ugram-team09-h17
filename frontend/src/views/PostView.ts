@@ -11,6 +11,17 @@ export class PostView extends Backbone.View<PictureModel> {
         this.template = require("./PostTemplate.ejs") as Function;
     }
 
+    public events() {
+        return <Backbone.EventsHash> {
+            "click #optionButtonEdit": () => { $("#popupEditContent").show(); },
+            "click #closeExitButtonPopup": () => { $("#popupEditContent").hide(); },
+            // "click #optionButton": () => { $("#popupCloseContent").show(); },
+            // "click #closeExitButtonPopup": () => { $("#popupCloseContent").hide(); },
+            // "click #closeCancelButtonPopup": () => { $("#popupCloseContent").hide(); },
+            // "click #postPictureButton": () => { this.postPicture(); },
+        };
+    }
+
     public render() {
         this.model.fetch({
             success: () => {

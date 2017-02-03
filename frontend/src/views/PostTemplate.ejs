@@ -38,8 +38,22 @@
 			<div class="addCommentFeed commentPaddingFeed">
 				<!--<a class="likeButtonFeed likePaddingFeed" href=""><span class="likeTextFeed2 heartIcon">J’aime</span></a>-->
 				<!--<form class="flexCommentFeed"><input type="text" class="inputCommentFeed inputTextFeed" placeholder="Add Comment..." value=""></form>-->
-				<button class="optionPostFeed optionIcon likeTextFeed2">More Options</button>
+				<button id="optionButtonEdit" class="optionPostFeed optionIcon likeTextFeed2">More Options</button>
 			</div>
 		<% } %>
 	</div>
+</div>
+
+<div class="popupContent">
+   <div id="popupEditContent" class="divPopupContent">
+    <div class="heightPopup">
+        <div class="height2Popup">
+            <ul>
+                <li class="lineQuitPopup"><button id="editButtonPopup" class="buttonQuitPopup">Edit</button></li>
+                <li class="lineQuitPopup"><button id="deleteButtonPopup" class="buttonQuitPopup">Delete</button></li>
+            </ul>
+        </div>
+    </div>
+    <button id="closeExitButtonPopup" class="closeButtonPopup">Fermer</button>
+   </div>
 </div>
