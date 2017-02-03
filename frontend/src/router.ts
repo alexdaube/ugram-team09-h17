@@ -23,10 +23,10 @@ export class AppRouter extends Backbone.Router {
 
     public routes = {
         "": "defaultRoute",
-        "profile": "showUserProfile",
+        "profile": () => { this.showUserProfile("jlabonte"); },
         "setting": "showUserSetting",
         "users": "showUsers",
-        "users/:userId": "showUserProfile2",
+        "users/:userId": "showUserProfile",
         "users/:userId/pictures/:pictureId": "showFeed",
     };
 
@@ -62,14 +62,6 @@ export class AppRouter extends Backbone.Router {
     }
 
     public showUserProfile(userId: string = "") {
-        const userModel = new UserModel({id: "abolduc"});
-        const feedCollection = new FeedCollection({url: "http://api.ugram.net/users/" + userModel.id + "/pictures"});
-        const userProfileView = new UserProfileView({el: "#content", model: userModel, collection: feedCollection});
-        userProfileView.render();
-    }
-
-    // TODO remove this and only use showUserProfile with parameter to know if its me or not
-    public showUserProfile2(userId: string) {
         const userModel = new UserModel({id: userId});
         const feedCollection = new FeedCollection({url: "http://api.ugram.net/users/" + userModel.id + "/pictures"});
         const userProfileView = new UserProfileView({el: "#content", model: userModel, collection: feedCollection});

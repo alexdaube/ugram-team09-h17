@@ -5,35 +5,66 @@
 		<div class="userNameFeed">
 			<a class="heightTextFeed widthTextFeed" href=""><%- post.userId %></a>
 		</div>
-		<a class="hourFeed" href=""><time datetime="2017-01-21T20:20:26.000Z"><%- post.postedDate %></time></a>
+		<a class="hourFeed" href=""><time><%- post.postedDate %></time></a>
 	</div>
 	<div class="imageFeed">
-        	<% if(!isSingleFeed){ %><a href="/#users/<%- post.userId %>/pictures/<%- post.id %>"><% } %>
+        	<% if(!isSingleFeed){ %><a><% } %>
 		<div class="imagePaddingFeed">
 			<img class="sizeImageFeed" src="<%- post.imageUrl %>" />
 		</div>
 			<% if(!isSingleFeed){ %></a><% } %>
 	</div>
 	<div class="textContentFeed">
+		<!--<div class="paddingLikeFeed">-->
+			<!--<span class="likeTextFeed"><%- post.tags.length %> likes</span>-->
+		<!--</div>-->
+		
+        <% if(post.description){ %>
 		<div class="paddingLikeFeed">
-			<span class="likeTextFeed"><%- post.tags.length %> liked</span>
+			<span class="likeTextFeed"><%- post.description %></span>
 		</div>
+        <% } %>
 
-		<ul>
-			<li class="textCommentFeed">
-				<a class="heightTextFeed blackTextFeed" href="">{user name post}</a>
-				<span>{text post}</span>
-			</li>
-			<li class="textCommentFeed">
-				<a class="heightTextFeed blackTextFeed" href="">{user name comment}</a>
-				<span>{text comment}</span>
-			</li>
-		</ul>
-
-		<div class="addCommentFeed commentPaddingFeed">
-			<a class="likeButtonFeed likePaddingFeed" href=""><span class="likeTextFeed2 heartIcon">J’aime</span></a>
-			<form class="flexCommentFeed"><input type="text" class="inputCommentFeed inputTextFeed" placeholder="Add Comment..." value=""></form>
-			<button class="optionPostFeed optionIcon likeTextFeed2">More Options</button>
+        <% if(post.tags.length){ %>
+		<div class="paddingLikeFeed">
+			<span class="likeTextFeed">
+				Tags:
+                <% for(var i=0; i< post.tags.length; i++) {%>
+					<span style="display: inline-block">&nbsp;<%- post.tags[i] %></span>
+                <% } %>
+			</span>
 		</div>
+        <% } %>
+
+        <% if(post.mentions.length){ %>
+		<div class="paddingLikeFeed">
+			<span class="likeTextFeed">
+				Mentions:
+                <% for(var i=0; i< post.mentions.length; i++) {%>
+					<span style="display: inline-block">&nbsp;<%- post.mentions[i] %></span>
+                <% } %>
+			</span>
+		</div>
+        <% } %>
+
+		<!-- Markup for the future -->
+		<!--<ul>-->
+			<!--<li class="textCommentFeed">-->
+				<!--<a class="heightTextFeed blackTextFeed" href="">{user name post}</a>-->
+				<!--<span>{text post}</span>-->
+			<!--</li>-->
+			<!--<li class="textCommentFeed">-->
+				<!--<a class="heightTextFeed blackTextFeed" href="">{user name comment}</a>-->
+				<!--<span>{text comment}</span>-->
+			<!--</li>-->
+		<!--</ul>-->
+        <% if(post.userId === "jlabonte"){ %>
+			<div class="addCommentFeed commentPaddingFeed">
+				<!-- Markup for the future -->
+				<!--<a class="likeButtonFeed likePaddingFeed" href=""><span class="likeTextFeed2 heartIcon">J’aime</span></a>-->
+				<!--<form class="flexCommentFeed"><input type="text" class="inputCommentFeed inputTextFeed" placeholder="Add Comment..." value=""></form>-->
+				<button class="optionPostFeed optionIcon likeTextFeed2">More Options</button>
+			</div>
+        <% } %>
 	</div>
 </div>
