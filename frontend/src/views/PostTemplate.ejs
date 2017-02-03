@@ -5,19 +5,23 @@
 		<div class="userNameFeed">
 			<a class="heightTextFeed widthTextFeed" href=""><%- post.userId %></a>
 		</div>
-		<a class="hourFeed" href=""><time datetime="2017-01-21T20:20:26.000Z"><%- post.postedDate %></time></a>
+		<a class="hourFeed" href=""><time><%- post.postedDate %></time></a>
 	</div>
 	<div class="imageFeed">
-        	<% if(!isSingleFeed){ %><a href="/#users/<%- post.userId %>/pictures/<%- post.id %>"><% } %>
+        	<% if(!isSingleFeed){ %><a><% } %>
 		<div class="imagePaddingFeed">
 			<img class="sizeImageFeed" src="<%- post.imageUrl %>" />
 		</div>
 			<% if(!isSingleFeed){ %></a><% } %>
 	</div>
 	<div class="textContentFeed">
+		<!--<div class="paddingLikeFeed">-->
+			<!--<span class="likeTextFeed"><%- post.tags.length %> likes</span>-->
+		<!--</div>-->
+		
         <% if(post.description){ %>
 		<div class="paddingLikeFeed">
-			<span class="likeTextFeed">Description: <%- post.description %></span>
+			<span class="likeTextFeed"><%- post.description %></span>
 		</div>
         <% } %>
 
