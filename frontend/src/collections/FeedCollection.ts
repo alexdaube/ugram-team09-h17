@@ -15,7 +15,6 @@ export class FeedCollection extends Backbone.Collection<PictureModel> {
             item["imageUrl"] = item["url"];
             delete item["url"];
         });
-        
         return response.items;
     }
 }
