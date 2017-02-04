@@ -93,7 +93,7 @@ export class UserProfileView extends Backbone.View<any> {
         const mentions: string[] = description.match(/@\w+/g);
         const tags: string[] = description.match(/#\w+/g);
 
-        if(InputValidator.containsScriptInjection(description)){
+        if (InputValidator.containsScriptInjection(description)) {
             alert("Forbidden description");
             return;
         }

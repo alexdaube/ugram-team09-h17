@@ -7,7 +7,7 @@ export class HeaderRequestGenerator {
         xhr.setRequestHeader("Authorization", HeaderRequestGenerator.token);
     }
 
-    public static sendAuthorization(xhr){
+    public static sendAuthorization(xhr) {
         xhr.setRequestHeader("Authorization", HeaderRequestGenerator.token);
     }
 

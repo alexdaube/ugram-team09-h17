@@ -56,7 +56,6 @@ export class UserSettingsView extends Backbone.View<UserModel> {
             return;
         }
         if (!InputValidator.nameIsValid(obj.firstName)) {
-            console.log(obj.firstName);
             alert("First Name is invalid");
             return;
         }
@@ -64,7 +63,6 @@ export class UserSettingsView extends Backbone.View<UserModel> {
             alert("Last Name is invalid");
             return;
         }
-
 
         this.userModel.save(obj, {
             beforeSend: HeaderRequestGenerator.setContentTypeToJSON,

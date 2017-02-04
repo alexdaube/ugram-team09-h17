@@ -1,7 +1,7 @@
 import * as Backbone from "backbone";
 
 import {InputFormatter} from "../util/InputFormatter";
-import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator"
+import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 
 export class PictureModel extends Backbone.Model {
     constructor(options?: any) {
