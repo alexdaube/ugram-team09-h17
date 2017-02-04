@@ -17,12 +17,6 @@ export class UserProfileView extends Backbone.View<any> {
 
     public events() {
         return <Backbone.EventsHash> {
-            "click #addPictureButton": () => {
-                $("#popupContent").show();
-            },
-            "click #closeButtonPopup": () => {
-                $("#popupContent").hide();
-            },
             "click #optionButton": () => {
                 $("#popupCloseContent").show();
             },
@@ -31,9 +25,6 @@ export class UserProfileView extends Backbone.View<any> {
             },
             "click #closeCancelButtonPopup": () => {
                 $("#popupCloseContent").hide();
-            },
-            "click #postPictureButton": () => {
-                this.postPicture();
             },
         };
     }
@@ -86,35 +77,5 @@ export class UserProfileView extends Backbone.View<any> {
         if (this.collection.length < this.picturesPerPage) {
             $("#show-more-container").hide();
         }
-    }
-
-    private postPicture() {
-        const description: string = $("#description").val();
-        const mentions: string[] = description.match(/@\w+/g);
-        const tags: string[] = description.match(/#\w+/g);
-
-        if (InputValidator.containsScriptInjection(description)) {
-            alert("Forbidden description");
-            return;
-        }
-
-        const formData: FormData = new FormData();
-        formData.append("description", description);
-        formData.append("mentions", mentions);
-        formData.append("tags", tags);
-        formData.append("file", (<any> $("input[type=file]")[0]).files[0]);
-        $.ajax({
-            url: "http://api.ugram.net/users/" + HeaderRequestGenerator.userId + "/pictures",
-            type: "POST",
-            data: formData,
-            processData: false,
-            contentType: false,
-            cache: false,
-            beforeSend: HeaderRequestGenerator.sendAuthorization,
-        }).done(() => {
-            $("#popupContent").hide();
-        }).fail(() => {
-            $("#error-text").text("Could not upload picture");
-        });
     }
 }

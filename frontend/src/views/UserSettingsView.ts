@@ -23,9 +23,6 @@ export class UserSettingsView extends Backbone.View<UserModel> {
         this.userModel.fetch({
             success() {
                 that.$el.html(that.template({userModel: that.userModel}));
-                $(document).ready(() => {
-                    // TODO show and hide #textSaveSetting and #textErrorSetting (popup)
-                });
             },
             error() {
                 // TODO Handle error

@@ -1,7 +1,8 @@
 <div class="contentPaddingSetting">
     <div class="whiteBackground contentSetting">
         <ul class="menuSetting">
-            <li><a class="textMenuSetting boldTextSetting" href="">Modify profile</a></li>
+            <li><a class="textMenuSetting" href="#picture">Add picture</a></li>
+            <li><a class="textMenuSetting boldTextSetting" href="#setting">Modify profile</a></li>
         </ul>
         <div class="inputSizeSetting">         
             <div class="usernameSetting">
@@ -10,7 +11,7 @@
             </div>
             <h1 class="userTextSetting"><%- userModel.userName %></h1>
             </div>
-            <form class="heightSetting">
+            <div class="heightSetting">
             <div class="infoSetting">
                 <div class="paddingInfoSetting"><label>First Name</label></div>
                 <div class="widthSetting"><input class="inputSetting" id="pepFirstName" value="<%- userModel.firstName %>" type="text"></div>
@@ -40,12 +41,12 @@
                 <div class="widthSetting">
                     <div class="buttonSetting"><span><button class="styleButtonSetting colorButtonSetting sizeButtonSetting" id="saveProfile">Update</button></span></div>
                     &nbsp;&nbsp;&nbsp;
-                    <div class="buttonSetting"><span><p class="validationTextSize successTextColor" id="textSaveSetting">Profile saved</p></span></div>
+                    <div id="textSaveSetting" class="buttonSetting"><span><p class="validationTextSize successTextColor">Profile saved</p></span></div>
                     &nbsp;&nbsp;&nbsp;
-                    <div class="buttonSetting"><span><p class="validationTextSize errorTextColor" id="textErrorSetting">Profile saved</p></span></div>
+                    <div id="textErrorSetting" class="buttonSetting"><span><p class="validationTextSize errorTextColor">Profile saved</p></span></div>
                 </div>
             </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

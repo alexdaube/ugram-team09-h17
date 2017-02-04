@@ -5,6 +5,7 @@ import {UserModel} from "./models/UserModel";
 import {UserCollection} from "./collections/UserCollection";
 import {UserCollectionView} from "./views/UserCollectionView";
 import {UserProfileView} from "./views/UserProfileView";
+import {UserAddPictureView} from "./views/UserAddPictureView";
 
 import {FeedCollection} from "./collections/FeedCollection";
 import {FeedCollectionView} from "./views/FeedCollectionView";
@@ -26,6 +27,7 @@ export class AppRouter extends Backbone.Router {
         "": "defaultRoute",
         "profile": () => { this.showUserProfile(HeaderRequestGenerator.userId); },
         "setting": "showUserSetting",
+        "picture": "showAddPicture",
         "users": "showUsers",
         "users/:userId": "showUserProfile",
         "users/:userId/pictures/:pictureId": "showFeed",
@@ -73,6 +75,12 @@ export class AppRouter extends Backbone.Router {
         const userModel = new UserModel({id: HeaderRequestGenerator.userId});
         const userSettingsView = new UserSettingsView({model: userModel});
         userSettingsView.render();
+    }
+
+    public showAddPicture(param: string = "") {
+        const userModel = new UserModel({id: HeaderRequestGenerator.userId});
+        const userAddPictureView = new UserAddPictureView({model: userModel});
+        userAddPictureView.render();
     }
 
     public showUsers(param: string = "") {

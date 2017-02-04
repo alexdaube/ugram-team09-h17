@@ -16,11 +16,7 @@ export class PostView extends Backbone.View<PictureModel> {
         return <Backbone.EventsHash> {
             "click #optionButtonEdit": () => { $("#popupEditContent").show(); },
             "click #closeExitButtonPopup": () => { $("#popupEditContent").hide(); },
-            // "click #optionButton": () => { $("#popupCloseContent").show(); },
             "click #deleteButtonPopup": () => { this.delete(); },
-            // "click #closeExitButtonPopup": () => { $("#popupCloseContent").hide(); },
-            // "click #closeCancelButtonPopup": () => { $("#popupCloseContent").hide(); },
-            // "click #postPictureButton": () => { this.postPicture(); },
         };
     }
 
