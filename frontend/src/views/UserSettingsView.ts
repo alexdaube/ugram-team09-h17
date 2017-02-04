@@ -4,6 +4,8 @@ import * as _ from "underscore";
 
 import {UserModel} from "../models/UserModel";
 import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
+import {InputFormatter} from "../util/InputFormatter";
+import {InputValidator} from "../util/InputValidator";
 
 export class UserSettingsView extends Backbone.View<UserModel> {
 
@@ -46,18 +48,30 @@ export class UserSettingsView extends Backbone.View<UserModel> {
             email :  $("#pepEmail").val(),
             firstName : $("#pepFirstName").val(),
             lastName : $("#pepLastName").val(),
-            phoneNumber : $("#pepPhone").val(),
+            phoneNumber : InputFormatter.normalizePhoneNumber($("#pepPhone").val()),
         };
+
+        if (!InputValidator.emailAddressIsValid(obj.email)) {
+            alert("Email address is invalid");
+            return;
+        }
+        if (!InputValidator.nameIsValid(obj.firstName)) {
+            alert("First Name is invalid");
+            return;
+        }
+        if (!InputValidator.nameIsValid(obj.lastName)) {
+            alert("Last Name is invalid");
+            return;
+        }
 
         this.userModel.save(obj, {
             beforeSend: HeaderRequestGenerator.setContentTypeToJSON,
             success() {
                 alert("The user profile was successfully updated");
-                    // TODO Valider les champs contre le hacking
                 that.render();
             },
             error() {
-                // TODO Handle error
+                alert("An error occured while updating the user");
             },
         });
     }

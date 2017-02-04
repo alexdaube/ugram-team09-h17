@@ -1,6 +1,6 @@
 import * as Backbone from "backbone";
 
-import {StringFormatter} from "../util/StringFormatter";
+import {InputFormatter} from "../util/InputFormatter";
 
 export class UserModel extends Backbone.Model {
 
@@ -63,7 +63,7 @@ export class UserModel extends Backbone.Model {
 
     get inscriptionDate(): string {
         const bufferDate = this.get("registrationDate");
-        return StringFormatter.formatMillisecondDateToMMDDYYYY(new Date(bufferDate));
+        return InputFormatter.formatMillisecondDateToMMDDYYYY(new Date(bufferDate));
     }
 
     set inscriptionDate(inscriptionDate: string) {

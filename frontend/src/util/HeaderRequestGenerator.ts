@@ -7,6 +7,10 @@ export class HeaderRequestGenerator {
         xhr.setRequestHeader("Authorization", HeaderRequestGenerator.token);
     }
 
+    public static sendAuthorization(xhr) {
+        xhr.setRequestHeader("Authorization", HeaderRequestGenerator.token);
+    }
+
     public static setContentTypeToURLEncoded(xhr) {
         xhr.setRequestHeader("Content-Type", ("application/x-www-form-urlencoded"));
         xhr.setRequestHeader("Authorization", HeaderRequestGenerator.token);

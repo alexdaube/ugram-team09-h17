@@ -2,7 +2,6 @@ import * as Backbone from "backbone";
 import * as _ from "underscore";
 
 import {PictureModel} from "../models/PictureModel";
-import {UserModel} from "../models/UserModel";
 
 export class PictureView extends Backbone.View<PictureModel> {
     private template: Function;

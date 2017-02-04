@@ -10,23 +10,23 @@
                 <h1 class="textNameProfile"><%- user.userName %></h1>
                     <% if(user.userName === "jlabonte"){ %>
                         <!--<div class="paddingOptionProfile">-->
-                            <!--<a><button id="optionButton" class="styleOptionProfile optionLogo textOptionProfile"></button></a>-->
+                            <!--<a><button id="optionButton" class="styleOptionProfile coreSpriteEllipsis textOptionProfile"></button></a>-->
                         <!--</div>-->
                     <% } %>
+            </div>
+            <div class="paddingBioProfile">
+                <h2 class="boldTextProfile"><%- user.firstName %> <%- user.lastName %></h2><br />
+                <span>Inscription date: <%- user.inscriptionDate %></span>
             </div>
             <% if(user.userName === "jlabonte"){ %>
                 <div class="editButtonProfile"><a href="">
                     <a class="whiteBackground" href="#setting"><button class="styleButtonProfile colorButtonProfile sizeButtonProfile">Update profile</button></a>
-                    &nbsp;&nbsp;
                     <a class="whiteBackground"><button id="addPictureButton" class="styleButtonProfile colorAddButtonProfile sizeButtonProfile">Add picture</button></a>
                 </div>
             <% } %>
         </div>
     </div>
-    <div class="paddingBioProfile">
-        <h2 class="boldTextProfile"><%- user.firstName %> <%- user.lastName %></h2>
-        <span><%- user.email %> <%- user.phoneNumber %> inscription date: <%- user.inscriptionDate %></span>
-    </div>
+    <br /><br />
     <ul class="statsProfile statsSizeProfile">
         <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Posts</span></li>
         <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Followers</a></li>
