@@ -18,12 +18,13 @@ import {FooterModel} from "./models/FooterModel";
 import {PictureModel} from "./models/PictureModel";
 
 import {PostView} from "./views/PostView";
+import {HeaderRequestGenerator} from "./util/HeaderRequestGenerator";
 
 export class AppRouter extends Backbone.Router {
 
     public routes = {
         "": "defaultRoute",
-        "profile": () => { this.showUserProfile("jlabonte"); },
+        "profile": () => { this.showUserProfile(HeaderRequestGenerator.userId); },
         "setting": "showUserSetting",
         "users": "showUsers",
         "users/:userId": "showUserProfile",
@@ -69,7 +70,7 @@ export class AppRouter extends Backbone.Router {
     }
 
     public showUserSetting(param: string = "") {
-        const userModel = new UserModel({id: "jlabonte"});
+        const userModel = new UserModel({id: HeaderRequestGenerator.userId});
         const userSettingsView = new UserSettingsView({model: userModel});
         userSettingsView.render();
     }

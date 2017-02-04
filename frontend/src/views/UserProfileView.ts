@@ -17,19 +17,31 @@ export class UserProfileView extends Backbone.View<any> {
 
     public events() {
         return <Backbone.EventsHash> {
-            "click #addPictureButton": () => { $("#popupContent").show(); },
-            "click #closeButtonPopup": () => { $("#popupContent").hide(); },
-            "click #optionButton": () => { $("#popupCloseContent").show(); },
-            "click #closeExitButtonPopup": () => { $("#popupCloseContent").hide(); },
-            "click #closeCancelButtonPopup": () => { $("#popupCloseContent").hide(); },
-            "click #postPictureButton": () => { this.postPicture(); },
+            "click #addPictureButton": () => {
+                $("#popupContent").show();
+            },
+            "click #closeButtonPopup": () => {
+                $("#popupContent").hide();
+            },
+            "click #optionButton": () => {
+                $("#popupCloseContent").show();
+            },
+            "click #closeExitButtonPopup": () => {
+                $("#popupCloseContent").hide();
+            },
+            "click #closeCancelButtonPopup": () => {
+                $("#popupCloseContent").hide();
+            },
+            "click #postPictureButton": () => {
+                this.postPicture();
+            },
         };
     }
 
     public render() {
         this.model.fetch({
             success: () => {
-                this.$el.html(this.template({ user: this.model}));
+                this.$el.html(this.template({user: this.model}));
 
                 const showMoreView = new ShowMoreView({
                     el: "#show-more-container",
@@ -64,7 +76,7 @@ export class UserProfileView extends Backbone.View<any> {
 
     private renderPictures() {
         this.collection.each((picture) => {
-            const pictureView = new PictureView({el: "#profile-pictures-list" , model: picture});
+            const pictureView = new PictureView({el: "#profile-pictures-list", model: picture});
             pictureView.append();
         });
         this.checkForMorePicturesAvailable();
@@ -82,7 +94,7 @@ export class UserProfileView extends Backbone.View<any> {
         const tags: string[] = description.match(/#\w+/g);
 
         if(InputValidator.containsScriptInjection(description)){
-            alert("Fack off");
+            alert("Forbidden description");
             return;
         }
 
@@ -92,7 +104,7 @@ export class UserProfileView extends Backbone.View<any> {
         formData.append("tags", tags);
         formData.append("file", (<any> $("input[type=file]")[0]).files[0]);
         $.ajax({
-            url: "http://api.ugram.net/users/jlabonte/pictures",
+            url: "http://api.ugram.net/users/" + HeaderRequestGenerator.userId + "/pictures",
             type: "POST",
             data: formData,
             processData: false,

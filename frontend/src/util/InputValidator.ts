@@ -12,9 +12,9 @@ export class InputValidator {
     }
 
     public static containsScriptInjection(text: string) {
-        return !((text.search("<script")
-            && text.search("type=")
-            && text.search("text/javascript")
-            && text.search("</script")) === -1);
+        return (new RegExp("<script").test(text)
+             || new RegExp("type=").test(text)
+             || new RegExp("text/javascript").test(text)
+             || new RegExp("</script").test(text));
     }
 }

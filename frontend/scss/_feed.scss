@@ -7,9 +7,9 @@
 
 .heartIcon {
   background-image: url(/img/ugram.png);
+  background-position: -207px -229px;
   height: 24px;
   width: 24px;
-  background-position: -207px -229px;
 }
 
 .imageFeed {
@@ -19,12 +19,8 @@
 }
 
 .sizeImageFeed {
-  left: 0;
   position: absolute;
-  top: 0;
   height: 100%;
-  -ms-user-select: none;
-  user-select: none;
   width: 100%;
 }
 
@@ -65,7 +61,6 @@
 .textCommentFeed {
   margin-bottom: 7px;
   position: relative;
-  word-wrap: break-word;
   &:last-child {
     margin-bottom: 0;
   }
@@ -121,7 +116,7 @@
 }
 
 .paddingLikeFeed {
-  margin-bottom: 7px;
+  margin-bottom: 20px;
 }
 
 .optionPostFeed {
@@ -210,6 +205,7 @@
 }
 
 .hourFeed {
+  cursor: default;
   color: #999;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -282,9 +278,6 @@
   }
   .addCommentFeed {
     min-height: 68px;
-  }
-  .commentPaddingFeed {
-    margin-top: 13px;
   }
 }
 

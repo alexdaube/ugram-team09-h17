@@ -65,6 +65,7 @@ export class UserSettingsView extends Backbone.View<UserModel> {
             return;
         }
 
+
         this.userModel.save(obj, {
             beforeSend: HeaderRequestGenerator.setContentTypeToJSON,
             success() {
