@@ -50,27 +50,33 @@ export class UserSettingsView extends Backbone.View<UserModel> {
         };
 
         if (!InputValidator.emailAddressIsValid(obj.email)) {
-            alert("Email address is invalid");
+            $("#textErrorSetting").show();
+            $("#textErrorSetting").find("p").text("Email address is invalid");
             return;
         }
         if (!InputValidator.nameIsValid(obj.firstName)) {
-            alert("First Name is invalid");
+            $("#textErrorSetting").show();
+            $("#textErrorSetting").find("p").text("First Name is invalid");
             return;
         }
         if (!InputValidator.nameIsValid(obj.lastName)) {
-            alert("Last Name is invalid");
+            $("#textErrorSetting").show();
+            $("#textErrorSetting").find("p").text("Last Name is invalid");
+            return;
+        }
+        if (obj.phoneNumber.toString() === "NaN") {
+            $("#textErrorSetting").show();
+            $("#textErrorSetting").find("p").text("Phone number is empty");
             return;
         }
 
         this.userModel.save(obj, {
             beforeSend: HeaderRequestGenerator.setContentTypeToJSON,
             success() {
-                alert("The user profile was successfully updated");
                 $("#textSaveSetting").show();
                 $("#textErrorSetting").hide();
             },
             error() {
-                alert("An error occured while updating the user");
                 $("#textSaveSetting").hide();
                 $("#textErrorSetting").show();
             },
