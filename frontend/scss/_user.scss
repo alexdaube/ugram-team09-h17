@@ -138,6 +138,11 @@
   width: 100%;
 }
 
+#textSaveSetting,
+#textErrorSetting{
+  display:none
+}
+
 @media (min-width: 640px) {
   .contentUser2 {
       padding-top: 60px;

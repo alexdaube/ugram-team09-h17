@@ -34,6 +34,7 @@ export class UserSettingsView extends Backbone.View<UserModel> {
     public events() {
         return <Backbone.EventsHash> {
             "click #saveProfile": "saveUserInfos",
+            "click .inputSizeSetting input": "hideSaveFeedBack",
         };
     }
 
@@ -65,11 +66,19 @@ export class UserSettingsView extends Backbone.View<UserModel> {
             beforeSend: HeaderRequestGenerator.setContentTypeToJSON,
             success() {
                 alert("The user profile was successfully updated");
-                that.render();
+                $("#textSaveSetting").show();
+                $("#textErrorSetting").hide();
             },
             error() {
                 alert("An error occured while updating the user");
+                $("#textSaveSetting").hide();
+                $("#textErrorSetting").show();
             },
         });
+    }
+
+    private hideSaveFeedBack() {
+        $("#textSaveSetting").hide();
+        $("#textErrorSetting").hide();
     }
 }
