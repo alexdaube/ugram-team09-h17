@@ -22,8 +22,24 @@ div {
   position: relative;
 }
 
-body, button, input {
+body, button, input, textarea {
   font-family: "proxima-nova", "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+textarea {
+  background: 0 0;
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  box-sizing: border-box;
+  color: #262626;
+  -ms-flex: 0 1 355px;
+  flex: 0 1 300px;
+  font-size: 16px;
+  height: 32px;
+  padding: 0 10px;
+  &:focus {
+    border: 1px solid #b2b2b2;
+  }
 }
 
 ul {

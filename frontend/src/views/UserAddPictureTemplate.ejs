@@ -1,0 +1,35 @@
+<div class="contentPaddingSetting">
+    <div class="whiteBackground contentSetting">
+        <ul class="menuSetting">
+            <li><a class="textMenuSetting boldTextSetting" href="#picture">Add picture</a></li>
+            <li><a class="textMenuSetting" href="#setting">Modify profile</a></li>
+        </ul>
+        <div class="inputSizeSetting">         
+            <div class="usernameSetting">
+                <div class="paddingLogoSetting">
+                    <button><img class="sizeLogoSetting" src="<%- userModel.profilePictureUrl %>"></button>
+                </div>
+                <h1 class="userTextSetting"><%- userModel.userName %></h1>
+            </div>
+            <div class="heightSetting">
+            <div class="infoSetting">
+                <div class="paddingInfoSetting"><label>Description</label></div>
+                <textarea id="description" class="widthSettingArea"></textarea>
+            </div>
+            <div class="infoSetting">
+                <div class="paddingInfoSetting"><label>Upload your file:</label></div>
+                <div class="widthSetting"><input id="upload-file-input" type="file" name="file" accept="image/*"></div>
+            </div>
+            <div class="infoSetting">
+                <div class="paddingInfoSetting privateSetting"><label></label></div>
+                <div class="widthSetting">
+                    <div class="buttonSetting"><span><button id="postPictureButton" class="styleButtonSetting colorButtonSetting sizeButtonSetting">Send</button></span></div>
+                    &nbsp;&nbsp;&nbsp;
+                    <div id="textSavePicture" class="buttonSetting"><span><p class="validationTextSize successTextColor">Post created</p></span></div>
+                    &nbsp;&nbsp;&nbsp;
+                    <div id="textErrorPicture" class="buttonSetting"><span><p class="validationTextSize errorTextColor">You can't add this post</p></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

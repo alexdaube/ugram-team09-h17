@@ -1,4 +1,4 @@
-export class StringFormatter {
+export class InputFormatter {
 
     public static formatMillisecondDateToMMDDYYYY(date: Date): string {
 
@@ -16,5 +16,10 @@ export class StringFormatter {
 
         const formattedDate = mm1.toString() + "/" + dd.toString() + "/" + yyyy.toString();
         return formattedDate;
+    }
+
+    public static normalizePhoneNumber(phoneNumber: string) {
+        const normalizedPhoneNumber = phoneNumber.replace(/\D/g, "");
+        return parseInt(normalizedPhoneNumber, 10);
     }
 }

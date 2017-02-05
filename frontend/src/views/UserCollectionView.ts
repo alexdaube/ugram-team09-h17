@@ -7,7 +7,7 @@ import {UserView} from "./UserView";
 export class UserCollectionView extends Backbone.View<any> {
     private template: Function;
     private usersPerPage: number = 15;
-    private nextPageToFetch: number = 1;
+    private nextPageToFetch: number = 0;
 
     constructor(options?: Backbone.ViewOptions<any>) {
         super(_.extend({el: "#content"}, options));

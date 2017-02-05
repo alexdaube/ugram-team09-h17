@@ -5,6 +5,7 @@ import {UserModel} from "./models/UserModel";
 import {UserCollection} from "./collections/UserCollection";
 import {UserCollectionView} from "./views/UserCollectionView";
 import {UserProfileView} from "./views/UserProfileView";
+import {UserAddPictureView} from "./views/UserAddPictureView";
 
 import {FeedCollection} from "./collections/FeedCollection";
 import {FeedCollectionView} from "./views/FeedCollectionView";
@@ -18,15 +19,17 @@ import {FooterModel} from "./models/FooterModel";
 import {PictureModel} from "./models/PictureModel";
 
 import {PostView} from "./views/PostView";
+import {HeaderRequestGenerator} from "./util/HeaderRequestGenerator";
 
 export class AppRouter extends Backbone.Router {
 
     public routes = {
         "": "defaultRoute",
-        "profile": "showUserProfile",
+        "profile": () => { this.showUserProfile(HeaderRequestGenerator.userId); },
         "setting": "showUserSetting",
+        "picture": "showAddPicture",
         "users": "showUsers",
-        "users/:userId": "showUserProfile2",
+        "users/:userId": "showUserProfile",
         "users/:userId/pictures/:pictureId": "showFeed",
     };
 
@@ -62,14 +65,6 @@ export class AppRouter extends Backbone.Router {
     }
 
     public showUserProfile(userId: string = "") {
-        const userModel = new UserModel({id: "abolduc"});
-        const feedCollection = new FeedCollection({url: "http://api.ugram.net/users/" + userModel.id + "/pictures"});
-        const userProfileView = new UserProfileView({el: "#content", model: userModel, collection: feedCollection});
-        userProfileView.render();
-    }
-
-    // TODO remove this and only use showUserProfile with parameter to know if its me or not
-    public showUserProfile2(userId: string) {
         const userModel = new UserModel({id: userId});
         const feedCollection = new FeedCollection({url: "http://api.ugram.net/users/" + userModel.id + "/pictures"});
         const userProfileView = new UserProfileView({el: "#content", model: userModel, collection: feedCollection});
@@ -77,9 +72,15 @@ export class AppRouter extends Backbone.Router {
     }
 
     public showUserSetting(param: string = "") {
-        const userModel = new UserModel({id: "jlabonte"});
+        const userModel = new UserModel({id: HeaderRequestGenerator.userId});
         const userSettingsView = new UserSettingsView({model: userModel});
         userSettingsView.render();
+    }
+
+    public showAddPicture(param: string = "") {
+        const userModel = new UserModel({id: HeaderRequestGenerator.userId});
+        const userAddPictureView = new UserAddPictureView({model: userModel});
+        userAddPictureView.render();
     }
 
     public showUsers(param: string = "") {

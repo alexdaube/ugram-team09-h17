@@ -6,68 +6,37 @@
         </div>
         </div>
         <div class="paddingNameProfile">
-        <div class="borderLogoProfile">
-            <h1 class="textNameProfile"><%- user.userName %></h1>
-            <div class="paddingOptionProfile">
-                <a><button id="optionButton" class="styleOptionProfile coreSpriteEllipsis textOptionProfile"></button></a>
+            <div class="borderLogoProfile">
+                <h1 class="textNameProfile"><%- user.userName %></h1>
+                    <% if(user.userName === "jlabonte"){ %>
+                        <!--<div class="paddingOptionProfile">-->
+                            <!--<a><button id="optionButton" class="styleOptionProfile coreSpriteEllipsis textOptionProfile"></button></a>-->
+                        <!--</div>-->
+                    <% } %>
             </div>
-        </div>
-        <div class="editButtonProfile"><a href="">
-            <a class="whiteBackground" href="#setting"><button class="styleButtonProfile colorButtonProfile sizeButtonProfile">Update profile</button></a>
-            &nbsp;&nbsp;
-            <a class="whiteBackground"><button id="addPictureButton" class="styleButtonProfile colorAddButtonProfile sizeButtonProfile">Add picture</button></a>
-        </div>
+            <div class="paddingBioProfile">
+                <h2 class="boldTextProfile"><%- user.firstName %> <%- user.lastName %></h2><br />
+                <span>Inscription date: <%- user.inscriptionDate %></span>
+            </div>
+            <% if(user.userName === "jlabonte"){ %>
+                <div class="editButtonProfile"><a href="">
+                    <a class="whiteBackground" href="#setting"><button class="styleButtonProfile colorButtonProfile sizeButtonProfile">Update profile</button></a>
+                    &nbsp;&nbsp;
+                    <a class="whiteBackground" href="#picture"><button class="styleButtonProfile colorAddButtonProfile sizeButtonProfile">Add picture</button></a>
+                </div>
+            <% } %>
         </div>
     </div>
-    <div class="paddingBioProfile">
-        <h2 class="boldTextProfile"><%- user.firstName %> <%- user.lastName %></h2>
-        <span><%- user.email %> <%- user.phoneNumber %> inscription date: <%- user.inscriptionDate %></span>
-    </div>
-    <br /><br />
-    <ul class="statsProfile statsSizeProfile">
-        <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Posts</span></li>
-        <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Followers</a></li>
-        <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Following</a></li>
-    </ul>
-    <div>
-        <div id="profile-pictures-list" class="imgProfile"></div>
-        <div id="show-more-container" />
-    </div>
+    <!--<ul class="statsProfile statsSizeProfile">-->
+        <!--<li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Posts</span></li>-->
+        <!--<li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Followers</a></li>-->
+        <!--<li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Following</a></li>-->
+    <!--</ul>-->
+    <div id="profile-pictures-list" class="imgProfile"></div>
+    <div id="show-more-container" />
 </div>
-
 
 <div class="popupContent">
-   <div id="popupContent" class="divPopupContent">
-         <div class="centerPopup">
-            <div class="contentSetting">
-                <div class="inputSizeSetting">
-                    <div class="usernameSetting">
-                        <div class="paddingLogoSetting">
-                        <button><img class="sizeLogoSetting" src="<%-user.profilePictureUrl%>"></button>
-                        </div>
-                        <h1 class="userTextSetting"><%- user.userName %></h1>
-                    </div>
-                    <div class="infoSetting">
-                        <aside class="paddingInfoSetting"><label>Description:</label></aside>
-                        <div class="widthSetting"><input id="description" class="inputSetting" type="text" name="description"></div>
-                    </div>
-                    <div class="infoSetting">
-                        <aside class="paddingInfoSetting"><label for="upload-file-input">Upload your file:</label></aside>
-                        <div class="widthSetting"><input id="upload-file-input" class="inputSetting" type="file" name="file" accept="image/*"></div>
-                    </div>
-                    <div class="infoSetting">
-                        <aside class="paddingInfoSetting privateSetting"><label></label></aside>
-                        <div class="buttonSetting"><span><button id="postPictureButton" class="styleButtonSetting colorButtonSetting sizeButtonSetting">Post</button></span></div>
-                    </div>
-                    <div id="error-text"></div>
-                </div>
-            </div>
-         </div>
-      <button id="closeButtonPopup" class="closeButtonPopup">Fermer</button>
-   </div>
-</div>
-
-<div class="popupVisibleExit popupContent">
    <div id="popupCloseContent" class="divPopupContent">
     <div class="heightPopup">
         <div class="height2Popup">
