@@ -49,6 +49,12 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
         //     return;
         // }
 
+        if (InputValidator.isTooLongText(description) || InputValidator.isNullOrEmpty(description)) {
+            $("#textErrorPicture").show();
+            $("#textErrorPicture").find("p").text("Invalid description");
+            return;
+        }
+
         const formData: FormData = new FormData();
         formData.append("description", description);
         formData.append("mentions", mentions);
