@@ -25,11 +25,11 @@ export class PostView extends Backbone.View<PictureModel> {
 
     public render() {
         this.model.fetch({
-            success() {
+            success: () => {
                 this.$el.html(this.template({post: this.model, isSingleFeed: true}));
                 this.$el.first().addClass("contentFeed");
             },
-            error() {
+            error: () => {
                 this.$el.html("There was an error");
             },
         });
@@ -62,16 +62,17 @@ export class PostView extends Backbone.View<PictureModel> {
     }
 
     private saveModif() {
-        const description: string = $("#editInput").val();
+        const description: string = $("#description").val();
         const mentions: string[] = description.match(/@\w+/g);
         const tags: string[] = description.match(/#\w+/g);
-
         const pictureId: string = $("#editInput").attr("data-id");
+
         // if (InputValidator.containsScriptInjection(description)) {
         //     $("#textErrorSetting").show();
         //     $("#textErrorSetting").find("p").text("Script are not authorized");
         //     return;
         // }
+
         const formData: FormData = new FormData();
         formData.append("description", description);
         formData.append("mentions", mentions);
@@ -85,13 +86,10 @@ export class PostView extends Backbone.View<PictureModel> {
             cache: false,
             beforeSend: HeaderRequestGenerator.sendAuthorization,
             success() {
-                $("#textSavePicture").show();
-                $("#textErrorPicture").hide();
+                alert("ok");
             },
             error() {
-                $("#textErrorPicture").show();
-                $("#textErrorPicture").find("p").text("One or more inputs was invalid");
-                $("#textSavePicture").hide();
+                alert("erreur");
             },
         });
         $("#popupEditContent").hide();
