@@ -7,7 +7,7 @@ import {PostView} from "./PostView";
 export class FeedCollectionView extends Backbone.View<any> {
     private template: Function;
     private picturesPerPage: number = 8;
-    private nextPageToFetch: number = 1;
+    private nextPageToFetch: number = 0;
 
     constructor(options?: any) {
         super(_.extend({}, options));
