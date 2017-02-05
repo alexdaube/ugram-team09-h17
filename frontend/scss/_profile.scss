@@ -504,6 +504,19 @@
     }
 }
 
+#editInput {
+  height: 100px;
+}
+
+#editInput #description {
+  width:100%;
+  height: 100%;
+}
+
+#saveButtonPopup {
+  margin: 10px;
+}
+
 .lineQuitPopup {
     background-color: #fff;
     border-bottom: 1px solid #dbdbdb
