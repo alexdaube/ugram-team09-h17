@@ -54,7 +54,7 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
         formData.append("mentions", mentions);
         formData.append("tags", tags);
         formData.append("file", (<any> $("input[type=file]")[0]).files[0]);
-        var filename = $('input[type=file]').val().split('\\').pop();
+        const filename = $("input[type=file]").val().split("\\").pop();
 
         if (InputValidator.extensionFileIsValid(filename)) {
             $.ajax({
@@ -65,16 +65,15 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
                 contentType: false,
                 cache: false,
                 beforeSend: HeaderRequestGenerator.sendAuthorization,
-                success: function(data) {
-                    
+                success() {
                     $("#textSavePicture").show();
                     $("#textErrorPicture").hide();
                 },
-                error: function(xhr, textStatus, error){
+                error() {
                     $("#textErrorPicture").show();
                     $("#textErrorPicture").find("p").text("One or more inputs was invalid");
                     $("#textSavePicture").hide();
-                }
+                },
             });
         } else {
             $("#textErrorPicture").show();
