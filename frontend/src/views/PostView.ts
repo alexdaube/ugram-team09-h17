@@ -65,31 +65,27 @@ export class PostView extends Backbone.View<PictureModel> {
         const description: string = $("#description").val();
         const mentions: string[] = description.match(/@\w+/g);
         const tags: string[] = description.match(/#\w+/g);
-        const pictureId: string = $("#editInput").attr("data-id");
 
-        // if (InputValidator.containsScriptInjection(description)) {
-        //     $("#textErrorSetting").show();
-        //     $("#textErrorSetting").find("p").text("Script are not authorized");
-        //     return;
-        // }
+        if (InputValidator.containsScriptInjection(description)) {
+            $("#textErrorSetting").show();
+            $("#textErrorSetting").find("p").text("Script are not authorized");
+            return;
+        }
 
-        const formData: FormData = new FormData();
-        formData.append("description", description);
-        formData.append("mentions", mentions);
-        formData.append("tags", tags);
-        $.ajax({
-            url: "http://api.ugram.net/users/" + HeaderRequestGenerator.userId + "/pictures/" + pictureId,
-            type: "PUT",
-            data: formData,
-            processData: false,
-            contentType: false,
-            cache: false,
-            beforeSend: HeaderRequestGenerator.sendAuthorization,
+        const obj = {
+            description,
+            mentions,
+            tags,
+        };
+
+        const that = this;
+        this.model.save(obj, {
+            beforeSend: HeaderRequestGenerator.setContentTypeToJSON,
             success() {
-                alert("ok");
+                that.render();
             },
             error() {
-                alert("erreur");
+                alert("Un erreur s'est produit lors de la sauvegarde");
             },
         });
         $("#popupEditContent").hide();

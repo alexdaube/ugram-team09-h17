@@ -32,10 +32,10 @@ export class InputValidator {
         return reg.test(text);
     }
 
-    // public static containsScriptInjection(text: string) {
-    //     return (new RegExp("<script").test(text)
-    //          || new RegExp("type=").test(text)
-    //          || new RegExp("text/javascript").test(text)
-    //          || new RegExp("</script").test(text));
-    // }
+    public static containsScriptInjection(text: string) {
+        return (new RegExp("<script").test(text)
+             || new RegExp("type=").test(text)
+             || new RegExp("text/javascript").test(text)
+             || new RegExp("</script").test(text));
+    }
 }
