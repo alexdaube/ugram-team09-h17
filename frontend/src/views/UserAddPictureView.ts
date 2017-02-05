@@ -49,6 +49,12 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
         //     return;
         // }
 
+        if (InputValidator.isTooLongText(description) || InputValidator.isNullOrEmpty(description)) {
+            $("#textErrorPicture").show();
+            $("#textErrorPicture").find("p").text("Invalid description");
+            return;
+        }
+
         const formData: FormData = new FormData();
         formData.append("description", description);
         formData.append("mentions", mentions);
@@ -65,11 +71,11 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
                 contentType: false,
                 cache: false,
                 beforeSend: HeaderRequestGenerator.sendAuthorization,
-                success: (data) => {
+                success() {
                     $("#textSavePicture").show();
                     $("#textErrorPicture").hide();
                 },
-                error: (xhr, textStatus, error) => {
+                error() {
                     $("#textErrorPicture").show();
                     $("#textErrorPicture").find("p").text("One or more inputs was invalid");
                     $("#textSavePicture").hide();

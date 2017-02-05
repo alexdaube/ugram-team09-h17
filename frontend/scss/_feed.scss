@@ -236,6 +236,11 @@
   padding-bottom: 100%;
 }
 
+#buttonSave,
+#editInput {
+  display: none;
+}
+
 @media (min-width: 640px) {
   .contentFeed {
     padding-top: 60px;

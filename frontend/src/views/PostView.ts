@@ -3,6 +3,7 @@ import * as _ from "underscore";
 
 import {PictureModel} from "../models/PictureModel";
 import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
+import {InputValidator} from "../util/InputValidator";
 
 export class PostView extends Backbone.View<PictureModel> {
     private template: Function;
@@ -18,6 +19,7 @@ export class PostView extends Backbone.View<PictureModel> {
             "click #closeExitButtonPopup": () => { $("#popupEditContent").hide(); },
             "click #deleteButtonPopup": "delete",
             "click #editButtonPopup" : "edit",
+            "click #saveButtonPopup" : "saveModif"
         };
     }
 
@@ -40,7 +42,9 @@ export class PostView extends Backbone.View<PictureModel> {
     }
 
     private edit() {
-        $("#popupEditContent").hide();
+        $("#buttonSave").show();
+        $("#editInput").show();
+
     }
 
     private delete() {
@@ -55,5 +59,44 @@ export class PostView extends Backbone.View<PictureModel> {
                 // TODO Handle error
             },
         });
+    }
+
+    private saveModif(){
+        const description: string = $("#editInput").val();
+        const mentions: string[] = description.match(/@\w+/g);
+        const tags: string[] = description.match(/#\w+/g);
+
+        const pictureId: string = $("#editInput").attr("data-id");
+        // if (InputValidator.containsScriptInjection(description)) {
+        //     $("#textErrorSetting").show();
+        //     $("#textErrorSetting").find("p").text("Script are not authorized");
+        //     return;
+        // }
+        const formData: FormData = new FormData();
+        formData.append("description", description);
+        formData.append("mentions", mentions);
+        formData.append("tags", tags);
+        $.ajax({
+            url: "http://api.ugram.net/users/" + HeaderRequestGenerator.userId + "/pictures/" + pictureId,
+            type: "PUT",
+            data: formData,
+            processData: false,
+            contentType: false,
+            cache: false,
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
+            success: function(data) {
+
+                $("#textSavePicture").show();
+                $("#textErrorPicture").hide();
+            },
+            error: function(xhr, textStatus, error){
+                $("#textErrorPicture").show();
+                $("#textErrorPicture").find("p").text("One or more inputs was invalid");
+                $("#textSavePicture").hide();
+            }
+        });
+        $("#popupEditContent").hide();
+        $("#buttonSave").hide();
+        $("#editInput").hide();
     }
 }
