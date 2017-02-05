@@ -15,6 +15,18 @@ export class InputValidator {
         return reg.test(text);
     }
 
+    public static isNullOrEmpty(text: string) {
+        if (text === "" || text === null) {
+            return true;
+        }
+    }
+
+    public static isTooLongText(text: string) {
+        if (text.length >= 300) {
+            return true;
+        }
+    }
+
     public static extensionFileIsValid(text: string) {
         const reg = /^.*\.(png|PNG|jpg|JPG|jpeg|JPEG|gif|GIF)$/;
         return reg.test(text);

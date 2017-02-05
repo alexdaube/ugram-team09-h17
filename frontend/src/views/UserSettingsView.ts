@@ -49,25 +49,25 @@ export class UserSettingsView extends Backbone.View<UserModel> {
             phoneNumber : $("#pepPhone").val(),
         };
 
-        if (!InputValidator.emailAddressIsValid(obj.email)) {
+        if (InputValidator.isTooLongText(obj.email) || InputValidator.isNullOrEmpty(obj.email) || !InputValidator.emailAddressIsValid(obj.email)) {
             $("#textErrorSetting").show();
             $("#textErrorSetting").find("p").text("Email address is invalid (e.g. test@test.com)");
             return;
         }
 
-        if (!InputValidator.normalInputIsValid(obj.firstName)) {
+        if (InputValidator.isTooLongText(obj.email) || InputValidator.isNullOrEmpty(obj.firstName) || !InputValidator.normalInputIsValid(obj.firstName)) {
             $("#textErrorSetting").show();
             $("#textErrorSetting").find("p").text("First Name is invalid");
             return;
         }
 
-        if (!InputValidator.normalInputIsValid(obj.lastName)) {
+        if (InputValidator.isTooLongText(obj.email) || InputValidator.isNullOrEmpty(obj.lastName) || !InputValidator.normalInputIsValid(obj.lastName)) {
             $("#textErrorSetting").show();
             $("#textErrorSetting").find("p").text("Last Name is invalid");
             return;
         }
 
-        if (!InputValidator.phoneIsValid(obj.phoneNumber)) {
+        if (InputValidator.isTooLongText(obj.email) || InputValidator.isNullOrEmpty(obj.phoneNumber) || !InputValidator.phoneIsValid(obj.phoneNumber)) {
             $("#textErrorSetting").show();
             $("#textErrorSetting").find("p").text("Phone number is invalid (e.g. 1234567890)");
             return;
