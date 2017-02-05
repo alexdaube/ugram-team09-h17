@@ -34,7 +34,7 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
     public events() {
         return <Backbone.EventsHash> {
             "click #postPictureButton": "postPicture",
-            "click .inputSizeSetting input": "hideSaveFeedBack",
+            "click .inputSizeSetting textarea": "hideSaveFeedBack",
         };
     }
 
@@ -49,37 +49,38 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
         //     return;
         // }
 
-        // TODO validate .jpg .jpeg .png .gif only
-        //  if (!InputValidator.extensionFileIsValid(file)) {
-        //      //$("#textErrorSetting").show();
-        //      //$("#textErrorSetting").find("p").text("Invalid file extension");
-        //      //return;
-        //      alert("oui");
-        //  }
-        //  else {
-        //      alert("non");
-        //  }
-
         const formData: FormData = new FormData();
         formData.append("description", description);
         formData.append("mentions", mentions);
         formData.append("tags", tags);
         formData.append("file", (<any> $("input[type=file]")[0]).files[0]);
-        $.ajax({
-            url: "http://api.ugram.net/users/" + HeaderRequestGenerator.userId + "/pictures",
-            type: "POST",
-            data: formData,
-            processData: false,
-            contentType: false,
-            cache: false,
-            beforeSend: HeaderRequestGenerator.sendAuthorization,
-        }).done(() => {
-            $("#textSavePicture").show();
-            $("#textErrorPicture").hide();
-        }).fail(() => {
+        var filename = $('input[type=file]').val().split('\\').pop();
+
+        if (InputValidator.extensionFileIsValid(filename)) {
+            $.ajax({
+                url: "http://api.ugram.net/users/" + HeaderRequestGenerator.userId + "/pictures",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                beforeSend: HeaderRequestGenerator.sendAuthorization,
+                success: function(data) {
+                    
+                    $("#textSavePicture").show();
+                    $("#textErrorPicture").hide();
+                },
+                error: function(xhr, textStatus, error){
+                    $("#textErrorPicture").show();
+                    $("#textErrorPicture").find("p").text("One or more inputs was invalid");
+                    $("#textSavePicture").hide();
+                }
+            });
+        } else {
             $("#textErrorPicture").show();
+            $("#textErrorPicture").find("p").text("Extension file is invalid (.jpg .png .gif)");
             $("#textSavePicture").hide();
-        });
+        }
     }
 
     private hideSaveFeedBack() {

@@ -15,10 +15,10 @@ export class InputValidator {
         return reg.test(text);
     }
 
-    // public static extensionFileIsValid(text: string) {
-    //     const reg = /^.*\.(png|PNG|jpg|JPG|jpeg|JPEG|gif|GIF)$/;
-    //     return reg.test(text);
-    // }
+    public static extensionFileIsValid(text: string) {
+        const reg = /^.*\.(png|PNG|jpg|JPG|jpeg|JPEG|gif|GIF)$/;
+        return reg.test(text);
+    }
 
     // public static containsScriptInjection(text: string) {
     //     return (new RegExp("<script").test(text)
