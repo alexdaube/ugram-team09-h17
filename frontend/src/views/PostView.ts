@@ -19,17 +19,17 @@ export class PostView extends Backbone.View<PictureModel> {
             "click #closeExitButtonPopup": () => { $("#popupEditContent").hide(); },
             "click #deleteButtonPopup": "delete",
             "click #editButtonPopup" : "edit",
-            "click #saveButtonPopup" : "saveModif"
+            "click #saveButtonPopup" : "saveModif",
         };
     }
 
     public render() {
         this.model.fetch({
-            success: () => {
+            success() {
                 this.$el.html(this.template({post: this.model, isSingleFeed: true}));
                 this.$el.first().addClass("contentFeed");
             },
-            error: () => {
+            error() {
                 this.$el.html("There was an error");
             },
         });
@@ -61,7 +61,7 @@ export class PostView extends Backbone.View<PictureModel> {
         });
     }
 
-    private saveModif(){
+    private saveModif() {
         const description: string = $("#editInput").val();
         const mentions: string[] = description.match(/@\w+/g);
         const tags: string[] = description.match(/#\w+/g);
@@ -84,16 +84,15 @@ export class PostView extends Backbone.View<PictureModel> {
             contentType: false,
             cache: false,
             beforeSend: HeaderRequestGenerator.sendAuthorization,
-            success: function(data) {
-
+            success() {
                 $("#textSavePicture").show();
                 $("#textErrorPicture").hide();
             },
-            error: function(xhr, textStatus, error){
+            error() {
                 $("#textErrorPicture").show();
                 $("#textErrorPicture").find("p").text("One or more inputs was invalid");
                 $("#textSavePicture").hide();
-            }
+            },
         });
         $("#popupEditContent").hide();
         $("#buttonSave").hide();

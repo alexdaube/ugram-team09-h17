@@ -7,7 +7,7 @@ import {InputValidator} from "../util/InputValidator";
 
 export class UserProfileView extends Backbone.View<any> {
     private template: Function;
-    private picturesPerPage: number = 3;
+    private picturesPerPage: number = 9;
     private nextPageToFetch: number = 0;
 
     constructor(options?: any) {
