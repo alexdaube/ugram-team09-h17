@@ -28,6 +28,7 @@
 .imgProfile {
   -ms-flex-direction: row;
   flex-direction: row;
+  flex-wrap: wrap;
   &:last-child {
     margin-bottom: 0;
   }
@@ -36,6 +37,8 @@
 .showImgProfile {
   -ms-flex: 1 0 0%;
   flex: 1 0 0%;
+  min-width: 30%;
+  max-width: 30%;
   &:last-child {
     margin-right: 0;
   }
@@ -259,7 +262,7 @@
 
 @media (min-width: 736px) {
   .showImgProfile {
-    margin-right: 28px;
+    margin: 14px;
   }
   .imgProfile {
     margin-bottom: 28px;
@@ -338,7 +341,7 @@
 
 @media (max-width: 735px) {
   .showImgProfile {
-    margin-right: 3px;
+    margin: 3px;
   }
   .imgProfile {
     margin-bottom: 3px;
