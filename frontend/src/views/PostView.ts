@@ -16,7 +16,8 @@ export class PostView extends Backbone.View<PictureModel> {
         return <Backbone.EventsHash> {
             "click #optionButtonEdit": () => { $("#popupEditContent").show(); },
             "click #closeExitButtonPopup": () => { $("#popupEditContent").hide(); },
-            "click #deleteButtonPopup": () => { this.delete(); },
+            "click #deleteButtonPopup": "delete",
+            "click #editButtonPopup" : () => { $("#popupEditContent").hide(); },
         };
     }
 
@@ -44,12 +45,9 @@ export class PostView extends Backbone.View<PictureModel> {
         this.model.destroy({
             beforeSend: HeaderRequestGenerator.setContentTypeToJSON,
             success() {
-                alert("The picture was successfully deleted");
-                // TODO Valider les champs contre le hacking
-                view.render();
+                window.location.href = "#profile";
             },
             error() {
-                alert("didn't work :'c");
                 // TODO Handle error
             },
         });

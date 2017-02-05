@@ -46,27 +46,30 @@ export class UserSettingsView extends Backbone.View<UserModel> {
             email :  $("#pepEmail").val(),
             firstName : $("#pepFirstName").val(),
             lastName : $("#pepLastName").val(),
-            phoneNumber : InputFormatter.normalizePhoneNumber($("#pepPhone").val()),
+            phoneNumber : $("#pepPhone").val(),
         };
 
         if (!InputValidator.emailAddressIsValid(obj.email)) {
             $("#textErrorSetting").show();
-            $("#textErrorSetting").find("p").text("Email address is invalid");
+            $("#textErrorSetting").find("p").text("Email address is invalid (e.g. test@test.com)");
             return;
         }
-        if (!InputValidator.nameIsValid(obj.firstName)) {
+
+        if (!InputValidator.normalInputIsValid(obj.firstName)) {
             $("#textErrorSetting").show();
             $("#textErrorSetting").find("p").text("First Name is invalid");
             return;
         }
-        if (!InputValidator.nameIsValid(obj.lastName)) {
+
+        if (!InputValidator.normalInputIsValid(obj.lastName)) {
             $("#textErrorSetting").show();
             $("#textErrorSetting").find("p").text("Last Name is invalid");
             return;
         }
-        if (obj.phoneNumber.toString() === "NaN") {
+
+        if (!InputValidator.phoneIsValid(obj.phoneNumber)) {
             $("#textErrorSetting").show();
-            $("#textErrorSetting").find("p").text("Phone number is empty");
+            $("#textErrorSetting").find("p").text("Phone number is invalid (e.g. 1234567890)");
             return;
         }
 

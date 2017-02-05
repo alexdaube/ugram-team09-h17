@@ -33,7 +33,8 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
 
     public events() {
         return <Backbone.EventsHash> {
-            "click #postPictureButton": () => { this.postPicture(); },
+            "click #postPictureButton": "postPicture",
+            "click .inputSizeSetting input": "hideSaveFeedBack",
         };
     }
 
@@ -42,10 +43,22 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
         const mentions: string[] = description.match(/@\w+/g);
         const tags: string[] = description.match(/#\w+/g);
 
-        if (InputValidator.containsScriptInjection(description)) {
-            alert("Forbidden description");
-            return;
-        }
+        // if (InputValidator.containsScriptInjection(description)) {
+        //     $("#textErrorSetting").show();
+        //     $("#textErrorSetting").find("p").text("Script are not authorized");
+        //     return;
+        // }
+
+        // TODO validate .jpg .jpeg .png .gif only
+        //  if (!InputValidator.extensionFileIsValid(file)) {
+        //      //$("#textErrorSetting").show();
+        //      //$("#textErrorSetting").find("p").text("Invalid file extension");
+        //      //return;
+        //      alert("oui");
+        //  }
+        //  else {
+        //      alert("non");
+        //  }
 
         const formData: FormData = new FormData();
         formData.append("description", description);
@@ -61,9 +74,16 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
             cache: false,
             beforeSend: HeaderRequestGenerator.sendAuthorization,
         }).done(() => {
-            alert("ok");
+            $("#textSavePicture").show();
+            $("#textErrorPicture").hide();
         }).fail(() => {
-            alert("error");
+            $("#textErrorPicture").show();
+            $("#textSavePicture").hide();
         });
+    }
+
+    private hideSaveFeedBack() {
+        $("#textSavePicture").hide();
+        $("#textErrorPicture").hide();
     }
 }
