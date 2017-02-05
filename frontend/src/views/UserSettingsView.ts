@@ -25,7 +25,7 @@ export class UserSettingsView extends Backbone.View<UserModel> {
                 that.$el.html(that.template({userModel: that.userModel}));
             },
             error() {
-                // TODO Handle error
+                that.$el.html(that.template("No user by that name!"));
             },
         });
         return this;

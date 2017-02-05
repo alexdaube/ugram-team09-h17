@@ -1,48 +1,46 @@
-<div class="contentFeed">
-	<div class="whiteBackground marginContentFeed borderFeed topFeed">
-		<div class="topAlignFeed">
-			<a class="userImageFeed userAlignFeed logoSize" href=""><img class="logoUserFeed" src="/img/test2.jpg"></a>
-			<div class="userNameFeed">
-				<a class="heightTextFeed widthTextFeed" href=""><%- post.userId %></a>
-			</div>
-			<div class="hourFeed" href="">
-				<time><%- post.postedDate %></time>
-			</div>
+<div class="whiteBackground marginContentFeed borderFeed topFeed">
+	<div class="topAlignFeed">
+		<a class="userImageFeed userAlignFeed logoSize" href=""><img class="logoUserFeed" src="/img/test2.jpg"></a>
+		<div class="userNameFeed">
+			<a class="heightTextFeed widthTextFeed" href=""><%- post.userId %></a>
 		</div>
-		<div class="imageFeed">
-			<% if(!isSingleFeed){ %><a><% } %>
-				<div class="imagePaddingFeed">
-					<img class="sizeImageFeed" src="<%- post.imageUrl %>" />
-				</div>
-			<% if(!isSingleFeed){ %></a><% } %>
+		<div class="hourFeed" href="">
+			<time><%- post.postedDate %></time>
 		</div>
-		<div class="textContentFeed">
-			<!--<div class="paddingLikeFeed">-->
-				<!--<span class="likeTextFeed">... likes</span>-->
-			<!--</div>-->
-			<div class="paddingLikeFeed">
-				<ul>	
-					<li class="textCommentFeed">
-						<a class="heightTextFeed blackTextFeed" href="/#users/<%- post.userId %>"><%- post.userId %></a>
-						<% if(post.description){ %>
-							<span id="descriptionEditable" ><%- post.description %></span>
-						<% } %>
-					</li>
-					<!--<li class="textCommentFeed">-->
-						<!--<a class="heightTextFeed blackTextFeed" href="">{user name comment}</a>-->
-						<!--<span>{text comment}</span>-->
-					<!--</li>-->
-					
-				</ul>
+	</div>
+	<div class="imageFeed">
+		<% if(!isSingleFeed){ %><a><% } %>
+			<div class="imagePaddingFeed">
+				<img class="sizeImageFeed" src="<%- post.imageUrl %>" />
 			</div>
-			<% if(post.editable){ %>
-				<div class="addCommentFeed commentPaddingFeed">
-					<!--<a class="likeButtonFeed likePaddingFeed" href=""><span class="likeTextFeed2 heartIcon">J’aime</span></a>-->
-					<!--<div class="flexCommentFeed"><input type="text" class="inputCommentFeed inputTextFeed" placeholder="Add Comment..." value=""></form>-->
-					<button id="optionButtonEdit" class="optionPostFeed optionIcon likeTextFeed2">More Options</button>
-				</div>
-			<% } %>
+		<% if(!isSingleFeed){ %></a><% } %>
+	</div>
+	<div class="textContentFeed">
+		<!--<div class="paddingLikeFeed">-->
+			<!--<span class="likeTextFeed">... likes</span>-->
+		<!--</div>-->
+		<div class="paddingLikeFeed">
+			<ul>	
+				<li class="textCommentFeed">
+					<a class="heightTextFeed blackTextFeed" href="/#users/<%- post.userId %>"><%- post.userId %></a>
+					<% if(post.description){ %>
+						<span id="descriptionEditable" ><%- post.description %></span>
+					<% } %>
+				</li>
+				<!--<li class="textCommentFeed">-->
+					<!--<a class="heightTextFeed blackTextFeed" href="">{user name comment}</a>-->
+					<!--<span>{text comment}</span>-->
+				<!--</li>-->
+				
+			</ul>
 		</div>
+		<% if(post.editable){ %>
+			<div class="addCommentFeed commentPaddingFeed">
+				<!--<a class="likeButtonFeed likePaddingFeed" href=""><span class="likeTextFeed2 heartIcon">J’aime</span></a>-->
+				<!--<div class="flexCommentFeed"><input type="text" class="inputCommentFeed inputTextFeed" placeholder="Add Comment..." value=""></form>-->
+				<button id="optionButtonEdit" class="optionPostFeed optionIcon likeTextFeed2">More Options</button>
+			</div>
+		<% } %>
 	</div>
 </div>
 

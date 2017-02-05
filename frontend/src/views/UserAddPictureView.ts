@@ -25,7 +25,7 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
                 that.$el.html(that.template({userModel: that.userModel}));
             },
             error() {
-                // TODO Handle error
+                this.$el.html(this.template("No user by that name!"));
             },
         });
         return this;

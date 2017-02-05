@@ -17,15 +17,9 @@ export class UserProfileView extends Backbone.View<any> {
 
     public events() {
         return <Backbone.EventsHash> {
-            "click #optionButton": () => {
-                $("#popupCloseContent").show();
-            },
-            "click #closeExitButtonPopup": () => {
-                $("#popupCloseContent").hide();
-            },
-            "click #closeCancelButtonPopup": () => {
-                $("#popupCloseContent").hide();
-            },
+            "click #optionButton": () => { $("#popupCloseContent").show(); },
+            "click #closeExitButtonPopup": () => { $("#popupCloseContent").hide(); },
+            "click #closeCancelButtonPopup": () => { $("#popupCloseContent").hide(); },
         };
     }
 
@@ -33,6 +27,7 @@ export class UserProfileView extends Backbone.View<any> {
         this.model.fetch({
             success: () => {
                 this.$el.html(this.template({user: this.model}));
+                this.$el.first().removeClass("contentFeed");
 
                 const showMoreView = new ShowMoreView({
                     el: "#show-more-container",
