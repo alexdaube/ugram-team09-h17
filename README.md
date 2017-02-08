@@ -1,7 +1,9 @@
 # ugram-h17-team-09
 
 Le site web est disponible à l'adresse suivante:
-http://glo-3102-team09.s3-website-us-east-1.amazonaws.com/
+http://db19aqpshtnup.cloudfront.net
+ou
+http://aide.moe
 
 ##Instructions concernant les fonctionnalités implémentés
 
