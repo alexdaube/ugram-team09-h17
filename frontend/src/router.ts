@@ -16,6 +16,9 @@ import {HeaderModel} from "./models/HeaderModel";
 import {FooterView} from "./views/FooterView";
 import {FooterModel} from "./models/FooterModel";
 
+import {LoginView} from "./views/LoginView";
+import {LoginModel} from "./models/LoginModel";
+
 import {PictureModel} from "./models/PictureModel";
 
 import {PostView} from "./views/PostView";
@@ -25,6 +28,7 @@ export class AppRouter extends Backbone.Router {
 
     public routes = {
         "": "defaultRoute",
+        "login": "showLogin",
         "profile": () => { this.showUserProfile(HeaderRequestGenerator.userId); },
         "setting": "showUserSetting",
         "picture": "showAddPicture",
@@ -50,6 +54,12 @@ export class AppRouter extends Backbone.Router {
 
     public defaultRoute() {
         this.showAllFeeds();
+    }
+
+    public showLogin() {
+        const loginModel = new LoginModel({});
+        const loginView = new LoginView({model: loginModel});
+        loginView.render();
     }
 
     public showAllFeeds() {
