@@ -53,7 +53,7 @@ export class AppRouter extends Backbone.Router {
     }
 
     public defaultRoute() {
-        this.showAllFeeds();
+        this.showLogin();
     }
 
     public showLogin() {
