@@ -6,7 +6,7 @@ import {LoginModel} from "../models/LoginModel";
 export class LoginView extends Backbone.View<LoginModel> {
     private template: Function;
 
-    constructor(options?: Backbone.View<LoginModel>) {
+    constructor(options?: Backbone.ViewOptions<LoginModel>) {
         super(_.extend({el: "#content"}, options));
         this.template = require("./LoginTemplate.ejs") as Function;
     }
