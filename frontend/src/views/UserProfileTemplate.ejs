@@ -8,11 +8,11 @@
         <div class="paddingNameProfile">
             <div class="borderLogoProfile">
                 <h1 class="textNameProfile"><%- user.userName %></h1>
-                    <% if(user.userName === "jlabonte"){ %>
-                        <div class="paddingOptionProfile">
-                            <a><button id="optionButton" class="styleOptionProfile coreSpriteEllipsis textOptionProfile"></button></a>
-                        </div>
-                    <% } %>
+                <% if(user.userName === "jlabonte"){ %>
+                    <div class="paddingOptionProfile">
+                        <a><button id="optionButton" class="styleOptionProfile coreSpriteEllipsis textOptionProfile"></button></a>
+                    </div>
+                <% } %>
             </div>
             <div class="paddingBioProfile">
                 <h2 class="boldTextProfile"><%- user.firstName %> <%- user.lastName %></h2><br />
@@ -42,6 +42,8 @@
         <div class="height2Popup">
             <ul>
                 <li class="lineQuitPopup"><button class="buttonQuitPopup">Déconnexion</button></li>
+                <li id="deleteAccount" class="lineQuitPopup"><button class="buttonQuitPopup">Delete my account</button></li>
+                <li id="confirmDelete" class="lineQuitPopup"><button class="deleteAccountColor">Click here to delete your account</button></li>
                 <li class="lineQuitPopup"><button id="closeCancelButtonPopup" class="buttonQuitPopup">Annuler</button></li>
             </ul>
         </div>
