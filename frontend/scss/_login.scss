@@ -1,0 +1,233 @@
+.fontLoginButton {
+  cursor: pointer;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  font-weight: 600;
+  outline: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.colorLoginButton {
+  background: #3897f0;
+  border-color: #3897f0;
+  color: #fff;
+}
+
+.heigthLoginButton {
+  padding: 0 8px;
+}
+
+.logoMediaLogin {
+  background-image: url(/img/ugram.png);
+  background-repeat: no-repeat;
+  background-position: -207px -256px;
+  height: 16px;
+  width: 16px;
+}
+
+.logoUgramLogin {
+  background-image: url(/img/ugram.png);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  height: 51px;
+  width: 175px;
+}
+
+.heightInputLogin {
+  background: 0 0;
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  box-sizing: border-box;
+  color: #262626;
+  font-size: 14px;
+  padding: 9px 8px 7px;
+  width: 100%;
+  &:focus {
+    border: 1px solid #b2b2b2;
+    outline: none;
+  }
+}
+
+.widthInputLogin {
+  margin: 0 40px 6px;
+}
+
+.paddingConnectLogin {
+  margin: 8px 40px;
+}
+
+.spaceBarLogin {
+  -ms-flex-direction: row;
+  flex-direction: row;
+  margin: 10px 40px 18px;
+}
+
+.middleBarLogin {
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
+  background-color: #c7c7c7;
+  height: 1px;
+  position: relative;
+  top: 0.45em;
+}
+
+.textUpLogin {
+  color: #999;
+  font-weight: 600;
+}
+
+.fontBarLogin {
+  color: #999;
+  font-weight: 600;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  font-size: 13px;
+  line-height: 15px;
+  margin: 0 18px;
+}
+
+.textUpLogin {
+  font-size: 17px;
+  line-height: 20px;
+  margin: 0 40px 10px;
+  text-align: center;
+}
+
+.columnMediaLogin {
+  display: inline-block;
+  margin-right: 8px;
+  position: relative;
+  top: 3px;
+}
+
+.textDownLogin {
+  color: #ed4956;
+  font-size: 14px;
+  line-height: 18px;
+  margin: 10px 40px;
+  text-align: center;
+  color: #999;
+  margin: 10px 60px;
+}
+
+.paddingZoneLogin {
+  color: #262626;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-top: 12px;
+  max-width: 350px;
+}
+
+.whiteZoneLogin {
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 1px;
+  margin: 0 0 10px;
+  padding: 10px 0;
+}
+
+.centerLogoLogin {
+  margin: 22px auto 8px;
+}
+
+.paddingSignLogin {
+  color: #262626;
+  font-size: 14px;
+  margin: 15px;
+  text-align: center;
+}
+
+.blueLinkLogin {
+  color: #3897f0;
+  &:active, &:hover, &:visited {
+    color: #3897f0;
+  }
+}
+
+.imageLeftLogin {
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  align-self: center;
+  background-image: url(/img/loginPhone.png);
+  background-position: 0 0;
+  background-size: 454px 618px;
+  -ms-flex-preferred-size: 454px;
+  flex-basis: 454px;
+  height: 618px;
+  margin-left: -35px;
+  margin-right: -15px;
+}
+
+.contentLogin {
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin: 30px auto 0;
+  max-width: 935px;
+  width: 100%;
+}
+
+@media (max-width: 875px) {
+  .mobileImageLogin {
+    display: none;
+  }
+}
+
+@media (max-width: 450px) {
+  .paddingZoneLogin {
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-top: 0;
+    max-width: 100%;
+  }
+  .whiteZoneLogin {
+    background-color: transparent;
+    border: none;
+  }
+  .contentLogin {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 735px) {
+  .heigthLoginButton {
+    line-height: 24px;
+    padding: 0 9px;
+  }
+  .fontLoginButton {
+    font-size: 14px;
+  }
+  .heigthLoginButton {
+    line-height: 26px;
+  }
+}
+
+@media (min-width: 736px) {
+  .heigthLoginButton {
+    line-height: 29px;
+    padding: 0 11px;
+  }
+  .fontLoginButton {
+    font-size: 16px;
+  }
+  .heigthLoginButton {
+    line-height: 28px;
+  }
+  .columnMediaLogin {
+    top: 2px;
+  }
+}

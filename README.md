@@ -1,7 +1,9 @@
 # ugram-h17-team-09
 
 Le site web est disponible à l'adresse suivante:
-http://glo-3102-team09.s3-website-us-east-1.amazonaws.com/
+http://db19aqpshtnup.cloudfront.net
+ou
+http://aide.moe
 
 ##Instructions concernant les fonctionnalités implémentés
 
@@ -29,7 +31,7 @@ L'usagé peut téléversé une image en appuyant sur le bouton "Add picture" pr�
 
 ###L'usager doit pouvoir modifier les champs d'une de ses images.
 
-En construction
+L'usager peut modifier une de ses images en appuyant sur celle-ci, en appuyant ensuite sur les trois point ( ... ) sous l'image, en sélectionnant "Edit", en entrant le nouveau texte et en appuyant sur le bouton "Save".
 
 ###L'usager doit pouvoir supprimer une de ses images.
 
@@ -46,9 +48,3 @@ L'usager peut consulter une image en particulier en appuyant sur celle-ci sur la
 ###L'usager doit pouvoir consulter une liste d'images ordonnées par date, tout usager confondu.
 
 La liste d'image, ordonnées par date, est disponible sur la page d'accueil de la page web
-
-
-
-
-
-

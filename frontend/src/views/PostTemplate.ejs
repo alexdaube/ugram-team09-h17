@@ -16,9 +16,6 @@
 		<% if(!isSingleFeed){ %></a><% } %>
 	</div>
 	<div class="textContentFeed">
-		<!--<div class="paddingLikeFeed">-->
-			<!--<span class="likeTextFeed">... likes</span>-->
-		<!--</div>-->
 		<div class="paddingLikeFeed">
 			<ul>	
 				<li class="textCommentFeed">
@@ -27,17 +24,11 @@
 						<span id="descriptionEditable" ><%- post.description %></span>
 					<% } %>
 				</li>
-				<!--<li class="textCommentFeed">-->
-					<!--<a class="heightTextFeed blackTextFeed" href="">{user name comment}</a>-->
-					<!--<span>{text comment}</span>-->
-				<!--</li>-->
 				
 			</ul>
 		</div>
 		<% if(post.editable){ %>
 			<div class="addCommentFeed commentPaddingFeed">
-				<!--<a class="likeButtonFeed likePaddingFeed" href=""><span class="likeTextFeed2 heartIcon">J’aime</span></a>-->
-				<!--<div class="flexCommentFeed"><input type="text" class="inputCommentFeed inputTextFeed" placeholder="Add Comment..." value=""></form>-->
 				<button id="optionButtonEdit" class="optionPostFeed optionIcon likeTextFeed2">More Options</button>
 			</div>
 		<% } %>
@@ -51,7 +42,7 @@
             <ul>
                 <li class="lineQuitPopup"><button id="editButtonPopup" class="buttonQuitPopup">Edit</button></li>
 				<li class="lineQuitPopup" id="editInput" data-id="<%-post.id %>"><textarea id="description"><%- post.description %></textarea></li>
-                <li class="lineQuitPopup" id="buttonSave"><button id="saveButtonPopup">Save</button></li>
+                <li class="lineQuitPopup" id="buttonSave"><button class="styleButtonProfile colorButtonProfile sizeButtonProfile" id="saveButtonPopup">Save</button></li>
                 <li class="lineQuitPopup"><button id="deleteButtonPopup" class="buttonQuitPopup">Delete</button></li>
             </ul>
         </div>

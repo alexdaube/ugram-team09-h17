@@ -43,11 +43,11 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
         const mentions: string[] = description.match(/@\w+/g);
         const tags: string[] = description.match(/#\w+/g);
 
-        // if (InputValidator.containsScriptInjection(description)) {
-        //     $("#textErrorSetting").show();
-        //     $("#textErrorSetting").find("p").text("Script are not authorized");
-        //     return;
-        // }
+        if (InputValidator.containsScriptInjection(description)) {
+            $("#textErrorSetting").show();
+            $("#textErrorSetting").find("p").text("Script are not authorized");
+            return;
+        }
 
         if (InputValidator.isTooLongText(description) || InputValidator.isNullOrEmpty(description)) {
             $("#textErrorPicture").show();

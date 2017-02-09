@@ -16,6 +16,11 @@ import {HeaderModel} from "./models/HeaderModel";
 import {FooterView} from "./views/FooterView";
 import {FooterModel} from "./models/FooterModel";
 
+import {RegisterView} from "./views/RegisterView";
+
+import {LoginView} from "./views/LoginView";
+import {LoginModel} from "./models/LoginModel";
+
 import {PictureModel} from "./models/PictureModel";
 
 import {PostView} from "./views/PostView";
@@ -25,12 +30,14 @@ export class AppRouter extends Backbone.Router {
 
     public routes = {
         "": "defaultRoute",
-        "profile": () => { this.showUserProfile(HeaderRequestGenerator.userId); },
+        "login": "showLogin",
+        "register": "showRegister",
         "setting": "showUserSetting",
         "picture": "showAddPicture",
         "users": "showUsers",
         "users/:userId": "showUserProfile",
-        "users/:userId/pictures/:pictureId": "showFeed",
+        "users/:userId/pictures/:pictureId": "showPost",
+        "profile": "showProfile",
     };
 
     constructor() {
@@ -49,16 +56,32 @@ export class AppRouter extends Backbone.Router {
     }
 
     public defaultRoute() {
-        this.showAllFeeds();
+        this.showRegister();
     }
 
-    public showAllFeeds() {
+    public showRegister() {
+        const loginModel = new LoginModel({});
+        const registerView = new RegisterView({model: loginModel});
+        registerView.render();
+    }
+
+    public showLogin() {
+        const loginModel = new LoginModel({});
+        const loginView = new LoginView({model: loginModel});
+        loginView.render();
+    }
+
+    public showProfile() {
+        this.showUserProfile(HeaderRequestGenerator.userId);
+    }
+
+    public showFeed() {
         const feedCollection = new FeedCollection({url: "http://api.ugram.net/pictures"});
         const feedCollectionView = new FeedCollectionView({el: "#content", collection: feedCollection});
         feedCollectionView.render();
     }
 
-    public showFeed(userFeedId: string, pictureId: string) {
+    public showPost(userFeedId: string, pictureId: string) {
         const pictureModel = new PictureModel({userId: userFeedId, id: pictureId});
         const postView = new PostView({el: "#content", model: pictureModel});
         postView.render();
