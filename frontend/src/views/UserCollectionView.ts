@@ -11,9 +11,11 @@ export class UserCollectionView extends Backbone.View<any> {
     private usersPerPage: number = 15;
     private nextPageToFetch: number = 0;
     private usersPerPageSearch: number = 100000;
+    private userList: SearchView[];
 
     constructor(options?: Backbone.ViewOptions<any>) {
         super(_.extend({el: "#content"}, options));
+        this.userList = new Array<SearchView>();
         this.template = require("./UserCollectionTemplate.ejs") as Function;
     }
 
@@ -23,18 +25,24 @@ export class UserCollectionView extends Backbone.View<any> {
 
         $(".searchBox").hide();
 
-        $("#content").click( () => {
-            $(".searchBox").hide();
+        $("#findInput").focusout( () => {
+            window.setTimeout( () => { $(".searchBox").hide(); }, 100);
         });
 
         $("#findInput").click( () => {
-            $(".searchBox").show();
-            this.showSearch();
+            if ($("#findInput").val().length > 0) {
+                $(".searchBox").show();
+                this.searchText();
+            }
         });
 
-        $("#findInput").keydown( () => {
-            $(".searchBox").show();
-            this.showSearch();
+        $("#findInput").keyup( () => {
+            if ($("#findInput").val().length > 0) {
+                $(".searchBox").show();
+                this.searchText();
+            } else {
+                $(".searchBox").hide();
+            }
         });
 
         this.showPictures();
@@ -77,7 +85,7 @@ export class UserCollectionView extends Backbone.View<any> {
 
     private renderPictures() {
         this.collection.each((user) => {
-            const userView = new UserView({el: "#usersList" , model: user});
+            const userView = new UserView({el: "#usersList", model: user});
             userView.append();
         });
         this.checkForMorePicturesAvailable();
@@ -91,8 +99,23 @@ export class UserCollectionView extends Backbone.View<any> {
 
     private renderSearch() {
         this.collection.each((user) => {
-            const searchView = new SearchView({el: "#searchList" , model: user});
-            searchView.append();
+            const searchView = new SearchView({el: "#searchList", model: user});
+            this.userList.push(searchView);
         });
+    }
+
+    private searchText() {
+        let isEmpty = true;
+        $("#searchList").html("");
+        for (const searchView of this.userList) {
+            if (searchView.model.userName.toLowerCase().indexOf($("#findInput").val().toLowerCase()) >= 0) {
+                searchView.append();
+                isEmpty = false;
+            }
+        }
+
+        if (isEmpty) {
+            $(".searchBox").hide();
+        }
     }
 }
