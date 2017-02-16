@@ -1,12 +1,12 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
 
-import {UserModel} from "../models/UserModel";
+import {PictureModel} from "../models/PictureModel";
 
-export class SearchTextView extends Backbone.View<UserModel> {
+export class SearchTextView extends Backbone.View<PictureModel> {
     private template: Function;
 
-    constructor(options?: Backbone.ViewOptions<UserModel>) {
+    constructor(options?: Backbone.ViewOptions<PictureModel>) {
         super(_.extend({}, options));
         this.template = require("./SearchTextTemplate.ejs") as Function;
     }

@@ -48,7 +48,8 @@ export class AppRouter extends Backbone.Router {
 
     public initialize() {
         const headerModel = new HeaderModel({});
-        const headerView = new HeaderView({model: headerModel});
+        const feedCollection = new FeedCollection({url: "http://api.ugram.net/pictures"});
+        const headerView = new HeaderView({model: headerModel, collection: feedCollection});
         headerView.render();
 
         const footerModel = new FooterModel({});
