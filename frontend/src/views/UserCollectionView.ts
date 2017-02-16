@@ -11,7 +11,6 @@ export class UserCollectionView extends Backbone.View<any> {
     private usersPerPage: number = 15;
     private nextPageToFetch: number = 0;
     private usersPerPageSearch: number = 100000;
-    private searchText: string = "";
 
     constructor(options?: Backbone.ViewOptions<any>) {
         super(_.extend({el: "#content"}, options));
@@ -19,27 +18,25 @@ export class UserCollectionView extends Backbone.View<any> {
     }
 
     public render() {
-
-        $("document").ready( function() {
-            $(".searchBox").hide();
-
-            $("#content").click( function() {
-                $(".searchBox").hide();
-            });
-
-            $("#findInput").click( function(event) {
-                $(".searchBox").show();
-                event.stopPropagation(); 
-            });
-
-            $("#findInput").keyup( function(event) {
-                this.searchText = $("#findInput").val();
-                console.log(this.searchText);
-            });
-        });
-
         const html = this.template();
         this.$el.html(html);
+
+        $(".searchBox").hide();
+
+        $("#content").click( () => {
+            $(".searchBox").hide();
+        });
+
+        $("#findInput").click( () => {
+            $(".searchBox").show();
+            this.showSearch();
+        });
+
+        $("#findInput").keydown( () => {
+            $(".searchBox").show();
+            this.showSearch();
+        });
+
         this.showPictures();
         this.showSearch();
 
@@ -93,17 +90,9 @@ export class UserCollectionView extends Backbone.View<any> {
     }
 
     private renderSearch() {
-        //var compter = 0;
         this.collection.each((user) => {
-            console.log("1 :" + user.id);
-            console.log("2 :" + this.searchText);
-            if (user.id == this.searchText) {
-                 const searchView = new SearchView({el: "#searchList" , model: user});
-                 searchView.append();
-            //     //compter++;
-            }
+            const searchView = new SearchView({el: "#searchList" , model: user});
+            searchView.append();
         });
-
-        //console.log(compter);
     }
 }
