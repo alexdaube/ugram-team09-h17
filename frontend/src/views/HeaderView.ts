@@ -1,7 +1,6 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
 
-import {HeaderModel} from "../models/HeaderModel";
 import {SearchTextView} from "./SearchTextView";
 
 export class HeaderView extends Backbone.View<any> {
@@ -61,8 +60,8 @@ export class HeaderView extends Backbone.View<any> {
     }
 
     private renderSearch() {
-        this.collection.each((user) => {
-            const searchTextView = new SearchTextView({el: "#searchList2", model: user});
+        this.collection.each((picture) => {
+            const searchTextView = new SearchTextView({el: "#searchList2", model: picture});
             this.textList.push(searchTextView);
         });
     }
@@ -71,7 +70,7 @@ export class HeaderView extends Backbone.View<any> {
         let isEmpty = true;
         $("#searchList2").html("");
         for (const searchTextView of this.textList) {
-            if (searchTextView.model.description.toLowerCase().indexOf($("#findInput2").val().toLowerCase()) >= 0) {
+            if (searchTextView.model.description != null && searchTextView.model.description.toLowerCase().indexOf($("#findInput2").val().toLowerCase()) >= 0) {
                 searchTextView.append();
                 isEmpty = false;
             }

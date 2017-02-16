@@ -1,7 +1,7 @@
-<a class="heightZoneSearch hoverColor" href="/#users/<%- user.id %>">
+<a class="heightZoneSearch hoverColor" href="#users/<%- picture.userId %>/pictures/<%-picture.id %>">
     <div class="columnZoneSearch">
-        <img class="imgZoneSearch" src="<%- user.profilePictureUrl %>">
-        <div class="nameZoneSearch"><span class="textZoneSearch"><%- user.id %></span></div>
-        <div class="smallTextZoneSearch"><%- user.email %></div>
+        <img class="imgZoneSearch" src="<%- picture.imageUrl %>">
+        <div class="nameZoneSearch"><span class="textZoneSearch"><%- picture.userId %></span></div>
+        <div class="smallTextZoneSearch"><%- picture.description %></div>
     </div>
 </a>
