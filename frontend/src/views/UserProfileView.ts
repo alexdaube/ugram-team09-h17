@@ -17,9 +17,11 @@ export class UserProfileView extends Backbone.View<any> {
 
     public events() {
         return <Backbone.EventsHash> {
-            "click #optionButton": () => { $("#popupCloseContent").show(); },
-            "click #closeExitButtonPopup": () => { $("#popupCloseContent").hide(); },
-            "click #closeCancelButtonPopup": () => { $("#popupCloseContent").hide(); },
+            "click #optionButton": () => { $("#popupCloseContent").show(); $("#confirmDelete").hide(); },
+            "click #closeExitButtonPopup": () => { $("#popupCloseContent").hide(); $("#confirmDelete").hide(); },
+            "click #closeCancelButtonPopup": () => { $("#popupCloseContent").hide(); $("#confirmDelete").hide(); },
+            "click #deleteAccount": () => { $("#confirmDelete").show(); },
+            "click #confirmDelete": "deleteMyAccount",
         };
     }
 
@@ -72,5 +74,9 @@ export class UserProfileView extends Backbone.View<any> {
         if (this.collection.length < this.picturesPerPage) {
             $("#show-more-container").hide();
         }
+    }
+
+    private deleteMyAccount() {
+        // TODO delete account
     }
 }
