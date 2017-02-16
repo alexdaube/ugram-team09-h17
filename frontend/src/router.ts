@@ -31,6 +31,7 @@ export class AppRouter extends Backbone.Router {
     public routes = {
         "": "defaultRoute",
         "login": "showLogin",
+        "home": "showFeed",
         "register": "showRegister",
         "setting": "showUserSetting",
         "picture": "showAddPicture",
