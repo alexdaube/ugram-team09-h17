@@ -1,35 +1,56 @@
-<div class="marginContentFeed borderFeed topFeed">
+<div class="whiteBackground marginContentFeed borderFeed topFeed">
 	<div class="topAlignFeed">
-		<a class="userImageFeed userAlignFeed logoSize" href=""><img class="logoUserFeed" src="/img/test2.jpg">
-		</a>
+		<a class="userImageFeed userAlignFeed logoSize" href=""><img class="logoUserFeed" src="/img/test2.jpg"></a>
 		<div class="userNameFeed">
-			<a class="heightTextFeed widthTextFeed" href="">{user name post}</a>
+			<a class="heightTextFeed widthTextFeed" href=""><%- post.userId %></a>
 		</div>
+		<div class="hourFeed" href="">
+			<time><%- post.postedDate %></time>
+		</div>
+<<<<<<< HEAD
 		<a class="hourFeed" href=""><time datetime="2017-01-21T20:20:26.000Z"><%- postedDate %></time></a>
+=======
+>>>>>>> develop
 	</div>
 	<div class="imageFeed">
-		<div class="imagePaddingFeed">
-			<img class="sizeImageFeed" src="/img/test1.jpg">
-		</div>
+		<% if(!isSingleFeed){ %><a><% } %>
+			<div class="imagePaddingFeed">
+				<img class="sizeImageFeed" src="<%- post.imageUrl %>" />
+			</div>
+		<% if(!isSingleFeed){ %></a><% } %>
 	</div>
 	<div class="textContentFeed">
 		<div class="paddingLikeFeed">
-			<span class="likeTextFeed">{like number} mentions J’aime</span>
+			<ul>	
+				<li class="textCommentFeed">
+					<a class="heightTextFeed blackTextFeed" href="/#users/<%- post.userId %>"><%- post.userId %></a>
+					<% if(post.description){ %>
+						<span id="descriptionEditable" ><%- post.description %></span>
+					<% } %>
+				</li>
+				
+			</ul>
 		</div>
-		<ul>
-			<li class="textCommentFeed">
-				<a class="heightTextFeed blackTextFeed" href="">{user name post}</a>
-				<span>{text post}</span>
-			</li>
-			<li class="textCommentFeed">
-				<a class="heightTextFeed blackTextFeed" href="">{user name comment}</a>
-				<span>{text comment}</span>
-			</li>
-		</ul>
-		<div class="addCommentFeed commentPaddingFeed">
-			<a class="likeButtonFeed likePaddingFeed" href=""><span class="likeTextFeed2 heartIcon">J’aime</span></a>
-			<form class="flexCommentFeed"><input type="text" class="inputCommentFeed inputTextFeed" placeholder="Add Comment..." value=""></form>
-			<button class="optionPostFeed optionIcon likeTextFeed2">More Options</button>
-		</div>
+		<% if(post.editable){ %>
+			<div class="addCommentFeed commentPaddingFeed">
+				<button id="optionButtonEdit" class="optionPostFeed optionIcon likeTextFeed2">More Options</button>
+			</div>
+		<% } %>
 	</div>
+</div>
+
+<div class="popupContent">
+   <div id="popupEditContent" class="divPopupContent">
+    <div class="heightPopup">
+        <div class="height2Popup">
+            <ul>
+                <li class="lineQuitPopup"><button id="editButtonPopup" class="buttonQuitPopup">Edit</button></li>
+				<li class="lineQuitPopup" id="editInput" data-id="<%-post.id %>"><textarea id="description"><%- post.description %></textarea></li>
+                <li class="lineQuitPopup" id="buttonSave"><button class="styleButtonProfile colorButtonProfile sizeButtonProfile" id="saveButtonPopup">Save</button></li>
+                <li class="lineQuitPopup"><button id="deleteButtonPopup" class="buttonQuitPopup">Delete</button></li>
+            </ul>
+        </div>
+    </div>
+    <button id="closeExitButtonPopup" class="closeButtonPopup">Fermer</button>
+   </div>
 </div>

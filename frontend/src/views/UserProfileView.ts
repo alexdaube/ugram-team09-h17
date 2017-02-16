@@ -1,30 +1,76 @@
 import * as Backbone from "backbone";
-import * as _ from "underscore";
 
-import {UserModel} from "../models/UserModel";
+import {PictureView} from "./PictureView";
+import {ShowMoreView} from "./ShowMoreView";
+import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
+import {InputValidator} from "../util/InputValidator";
 
-export class UserProfileView extends Backbone.View<UserModel> {
+export class UserProfileView extends Backbone.View<any> {
     private template: Function;
-    private userModel: UserModel;
+    private picturesPerPage: number = 9;
+    private nextPageToFetch: number = 0;
 
-    constructor(options?: Backbone.ViewOptions<UserModel>) {
-        super(_.extend({
-            el: "#content",
-        }, options));
+    constructor(options?: any) {
+        super(options);
         this.template = require("./UserProfileTemplate.ejs") as Function;
-        this.userModel = options["model"];
+    }
+
+    public events() {
+        return <Backbone.EventsHash> {
+            "click #optionButton": () => { $("#popupCloseContent").show(); },
+            "click #closeExitButtonPopup": () => { $("#popupCloseContent").hide(); },
+            "click #closeCancelButtonPopup": () => { $("#popupCloseContent").hide(); },
+        };
     }
 
     public render() {
-        const that = this;
-        this.userModel.fetch({
-            success() {
-                that.$el.html(that.template({userModel: that.userModel}));
+        this.model.fetch({
+            success: () => {
+                this.$el.html(this.template({user: this.model}));
+                this.$el.first().removeClass("contentFeed");
+
+                const showMoreView = new ShowMoreView({
+                    el: "#show-more-container",
+                    showMoreCallback: this.showPictures.bind(this),
+                });
+                showMoreView.render();
+                this.showPictures();
             },
-            error() {
-                // TODO handle error
+            error: () => {
+                this.$el.html(this.template("No user by that name!"));
             },
         });
         return this;
+    }
+
+    private showPictures() {
+        this.collection.fetch({
+            data: {
+                page: this.nextPageToFetch,
+                perPage: this.picturesPerPage,
+            },
+            success: () => {
+                this.nextPageToFetch += 1;
+                this.renderPictures();
+            },
+            error: () => {
+                $("#profile-pictures-list").append("<h3>You have no pictures yet!</h3>");
+                $("#show-more-container").hide();
+            },
+        });
+    }
+
+    private renderPictures() {
+        this.collection.each((picture) => {
+            const pictureView = new PictureView({el: "#profile-pictures-list", model: picture});
+            pictureView.append();
+        });
+        this.checkForMorePicturesAvailable();
+    }
+
+    private checkForMorePicturesAvailable() {
+        if (this.collection.length < this.picturesPerPage) {
+            $("#show-more-container").hide();
+        }
     }
 }

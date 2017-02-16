@@ -1,15 +1,15 @@
-<div class="contentUser">
+<div class="whiteBackground contentUser">
     <ul class="boxUser">
         <li id="userSection" class="titleUser">
             <div class="paddingUser">
                 <div class="widthUser">
-                    <a class="roundImgUser tabImgUser" href="/#users/<%- id %>"><img src="<%- pictureUrl %>"></a>
+                    <a class="roundImgUser tabImgUser" href="/#users/<%- user.id %>"><img src="<%- user.profilePictureUrl %>"></a>
                     <div class="centerTitleUser">
-                        <div><a class="boldNameUser colorNameUser" href="/#users/<%- id %>"><%- id %></a></div>
-                        <div class="fontNameUser"><%- email %></div>
+                        <div><a class="boldNameUser colorNameUser" href="/#users/<%- user.id %>"><%- user.id %></a></div>
+                        <div class="fontNameUser"><%- user.email %></div>
                     </div>
                 </div>
-                <div class="heightButtonUser"><span><button class="styleButtonUser colorButtonUser sizeButtonUser">Subscribe</button></span></div>
+                <!--<div class="heightButtonUser"><span><button class="styleButtonUser colorButtonUser sizeButtonUser">Subscribe</button></span></div>-->
             </div>
         </li>
     </ul>

@@ -4,6 +4,6 @@ import * as $ from "jquery";
 import {AppRouter} from "./router";
 
 $(document).ready(() => {
-    const approuter = new AppRouter();
+    const appRouter = new AppRouter();
     Backbone.history.start();
 });
