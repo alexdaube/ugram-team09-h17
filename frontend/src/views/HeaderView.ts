@@ -70,14 +70,20 @@ export class HeaderView extends Backbone.View<any> {
         let isEmpty = true;
         $("#searchList2").html("");
         for (const searchTextView of this.textList) {
-            if (searchTextView.model.description != null && searchTextView.model.description.toLowerCase().indexOf($("#findInput2").val().toLowerCase()) >= 0) {
-                searchTextView.append();
-                isEmpty = false;
+            if (searchTextView.model.description != null) {
+                // if ($("#findInput2").val().toLowerCase().indexOf("#") >= 0) {}
+                // else if ($("#findInput2").val().toLowerCase().indexOf("@") >= 0) {}
+                // else
+
+                if (searchTextView.model.description.toLowerCase().indexOf($("#findInput2").val().toLowerCase()) >= 0) {
+                    searchTextView.append();
+                    isEmpty = false;
+                }
             }
         }
 
         if (isEmpty) {
-            $(".searchBox").hide();
+            $(".searchBox2").hide();
         }
     }
 }
