@@ -1,0 +1,99 @@
+<div class="contentProfile paddingProfile">
+    <div class=" headerProfile">
+        <div class="logoPaddingProfile">
+        <div class="logoProfile">
+            <button><img class="stlyeLogoProfile" src="/img/test2.jpg"></button>
+        </div>
+        </div>
+        <div class="paddingNameProfile">
+        <div class="borderLogoProfile">
+            <h1 class="textNameProfile"><%- userModel.userName %></h1>
+            <div class="paddingOptionProfile">
+                <a><button id="buttonExitUgram" class="styleOptionProfile coreSpriteEllipsis textOptionProfile"></button></a>
+            </div>
+        </div>
+        <div class="editButtonProfile"><a href="">
+            <a href="#setting"><button class="styleButtonProfile colorButtonProfile sizeButtonProfile">Update profile</button></a>
+            &nbsp;&nbsp;
+            <a><button id="buttonAddPicture" class="styleButtonProfile colorAddButtonProfile sizeButtonProfile">Add picture</button></a>
+        </div>
+        </div>
+    </div>
+    <div class="paddingBioProfile">
+        <h2 class="boldTextProfile"><%- userModel.firstName %> <%- userModel.lastName %></h2>
+        <span><%- userModel.email %> <%- userModel.phoneNumber %> inscription date: <%- userModel.inscriptionDate %></span>
+    </div>
+    <br /><br />
+    <ul class="statsProfile statsSizeProfile">
+        <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Posts</span></li>
+        <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Followers</a></li>
+        <li class="paddingStatsProfile"><span class="fontStatsProfile blockStatsProfile">{number}</span>Following</a></li>
+    </ul>
+    <div>
+        <div class="imgProfile">
+            <a class="showImgProfile" href="">
+                <div class="displayImgProfile">
+                    <div class="divImgProfile"><img class="pictureProfile" id="pImage_1" src="/img/test3.jpg"></div>
+                </div>
+            </a>
+            <a class="showImgProfile" href="">
+                <div class="displayImgProfile">
+                    <div class="divImgProfile"><img class="pictureProfile" id="pImage_2" src="/img/test4.jpg"></div>
+                </div>
+            </a>
+            <a class="showImgProfile" href="">
+                <div class="displayImgProfile">
+                    <div class="divImgProfile"><img class="pictureProfile" id="pImage_3" src="/img/test5.jpg"></div>
+                </div>
+            </a>
+        </div>
+        <div class="addMoreProfile"><a class="moreTextProfile" href="">Show more</a></div>
+    </div>
+</div>
+
+
+<div class="popupContent">
+   <div id="popupContent" class="divPopupContent">
+         <div class="centerPopup">
+            <div class="contentSetting">
+                <div class="inputSizeSetting">
+                    <div class="usernameSetting">
+                        <div class="paddingLogoSetting">
+                        <button><img class="sizeLogoSetting" src="<%-userModel.profilePictureUrl%>"></button>
+                        </div>
+                        <h1 class="userTextSetting"><%- userModel.userName %></h1>
+                    </div>
+                    <div class="infoSetting">
+                        <aside class="paddingInfoSetting"><label>Description:</label></aside>
+                        <div class="widthSetting"><input id="description" class="inputSetting" type="text" name="description"></div>
+                    </div>
+                    <div class="infoSetting">
+                        <aside class="paddingInfoSetting"><label for="upload-file-input">Upload your file:</label></aside>
+                        <div class="widthSetting"><input id="upload-file-input" class="inputSetting" type="file" name="file" accept="image/*"></div>
+                    </div>
+                    <div class="infoSetting">
+                        <aside class="paddingInfoSetting privateSetting"><label></label></aside>
+                        <div class="buttonSetting"><span><button id="postPictureButton" class="styleButtonSetting colorButtonSetting sizeButtonSetting">Post</button></span></div>
+                    </div>
+                    <div id="error-text"></div>
+                </div>
+            </div>
+         </div>
+      <button id="closeButtonPopup" class="closeButtonPopup">Fermer</button>
+   </div>
+</div>
+    
+
+<div id="popupCloseContent" class="popupVisibleExit popupContent">
+   <div class="divPopupContent">
+    <div class="heightPopup">
+        <div class="height2Popup">
+            <ul>
+                <li class="lineQuitPopup"><button class="buttonQuitPopup">Déconnexion</button></li>
+                <li class="lineQuitPopup"><button id="closeCancelButtonPopup" class="buttonQuitPopup">Annuler</button></li>
+            </ul>
+        </div>
+    </div>
+    <button id="closeExitButtonPopup" class="closeButtonPopup">Fermer</button>
+   </div>
+</div>
