@@ -3,12 +3,12 @@ import * as _ from "underscore";
 
 import {UserModel} from "../models/UserModel";
 
-export class SearchView extends Backbone.View<UserModel> {
+export class SearchUserView extends Backbone.View<UserModel> {
     private template: Function;
 
     constructor(options?: Backbone.ViewOptions<UserModel>) {
         super(_.extend({}, options));
-        this.template = require("./SearchTemplate.ejs") as Function;
+        this.template = require("./SearchUserTemplate.ejs") as Function;
     }
 
     public render() {

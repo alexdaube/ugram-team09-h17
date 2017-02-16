@@ -4,18 +4,18 @@ import * as _ from "underscore";
 
 import {ShowMoreView} from "./ShowMoreView";
 import {UserView} from "./UserView";
-import {SearchView} from "./SearchView";
+import {SearchUserView} from "./SearchUserView";
 
 export class UserCollectionView extends Backbone.View<any> {
     private template: Function;
     private usersPerPage: number = 15;
     private nextPageToFetch: number = 0;
     private usersPerPageSearch: number = 100000;
-    private userList: SearchView[];
+    private userList: SearchUserView[];
 
     constructor(options?: Backbone.ViewOptions<any>) {
         super(_.extend({el: "#content"}, options));
-        this.userList = new Array<SearchView>();
+        this.userList = new Array<SearchUserView>();
         this.template = require("./UserCollectionTemplate.ejs") as Function;
     }
 
@@ -99,17 +99,17 @@ export class UserCollectionView extends Backbone.View<any> {
 
     private renderSearch() {
         this.collection.each((user) => {
-            const searchView = new SearchView({el: "#searchList", model: user});
-            this.userList.push(searchView);
+            const searchUserView = new SearchUserView({el: "#searchList", model: user});
+            this.userList.push(searchUserView);
         });
     }
 
     private searchText() {
         let isEmpty = true;
         $("#searchList").html("");
-        for (const searchView of this.userList) {
-            if (searchView.model.userName.toLowerCase().indexOf($("#findInput").val().toLowerCase()) >= 0) {
-                searchView.append();
+        for (const searchUserView of this.userList) {
+            if (searchUserView.model.userName.toLowerCase().indexOf($("#findInput").val().toLowerCase()) >= 0) {
+                searchUserView.append();
                 isEmpty = false;
             }
         }
