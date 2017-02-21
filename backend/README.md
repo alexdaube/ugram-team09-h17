@@ -14,6 +14,11 @@ Finalement, le logging est configuré pour utiliser AWS CloudWatch logs avec [Wi
 
 # Exécuter
 
+Lancer la commande en dev avec nodemon(live reload):
+```sh
+npm run dev
+```
+
 Lancer la commande:
 ```sh
 npm start
