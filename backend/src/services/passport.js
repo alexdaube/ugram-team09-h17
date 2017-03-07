@@ -1,104 +1,60 @@
-const passport = require('passport');
-const User = require('../models/user');
-const config = require('../config');
-const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
-const LocalStrategy = require('passport-local');
-const FacebookStrategy = require('passport-facebook').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
+var User       = require('../models/user');
+var configAuth = require('./../../config/auth');
 
-// Create facebook strategy
-const facebookOptions = {
-    clientID: "CLIENT ID GOES HERE",
-    clientSecret: "CLIENT SECRET GOES HERE",
-    callbackURL: 'CALLBACK URL GOES HERE'
-};
+module.exports = function(passport) {
 
-const facebookLogin = new FacebookStrategy(facebookOptions, (accessToken, refreshToken, profile, done) => {
-    User.findOne({ ugramId: profile.id }, (err, user) => {
-        if(err) {
-            return done(err);
-        }
+    // used to serialize the user for the session
+    passport.serializeUser(function(user, done) {
+        done(null, user.id);
+    });
 
-        if (user) {
-            return done(null, user);
-        } else {
-            const newUser = new User({
-                ugramId: profile.id,
-                email: profile.emails[0].value,
-                //password,
-                firstName: profile.name.givenName,
-                lastName: profile.name.familyName,
-                //phoneNumber,
-                //pictureUrl,
-                registrationDate: new Date()
+    // used to deserialize the user
+    passport.deserializeUser(function(id, done) {
+        new User({id: id}).fetch().then(function (user) {
+                done(null, user);
             });
+    });
 
-            newUser.save((err) => {
-                if (err) {
-                    return next(err);
+    // =========================================================================
+    // FACEBOOK ================================================================
+    // =========================================================================
+    var fbStrategy = configAuth.facebookAuth;
+    fbStrategy.passReqToCallback = true;  // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+    passport.use(new FacebookStrategy(fbStrategy,
+        // facebook will send back the token and profile
+        function(req, token, refreshToken, profile, done) {
+            // asynchronous
+            process.nextTick(function() {
+                // check if the user is already logged in
+                if (!req.user) {
+                    // find the user in the database based on their facebook id
+                    new User({facebookId: profile.id}).fetch().then(function (user) {
+                        // if the user is found, then log them in
+                        if (user) {
+                            console.log("found user !");
+                            return done(null, user); // user found, return that user
+                        } else {
+                            // if there is no user found with that facebook id, create them
+                            console.log("You should be on signup page and asked for more info if needed");
+                            console.log("creating new user");
+                            var newUser = new User({
+                                facebookId: profile.id,
+                                token: token,
+                                name: profile.displayName,
+                                email: profile.emails[0].value
+                            }).save().then(function (savedUser) {
+                                return done(null, savedUser);
+                            });
+                        }
+                    });
                 }
 
-                // Respond to request indicating the user was created
-                res.json({ token: tokenForUser(user) });
+                else {
+                    console.log("user exists and logged in");
+                    return done(null, req.user);
+                }
             });
-        }
-    });
-});
+        }));
 
-
-// Create local strategy
-const localOptions = {usernameField: 'ugramId'};
-const localLogin = new LocalStrategy(localOptions, (id, password, done) => {
-    // Verify this ugram id and password, call done with the user
-    // if it is the correct ugram id and password
-    // otherwise, call done with false
-    User.findOne({ugramId: id}, (err, user) => {
-        if (err) {
-            return done(err);
-        }
-        if (!user) {
-            return done(null, false);
-        }
-
-        // compare passwords - is `password` equal to user.password?
-        user.comparePassword(password, (err, isMatch) => {
-            if (err) {
-                return done(err);
-            }
-            if (!isMatch) {
-                return done(null, false);
-            }
-
-            return done(null, user);
-        });
-    });
-});
-
-// Setup options for JWT Strategy
-const jwtOptions = {
-    jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-    secretOrKey: config.secret
 };
-
-// Create JWT strategy
-const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
-    // See if the user ID in the payload exists in our database
-    // If it does, call 'done' with that other
-    // otherwise, call done without a user object
-    User.findById(payload.sub, (err, user) => {
-        if (err) {
-            return done(err, false);
-        }
-
-        if (user) {
-            done(null, user);
-        } else {
-            done(null, false);
-        }
-    });
-});
-
-// Tell passport to use this strategy
-passport.use(jwtLogin);
-passport.use(localLogin);
-passport.use(facebookLogin);
