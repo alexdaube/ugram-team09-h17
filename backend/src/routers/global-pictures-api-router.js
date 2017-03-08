@@ -1,26 +1,21 @@
-/**
- * Created by Leandre Noel on 2/21/2017.
- */
+var GlobalPicturesService = require("../services/GlobalPicturesService");
+var config = require('getconfig');
 
+module.exports = function(app) {
 
-var express = require('express');
-var router = express.Router();
+app.get('/pictures', isLoggedIn, function(req, res) {
+        var globalPicturesService = new GlobalPicturesService(config);
+        globalPicturesService.getAllPictures(req, res);
+    });
+}
 
-router.get("/", function(req, res) {
+function isLoggedIn(req, res, next) {
+    // if user is authenticated in the session, carry on
 
-    var query = req.query; //query in url ?param1=1&param2=2
-
-    if(false) { //Unauthorized
-        res.status(401).send("Unauthorized");
-    }
-    else if(false) { //Forbidden
-        res.status(403).send("Forbidden");           
-    }
-    else if(false) { //Not Found
-        res.status(404).send("Not Found");
-    }
-
-    res.status(200).send("GET /pictures");
-});
-
-module.exports = router;
+    return next();
+    // TODO Uncomment the fuck ou't'his shit
+    // if (req.isAuthenticated())
+    //     return next();
+    // if they aren't redirect them to the home page
+    //res.redirect('/login');
+}
