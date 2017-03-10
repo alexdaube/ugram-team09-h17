@@ -2,7 +2,6 @@ module.exports = function (app, passport) {
     const User = require('../models/user');
 
     app.get('/', isLoggedIn, function (req, res) {
-        //res.redirect('/profile');
         res.status(200).send("Welcome to Ugram API");
     });
 
@@ -13,7 +12,8 @@ module.exports = function (app, passport) {
 
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function (req, res) {
-        res.send({
+         console.log("Succes");
+        res.status(200).send({
             message: "You should see profile page here",
             user: req.user
         });
@@ -35,17 +35,7 @@ module.exports = function (app, passport) {
         req.logout();
         res.send({ message: "You are now logged out." });
     });
-
-    //Get users
-    // app.get('/users', isLoggedIn, function (req, res) {
-    //     new User().fetchAll().then(function (users) {
-    //         res.send(users.toJSON());
-    //     }).catch(function (err) {
-    //         console.log(err);
-    //         res.send('an error occured');
-    //     });
-    // });
-};
+}
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {

@@ -1,31 +1,54 @@
 //var Request = require('request');
 var ErrorHandler = require("../../common/errors");
 var Request = require("./DatabaseMock");
+const Picture = require("../../models/picture");
+var DatabaseDTO = require("../../util/DatabaseDTO");
 
 
 var globalPicturesRepository = function (config) {
     this.host = config.repository.host;
     this.port = config.repository.port;
+    this.databaseDTO = new DatabaseDTO();
 }
 
+// DONE
 globalPicturesRepository.prototype.get = function (page, perPage, callback) {
 
-    // TODO modify with bd call as soon as the bd is ready
-    //page équivaut au numéro de la page fetché et non au nombre de page fetché
-    var request = new Request();
-    request.getAllPictures(page, perPage, function (statusCode, body) {
-        verifyError(statusCode, body, callback);
-    })
+    var that = this;
+    var numberOfPictureInTotal;
+    var numberOfPages;
+    if (typeof perPage === 'undefined') { perPage = 20 };
+
+
+    new Picture().fetchAll({ withRelated: ["tags", "mentions"] }).then(function (pictures) {
+        if (pictures) {
+            numberOfPictureInTotal = pictures.length;
+            numberOfPages = Math.ceil(numberOfPictureInTotal / perPage);
+            pictures.query(function (qb) {
+                qb.limit(perPage).offset(page * perPage)
+            }).fetch()
+                .then(function (newCollection) {
+                    var newCollectionJSON =
+                        {
+                            items: that.databaseDTO.getPictureJSON(newCollection),
+                            totalPages: numberOfPages,
+                            totalEntries: numberOfPictureInTotal
+                        }
+                    return callback(null, newCollectionJSON);
+                })
+        }
+        else {
+            return callback(null, {});
+        }
+
+    }).catch(function (err) {
+        console.log(err);
+        handleError(400, null, callback);
+    });
 }
 
-var verifyError = function (statusCode, body, callback) {
+var handleError = function (statusCode, body, callback) {
     var error = ErrorHandler.handleReturnCall(statusCode);
-    if (error) {
-        return callback(error, null);
-    }
-    if (typeof body === 'object') {
-        return callback(error, body);
-    }
     return callback(error, JSON.parse(body));
 };
 

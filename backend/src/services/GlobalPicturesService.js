@@ -16,7 +16,7 @@ globalPicturesService.prototype.getAllPictures = function(request, returnObject)
         if(!err && response){
             returnObject.status(200).json(response);
         }
-        else{
+        else {
             console.warn(err, response);
             returnObject.status(err.statusCode).send(err.message);
         }

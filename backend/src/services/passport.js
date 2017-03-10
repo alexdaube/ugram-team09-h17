@@ -35,16 +35,16 @@ module.exports = function(passport) {
                             console.log("found user !");
                             return done(null, user); // user found, return that user
                         } else {
-                            // if there is no user found with that facebook id, create them
+                            //if there is no user found with that facebook id, create them
                             console.log("You should be on signup page and asked for more info if needed");
                             console.log("creating new user");
                             var newUser = new User({
                                 facebookId: profile.id,
                                 token: token,
-                                name: profile.displayName,
-                                email: profile.emails[0].value
+                                email: profile.emails[0].value,
+                                userName: "jlabonte"
                             }).save().then(function (savedUser) {
-                                return done(null, savedUser);
+                                 return done(null, savedUser);
                             });
                         }
                     });
