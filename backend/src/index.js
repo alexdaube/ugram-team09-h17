@@ -51,8 +51,9 @@ require('./services/passport')(passport); // pass passport for configuration
 // logging, parsing, and session handling.
 app.use(require('morgan')('combined'));
 app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser.json()); // get information from html forms
-app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.({uploadDir: '../upload'}));
+app.use(bodyParser.json({limit: '50mb'})); // get information from html forms
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
 

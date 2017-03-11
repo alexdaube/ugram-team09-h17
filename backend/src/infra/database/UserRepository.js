@@ -123,11 +123,31 @@ userRepository.prototype.getUserPictures = function (userId, page, perPage, call
 }
 
 userRepository.prototype.createPicture = function (userId, body, callback) {
-    // TODO modify with bd call as soon as the bd is ready
-    var request = new Request();
-    request.getAllUsers(function (statusCode, body) {
-        handleError(statusCode, body, callback);
-    })
+
+    User.where({ userName: userId })
+        .fetch()
+        .then(function (user) {
+            if (!user) {
+                return callback({ statusCode: 400, message: "Missing parameter or unexisting user" });
+            }
+
+            new Picture({
+                description: body.description,
+                userId: userId
+            })
+                .save()
+                .then(function (picture) {
+                    body.mentions.forEach(function (mention) {
+                        new Mention({ mention: mention, picture_id: picture.id })
+                            .save();
+                    })
+                    body.tags.forEach(function (tag) {
+                        new Tag({ tag: tag, picture_id: picture.id })
+                            .save();
+                    })
+                    return callback(null, picture);
+                })
+        })
 }
 
 // DONE
@@ -181,9 +201,8 @@ userRepository.prototype.getUserPicture = function (userId, pictureId, callback)
         });
 }
 
+// NOT DONE; Problem. See below
 userRepository.prototype.updateUserPicture = function (userId, pictureId, body, callback) {
-    // TODO modify with bd call as soon as the bd is ready
-    //console.log(body.mentions);
 
     var that = this;
     var numberOfPictureInTotal;
@@ -191,25 +210,23 @@ userRepository.prototype.updateUserPicture = function (userId, pictureId, body, 
 
     if (typeof perPage === 'undefined') { perPage = 20 };
 
-    new Picture().where({ userId: userId, id: pictureId })
-        .fetch({ withRelated: ["tags", "mentions"] }).then(function (picture) {
-            //console.log(picture);
+    Picture
+        .where({ userId: userId, id: pictureId })
+        .fetch({ withRelated: ["tags", "mentions"] })
+        .then(function (picture) {
             if (picture) {
 
                 Mention.where({ picture_id: pictureId })
                     .fetchAll()
                     .then(function (mentions) {
                         mentions.forEach(function (mention) {
-                            mention.destroy().then(function () {
-                            })
+                            mention.destroy();
                         })
                     })
                     .then(function () {
-                        console.log(body.mentions);
                         body.mentions.forEach(function (mention) {
-                            console.log(mention);
-                            new Mention({ mention: mention, picture_id: pictureId }).save().then(function () {
-                            })
+                            new Mention({ mention: mention, picture_id: pictureId })
+                                .save()
                         })
                     })
 
@@ -217,33 +234,65 @@ userRepository.prototype.updateUserPicture = function (userId, pictureId, body, 
                     .fetchAll()
                     .then(function (tags) {
                         tags.forEach(function (tag) {
-                            tag.destroy().then(function () {
-                            })
+                            tag.destroy();
                         })
                     })
                     .then(function () {
-                        console.log(body.tags);
                         body.tags.forEach(function (tag) {
-                            new Tag({ tag: tag, picture_id: pictureId }).save().then(function () {
-                            })
+                            new Tag({ tag: tag, picture_id: pictureId })
+                                .save()
                         })
                     })
 
 
-                picture.save({ description: body.description })
-                    .then(function (picture) {
-                        var formattedPictureJSON = that.databaseDTO.getPictureJSON(picture);
-                        return callback(null, formattedPictureJSON);
-                    }).catch(function (err) {
-                        if (err.message === 'No Rows Updated') {
-                            var formattedPictureJSON = that.databaseDTO.getPictureJSON(picture);
-                            return callback(null, formattedPictureJSON);
-                        }
-                    })
+                // picture.save({ description: body.description })
+                //     // .then(function (picture) {
+
+                //     //     Picture
+                //     //         .where({ userId: userId, id: pictureId })
+                //     //         .fetch({ withRelated: ["tags", "mentions"] })
+                //     //         .then(function (picture) {
+                //     //             var formattedPictureJSON = that.databaseDTO.getPictureJSON(picture);
+                //     //             return callback(null, formattedPictureJSON);
+                //     //         })
+
+                //     .catch(function (err) {
+                //         console.log("ERROR: " + err);
+                //         if (err.message === 'No Rows Updated') {
+                //             // var formattedPictureJSON = that.databaseDTO.getPictureJSON(picture);
+                //             // return callback(null, formattedPictureJSON);
+                //             //return picture;
+                //         }
+                //     })
+
+                return picture;
             }
             else {
                 return callback({ statusCode: 400, message: "No such picture" }, null);
             }
+        }).then(function (picture) {
+            picture.save({ description: body.description })
+                .then(function (picture) {
+                    return;
+                }).catch(function (err) {
+                    //console.log("ERROR: " + err);
+                    if (err.message === 'No Rows Updated') {
+                        return;
+                    }
+                })
+        }).then(function () {
+            // TODO regler ça - Les tags et les mentions ont pas tout le temps de ce loader
+            // avant que la picture soit réenvoyé au client. Le client recoit donc une partie
+            // aléatoire des tags et des mentions
+            Picture
+                .where({ userId: userId, id: pictureId })
+                .fetch({ withRelated: ["tags", "mentions"] })
+                .then(function (picture) {
+                    return that.databaseDTO.getPictureJSON(picture);
+                })
+                .then(function (formattedPictureJSON) {
+                    return callback(null, formattedPictureJSON);
+                })
         }).catch(function (err) {
             console.log(err);
             handleError(400, null, callback);
