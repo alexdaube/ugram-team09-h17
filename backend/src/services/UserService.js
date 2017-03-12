@@ -50,6 +50,11 @@ userService.prototype.updateUser = function (request, returnObject) {
     var userId = urlParts[2];
     var body = request.body;
 
+    if(userId != global.user.toJSON().userName){
+        returnObject.status(403).json("Editing on forbidden user account for current authentication");
+        return;
+    }
+
     this.persistence.update(userId, body, function (err, response) {
         if (!err && response) {
             returnObject.status(201).json(response);
@@ -86,6 +91,11 @@ userService.prototype.createUserPicture = function (request, returnObject) {
     var urlParts = path.split('/');
     var userId = urlParts[2];
     var body = request.body;
+
+    if(userId != global.user.toJSON().userName){
+        returnObject.status(403).json("Editing on forbidden user account for current authentication");
+        return;
+    }
 
     // HOLY MOLY ==> path.extname(req.files.file.name) <== extname :O:O
 
@@ -153,6 +163,11 @@ userService.prototype.deleteUserPicture = function (request, returnObject) {
     var userId = urlParts[2];
     var pictureId = urlParts[4];
 
+    if(userId != global.user.toJSON().userName){
+        returnObject.status(403).json("Editing on forbidden user account for current authentication");
+        return;
+    }
+
     this.persistence.deletePicture(userId, pictureId, function (err, response) {
         if (!err && response) {
             returnObject.status(204).send();
@@ -187,6 +202,11 @@ userService.prototype.updateUserPicture = function (request, returnObject) {
     var userId = urlParts[2];
     var pictureId = urlParts[4];
     var body = request.body;
+
+    if(userId != global.user.toJSON().userName){
+        returnObject.status(403).json("Editing on forbidden user account for current authentication");
+        return;
+    }
 
     this.persistence.updateUserPicture(userId, pictureId, body, function (err, response) {
         if (!err && response) {

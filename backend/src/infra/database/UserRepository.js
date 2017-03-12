@@ -63,7 +63,9 @@ userRepository.prototype.update = function (userId, body, callback) {
     var newPhoneNumber = body.phoneNumber;
     var that = this;
 
-    new User({ userName: userId }).fetch().then(function (user) {
+    new User({ userName: userId })
+    .fetch()
+    .then(function (user) {
         user.save({
             email: newEmail,
             firstName: newFirstName,
