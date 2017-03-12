@@ -33,6 +33,7 @@ userService.prototype.getUser = function (request, returnObject) {
     var urlParts = path.split('/');
     var userId = urlParts[2];
 
+
     this.persistence.get(userId, function (err, response) {
         if (!err && response) {
             returnObject.status(200).json(response);

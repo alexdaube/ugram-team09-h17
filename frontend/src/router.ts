@@ -48,7 +48,8 @@ export class AppRouter extends Backbone.Router {
 
     public initialize() {
         const headerModel = new HeaderModel({});
-        const feedCollection = new FeedCollection({url: "http://api.ugram.net/pictures"});
+        //const feedCollection = new FeedCollection({url: "http://api.ugram.net/pictures"});
+        const feedCollection = new FeedCollection({url: "http://localhost:3000/pictures"});
         const headerView = new HeaderView({model: headerModel, collection: feedCollection});
         headerView.render();
 
@@ -78,7 +79,8 @@ export class AppRouter extends Backbone.Router {
     }
 
     public showFeed() {
-        const feedCollection = new FeedCollection({url: "http://api.ugram.net/pictures"});
+        //const feedCollection = new FeedCollection({url: "http://api.ugram.net/pictures"});
+        const feedCollection = new FeedCollection({url: "http://localhost:3000/pictures"});
         const feedCollectionView = new FeedCollectionView({el: "#content", collection: feedCollection});
         feedCollectionView.render();
     }
@@ -91,7 +93,8 @@ export class AppRouter extends Backbone.Router {
 
     public showUserProfile(userId: string = "") {
         const userModel = new UserModel({id: userId});
-        const feedCollection = new FeedCollection({url: "http://api.ugram.net/users/" + userModel.id + "/pictures"});
+        //const feedCollection = new FeedCollection({url: "http://api.ugram.net/users/" + userModel.id + "/pictures"});
+        const feedCollection = new FeedCollection({url: "http://localhost:3000/users/" + userModel.id + "/pictures"});
         const userProfileView = new UserProfileView({el: "#content", model: userModel, collection: feedCollection});
         userProfileView.render();
     }
@@ -109,7 +112,8 @@ export class AppRouter extends Backbone.Router {
     }
 
     public showUsers(param: string = "") {
-        const userCollection = new UserCollection({url: "http://api.ugram.net/users"});
+        //const userCollection = new UserCollection({url: "http://api.ugram.net/users"});
+        const userCollection = new UserCollection({url: "http://localhost:3000/users"});
         const userCollectionView = new UserCollectionView({el: "#content", collection: userCollection});
         userCollectionView.render();
     }
