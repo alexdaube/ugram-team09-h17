@@ -174,3 +174,4 @@ jspm_packages
 
 #App Specific
 dist
+backend/config/auth.js
