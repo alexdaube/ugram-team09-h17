@@ -9,4 +9,9 @@ gulp ts &&
 gulp sass &&
 cp *.html /www/ &&
 cp dist /www/ -R &&
-cp img /www/ -R
+cp img /www/ -R &&
+cd /home/ec2-user/backend/ &&
+sudo chown ec2-user * -R -f &&
+npm install &&
+forever stopall &&
+forever start /home/ec2-user/backend/src/index.js
