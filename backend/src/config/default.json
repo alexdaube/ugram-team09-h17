@@ -1,9 +1,0 @@
-{
-  "server":{
-    "port": 3000
-  },
-  "repository": {
-    "host": "https://localhost",
-    "port": "/"
-  }
-}

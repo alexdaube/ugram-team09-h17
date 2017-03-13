@@ -1,5 +1,5 @@
 var UserService = require("../services/UserService");
-var config = require('getconfig');
+var config = global.configs.repository;
 
 module.exports = function (app) {
 

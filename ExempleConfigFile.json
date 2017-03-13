@@ -1,0 +1,31 @@
+{
+  "dbConnection": {
+    "host": "domainNameOrIP",
+    "user": "dbUser",
+    "password": "dbPassword",
+    "db": "databaseName",
+    "charset": "collation"
+  },
+  "facebookAuth": {
+    "clientID": "facebookAppId",
+    "clientSecret": "facebookAppSecret",
+    "callbackURL": "http://callback.domain/auth/facebook/callback",
+    "profileURL": "https://graph.facebook.com/v2.5/me?fields=id,name,email"
+  },
+  "server": {
+    "port": 3000
+  },
+  "repository": {
+    "host": "https://localhost",
+    "port": "/"
+  },
+  "sequelizeConfig": {
+    "user": "dbUser",
+    "password": "dbPassword",
+    "db": "databaseName",
+    "config": {
+      "dialect": "mariadb",
+      "port": "3306"
+    }
+  }
+}

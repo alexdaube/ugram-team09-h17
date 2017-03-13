@@ -6,8 +6,8 @@ var DatabaseDTO = require("../../util/DatabaseDTO");
 
 
 var globalPicturesRepository = function (config) {
-    this.host = config.repository.host;
-    this.port = config.repository.port;
+    this.host = config.host;
+    this.port = config.port;
     this.databaseDTO = new DatabaseDTO();
 }
 
