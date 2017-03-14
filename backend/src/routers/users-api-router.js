@@ -47,9 +47,7 @@ module.exports = function (app) {
 }
 
 function isLoggedIn(req, res, next) {
-    return next();
-    // TODO Uncomment the fuck ou't'his shit
-    // if (req.isAuthenticated())
-    //     return next();
-    //res.redirect('/login');
+    if (req.isAuthenticated())
+        return next();
+    res.redirect('/login');
 }
