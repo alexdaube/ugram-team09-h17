@@ -6,7 +6,8 @@ export class UserModel extends Backbone.Model {
 
     constructor(options?: any) {
         super(options);
-        this.urlRoot = "http://api.ugram.net/users";
+        // this.urlRoot = "http://api.ugram.net/users";
+        this.urlRoot = "http://localhost:3000/users";
     };
 
     public defaults() {
