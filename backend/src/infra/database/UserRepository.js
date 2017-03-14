@@ -104,11 +104,11 @@ userRepository.prototype.getUserPictures = function (userId, page, perPage, call
                 pictures.query(function (qb) {
                     qb.limit(perPage)
                         .offset(page * perPage)
-                        //.where({ url: userId})
-                        .where("url", "<>", "null")
+                        .where({ userId: userId})
+                        .where("url", "!=", "null")
+                        //.where("url", "!=", "null")
                 }).fetch()
                     .then(function (newCollection) {
-                        console.log(newCollection)
                         numberOfPictureInTotal = newCollection.length;
                         numberOfPages = Math.ceil(numberOfPictureInTotal / perPage);
                         var newCollectionJSON =
@@ -171,8 +171,6 @@ userRepository.prototype.updatePictureUrl = function (pictureName, callback) {
     
     var pictureNameBuffer = pictureName.split(".");
     
-
-
     new Picture({ id: pictureNameBuffer[0] })
         .fetch()
         .then(function (picture) {

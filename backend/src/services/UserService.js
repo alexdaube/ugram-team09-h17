@@ -103,7 +103,7 @@ userService.prototype.createUserPicture = function (request, returnObject) {
 
         if (!err && response) {
             var newPictureId = response.toJSON().id;
-            var fileName = that.S3ImageUploader.uploadPicture(newPictureId, function (fileName) {
+            that.S3ImageUploader.uploadPicture(newPictureId, function (fileName) {
                 that.persistence.updatePictureUrl(fileName, function (err) {
                     if (!err) {
                         returnObject.status(201).send({ id: newPictureId });

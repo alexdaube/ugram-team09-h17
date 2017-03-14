@@ -11,19 +11,18 @@ S3UploadService.prototype.uploadPicture = function (newPictureId, callback) {
 
 
     var files = fs.readdirSync("./upload");
-
     var fileName = files[0];
 
-    // if(typeof fileName === 'undefined'){
-    //     return callback(null);
-    // }
+    if(typeof fileName === 'undefined'){
+        return callback(null);
+    }
     var extention = fileName.split(".").pop();
     var newFileName = newPictureId + "." + extention;
 
     aws.config.update(s3Auth.keys);
     var s3 = new aws.S3();
 
-    fs.readFile(".upload/" + fileName, function (err, data) {
+    fs.readFile("upload/" + fileName, function (err, data) {
 
         var params = {
             Bucket: "glo-3102-team09",
