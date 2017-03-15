@@ -1,32 +1,32 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
-var User       = require('../models/user');
+var User = require('../models/user');
 
 
-module.exports = function(passport) {
+module.exports = function (passport) {
 
     // used to serialize the user for the session
-    passport.serializeUser(function(user, done) {
+    passport.serializeUser(function (user, done) {
         done(null, user.id);
     });
 
     // used to deserialize the user
-    passport.deserializeUser(function(id, done) {
+    passport.deserializeUser(function (id, done) {
         new User({id: id}).fetch().then(function (user) {
-                done(null, user);
-            });
+            done(null, user);
+        });
     });
 
     // =========================================================================
     // FACEBOOK ================================================================
     // =========================================================================
-    var fbStrategy =  global.configs.facebookAuth;
+    var fbStrategy = global.configs.facebookAuth;
 
     fbStrategy.passReqToCallback = true;  // allows us to pass in the req from our route (lets us check if a user is logged in or not)
     passport.use(new FacebookStrategy(fbStrategy,
         // facebook will send back the token and profile
-        function(req, token, refreshToken, profile, done) {
+        function (req, token, refreshToken, profile, done) {
             // asynchronous
-            process.nextTick(function() {
+            process.nextTick(function () {
                 // check if the user is already logged in
                 if (!req.user) {
                     // find the user in the database based on their facebook id
@@ -39,14 +39,32 @@ module.exports = function(passport) {
                             //if there is no user found with that facebook id, create them
                             console.log("You should be on signup page and asked for more info if needed");
                             console.log("creating new user");
-                            var newUser = new User({
-                                facebookId: profile.id,
-                                token: token,
-                                email: profile.emails[0].value,
-                                userName: "jlabonte"
-                            }).save().then(function (savedUser) {
-                                 return done(null, savedUser);
-                            });
+                            if (req.body.newUser) {
+                                new User({facebookId: profile.id}).fetch().then(function (user) {
+                                    if (user) {
+                                        return done(new Error("Username is already in use"), false);
+                                    } else {
+                                        new User({
+                                            facebookId: profile.id,
+                                            token: token,
+                                            email: profile.emails[0].value,
+                                            userName: ""
+                                        }).save().then(function (savedUser) {
+                                            return done(null, savedUser);
+                                        });
+                                    }
+                                });
+
+                            }
+                            return done(null, false);
+                            // var newUser = new User({
+                            //     facebookId: profile.id,
+                            //     token: token,
+                            //     email: profile.emails[0].value,
+                            //     userName: "jlabonte"
+                            // }).save().then(function (savedUser) {
+                            //      return done(null, savedUser);
+                            // });
                         }
                     });
                 }
