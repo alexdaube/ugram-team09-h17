@@ -6,6 +6,7 @@
     "db": "databaseName",
     "charset": "collation"
   },
+  "dbDialect": "mariasql",
   "facebookAuth": {
     "clientID": "facebookAppId",
     "clientSecret": "facebookAppSecret",
@@ -26,6 +27,15 @@
     "config": {
       "dialect": "mariadb",
       "port": "3306"
+    },
+    "session": {
+      "secret": "someSessionSecret"
+    },
+    "s3Auth": {
+      "keys": {
+        "secretAccessKey": "secretAccessKey",
+        "accessKeyId": "accessKeyId"
+      }
     }
   }
 }
