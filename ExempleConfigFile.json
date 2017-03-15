@@ -1,12 +1,14 @@
 {
-  "dbConnection": {
-    "host": "domainNameOrIP",
-    "user": "dbUser",
-    "password": "dbPassword",
-    "db": "databaseName",
-    "charset": "collation"
+  "bookshelf": {
+    "dbDialect": "mariasql",
+    "dbConnection": {
+      "host": "domainNameOrIP",
+      "user": "dbUser",
+      "password": "dbPassword",
+      "db": "databaseName",
+      "charset": "collation"
+    }
   },
-  "dbDialect": "mariasql",
   "facebookAuth": {
     "clientID": "facebookAppId",
     "clientSecret": "facebookAppSecret",
