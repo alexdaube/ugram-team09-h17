@@ -57,7 +57,7 @@ userRepository.prototype.get = function (userId, callback) {
         }).catch(function (err) {
             handleError(400, null, callback);
         });
-}
+};
 
 // DONE
 userRepository.prototype.update = function (userId, body, callback) {

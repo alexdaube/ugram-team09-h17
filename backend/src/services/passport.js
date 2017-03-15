@@ -29,6 +29,7 @@ module.exports = function (passport) {
             process.nextTick(function () {
                 // check if the user is already logged in
                 if (!req.user) {
+
                     // find the user in the database based on their facebook id
                     new User({facebookId: profile.id}).fetch().then(function (user) {
                         // if the user is found, then log them in
@@ -39,32 +40,24 @@ module.exports = function (passport) {
                             //if there is no user found with that facebook id, create them
                             console.log("You should be on signup page and asked for more info if needed");
                             console.log("creating new user");
-                            if (req.body.newUser) {
-                                new User({facebookId: profile.id}).fetch().then(function (user) {
-                                    if (user) {
-                                        return done(new Error("Username is already in use"), false);
-                                    } else {
-                                        new User({
-                                            facebookId: profile.id,
-                                            token: token,
-                                            email: profile.emails[0].value,
-                                            userName: ""
-                                        }).save().then(function (savedUser) {
-                                            return done(null, savedUser);
-                                        });
-                                    }
+                            if (req.cookies.newSignupUserName) {
+                                new User({
+                                    facebookId: profile.id,
+                                    token: token,
+                                    email: profile.emails[0].value,
+                                    userName: req.cookies.newSignupUserName
+                                }).save().then(function (savedUser) {
+                                    return done(null, savedUser);
+                                }).catch(function (err) {
+                                    req.signupNeeded = true;
+                                    req.signupError = new Error('User already exists');
+                                    return done(null, new User({id: "nonExistentUser"}));
                                 });
 
+                            } else {
+                                req.signupNeeded = true;
+                                return done(null, new User({id: "nonExistentUser"}));
                             }
-                            return done(null, false);
-                            // var newUser = new User({
-                            //     facebookId: profile.id,
-                            //     token: token,
-                            //     email: profile.emails[0].value,
-                            //     userName: "jlabonte"
-                            // }).save().then(function (savedUser) {
-                            //      return done(null, savedUser);
-                            // });
                         }
                     });
                 }
