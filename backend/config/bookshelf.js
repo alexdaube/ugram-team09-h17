@@ -1,5 +1,5 @@
 var knex = require('knex')({
-    client: 'mysql',
+    client: 'mariasql',
     connection: global.configs.dbConnection
 });
 module.exports = require('bookshelf')(knex);

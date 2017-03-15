@@ -4,7 +4,7 @@
   "description": "Packs de départs pour développement avancé d'application web",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js ../../../config.json",
+    "start": "node src/index.js ../../config.json",
     "dev": "nodemon src/index.js",
     "test": "istanbul cover _mocha -- -u exports -R spec test/**/*",
     "coverage": "opn ./coverage/lcov-report/index.html"
@@ -31,11 +31,13 @@
     "ejs": "^2.5.2",
     "express": "^4.14.0",
     "express-session": "^1.15.1",
-    "formidable": "^1.1.1",
+    "fs": "0.0.1-security",
     "jwt-simple": "^0.5.1",
     "knex": "^0.12.7",
     "mongoose": "^4.8.4",
     "morgan": "^1.7.0",
+    "multer": "^1.3.0",
+    "multer-s3": "^2.5.0",
     "mysql": "^2.13.0",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
@@ -55,3 +57,4 @@
     "opn-cli": "^3.1.0"
   }
 }
+

@@ -1,12 +1,13 @@
 var UserRepository = require("../infra/database/UserRepository");
+var S3UploadService = require("./S3UploadService");
 var ErrorHandler = require("../common/errors");
-
 var path = require('path');
-var formidable = require('formidable');
-var fs = require('fs');
+
 
 var userService = function (config) {
     this.persistence = new UserRepository(config);
+    this.S3ImageUploader = new S3UploadService();
+
 };
 
 userService.prototype.setPersistance = function (persistence) {
@@ -51,7 +52,8 @@ userService.prototype.updateUser = function (request, returnObject) {
     var userId = urlParts[2];
     var body = request.body;
 
-    if(userId != global.user.toJSON().userName){
+
+    if (userId != global.user.toJSON().userName) {
         returnObject.status(403).json("Editing on forbidden user account for current authentication");
         return;
     }
@@ -87,69 +89,33 @@ userService.prototype.getUserPictures = function (request, returnObject) {
 
 userService.prototype.createUserPicture = function (request, returnObject) {
 
-    console.log(request);
-    var path = request.path;
-    var urlParts = path.split('/');
+
+    var urlPath = request.path;
+    var urlParts = urlPath.split('/');
     var userId = urlParts[2];
     var body = request.body;
+    var that = this;
 
-    if(userId != global.user.toJSON().userName){
+
+    if (userId != global.user.toJSON().userName) {
         returnObject.status(403).json("Editing on forbidden user account for current authentication");
         return;
     }
 
-    // HOLY MOLY ==> path.extname(req.files.file.name) <== extname :O:O
-
     this.persistence.createPicture(userId, body, function (err, response) {
+
         if (!err && response) {
-
-            var tempPath = request.files.file.path;
-            var targetName = response.toJSON().id;
-            var extensionName = path.extname(req.files.file.name).toLowerCase();
-            var fullTargetName = targetName + extensionName;
-            var targetPath = path.resolve('../../upload/' + fullTargetName);
-
-            var form = new formidable.IncomingForm();
-
-            // specify that we want to allow the user to upload multiple files in a single request
-            form.multiples = true;
-
-            // store all uploads in the /uploads directory
-            form.uploadDir = path.join('../../upload/');
-
-            // every time a file has been uploaded successfully,
-            // rename it to it's orignal name
-            form.on('file', function (field, file) {
-                fs.rename(tempPath, targetName);
+            var newPictureId = response.toJSON().id;
+            that.S3ImageUploader.uploadPicture(newPictureId, function (fileName) {
+                that.persistence.updatePictureUrl(fileName, function (err) {
+                    if (!err) {
+                        returnObject.status(201).send({ id: newPictureId });
+                    }
+                    else {
+                        returnObject.status(500).send("Internal server error");
+                    }
+                });
             });
-
-            // log any errors that occur
-            form.on('error', function (err) {
-                console.log('An error has occured: \n' + err);
-            });
-
-            // once all the files have been uploaded, send a response to the client
-            form.on('end', function () {
-                //console.log(response.toJSON().id)
-                returnObject.status(201).json(response.toJSON().id);
-            });
-
-            // parse the incoming request containing the form data
-            form.parse(req);
-            // var tempPath = request.files.file.path;
-            // var targetName = response.toJSON().id;
-            // var extensionName = path.extname(req.files.file.name).toLowerCase();
-            // var fullTargetName = targetName + extensionName;
-            // var targetPath = path.resolve('../../upload/' + fullTargetName);
-
-
-            // fs.rename(tempPath, targetPath, function (err) {
-            //     if (err) throw err;
-            //     console.log("Upload completed!");
-            // });
-
-            // //console.log(response.toJSON().id)
-            // returnObject.status(201).json(response.toJSON().id);
         }
         else {
             console.warn(err, response);
@@ -164,7 +130,7 @@ userService.prototype.deleteUserPicture = function (request, returnObject) {
     var userId = urlParts[2];
     var pictureId = urlParts[4];
 
-    if(userId != global.user.toJSON().userName){
+    if (userId != global.user.toJSON().userName) {
         returnObject.status(403).json("Editing on forbidden user account for current authentication");
         return;
     }
@@ -204,7 +170,7 @@ userService.prototype.updateUserPicture = function (request, returnObject) {
     var pictureId = urlParts[4];
     var body = request.body;
 
-    if(userId != global.user.toJSON().userName){
+    if (userId != global.user.toJSON().userName) {
         returnObject.status(403).json("Editing on forbidden user account for current authentication");
         return;
     }

@@ -1,5 +1,6 @@
 var UserService = require("../services/UserService");
 var config = global.configs.repository;
+var LocalUploadService = require("../services/LocalUploadService");
 
 module.exports = function (app) {
 
@@ -23,7 +24,7 @@ module.exports = function (app) {
         userService.getUserPictures(req, res);
     });
 
-    app.post("/users/:userId/pictures", isLoggedIn, function (req, res) {
+    app.post("/users/:userId/pictures", isLoggedIn, LocalUploadService.upload.single("file"), function (req, res) {
         var userService = new UserService(config);
         userService.createUserPicture(req, res);
     });
@@ -47,8 +48,7 @@ module.exports = function (app) {
 
 function isLoggedIn(req, res, next) {
     return next();
-    // TODO Uncomment the fuck ou't'his shit
     // if (req.isAuthenticated())
     //     return next();
-    //res.redirect('/login');
+    // res.redirect('/login');
 }

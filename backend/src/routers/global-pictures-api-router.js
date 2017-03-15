@@ -10,8 +10,7 @@ app.get('/pictures', isLoggedIn, function(req, res) {
 
 function isLoggedIn(req, res, next) {
     return next();
-    // TODO Uncomment the fuck ou't'his shit
     // if (req.isAuthenticated())
     //     return next();
-    //res.redirect('/login');
+    // res.redirect('/login');
 }

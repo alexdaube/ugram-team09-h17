@@ -1,6 +1,5 @@
 //var Request = require('request');
 var ErrorHandler = require("../../common/errors");
-var Request = require("./DatabaseMock");
 const Picture = require("../../models/picture");
 var DatabaseDTO = require("../../util/DatabaseDTO");
 
@@ -8,6 +7,10 @@ var DatabaseDTO = require("../../util/DatabaseDTO");
 var globalPicturesRepository = function (config) {
     this.host = config.host;
     this.port = config.port;
+
+    // this.host = config.repository.host;
+    // this.port = config.repository.port;
+
     this.databaseDTO = new DatabaseDTO();
 }
 
@@ -42,7 +45,6 @@ globalPicturesRepository.prototype.get = function (page, perPage, callback) {
         }
 
     }).catch(function (err) {
-        console.log(err);
         handleError(400, null, callback);
     });
 }

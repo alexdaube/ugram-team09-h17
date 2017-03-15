@@ -1,3 +1,4 @@
+
 if (process.argv.length !== 3){
     throw new Error('missing config file argument');
 }
@@ -7,7 +8,6 @@ else {
 
 const express = require('express');
 const bodyParser = require('body-parser');
-//const config = require('getconfig');
 const cors = require('cors');
 const Database = require("./infra/database/Database");
 
@@ -21,9 +21,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const Promise = require('bluebird');
 const errors = require('./common/errors');
-// const logger = require('./common/logger');
 const passport = require('passport');
-//const router = require('./router');
 const session = require('express-session');
 
 
@@ -41,14 +39,6 @@ const corsOptions = {
 };
 
 // configuration ===============================================================
-
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({extended: false}));
-
-// app.use("/", basicApiRouter);
-// app.use("/pictures", globalPicturesApiRouter);
-// app.use("/users", userApi);
-
 const port = process.env.PORT || global.configs.server.port;
 
 require('./services/passport')(passport); // pass passport for configuration
@@ -57,9 +47,8 @@ require('./services/passport')(passport); // pass passport for configuration
 // logging, parsing, and session handling.
 app.use(require('morgan')('combined'));
 app.use(cookieParser()); // read cookies (needed for auth)
-//app.use(bodyParser.({uploadDir: '../upload'}));
-app.use(bodyParser.json({limit: '50mb'})); // get information from html forms
-app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
+app.use(bodyParser.json()); // get information from html forms
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
 

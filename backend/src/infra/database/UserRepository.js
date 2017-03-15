@@ -1,5 +1,4 @@
 var ErrorHandler = require("../../common/errors")
-var Request = require("./DatabaseMock");
 const User = require('../../models/user');
 const Picture = require("../../models/picture");
 const Mention = require("../../models/mention");
@@ -10,6 +9,8 @@ var DatabaseDTO = require("../../util/DatabaseDTO");
 var userRepository = function (config) {
     this.host = config.host;
     this.port = config.port;
+    // this.host = config.repository.host;
+    // this.port = config.repository.port;
     this.databaseDTO = new DatabaseDTO();
 }
 
@@ -21,37 +22,41 @@ userRepository.prototype.getAll = function (page, perPage, callback) {
     var numberOfPages;
     if (typeof perPage === 'undefined') { perPage = 20 };
 
-    new User().fetchAll().then(function (users) {
-        numberOfPictureInTotal = users.length;
-        numberOfPages = Math.ceil(numberOfPictureInTotal / perPage);
-        users.query(function (qb) {
-            qb.limit(perPage).offset(page * perPage)
-        }).fetch()
-            .then(function (newCollection) {
-                var newCollectionJSON =
-                    {
-                        items: that.databaseDTO.getUserJSON(newCollection),
-                        totalPages: numberOfPages,
-                        totalEntries: numberOfPictureInTotal
-                    }
+    new User()
+        .fetchAll()
+        .then(function (users) {
+            numberOfPictureInTotal = users.length;
+            numberOfPages = Math.ceil(numberOfPictureInTotal / perPage);
+            users.query(function (qb) {
+                qb.limit(perPage).offset(page * perPage)
+            }).fetch()
+                .then(function (newCollection) {
+                    var newCollectionJSON =
+                        {
+                            items: that.databaseDTO.getUserJSON(newCollection),
+                            totalPages: numberOfPages,
+                            totalEntries: numberOfPictureInTotal
+                        }
 
-                return callback(null, newCollectionJSON);
-            })
-    }).catch(function (err) {
-        handleError(400, null, callback);
-    });
+                    return callback(null, newCollectionJSON);
+                })
+        }).catch(function (err) {
+            handleError(400, null, callback);
+        });
 }
 
 // DONE
 userRepository.prototype.get = function (userId, callback) {
 
     var that = this;
-    new User({ userName: userId }).fetch().then(function (user) {
-        var newUserJSON = that.databaseDTO.getUserJSON(user);
-        return callback(null, newUserJSON);
-    }).catch(function (err) {
-        handleError(400, null, callback);
-    });
+    new User({ userName: userId })
+        .fetch()
+        .then(function (user) {
+            var newUserJSON = that.databaseDTO.getUserJSON(user);
+            return callback(null, newUserJSON);
+        }).catch(function (err) {
+            handleError(400, null, callback);
+        });
 }
 
 // DONE
@@ -101,7 +106,9 @@ userRepository.prototype.getUserPictures = function (userId, page, perPage, call
                 pictures.query(function (qb) {
                     qb.limit(perPage)
                         .offset(page * perPage)
-                        .where({ userId: userId })
+                        .where({ userId: userId})
+                        .where("url", "!=", "null")
+                        //.where("url", "!=", "null")
                 }).fetch()
                     .then(function (newCollection) {
                         numberOfPictureInTotal = newCollection.length;
@@ -119,7 +126,6 @@ userRepository.prototype.getUserPictures = function (userId, page, perPage, call
                 return callback(null, {});
             }
         }).catch(function (err) {
-            console.log(err);
             handleError(400, null, callback);
         });
 }
@@ -140,16 +146,48 @@ userRepository.prototype.createPicture = function (userId, body, callback) {
             })
                 .save()
                 .then(function (picture) {
-                    body.mentions.forEach(function (mention) {
-                        new Mention({ mention: mention, picture_id: picture.id })
-                            .save();
-                    })
-                    body.tags.forEach(function (tag) {
-                        new Tag({ tag: tag, picture_id: picture.id })
-                            .save();
-                    })
+                    if (body.mentions != "null") {
+                        var mentions = body.mentions.split(",");
+                        mentions.forEach(function (mention) {
+                            new Mention({ mention: mention, picture_id: picture.id })
+                                .save();
+                        })
+                    }
+                    if (body.tags != "null") {
+                        var tags = body.tags.split(",");
+                        tags.forEach(function (tag) {
+                            new Tag({ tag: tag, picture_id: picture.id })
+                                .save();
+                        })
+                    }
                     return callback(null, picture);
                 })
+        })
+}
+
+userRepository.prototype.updatePictureUrl = function (pictureName, callback) {
+    
+    if(pictureName == null){
+        return callback("Error"); 
+    }
+    
+    var pictureNameBuffer = pictureName.split(".");
+    
+    new Picture({ id: pictureNameBuffer[0] })
+        .fetch()
+        .then(function (picture) {
+            if(picture){
+                picture
+                .save({ url: global.configs.s3Bucket.imageFolderUrl + pictureName })
+                .then(function () {
+                    return callback(null)
+                }).catch(function (err) {
+                    return callback(err);
+                })
+            }
+            else {
+                return callback("Error");
+            }
         })
 }
 
@@ -158,9 +196,6 @@ userRepository.prototype.deletePicture = function (userId, pictureId, callback) 
     var that = this;
     var numberOfPictureInTotal;
     var numberOfPages;
-
-    console.log(userId);
-    console.log(pictureId);
 
     if (typeof perPage === 'undefined') { perPage = 20 };
 
