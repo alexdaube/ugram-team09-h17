@@ -26,6 +26,15 @@
     "config": {
       "dialect": "mariadb",
       "port": "3306"
+    },
+    "session": {
+      "secret": "someSessionSecret"
+    },
+    "s3Auth": {
+      "keys": {
+        "secretAccessKey": "secretAccessKey",
+        "accessKeyId": "accessKeyId"
+      }
     }
   }
 }

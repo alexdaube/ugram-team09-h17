@@ -1,6 +1,5 @@
 var fs = require("fs");
 var aws = require("aws-sdk");
-//var s3Auth = require('./../../config/s3Auth');
 
 
 var S3UploadService = function () {
