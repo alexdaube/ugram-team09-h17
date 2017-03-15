@@ -1,5 +1,5 @@
 var knex = require('knex')({
-    client: global.configs.dbDialect,
-    connection: global.configs.dbConnection
+    client: global.configs.bookshelf.dbDialect,
+    connection: global.configs.bookshelf.dbConnection
 });
 module.exports = require('bookshelf')(knex);

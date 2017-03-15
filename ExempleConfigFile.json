@@ -1,12 +1,14 @@
 {
-  "dbConnection": {
-    "host": "domainNameOrIP",
-    "user": "dbUser",
-    "password": "dbPassword",
-    "db": "databaseName",
-    "charset": "collation"
+  "bookshelf": {
+    "dbDialect": "mariasql",
+    "dbConnection": {
+      "host": "domainNameOrIP",
+      "user": "dbUser",
+      "password": "dbPassword",
+      "db": "databaseName",
+      "charset": "collation"
+    }
   },
-  "dbDialect": "mariasql",
   "facebookAuth": {
     "clientID": "facebookAppId",
     "clientSecret": "facebookAppSecret",
@@ -32,10 +34,13 @@
       "secret": "someSessionSecret"
     },
     "s3Auth": {
-      "keys": {
-        "secretAccessKey": "secretAccessKey",
-        "accessKeyId": "accessKeyId"
-      }
+      "secretAccessKey": "secretAccessKey",
+      "accessKeyId": "accessKeyId"
+    },
+    "s3Bucket": {
+      "bucketName": "teamName",
+      "imageFolderPath": "imagesPath",
+      "imageFolderUrl": "imageFolderUrl"
     }
   }
 }
