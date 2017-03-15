@@ -1,6 +1,13 @@
+
+if (process.argv.length !== 3){
+    throw new Error('missing config file argument');
+}
+else {
+    global.configs = require(process.argv[2]);
+}
+
 const express = require('express');
 const bodyParser = require('body-parser');
-const config = require('getconfig');
 const cors = require('cors');
 const Database = require("./infra/database/Database");
 
@@ -32,7 +39,7 @@ const corsOptions = {
 };
 
 // configuration ===============================================================
-const port = process.env.PORT || config.server.port;
+const port = process.env.PORT || global.configs.server.port;
 
 require('./services/passport')(passport); // pass passport for configuration
 

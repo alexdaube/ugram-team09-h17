@@ -1,12 +1,11 @@
 var Sequelize = require('sequelize')
-  , sequelize = new Sequelize('ugram', 'root', 'root', {
-      dialect: "mariadb", // or 'sqlite', 'postgres', 'mariadb'
-      port:    3306, // or 5432 (for postgres)
-    });
-
+  , sequelize =
+    new Sequelize(global.configs.sequelizeConfig.db,
+        global.configs.sequelizeConfig.user,
+        global.configs.sequelizeConfig.password,
+        global.configs.sequelizeConfig.config);
 
 module.exports = class DataBase {
-
     connect(){
         sequelize.authenticate()
         .then(function(err) {

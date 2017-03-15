@@ -7,6 +7,7 @@ var path = require('path');
 var userService = function (config) {
     this.persistence = new UserRepository(config);
     this.S3ImageUploader = new S3UploadService();
+
 };
 
 userService.prototype.setPersistance = function (persistence) {
@@ -51,6 +52,7 @@ userService.prototype.updateUser = function (request, returnObject) {
     var userId = urlParts[2];
     var body = request.body;
 
+
     if (userId != global.user.toJSON().userName) {
         returnObject.status(403).json("Editing on forbidden user account for current authentication");
         return;
@@ -86,6 +88,7 @@ userService.prototype.getUserPictures = function (request, returnObject) {
 }
 
 userService.prototype.createUserPicture = function (request, returnObject) {
+
 
     var urlPath = request.path;
     var urlParts = urlPath.split('/');

@@ -7,8 +7,10 @@ var DatabaseDTO = require("../../util/DatabaseDTO");
 
 
 var userRepository = function (config) {
-    this.host = config.repository.host;
-    this.port = config.repository.port;
+    this.host = config.host;
+    this.port = config.port;
+    // this.host = config.repository.host;
+    // this.port = config.repository.port;
     this.databaseDTO = new DatabaseDTO();
 }
 
@@ -176,7 +178,7 @@ userRepository.prototype.updatePictureUrl = function (pictureName, callback) {
         .then(function (picture) {
             if(picture){
                 picture
-                .save({ url: "https://s3.amazonaws.com/glo-3102-team09/img/uploadedImg/" + pictureName })
+                .save({ url: global.configs.s3Bucket.imageFolderUrl + pictureName })
                 .then(function () {
                     return callback(null)
                 }).catch(function (err) {

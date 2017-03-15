@@ -1,10 +1,9 @@
 var GlobalPicturesService = require("../services/GlobalPicturesService");
-var config = require('getconfig');
 
 module.exports = function(app) {
 
 app.get('/pictures', isLoggedIn, function(req, res) {
-        var globalPicturesService = new GlobalPicturesService(config);
+        var globalPicturesService = new GlobalPicturesService(global.configs.repository);
         globalPicturesService.getAllPictures(req, res);
     });
 }

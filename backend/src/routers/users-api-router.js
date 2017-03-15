@@ -1,6 +1,6 @@
 var UserService = require("../services/UserService");
+var config = global.configs.repository;
 var LocalUploadService = require("../services/LocalUploadService");
-var config = require('getconfig');
 
 module.exports = function (app) {
 

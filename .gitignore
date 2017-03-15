@@ -177,3 +177,5 @@ dist
 backend/config/auth.js
 backend/config/s3Auth.js
 backend/upload
+config.json
+

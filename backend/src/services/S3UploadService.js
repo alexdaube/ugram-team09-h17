@@ -1,6 +1,6 @@
 var fs = require("fs");
 var aws = require("aws-sdk");
-var s3Auth = require('./../../config/s3Auth');
+//var s3Auth = require('./../../config/s3Auth');
 
 
 var S3UploadService = function () {
@@ -19,14 +19,14 @@ S3UploadService.prototype.uploadPicture = function (newPictureId, callback) {
     var extention = fileName.split(".").pop();
     var newFileName = newPictureId + "." + extention;
 
-    aws.config.update(s3Auth.keys);
+    aws.config.update(global.configs.s3Auth);
     var s3 = new aws.S3();
 
     fs.readFile("upload/" + fileName, function (err, data) {
 
         var params = {
-            Bucket: "glo-3102-team09",
-            Key: 'img/uploadedImg/' + newFileName,
+            Bucket: global.configs.s3Bucket.bucketName,
+            Key: global.configs.s3Bucket.imageFolderPath + newFileName,
             Body: data
         };
 
