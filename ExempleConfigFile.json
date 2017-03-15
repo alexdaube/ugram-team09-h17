@@ -32,10 +32,13 @@
       "secret": "someSessionSecret"
     },
     "s3Auth": {
-      "keys": {
-        "secretAccessKey": "secretAccessKey",
-        "accessKeyId": "accessKeyId"
-      }
+      "secretAccessKey": "secretAccessKey",
+      "accessKeyId": "accessKeyId"
+    },
+    "s3Bucket": {
+      "bucketName": "teamName",
+      "imageFolderPath": "imagesPath",
+      "imageFolderUrl": "imageFolderUrl"
     }
   }
 }
