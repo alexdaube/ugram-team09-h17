@@ -88,28 +88,29 @@ export class RegisterView extends Backbone.View<LoginModel> {
 
     public facebookLogin(auth) {
         // Save the social token
-        debugger;
         this.socialToken = auth.authResponse.access_token;
 
         // Auth with our own server using the social token
-        this.authenticate(auth.network, this.socialToken).then((token) => {
-            debugger;
-            this.serverToken = token;
+        this.authenticate(auth.network, this.socialToken).then((response) => {
+            this.serverToken = response.token;
             //headers: { authorization: localStorage.getItem('token') }
-            //localStorage.setItem('token', response.data.token);
             //localStorage.removeItem('token');
+            localStorage.setItem('token', response.token);
+        }).catch((err) => {
+            debugger;
+            var hello = "iam here"
         });
     }
 
     private authenticate(network, socialToken) {
         return new Promise((resolve, reject) => {
             request
-                .post('http://localhost:3000/authentication')
+                .post("http://localhost:3000/authentication")
                 .send({
                     network: network,
                     socialToken: socialToken
                 })
-                .set('Accept', 'application/json')
+                .set("Accept", "application/json")
                 .end(function (err, res) {
                     if (err) {
                         reject(err);
