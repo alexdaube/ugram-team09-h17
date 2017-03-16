@@ -41,7 +41,7 @@ const corsOptions = {
 // configuration ===============================================================
 const port = process.env.PORT || global.configs.server.port;
 
-require('./services/passport')(passport); // pass passport for configuration
+//require('./services/passport')(passport); // pass passport for configuration
 
 // Use application-level middleware for common functionality, including
 // logging, parsing, and session handling.
@@ -56,8 +56,8 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
+//app.use(passport.initialize());
+//app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 //app.use(errors.genericErrorHandler);
@@ -65,7 +65,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 app.use(cors(corsOptions));
 
 // routes ======================================================================
-authentificationRouter(app, passport); // load our routes and pass in our app and fully configured passport
+authentificationRouter(app); // load our routes and pass in our app and fully configured passport
 globalPicturesApiRouter(app);// load our routes and pass in our app and fully configured passport
 userApiRouter(app);
 
