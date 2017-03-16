@@ -18,7 +18,6 @@ export class RegisterView extends Backbone.View<LoginModel> {
 
     public events() {
         return <Backbone.EventsHash> {
-            //"auth.login": this.facebookLogin,
             "click #loginButton": () => {
                 hello('facebook').login({
                     scope: 'email'
@@ -29,57 +28,6 @@ export class RegisterView extends Backbone.View<LoginModel> {
             },
         };
     }
-
-    // new deps => hellojs, superagent
-    // Front end stuff
-    // Init hello lib with facebook client id as param
-
-//     hello.init({
-//     facebook: '359288236870',
-//     windows: '000000004403AD10'
-// });
-
-
-    // Put a click event with a callback => facebookLogin
-
-    // have 2 view wide variables
-    // socialToken
-    // serverToken
-
-    // on auth.login event
-    // save socialtoken
-    // call a callback to communicate with own server
-//     var socialToken;
-//     var serverToken;
-//
-//     hello.on('auth.login', function (auth) {
-//     // Save the social token
-//     socialToken = auth.authResponse.access_token;
-//
-//     // Auth with our own server using the social token
-//     authenticate(auth.network, socialToken).then(function (token) {
-//         serverToken = token;
-//     });
-// });
-//
-//     function authenticate(network, socialToken) {
-//     return new Promise(function (resolve, reject) {
-//         request
-//             .post('/api/auth')
-//             .send({
-//                 network: network,
-//                 socialToken: socialToken
-//             })
-//             .set('Accept', 'application/json')
-//             .end(function(err, res){
-//                 if (err) {
-//                     reject(err);
-//                 } else {
-//                     resolve(res);
-//                 }
-//             });
-//     });
-// }
 
     public render() {
         this.$el.html(this.template(this.model.toJSON()));

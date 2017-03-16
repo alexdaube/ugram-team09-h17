@@ -1,6 +1,10 @@
+var passportService = require('../services/passport');
+var passport = require('passport');
 var UserService = require("../services/UserService");
 var config = global.configs.repository;
 var LocalUploadService = require("../services/LocalUploadService");
+
+var isLoggedIn = passport.authenticate('jwt', {session: false});
 
 module.exports = function (app) {
 
@@ -44,11 +48,4 @@ module.exports = function (app) {
         userService.updateUserPicture(req, res);
     });
 
-}
-
-function isLoggedIn(req, res, next) {
-    return next();
-    // if (req.isAuthenticated())
-    //     return next();
-    // res.redirect('/login');
-}
+};
