@@ -12,18 +12,17 @@ export class RegisterView extends Backbone.View<LoginModel> {
     constructor(options?: Backbone.ViewOptions<LoginModel>) {
         super(_.extend({el: "#content"}, options));
         this.template = require("./RegisterTemplate.ejs") as Function;
-        hello.init({facebook: "885865444886900"});
-        this.facebookLogin = this.facebookLogin.bind(this);
+        hello.init({facebook: "760512777458970"});
+        this.facebookRegister = this.facebookRegister.bind(this);
     }
 
     public events() {
         return <Backbone.EventsHash> {
-            "click #loginButton": () => {
-                hello('facebook').login({
-                    scope: 'email'
+            "click #registerButton": () => {
+                hello("facebook").login({
+                    scope: "email",
                 }).then((auth) => {
-                    this.facebookLogin(auth);
-                    console.log(auth);
+                    this.facebookRegister(auth);
                 });
             },
         };
@@ -34,32 +33,30 @@ export class RegisterView extends Backbone.View<LoginModel> {
         return this;
     }
 
-    public facebookLogin(auth) {
+    public facebookRegister(auth) {
         // Save the social token
         this.socialToken = auth.authResponse.access_token;
-
+        const userName = $("#username-input").val();
         // Auth with our own server using the social token
-        this.authenticate(auth.network, this.socialToken).then((response) => {
-            this.serverToken = response.token;
-            //headers: { authorization: localStorage.getItem('token') }
-            //localStorage.removeItem('token');
-            localStorage.setItem('token', response.token);
+        this.signup(auth.network, this.socialToken, userName).then((response) => {
+            this.serverToken = response.body.token;
+            localStorage.setItem("token", response.body.token);
         }).catch((err) => {
-            debugger;
-            var hello = "iam here"
+            // TODO handle error
         });
     }
 
-    private authenticate(network, socialToken) {
+    private signup(network, socialToken, userName) {
         return new Promise((resolve, reject) => {
             request
-                .post("http://localhost:3000/authentication")
+                .post("http://localhost:3000/signup")
                 .send({
-                    network: network,
-                    socialToken: socialToken
+                    network,
+                    socialToken,
+                    userName,
                 })
                 .set("Accept", "application/json")
-                .end(function (err, res) {
+                .end((err, res) => {
                     if (err) {
                         reject(err);
                     } else {

@@ -1,8 +1,8 @@
 import * as Backbone from "backbone";
 
+import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 import {PictureView} from "./PictureView";
 import {ShowMoreView} from "./ShowMoreView";
-import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 import {InputValidator} from "../util/InputValidator";
 
 export class UserProfileView extends Backbone.View<any> {
@@ -27,6 +27,7 @@ export class UserProfileView extends Backbone.View<any> {
 
     public render() {
         this.model.fetch({
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
             success: () => {
                 this.$el.html(this.template({user: this.model}));
                 this.$el.first().removeClass("contentFeed");

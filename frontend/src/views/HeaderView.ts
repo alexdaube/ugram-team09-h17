@@ -1,6 +1,7 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
 
+import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 import {SearchTextView} from "./SearchTextView";
 
 export class HeaderView extends Backbone.View<any> {
@@ -48,6 +49,7 @@ export class HeaderView extends Backbone.View<any> {
 
     private showSearch() {
         this.collection.fetch({
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
             data: {
                 page: this.nextPageToFetch,
                 perPage: this.usersPerPageSearch,

@@ -1,6 +1,7 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
 
+import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 import {ShowMoreView} from "./ShowMoreView";
 import {PostView} from "./PostView";
 
@@ -28,6 +29,7 @@ export class FeedCollectionView extends Backbone.View<any> {
 
     private showPictures() {
         this.collection.fetch({
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
             data: {
                 page: this.nextPageToFetch,
                 perPage: this.picturesPerPage,

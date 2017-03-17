@@ -1,7 +1,7 @@
 import * as Backbone from "backbone";
 import * as $ from "jquery";
 import * as _ from "underscore";
-
+import { HeaderRequestGenerator } from "../util/HeaderRequestGenerator";
 import {ShowMoreView} from "./ShowMoreView";
 import {UserView} from "./UserView";
 import {SearchUserView} from "./SearchUserView";
@@ -59,6 +59,7 @@ export class UserCollectionView extends Backbone.View<any> {
 
     private showPictures() {
         this.collection.fetch({
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
             data: {
                 page: this.nextPageToFetch,
                 perPage: this.usersPerPage,
