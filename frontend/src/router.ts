@@ -16,8 +16,6 @@ import {HeaderModel} from "./models/HeaderModel";
 import {FooterView} from "./views/FooterView";
 import {FooterModel} from "./models/FooterModel";
 
-import {RegisterView} from "./views/RegisterView";
-
 import {LoginView} from "./views/LoginView";
 import {LoginModel} from "./models/LoginModel";
 
@@ -32,7 +30,6 @@ export class AppRouter extends Backbone.Router {
         "": "defaultRoute",
         "login": "showLogin",
         "home": "showFeed",
-        "register": "showRegister",
         "setting": "showUserSetting",
         "picture": "showAddPicture",
         "users": "showUsers",
@@ -60,12 +57,6 @@ export class AppRouter extends Backbone.Router {
 
     public defaultRoute() {
         this.showLogin();
-    }
-
-    public showRegister() {
-        const loginModel = new LoginModel({});
-        const registerView = new RegisterView({model: loginModel});
-        registerView.render();
     }
 
     public showLogin() {

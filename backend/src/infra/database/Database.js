@@ -14,4 +14,4 @@ module.exports = class DataBase {
             console.log('Unable to connect to the database:', err);
         });
     }
-}
+};

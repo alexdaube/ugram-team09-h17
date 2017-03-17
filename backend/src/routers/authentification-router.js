@@ -19,7 +19,7 @@ module.exports = function (app) {
 
     app.post('/signup', AuthenticationController.signup);
 
-    app.post('/authentication', AuthenticationController.authenticate);
+    app.post('/login', AuthenticationController.login);
 
 
     // PROFILE SECTION =========================

@@ -10,7 +10,7 @@ export class LoginView extends Backbone.View<LoginModel> {
     private template: Function;
     private socialToken: string;
     private network: string;
-    private signupNeeded: boolean = true;
+    private signupNeeded: boolean = false;
 
     constructor(options?: Backbone.ViewOptions<LoginModel>) {
         super(_.extend({el: "#content"}, options));
@@ -18,12 +18,16 @@ export class LoginView extends Backbone.View<LoginModel> {
         hello.init({facebook: "760512777458970"});
         this.login = this.login.bind(this);
         this.signup = this.signup.bind(this);
+        this.loginSucessCallback = this.loginSucessCallback.bind(this);
+        this.loginErrorCallBack = this.loginErrorCallBack.bind(this);
+        this.signupSuccessCallback = this.signupSuccessCallback.bind(this);
+        this.signupErrorCallback = this.signupErrorCallback.bind(this);
     }
 
     public events() {
         return <Backbone.EventsHash> {
-            "click #loginButton": () => {this.login()},
-            "click #registerButton": () => {this.signup()},
+            "click #loginButton": () => { this.login(); },
+            "click #registerButton": () => { this.signup(); },
         };
     }
 
@@ -46,7 +50,7 @@ export class LoginView extends Backbone.View<LoginModel> {
 
         if (InputValidator.isURLSafe(userName)) {
             this.showError("User name cannot contain anything other than numbers, letters, underscores or dashes. It must not have any spaces either!");
-            return
+            return;
         }
 
         const params = {
@@ -54,29 +58,29 @@ export class LoginView extends Backbone.View<LoginModel> {
             socialToken: this.socialToken,
             userName,
         };
-        // this.authenticate('signup', params)
-        //     .then(this.signupSuccessCallback)
-        //     .catch(this.signupErrorCallback);
-    }
 
-    private showError(message: string) {
-        $("#textErrorSetting").show();
-        $("#textErrorSetting").find("p").text(message);
+        this.authenticate("signup", params)
+            .then(this.signupSuccessCallback)
+            .catch(this.signupErrorCallback);
     }
 
     public login() {
-        hello("facebook").login({scope: "email",}).then((auth) => {
+        hello("facebook").login({scope: "email"}).then((auth) => {
             this.socialToken = auth.authResponse.access_token;
             this.network = auth.network;
             const params = {
                 network: this.network,
                 socialToken: this.socialToken,
             };
-
-            this.authenticate('login', params)
+            this.authenticate("login", params)
                 .then(this.loginSucessCallback)
                 .catch(this.loginErrorCallBack);
         });
+    }
+
+    private showError(message: string) {
+        $("#textErrorSetting").show();
+        $("#textErrorSetting").find("p").text(message);
     }
 
     private authenticate(route, params) {
@@ -98,11 +102,10 @@ export class LoginView extends Backbone.View<LoginModel> {
     private loginSucessCallback(response) {
         if (response.body.token) {
             localStorage.setItem("token", response.body.token);
-            // move user to /profile
+            Backbone.history.navigate("profile", true);
         } else {
             this.signupNeeded = true;
             this.render();
-            //window.location.href = "/#register";
         }
     }
 
@@ -112,13 +115,12 @@ export class LoginView extends Backbone.View<LoginModel> {
 
     private signupSuccessCallback(response) {
         localStorage.setItem("token", response.body.token);
-        // Move user to profile
+        Backbone.history.navigate("profile", true);
     }
 
     private signupErrorCallback(err) {
-        // TODO handle error
-        if (err.body.signupError) {
-            // Show some error message
+        if (err.response.body.signupError) {
+            this.showError(err.response.body.signupError);
         }
     }
 }
