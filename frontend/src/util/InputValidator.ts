@@ -21,8 +21,8 @@ export class InputValidator {
         }
     }
 
-    public static isTooLongText(text: string) {
-        if (text.length >= 300) {
+    public static isTooLongText(text: string, max: number = 300) {
+        if (text.length >= max) {
             return true;
         }
     }
@@ -37,5 +37,10 @@ export class InputValidator {
              || new RegExp("type=").test(text)
              || new RegExp("text/javascript").test(text)
              || new RegExp("</script").test(text));
+    }
+
+    public static isURLSafe(text: string) {
+        const reg = /^[a-zA-Z0-9_-]*$/;
+        return reg.test(text);
     }
 }
