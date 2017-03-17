@@ -3,7 +3,6 @@ import * as $ from "jquery";
 import * as _ from "underscore";
 import * as hello from "hellojs";
 import * as request from "superagent";
-
 import {InputValidator} from "../util/InputValidator";
 import {LoginModel} from "../models/LoginModel";
 
@@ -23,8 +22,8 @@ export class LoginView extends Backbone.View<LoginModel> {
 
     public events() {
         return <Backbone.EventsHash> {
-            "click #loginButton": this.login,
-            "click #registerButton": this.signup,
+            "click #loginButton": () => {this.login()},
+            "click #registerButton": () => {this.signup()},
         };
     }
 
@@ -34,25 +33,20 @@ export class LoginView extends Backbone.View<LoginModel> {
     }
 
     public signup() {
-        const userName = $("#username-input").val();
+        const userName = $("#username-input").val().trim();
         if (InputValidator.isNullOrEmpty(userName)) {
-            // tell user that this field cannot be empty
+            this.showError("User name cannot be empty!");
             return;
         }
 
-        if(InputValidator.isURLSafe(userName)) {
-            // Show message
+        if (InputValidator.isTooLongText(userName, 30)) {
+            this.showError("User name must be shorter than 30 characters!");
+            return;
+        }
+
+        if (InputValidator.isURLSafe(userName)) {
+            this.showError("User name cannot contain anything other than numbers, letters, underscores or dashes. It must not have any spaces either!");
             return
-        }
-
-        if(InputValidator.isTooLongText(userName, 30)) {
-            // Show message
-            return;
-        }
-
-        if (InputValidator.containsScriptInjection(userName)) {
-            // Show message
-            return;
         }
 
         const params = {
@@ -60,9 +54,14 @@ export class LoginView extends Backbone.View<LoginModel> {
             socialToken: this.socialToken,
             userName,
         };
-        this.authenticate('signup', params)
-            .then(this.signupSuccessCallback)
-            .catch(this.signupErrorCallback);
+        // this.authenticate('signup', params)
+        //     .then(this.signupSuccessCallback)
+        //     .catch(this.signupErrorCallback);
+    }
+
+    private showError(message: string) {
+        $("#textErrorSetting").show();
+        $("#textErrorSetting").find("p").text(message);
     }
 
     public login() {
@@ -118,7 +117,7 @@ export class LoginView extends Backbone.View<LoginModel> {
 
     private signupErrorCallback(err) {
         // TODO handle error
-        if(err.body.signupError) {
+        if (err.body.signupError) {
             // Show some error message
         }
     }

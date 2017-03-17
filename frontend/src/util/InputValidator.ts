@@ -41,6 +41,6 @@ export class InputValidator {
 
     public static isURLSafe(text: string) {
         const reg = /^[a-zA-Z0-9_-]*$/;
-        return reg.test(text);
+        return !reg.test(text);
     }
 }

@@ -2,20 +2,22 @@
 	<div class="imageLeftLogin mobileImageLogin"></div>
 	<div class="paddingZoneLogin">
 
+		<h1 class="centerLogoLogin navLogo"></h1>
+
 		<% if(signupNeeded){ %>
 			<h2 class="textUpLogin">
-				This is your first time here. Welcome!
-				You must choose a unique username to complete your ugram signup.
-				User names must not have any spaces, be shorter than 30 characters and only
-				contains letters, numbers underscores or slashes.
+				Welcome to ugram! To complete your registration: choose a user name that is shorter than 30 characters,
+				cannot have spaces and must be alphanumeric.
 			</h2>
 			<div class="widthInputLogin">
-				<input id="username-input" type="text" class="heightInputLogin" placeholder="Choose a unique User Name">
+				<input id="username-input" type="text" class="heightInputLogin" placeholder="User Name">
+
+				<div id="textErrorSetting" class="buttonSetting"><span><p class="validationTextSize errorTextColor"></p></span></div>
 			</div>
 			<div>
 				<div class="paddingConnectLogin">
 					<button id="registerButton" class="fontLoginButton colorLoginButton heigthLoginButton">
-						<div class="logoMediaLogin columnMediaLogin"></div>Register with Facebook
+						<div class="logoMediaLogin columnMediaLogin"></div>Signup with Facebook
 					</button>
 				</div>
 			</div>
@@ -28,6 +30,13 @@
 				</div>
 			</div>
         <% } %>
+
+
+		<div class="whiteZoneLogin">
+			<p class="paddingSignLogin">
+				By signing in with facebook, you agree to our Terms of Use and Privacy Policy
+			</p>
+		</div>
 
 	</div>
 </div>
