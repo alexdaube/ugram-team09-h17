@@ -6,6 +6,7 @@ before_script:
 script:
   - npm install --prefix ./frontend
   - gulp --cwd ./frontend clean
+  - gulp --cwd ./frontend set-constants
   - gulp --cwd ./frontend ts
   - gulp --cwd ./frontend sass
   - tslint frontend/src/**/*.ts{,x}
