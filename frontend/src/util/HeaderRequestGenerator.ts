@@ -1,6 +1,6 @@
 export class HeaderRequestGenerator {
 
-    public static userId = "jlabonte";
+    public static userId = localStorage.getItem("currentUser");
 
     public static setContentTypeToJSON(xhr) {
         xhr.setRequestHeader("Content-Type", ("application/json"));

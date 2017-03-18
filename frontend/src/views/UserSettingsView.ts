@@ -21,6 +21,7 @@ export class UserSettingsView extends Backbone.View<UserModel> {
     public render() {
         const that = this;
         this.userModel.fetch({
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
             success() {
                 that.$el.html(that.template({userModel: that.userModel}));
             },

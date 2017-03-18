@@ -2,6 +2,7 @@ import * as Backbone from "backbone";
 import * as _ from "underscore";
 import * as $ from "jquery";
 
+import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 import {UserModel} from "../models/UserModel";
 
 export class LoggedUserProfileView extends Backbone.View<UserModel> {
@@ -18,6 +19,7 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
     public render() {
         const that = this;
         this.userProfileModel.fetch({
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
             success() {
                 that.$el.html(that.template({userModel: that.userProfileModel}));
                 $("#buttonExitUgram").click(() => {

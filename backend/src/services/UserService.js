@@ -34,7 +34,6 @@ userService.prototype.getUser = function (request, returnObject) {
     var urlParts = path.split('/');
     var userId = urlParts[2];
 
-
     this.persistence.get(userId, function (err, response) {
         if (!err && response) {
             returnObject.status(200).json(response);
@@ -52,8 +51,7 @@ userService.prototype.updateUser = function (request, returnObject) {
     var userId = urlParts[2];
     var body = request.body;
 
-
-    if (userId != global.user.toJSON().userName) {
+    if (userId != request.user.attributes.userName) {
         returnObject.status(403).json("Editing on forbidden user account for current authentication");
         return;
     }

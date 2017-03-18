@@ -56,7 +56,12 @@ export class AppRouter extends Backbone.Router {
     }
 
     public defaultRoute() {
-        this.showLogin();
+        if (!localStorage.getItem("token")) {
+            this.showLogin();
+        } else {
+            window.location.href = "/#home";
+        }
+
     }
 
     public showLogin() {
@@ -66,10 +71,12 @@ export class AppRouter extends Backbone.Router {
     }
 
     public showProfile() {
+        this.loginRedirect();
         this.showUserProfile(HeaderRequestGenerator.userId);
     }
 
     public showFeed() {
+        this.loginRedirect();
         // const feedCollection = new FeedCollection({url: "http://api.ugram.net/pictures"});
         const feedCollection = new FeedCollection({url: "http://localhost:3000/pictures"});
         const feedCollectionView = new FeedCollectionView({el: "#content", collection: feedCollection});
@@ -77,12 +84,14 @@ export class AppRouter extends Backbone.Router {
     }
 
     public showPost(userFeedId: string, pictureId: string) {
+        this.loginRedirect();
         const pictureModel = new PictureModel({userId: userFeedId, id: pictureId});
         const postView = new PostView({el: "#content", model: pictureModel});
         postView.render();
     }
 
     public showUserProfile(userId: string = "") {
+        this.loginRedirect();
         const userModel = new UserModel({id: userId});
         // const feedCollection = new FeedCollection({url: "http://api.ugram.net/users/" + userModel.id + "/pictures"});
         const feedCollection = new FeedCollection({url: "http://localhost:3000/users/" + userModel.id + "/pictures"});
@@ -91,21 +100,30 @@ export class AppRouter extends Backbone.Router {
     }
 
     public showUserSetting(param: string = "") {
+        this.loginRedirect();
         const userModel = new UserModel({id: HeaderRequestGenerator.userId});
         const userSettingsView = new UserSettingsView({model: userModel});
         userSettingsView.render();
     }
 
     public showAddPicture(param: string = "") {
+        this.loginRedirect();
         const userModel = new UserModel({id: HeaderRequestGenerator.userId});
         const userAddPictureView = new UserAddPictureView({model: userModel});
         userAddPictureView.render();
     }
 
     public showUsers(param: string = "") {
+        this.loginRedirect();
         // const userCollection = new UserCollection({url: "http://api.ugram.net/users"});
         const userCollection = new UserCollection({url: "http://localhost:3000/users"});
         const userCollectionView = new UserCollectionView({el: "#content", collection: userCollection});
         userCollectionView.render();
+    }
+
+    public loginRedirect() {
+        if (!localStorage.getItem("token")) {
+            window.location.href = "/";
+        }
     }
 }

@@ -37,14 +37,21 @@ exports.signup = function (req, res, next) {
     var userName = req.body.userName;
     validateWithProvider(network, socialToken)
         .then(function (profile) {
-            var date = new Date();
+            var date = new Date().getTime();
             new User({
+                firstName: profile.first_name,
+                lastName: profile.last_name,
                 facebookId: profile.id,
                 email: profile.email,
                 userName: userName,
-                registrationDate: date.valueOf()
-            }).save().then(function (user) {
-                return res.send({token: generateJsonWebToken(profile)});
+                pictureUrl: profile.picture.data.url,
+                registrationDate: date
+            }).save(null, {method: 'insert'}).then(function (user) {
+                return res.send(
+                    {
+                        token: generateJsonWebToken(profile),
+                        currentUser: user.attributes.userName
+                    });
             }).catch(function (err) {
                 return res.status(400).send({signupError: "User name already exists. Choose another one!"});
             });
@@ -63,7 +70,11 @@ exports.login = function (req, res, next) {
     validateWithProvider(network, socialToken).then(function (profile) {
         new User({facebookId: profile.id}).fetch().then(function (user) {
             if (user) {
-                return res.send({token: generateJsonWebToken(profile)});
+                return res.send(
+                    {
+                        token: generateJsonWebToken(profile),
+                        currentUser: user.attributes.userName
+                    });
             } else {
                 return res.send({signupNeeded: true});
             }

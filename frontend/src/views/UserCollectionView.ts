@@ -73,6 +73,7 @@ export class UserCollectionView extends Backbone.View<any> {
 
     private showSearch() {
         this.collection.fetch({
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
             data: {
                 page: this.nextPageToFetch,
                 perPage: this.usersPerPageSearch,

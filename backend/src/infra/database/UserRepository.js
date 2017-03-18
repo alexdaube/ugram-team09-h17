@@ -84,6 +84,7 @@ userRepository.prototype.update = function (userId, body, callback) {
                     var formattedUserJSON = that.databaseDTO.getUserJSON(user);
                     return callback(null, formattedUserJSON);
                 }
+                console.log(err);
                 handleError(400, null, callback);
             });
         });

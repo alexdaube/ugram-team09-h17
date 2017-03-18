@@ -102,6 +102,7 @@ export class LoginView extends Backbone.View<LoginModel> {
     private loginSucessCallback(response) {
         if (response.body.token) {
             localStorage.setItem("token", response.body.token);
+            localStorage.setItem("currentUser", response.body.currentUser);
             Backbone.history.navigate("profile", true);
         } else {
             this.signupNeeded = true;
@@ -115,6 +116,7 @@ export class LoginView extends Backbone.View<LoginModel> {
 
     private signupSuccessCallback(response) {
         localStorage.setItem("token", response.body.token);
+        localStorage.setItem("currentUser", response.body.currentUser);
         Backbone.history.navigate("profile", true);
     }
 
