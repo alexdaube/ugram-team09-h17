@@ -20,7 +20,10 @@ module.exports = {
         preLoaders: [
             {
                 test: /\.ts$/,
-                loader: 'tslint-loader'
+                loader: 'tslint-loader',
+                options: {
+                    configFile: 'tslint.json'
+                }
             }
         ],
         loaders: [

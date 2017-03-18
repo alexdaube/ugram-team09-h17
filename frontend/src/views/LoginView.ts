@@ -2,7 +2,6 @@ import * as Backbone from "backbone";
 import * as $ from "jquery";
 import * as _ from "underscore";
 import * as hello from "hellojs";
-import * as jwt_decode from "jwt-decode";
 import * as request from "superagent";
 import {InputValidator} from "../util/InputValidator";
 import {LoginModel} from "../models/LoginModel";

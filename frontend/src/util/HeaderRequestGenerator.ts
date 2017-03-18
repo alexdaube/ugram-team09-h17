@@ -5,8 +5,7 @@ export class HeaderRequestGenerator {
     public static currentUser(): string {
         const token = localStorage.getItem("token");
         const decoded = jwt_decode(token);
-        const currentUser = decoded.sub.userName;
-        return currentUser;
+        return decoded.sub.userName;
     }
 
     public static setContentTypeToJSON(xhr) {

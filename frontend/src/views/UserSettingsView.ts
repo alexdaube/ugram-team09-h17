@@ -4,7 +4,6 @@ import * as _ from "underscore";
 
 import {UserModel} from "../models/UserModel";
 import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
-import {InputFormatter} from "../util/InputFormatter";
 import {InputValidator} from "../util/InputValidator";
 
 export class UserSettingsView extends Backbone.View<UserModel> {
