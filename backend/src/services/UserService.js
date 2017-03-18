@@ -12,7 +12,7 @@ var userService = function (config) {
 
 userService.prototype.setPersistance = function (persistence) {
     this.persistence = persistence;
-}
+};
 
 userService.prototype.getAllUsers = function (request, returnObject) {
     var page = request.query.page;
@@ -26,8 +26,8 @@ userService.prototype.getAllUsers = function (request, returnObject) {
             console.warn(err, response);
             returnObject.status(err.statusCode).send(err.message);
         }
-    })
-}
+    });
+};
 
 userService.prototype.getUser = function (request, returnObject) {
     var path = request.path;
@@ -42,8 +42,8 @@ userService.prototype.getUser = function (request, returnObject) {
             console.warn(err, response);
             returnObject.status(err.statusCode).send(err.message);
         }
-    })
-}
+    });
+};
 
 userService.prototype.updateUser = function (request, returnObject) {
     var path = request.path;
@@ -64,8 +64,8 @@ userService.prototype.updateUser = function (request, returnObject) {
             console.warn(err, response);
             returnObject.status(err.statusCode).send(err.message);
         }
-    })
-}
+    });
+};
 
 userService.prototype.getUserPictures = function (request, returnObject) {
     var path = request.path;
@@ -82,8 +82,8 @@ userService.prototype.getUserPictures = function (request, returnObject) {
             console.warn(err, response);
             returnObject.status(err.statusCode).send(err.message);
         }
-    })
-}
+    });
+};
 
 userService.prototype.createUserPicture = function (request, returnObject) {
 
@@ -119,8 +119,8 @@ userService.prototype.createUserPicture = function (request, returnObject) {
             console.warn(err, response);
             returnObject.status(err.statusCode).send(err.message);
         }
-    })
-}
+    });
+};
 
 userService.prototype.deleteUserPicture = function (request, returnObject) {
     var path = request.path;
@@ -141,8 +141,8 @@ userService.prototype.deleteUserPicture = function (request, returnObject) {
             console.warn(err, response);
             returnObject.status(err.statusCode).send(err.message);
         }
-    })
-}
+    });
+};
 
 userService.prototype.getUserPicture = function (request, returnObject) {
     var path = request.path;
@@ -158,8 +158,8 @@ userService.prototype.getUserPicture = function (request, returnObject) {
             console.warn(err, response);
             returnObject.status(err.statusCode).send(err.message);
         }
-    })
-}
+    });
+};
 
 userService.prototype.updateUserPicture = function (request, returnObject) {
     var path = request.path;
@@ -181,7 +181,7 @@ userService.prototype.updateUserPicture = function (request, returnObject) {
             console.warn(err, response);
             returnObject.status(err.statusCode).send(err.message);
         }
-    })
-}
+    });
+};
 
 module.exports = userService;

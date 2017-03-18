@@ -1,4 +1,4 @@
-var ErrorHandler = require("../../common/errors")
+var ErrorHandler = require("../../common/errors");
 const User = require('../../models/user');
 const Picture = require("../../models/picture");
 const Mention = require("../../models/mention");
@@ -12,7 +12,7 @@ var userRepository = function (config) {
     // this.host = config.repository.host;
     // this.port = config.repository.port;
     this.databaseDTO = new DatabaseDTO();
-}
+};
 
 // DONE
 userRepository.prototype.getAll = function (page, perPage, callback) {
@@ -20,7 +20,7 @@ userRepository.prototype.getAll = function (page, perPage, callback) {
     var that = this;
     var numberOfPictureInTotal;
     var numberOfPages;
-    if (typeof perPage === 'undefined') { perPage = 20 };
+    if (typeof perPage === 'undefined') { perPage = 20; }
 
     new User()
         .fetchAll()
@@ -28,7 +28,7 @@ userRepository.prototype.getAll = function (page, perPage, callback) {
             numberOfPictureInTotal = users.length;
             numberOfPages = Math.ceil(numberOfPictureInTotal / perPage);
             users.query(function (qb) {
-                qb.limit(perPage).offset(page * perPage)
+                qb.limit(perPage).offset(page * perPage);
             }).fetch()
                 .then(function (newCollection) {
                     var newCollectionJSON =
@@ -36,14 +36,14 @@ userRepository.prototype.getAll = function (page, perPage, callback) {
                             items: that.databaseDTO.getUserJSON(newCollection),
                             totalPages: numberOfPages,
                             totalEntries: numberOfPictureInTotal
-                        }
+                        };
 
                     return callback(null, newCollectionJSON);
-                })
+                });
         }).catch(function (err) {
             handleError(400, null, callback);
         });
-}
+};
 
 // DONE
 userRepository.prototype.get = function (userId, callback) {
@@ -88,7 +88,7 @@ userRepository.prototype.update = function (userId, body, callback) {
                 handleError(400, null, callback);
             });
         });
-}
+};
 
 // DONE
 userRepository.prototype.getUserPictures = function (userId, page, perPage, callback) {
@@ -96,7 +96,7 @@ userRepository.prototype.getUserPictures = function (userId, page, perPage, call
     var that = this;
     var numberOfPictureInTotal;
     var numberOfPages;
-    if (typeof perPage === 'undefined') { perPage = 20 };
+    if (typeof perPage === 'undefined') { perPage = 20; }
 
     new Picture()
         .fetchAll({ withRelated: ["tags", "mentions"] })
@@ -108,7 +108,7 @@ userRepository.prototype.getUserPictures = function (userId, page, perPage, call
                     qb.limit(perPage)
                         .offset(page * perPage)
                         .where({ userId: userId})
-                        .where("url", "!=", "null")
+                        .where("url", "!=", "null");
                         //.where("url", "!=", "null")
                 }).fetch()
                     .then(function (newCollection) {
@@ -119,9 +119,9 @@ userRepository.prototype.getUserPictures = function (userId, page, perPage, call
                                 items: that.databaseDTO.getPictureJSON(newCollection),
                                 totalPages: numberOfPages,
                                 totalEntries: numberOfPictureInTotal
-                            }
+                            };
                         return callback(null, newCollectionJSON);
-                    })
+                    });
             }
             else {
                 return callback(null, {});
@@ -129,7 +129,7 @@ userRepository.prototype.getUserPictures = function (userId, page, perPage, call
         }).catch(function (err) {
             handleError(400, null, callback);
         });
-}
+};
 
 userRepository.prototype.createPicture = function (userId, body, callback) {
 
@@ -152,23 +152,23 @@ userRepository.prototype.createPicture = function (userId, body, callback) {
                         mentions.forEach(function (mention) {
                             new Mention({ mention: mention, picture_id: picture.id })
                                 .save();
-                        })
+                        });
                     }
                     if (body.tags != "null") {
                         var tags = body.tags.split(",");
                         tags.forEach(function (tag) {
                             new Tag({ tag: tag, picture_id: picture.id })
                                 .save();
-                        })
+                        });
                     }
                     return callback(null, picture);
-                })
-        })
-}
+                });
+        });
+};
 
 userRepository.prototype.updatePictureUrl = function (pictureName, callback) {
     
-    if(pictureName == null){
+    if(pictureName === null){
         return callback("Error"); 
     }
     
@@ -181,16 +181,16 @@ userRepository.prototype.updatePictureUrl = function (pictureName, callback) {
                 picture
                 .save({ url: global.configs.s3Bucket.imageFolderUrl + pictureName })
                 .then(function () {
-                    return callback(null)
+                    return callback(null);
                 }).catch(function (err) {
                     return callback(err);
-                })
+                });
             }
             else {
                 return callback("Error");
             }
-        })
-}
+        });
+};
 
 // DONE
 userRepository.prototype.deletePicture = function (userId, pictureId, callback) {
@@ -198,7 +198,7 @@ userRepository.prototype.deletePicture = function (userId, pictureId, callback) 
     var numberOfPictureInTotal;
     var numberOfPages;
 
-    if (typeof perPage === 'undefined') { perPage = 20 };
+    if (typeof perPage === 'undefined') { perPage = 20; }
 
     new Picture().where({ userId: userId, id: pictureId })
         .fetch({ withRelated: ["tags", "mentions"] }).then(function (picture) {
@@ -206,7 +206,7 @@ userRepository.prototype.deletePicture = function (userId, pictureId, callback) 
                 //delete picture here
                 picture.destroy().then(function () {
                     return callback(null, "No content");
-                })
+                });
             }
             else {
                 return callback({ statusCode: 400, message: "No such picture" }, null);
@@ -215,7 +215,7 @@ userRepository.prototype.deletePicture = function (userId, pictureId, callback) 
             console.log(err);
             handleError(400, null, callback);
         });
-}
+};
 
 // DONE
 userRepository.prototype.getUserPicture = function (userId, pictureId, callback) {
@@ -223,7 +223,7 @@ userRepository.prototype.getUserPicture = function (userId, pictureId, callback)
     var numberOfPictureInTotal;
     var numberOfPages;
 
-    if (typeof perPage === 'undefined') { perPage = 20 };
+    if (typeof perPage === 'undefined') { perPage = 20; }
 
     new Picture()
         .where({ userId: userId, id: pictureId })
@@ -239,7 +239,7 @@ userRepository.prototype.getUserPicture = function (userId, pictureId, callback)
             console.log(err);
             handleError(400, null, callback);
         });
-}
+};
 
 // NOT DONE; Problem. See below
 userRepository.prototype.updateUserPicture = function (userId, pictureId, body, callback) {
@@ -248,7 +248,7 @@ userRepository.prototype.updateUserPicture = function (userId, pictureId, body, 
     var numberOfPictureInTotal;
     var numberOfPages;
 
-    if (typeof perPage === 'undefined') { perPage = 20 };
+    if (typeof perPage === 'undefined') { perPage = 20; }
 
     Picture
         .where({ userId: userId, id: pictureId })
@@ -262,7 +262,7 @@ userRepository.prototype.updateUserPicture = function (userId, pictureId, body, 
                         if (mentions) {
                             mentions.forEach(function (mention) {
                                 mention.destroy();
-                            })
+                            });
                         }
                     })
                     .then(function () {
@@ -270,9 +270,9 @@ userRepository.prototype.updateUserPicture = function (userId, pictureId, body, 
                             body.mentions.forEach(function (mention) {
                                 new Mention({ mention: mention, picture_id: pictureId })
                                     .save();
-                            })
+                            });
                         }
-                    })
+                    });
 
                 Tag
                     .where({ picture_id: pictureId })
@@ -281,17 +281,17 @@ userRepository.prototype.updateUserPicture = function (userId, pictureId, body, 
                         if (tags) {
                             tags.forEach(function (tag) {
                                 tag.destroy();
-                            })
+                            });
                         }
                     })
                     .then(function () {
                         if (body.tags) {
                             body.tags.forEach(function (tag) {
                                 new Tag({ tag: tag, picture_id: pictureId })
-                                    .save()
-                            })
+                                    .save();
+                            });
                         }
-                    })
+                    });
                 return picture;
             }
             else {
@@ -307,7 +307,7 @@ userRepository.prototype.updateUserPicture = function (userId, pictureId, body, 
                     if (err.message === 'No Rows Updated') {
                         return;
                     }
-                })
+                });
         }).then(function () {
             // TODO regler ça - Les tags et les mentions ont pas tout le temps de ce loader
             // avant que la picture soit réenvoyé au client. Le client recoit donc une partie
@@ -325,12 +325,12 @@ userRepository.prototype.updateUserPicture = function (userId, pictureId, body, 
                 })
                 .then(function (formattedPictureJSON) {
                     return callback(null, formattedPictureJSON);
-                })
+                });
         }).catch(function (err) {
             console.log(err);
             handleError(400, null, callback);
         });
-}
+};
 
 var handleError = function (statusCode, body, callback) {
     var error = ErrorHandler.handleReturnCall(statusCode);

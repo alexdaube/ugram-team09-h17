@@ -12,7 +12,7 @@ var jwtOptions = {
 var jwtLogin = new JwtStrategy(jwtOptions, function (payload, done) {
     new User({facebookId: payload.sub.id}).fetch().then(function (user) {
         if (user) {
-            return done(null, user)
+            return done(null, user);
         } else {
             return done(null, false);
         }

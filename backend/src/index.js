@@ -1,8 +1,7 @@
 
 if (process.argv.length !== 3){
     throw new Error('missing config file argument');
-}
-else {
+} else {
     global.configs = require(process.argv[2]);
 }
 

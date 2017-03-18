@@ -32,7 +32,7 @@ module.exports = class DatabaseDTO {
                 phoneNumber: userJSON.phoneNumber,
                 pictureUrl: userJSON.pictureUrl,
                 registrationDate: userJSON.registrationDate
-            }
+            };
             return formattedUserJSON;
         }
         else {
@@ -46,9 +46,9 @@ module.exports = class DatabaseDTO {
                     phoneNumber: user.phoneNumber,
                     pictureUrl: user.pictureUrl,
                     registrationDate: user.registrationDate
-                }
+                };
                 userJSONArray.push(formattedUserJSON);
-            })
+            });
             return userJSONArray;
         }
     }
@@ -67,7 +67,7 @@ module.exports = class DatabaseDTO {
                 tags: that.getTagJSON(pictureJSON.tags),
                 url: pictureJSON.url,
                 userId: pictureJSON.userId
-            }
+            };
             return formattedPictureJSON;
         }
         else {
@@ -81,9 +81,9 @@ module.exports = class DatabaseDTO {
                     tags: that.getTagJSON(picture.tags),
                     url: picture.url,
                     userId: picture.userId
-                }
+                };
                 picturesJSONArray.push(formattedPictureJSON);
-            })
+            });
             return picturesJSONArray;
         }
     }
@@ -113,4 +113,4 @@ module.exports = class DatabaseDTO {
         });
         return mentionsArray;
     }
-}
+};

@@ -1,9 +1,10 @@
-var Sequelize = require('sequelize')
-  , sequelize =
-    new Sequelize(global.configs.sequelizeConfig.db,
-        global.configs.sequelizeConfig.user,
-        global.configs.sequelizeConfig.password,
-        global.configs.sequelizeConfig.config);
+var Sequelize = require('sequelize');
+var sequelize = new Sequelize(
+    global.configs.sequelizeConfig.db,
+    global.configs.sequelizeConfig.user,
+    global.configs.sequelizeConfig.password,
+    global.configs.sequelizeConfig.config
+);
 
 module.exports = class DataBase {
     connect(){
