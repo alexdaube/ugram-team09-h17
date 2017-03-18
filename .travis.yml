@@ -5,10 +5,7 @@ before_script:
   - npm install -g tslint typescript gulp jshint
 script:
   - npm install --prefix ./frontend
-  - gulp --cwd ./frontend clean
-  - gulp --cwd ./frontend set-constants
-  - gulp --cwd ./frontend ts
-  - gulp --cwd ./frontend sass
+  - gulp --cwd ./build
   - tslint frontend/src/**/*.ts{,x}
   - npm install --prefix ./backend
   - jshint ./backend/src
