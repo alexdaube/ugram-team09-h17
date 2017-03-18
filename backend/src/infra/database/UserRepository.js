@@ -108,7 +108,8 @@ userRepository.prototype.getUserPictures = function (userId, page, perPage, call
                     qb.limit(perPage)
                         .offset(page * perPage)
                         .where({ userId: userId})
-                        .where("url", "!=", "null");
+                        .where("url", "!=", "null")
+                        .orderBy("createdDate", "DESC");
                         //.where("url", "!=", "null")
                 }).fetch()
                     .then(function (newCollection) {
