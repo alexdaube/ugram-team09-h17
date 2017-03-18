@@ -143,7 +143,7 @@ userRepository.prototype.createPicture = function (userId, body, callback) {
             new Picture({
                 description: body.description,
                 userId: userId,
-                createdDate: new Date().getTime()
+                createdDate: new Date()
             })
                 .save()
                 .then(function (picture) {
