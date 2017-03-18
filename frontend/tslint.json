@@ -16,7 +16,6 @@
     "ordered-imports": false,
     "no-angle-bracket-type-assertion": false,
     "max-line-length": false,
-
     "ban-types": [true, ["Object", "Avoid using the `Object` type. Did you mean `object`?"],
       ["Boolean", "Avoid using the `Boolean` type. Did you mean `boolean`?"],
       ["Number", "Avoid using the `Number` type. Did you mean `number`?"],

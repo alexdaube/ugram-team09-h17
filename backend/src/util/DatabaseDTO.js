@@ -29,9 +29,9 @@ module.exports = class DatabaseDTO {
                 firstName: userJSON.firstName,
                 id: userJSON.userName,
                 lastName: userJSON.lastName,
-                phoneNumber: userJSON.phoneNumber,
+                phoneNumber: parseInt(userJSON.phoneNumber),
                 pictureUrl: userJSON.pictureUrl,
-                registrationDate: userJSON.registrationDate
+                registrationDate: parseInt(userJSON.registrationDate)
             };
             return formattedUserJSON;
         }
@@ -43,9 +43,9 @@ module.exports = class DatabaseDTO {
                     firstName: user.firstName,
                     id: user.userName,
                     lastName: user.lastName,
-                    phoneNumber: user.phoneNumber,
+                    phoneNumber: parseInt(user.phoneNumber),
                     pictureUrl: user.pictureUrl,
-                    registrationDate: user.registrationDate
+                    registrationDate: parseInt(user.registrationDate)
                 };
                 userJSONArray.push(formattedUserJSON);
             });
@@ -61,7 +61,7 @@ module.exports = class DatabaseDTO {
         if (typeof pictureLength === 'undefined') {
             var formattedPictureJSON = {
                 id: pictureJSON.id,
-                createdDate: pictureJSON.createdDate,
+                createdDate: Date.parse(pictureJSON.createdDate),
                 description: pictureJSON.description,
                 mentions: that.getMentionJSON(pictureJSON.mentions),
                 tags: that.getTagJSON(pictureJSON.tags),
@@ -75,7 +75,7 @@ module.exports = class DatabaseDTO {
             pictureJSON.forEach(function (picture) {
                 var formattedPictureJSON = {
                     id: picture.id,
-                    createdDate: picture.createdDate,
+                    createdDate: Date.parse(picture.createdDate),
                     description: picture.description,
                     mentions: that.getMentionJSON(picture.mentions),
                     tags: that.getTagJSON(picture.tags),
