@@ -95,7 +95,7 @@ userService.prototype.createUserPicture = function (request, returnObject) {
     var that = this;
 
 
-    if (userId != global.user.toJSON().userName) {
+    if (userId != request.user.attributes.userName) {
         returnObject.status(403).json("Editing on forbidden user account for current authentication");
         return;
     }
@@ -128,7 +128,7 @@ userService.prototype.deleteUserPicture = function (request, returnObject) {
     var userId = urlParts[2];
     var pictureId = urlParts[4];
 
-    if (userId != global.user.toJSON().userName) {
+    if (userId != request.user.attributes.userName) {
         returnObject.status(403).json("Editing on forbidden user account for current authentication");
         return;
     }
@@ -168,7 +168,7 @@ userService.prototype.updateUserPicture = function (request, returnObject) {
     var pictureId = urlParts[4];
     var body = request.body;
 
-    if (userId != global.user.toJSON().userName) {
+    if (userId != request.user.attributes.userName) {
         returnObject.status(403).json("Editing on forbidden user account for current authentication");
         return;
     }

@@ -28,7 +28,9 @@ globalPicturesRepository.prototype.get = function (page, perPage, callback) {
             numberOfPictureInTotal = pictures.length;
             numberOfPages = Math.ceil(numberOfPictureInTotal / perPage);
             pictures.query(function (qb) {
-                qb.limit(perPage).offset(page * perPage);
+                qb.limit(perPage)
+                  .offset(page * perPage)
+                  .orderBy("createdDate", "DESC");
             }).fetch()
                 .then(function (newCollection) {
                     var newCollectionJSON =
@@ -45,6 +47,7 @@ globalPicturesRepository.prototype.get = function (page, perPage, callback) {
         }
 
     }).catch(function (err) {
+        console.log(err);
         handleError(400, null, callback);
     });
 };
