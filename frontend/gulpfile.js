@@ -90,11 +90,11 @@ gulp.task('open', ['connect'], function() {
   .pipe(open({uri: 'http://localhost:' + (argv.port ? argv.port : SERVER_PORT)}));
 });
 
-gulp.task('serve', ['clean', 'set-constants', 'ts', 'sass', 'open', 'watch'], function() {});
+gulp.task('serve', ['clean', 'set-constants', 'ts', 'sass', 'open', 'watch']);
 
-gulp.task('build', ['clean', 'set-constants', 'ts', 'sass'], function() {});
+gulp.task('build', ['clean', 'set-constants', 'ts', 'sass']);
 
-gulp.task('build-prod', ['clean', 'set-prod-env', 'set-constants', 'ts', 'sass'], function() {});
+gulp.task('build-prod', ['clean', 'set-prod-env', 'set-constants', 'ts', 'sass']);
 
-gulp.task('default', ['clean', 'ts', 'sass', 'watch'], function() {});
+gulp.task('default', ['serve']);
 
