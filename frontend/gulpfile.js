@@ -16,10 +16,30 @@ var argv = require('yargs').argv;
 
 var SERVER_PORT = '8000';
 
+
+// npm install --save gulp-util
+// gulp util to read env variables passed in
+
 function swallowError(error) {
     console.log(error.toString());
     this.emit('end')
 }
+
+var env = "dev";
+
+gulp.task('set-prod-env', function() {
+    env = "prod";
+});
+
+gulp.task('set-constants', function() {
+    var file = "constants/dev.ts";
+    if(env === "prod") {
+        file = "constants/prod.ts";
+    }
+    return gulp.src(file)
+        .pipe(rename("constants.ts"))
+        .pipe(gulp.dest("./src"));
+});
 
 gulp.task('ts', function() {
     return gulp.src('src/Index.ts')
@@ -70,8 +90,11 @@ gulp.task('open', ['connect'], function() {
   .pipe(open({uri: 'http://localhost:' + (argv.port ? argv.port : SERVER_PORT)}));
 });
 
-gulp.task('serve', ['clean','ts', 'sass', 'open', 'watch'], function() {});
+gulp.task('serve', ['clean', 'set-constants', 'ts', 'sass', 'open', 'watch'], function() {});
 
-gulp.task('smart-serve', ['clean','ts', 'sass', 'connect'], function() {});
+gulp.task('build', ['clean', 'set-constants', 'ts', 'sass'], function() {});
+
+gulp.task('build-prod', ['clean', 'set-prod-env', 'set-constants', 'ts', 'sass'], function() {});
 
 gulp.task('default', ['clean', 'ts', 'sass', 'watch'], function() {});
+
