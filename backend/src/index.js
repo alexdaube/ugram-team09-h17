@@ -18,7 +18,6 @@ const app = express();
 const flash    = require('connect-flash');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
-const Promise = require('bluebird');
 const errors = require('./common/errors');
 const passport = require('passport');
 const session = require('express-session');
