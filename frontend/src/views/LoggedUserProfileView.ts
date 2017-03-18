@@ -55,7 +55,7 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
         formData.append("file", (<any> $("input[type=file]")[0]).files[0]);
         $.ajax({
             // TODO on a laissé jlabonte hard coder dans le code?
-            //url: "http://api.ugram.net/users/jlabonte/pictures",
+            // url: "http://api.ugram.net/users/jlabonte/pictures",
             url: "http://localhost:3000/users/jlabonte/pictures",
             type: "POST",
             data: formData,

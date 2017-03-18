@@ -20,19 +20,16 @@ if(statusCode >= 400) {
         statusCode: statusCode,
         message: "Missing parameter or unexisting user"
       };
-      break;
     case 401:
       return {
         statusCode: statusCode,
         message: "Unauthorized"
       };
-      break;
       case 403:
       return {
         statusCode: statusCode,
         message: "Forbidden"
       };
-      break;
     default:
       return {
         statusCode: 500,
