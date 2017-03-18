@@ -91,6 +91,7 @@ export class UserProfileView extends Backbone.View<any> {
     private logout() {
         hello("facebook").logout().then(() => {
             localStorage.removeItem("token");
+            localStorage.removeItem("currentUser");
             window.location.href = "/";
         });
 
