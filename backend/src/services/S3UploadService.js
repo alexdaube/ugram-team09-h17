@@ -4,7 +4,7 @@ var aws = require("aws-sdk");
 
 var S3UploadService = function () {
 
-}
+};
 
 S3UploadService.prototype.uploadPicture = function (newPictureId, callback) {
 
@@ -36,13 +36,13 @@ S3UploadService.prototype.uploadPicture = function (newPictureId, callback) {
                 console.log("Successfully uploaded data to myBucket/myKey");
             }
         });
-    })
+    });
 
     for( var file in files){
         fs.unlink("upload/" + files[file]);
     }
     return callback(newFileName);
-}
+};
 
 
 module.exports = S3UploadService;

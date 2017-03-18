@@ -1,8 +1,9 @@
 import * as Backbone from "backbone";
+import * as hello from "hellojs";
 
+import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 import {PictureView} from "./PictureView";
 import {ShowMoreView} from "./ShowMoreView";
-import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 import {InputValidator} from "../util/InputValidator";
 
 export class UserProfileView extends Backbone.View<any> {
@@ -17,6 +18,7 @@ export class UserProfileView extends Backbone.View<any> {
 
     public events() {
         return <Backbone.EventsHash> {
+            "click #logoutButton": "logout",
             "click #optionButton": () => { $("#popupCloseContent").show(); $("#confirmDelete").hide(); },
             "click #closeExitButtonPopup": () => { $("#popupCloseContent").hide(); $("#confirmDelete").hide(); },
             "click #closeCancelButtonPopup": () => { $("#popupCloseContent").hide(); $("#confirmDelete").hide(); },
@@ -27,8 +29,13 @@ export class UserProfileView extends Backbone.View<any> {
 
     public render() {
         this.model.fetch({
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
             success: () => {
-                this.$el.html(this.template({user: this.model}));
+                this.$el.html(this.template(
+                    {
+                        user: this.model,
+                        currentUser: HeaderRequestGenerator.currentUser(),
+                    }));
                 this.$el.first().removeClass("contentFeed");
 
                 const showMoreView = new ShowMoreView({
@@ -47,6 +54,7 @@ export class UserProfileView extends Backbone.View<any> {
 
     private showPictures() {
         this.collection.fetch({
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
             data: {
                 page: this.nextPageToFetch,
                 perPage: this.picturesPerPage,
@@ -78,5 +86,14 @@ export class UserProfileView extends Backbone.View<any> {
 
     private deleteMyAccount() {
         // TODO delete account
+    }
+
+    private logout() {
+        hello("facebook").logout().then(() => {
+            localStorage.removeItem("token");
+            localStorage.removeItem("currentUser");
+            window.location.href = "/";
+        });
+
     }
 }

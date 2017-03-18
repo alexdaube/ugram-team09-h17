@@ -21,6 +21,7 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
     public render() {
         const that = this;
         this.userModel.fetch({
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
             success() {
                 that.$el.html(that.template({ userModel: that.userModel }));
             },
@@ -32,7 +33,7 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
     }
 
     public events() {
-        return <Backbone.EventsHash>{
+        return <Backbone.EventsHash> {
             "click #postPictureButton": "postPicture",
             "click .inputSizeSetting textarea": "hideSaveFeedBack",
         };
@@ -54,18 +55,18 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
             $("#textErrorPicture").find("p").text("Invalid description");
             return;
         }
-        
+
         const formData: FormData = new FormData();
         formData.append("description", description);
         formData.append("mentions", mentions);
         formData.append("tags", tags);
-        formData.append("file", (<any>$("input[type=file]")[0]).files[0]);
+        formData.append("file", (<any> $("input[type=file]")[0]).files[0]);
         const filename = $("input[type=file]").val().split("\\").pop();
 
         if (InputValidator.extensionFileIsValid(filename)) {
             $.ajax({
-                //url: "http://api.ugram.net/users/" + HeaderRequestGenerator.userId + "/pictures",
-                url: "http://localhost:3000/users/" + HeaderRequestGenerator.userId + "/pictures",
+                // url: "http://api.ugram.net/users/" + HeaderRequestGenerator.userId + "/pictures",
+                url: "http://localhost:3000/users/" + HeaderRequestGenerator.currentUser() + "/pictures",
                 type: "POST",
                 data: formData,
                 processData: false,

@@ -1,8 +1,7 @@
 
 if (process.argv.length !== 3){
     throw new Error('missing config file argument');
-}
-else {
+} else {
     global.configs = require(process.argv[2]);
 }
 
@@ -19,7 +18,6 @@ const app = express();
 const flash    = require('connect-flash');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
-const Promise = require('bluebird');
 const errors = require('./common/errors');
 const passport = require('passport');
 const session = require('express-session');
@@ -41,7 +39,7 @@ const corsOptions = {
 // configuration ===============================================================
 const port = process.env.PORT || global.configs.server.port;
 
-require('./services/passport')(passport); // pass passport for configuration
+//require('./services/passport')(passport); // pass passport for configuration
 
 // Use application-level middleware for common functionality, including
 // logging, parsing, and session handling.
@@ -56,8 +54,8 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
+//app.use(passport.initialize());
+//app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 //app.use(errors.genericErrorHandler);
@@ -65,7 +63,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 app.use(cors(corsOptions));
 
 // routes ======================================================================
-authentificationRouter(app, passport); // load our routes and pass in our app and fully configured passport
+authentificationRouter(app); // load our routes and pass in our app and fully configured passport
 globalPicturesApiRouter(app);// load our routes and pass in our app and fully configured passport
 userApiRouter(app);
 

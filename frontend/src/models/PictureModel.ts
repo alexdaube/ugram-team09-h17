@@ -6,7 +6,7 @@ import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 export class PictureModel extends Backbone.Model {
     constructor(options?: any) {
         super(options);
-        //this.urlRoot = "http://api.ugram.net/users/" + this.userId + "/pictures";
+        // this.urlRoot = "http://api.ugram.net/users/" + this.userId + "/pictures";
         this.urlRoot = "http://localhost:3000/users/" + this.userId + "/pictures";
     }
 

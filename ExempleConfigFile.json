@@ -9,11 +9,14 @@
       "charset": "collation"
     }
   },
-  "facebookAuth": {
-    "clientID": "facebookAppId",
-    "clientSecret": "facebookAppSecret",
-    "callbackURL": "http://callback.domain/auth/facebook/callback",
-    "profileURL": "https://graph.facebook.com/v2.5/me?fields=id,name,email"
+  "auth": {
+    "facebook": {
+      "clientID": "facebookAppId",
+      "profileURL": "https://graph.facebook.com/ + infos"
+    },
+    "jwt": {
+      "secret": "sometokensecret"
+    }
   },
   "server": {
     "port": 3000

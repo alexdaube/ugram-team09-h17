@@ -2,6 +2,7 @@ import * as Backbone from "backbone";
 import * as _ from "underscore";
 import * as $ from "jquery";
 
+import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 import {UserModel} from "../models/UserModel";
 
 export class LoggedUserProfileView extends Backbone.View<UserModel> {
@@ -18,6 +19,7 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
     public render() {
         const that = this;
         this.userProfileModel.fetch({
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
             success() {
                 that.$el.html(that.template({userModel: that.userProfileModel}));
                 $("#buttonExitUgram").click(() => {
@@ -53,7 +55,7 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
         formData.append("file", (<any> $("input[type=file]")[0]).files[0]);
         $.ajax({
             // TODO on a laissé jlabonte hard coder dans le code?
-            //url: "http://api.ugram.net/users/jlabonte/pictures",
+            // url: "http://api.ugram.net/users/jlabonte/pictures",
             url: "http://localhost:3000/users/jlabonte/pictures",
             type: "POST",
             data: formData,

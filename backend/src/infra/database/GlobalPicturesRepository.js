@@ -12,7 +12,7 @@ var globalPicturesRepository = function (config) {
     // this.port = config.repository.port;
 
     this.databaseDTO = new DatabaseDTO();
-}
+};
 
 // DONE
 globalPicturesRepository.prototype.get = function (page, perPage, callback) {
@@ -20,7 +20,7 @@ globalPicturesRepository.prototype.get = function (page, perPage, callback) {
     var that = this;
     var numberOfPictureInTotal;
     var numberOfPages;
-    if (typeof perPage === 'undefined') { perPage = 20 };
+    if (typeof perPage === 'undefined') { perPage = 20; }
 
 
     new Picture().fetchAll({ withRelated: ["tags", "mentions"] }).then(function (pictures) {
@@ -28,7 +28,7 @@ globalPicturesRepository.prototype.get = function (page, perPage, callback) {
             numberOfPictureInTotal = pictures.length;
             numberOfPages = Math.ceil(numberOfPictureInTotal / perPage);
             pictures.query(function (qb) {
-                qb.limit(perPage).offset(page * perPage)
+                qb.limit(perPage).offset(page * perPage);
             }).fetch()
                 .then(function (newCollection) {
                     var newCollectionJSON =
@@ -36,9 +36,9 @@ globalPicturesRepository.prototype.get = function (page, perPage, callback) {
                             items: that.databaseDTO.getPictureJSON(newCollection),
                             totalPages: numberOfPages,
                             totalEntries: numberOfPictureInTotal
-                        }
+                        };
                     return callback(null, newCollectionJSON);
-                })
+                });
         }
         else {
             return callback(null, {});
@@ -47,7 +47,7 @@ globalPicturesRepository.prototype.get = function (page, perPage, callback) {
     }).catch(function (err) {
         handleError(400, null, callback);
     });
-}
+};
 
 var handleError = function (statusCode, body, callback) {
     var error = ErrorHandler.handleReturnCall(statusCode);

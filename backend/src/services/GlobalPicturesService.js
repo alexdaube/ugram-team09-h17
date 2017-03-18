@@ -6,7 +6,7 @@ var globalPicturesService = function(config){
 
 globalPicturesService.prototype.setPersistence = function(persistence){
     this.persistence = persistence;
-}
+};
 
 globalPicturesService.prototype.getAllPictures = function(request, returnObject){
     var page = request.query.page;
@@ -20,8 +20,8 @@ globalPicturesService.prototype.getAllPictures = function(request, returnObject)
             console.warn(err, response);
             returnObject.status(err.statusCode).send(err.message);
         }
-    })
-}
+    });
+};
 
 module.exports = globalPicturesService;
 

@@ -4,7 +4,6 @@ import * as _ from "underscore";
 
 import {UserModel} from "../models/UserModel";
 import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
-import {InputFormatter} from "../util/InputFormatter";
 import {InputValidator} from "../util/InputValidator";
 
 export class UserSettingsView extends Backbone.View<UserModel> {
@@ -21,6 +20,7 @@ export class UserSettingsView extends Backbone.View<UserModel> {
     public render() {
         const that = this;
         this.userModel.fetch({
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
             success() {
                 that.$el.html(that.template({userModel: that.userModel}));
             },

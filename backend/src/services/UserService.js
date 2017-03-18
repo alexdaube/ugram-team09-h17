@@ -12,7 +12,7 @@ var userService = function (config) {
 
 userService.prototype.setPersistance = function (persistence) {
     this.persistence = persistence;
-}
+};
 
 userService.prototype.getAllUsers = function (request, returnObject) {
     var page = request.query.page;
@@ -26,14 +26,13 @@ userService.prototype.getAllUsers = function (request, returnObject) {
             console.warn(err, response);
             returnObject.status(err.statusCode).send(err.message);
         }
-    })
-}
+    });
+};
 
 userService.prototype.getUser = function (request, returnObject) {
     var path = request.path;
     var urlParts = path.split('/');
     var userId = urlParts[2];
-
 
     this.persistence.get(userId, function (err, response) {
         if (!err && response) {
@@ -43,8 +42,8 @@ userService.prototype.getUser = function (request, returnObject) {
             console.warn(err, response);
             returnObject.status(err.statusCode).send(err.message);
         }
-    })
-}
+    });
+};
 
 userService.prototype.updateUser = function (request, returnObject) {
     var path = request.path;
@@ -52,8 +51,7 @@ userService.prototype.updateUser = function (request, returnObject) {
     var userId = urlParts[2];
     var body = request.body;
 
-
-    if (userId != global.user.toJSON().userName) {
+    if (userId != request.user.attributes.userName) {
         returnObject.status(403).json("Editing on forbidden user account for current authentication");
         return;
     }
@@ -66,8 +64,8 @@ userService.prototype.updateUser = function (request, returnObject) {
             console.warn(err, response);
             returnObject.status(err.statusCode).send(err.message);
         }
-    })
-}
+    });
+};
 
 userService.prototype.getUserPictures = function (request, returnObject) {
     var path = request.path;
@@ -84,8 +82,8 @@ userService.prototype.getUserPictures = function (request, returnObject) {
             console.warn(err, response);
             returnObject.status(err.statusCode).send(err.message);
         }
-    })
-}
+    });
+};
 
 userService.prototype.createUserPicture = function (request, returnObject) {
 
@@ -121,8 +119,8 @@ userService.prototype.createUserPicture = function (request, returnObject) {
             console.warn(err, response);
             returnObject.status(err.statusCode).send(err.message);
         }
-    })
-}
+    });
+};
 
 userService.prototype.deleteUserPicture = function (request, returnObject) {
     var path = request.path;
@@ -143,8 +141,8 @@ userService.prototype.deleteUserPicture = function (request, returnObject) {
             console.warn(err, response);
             returnObject.status(err.statusCode).send(err.message);
         }
-    })
-}
+    });
+};
 
 userService.prototype.getUserPicture = function (request, returnObject) {
     var path = request.path;
@@ -160,8 +158,8 @@ userService.prototype.getUserPicture = function (request, returnObject) {
             console.warn(err, response);
             returnObject.status(err.statusCode).send(err.message);
         }
-    })
-}
+    });
+};
 
 userService.prototype.updateUserPicture = function (request, returnObject) {
     var path = request.path;
@@ -183,7 +181,7 @@ userService.prototype.updateUserPicture = function (request, returnObject) {
             console.warn(err, response);
             returnObject.status(err.statusCode).send(err.message);
         }
-    })
-}
+    });
+};
 
 module.exports = userService;

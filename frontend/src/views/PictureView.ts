@@ -1,6 +1,6 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
-
+import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 import {PictureModel} from "../models/PictureModel";
 
 export class PictureView extends Backbone.View<PictureModel> {
@@ -13,6 +13,7 @@ export class PictureView extends Backbone.View<PictureModel> {
 
     public render() {
         this.model.fetch({
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
             success: () => {
                 this.$el.html(this.template({picture: this.model}));
             },
