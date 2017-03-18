@@ -4,16 +4,16 @@ export class HeaderRequestGenerator {
 
     public static setContentTypeToJSON(xhr) {
         xhr.setRequestHeader("Content-Type", ("application/json"));
-        xhr.setRequestHeader("Authorization", HeaderRequestGenerator.token);
+        xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
     }
 
     public static sendAuthorization(xhr) {
-        xhr.setRequestHeader("Authorization", HeaderRequestGenerator.token);
+        xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
     }
 
     public static setContentTypeToURLEncoded(xhr) {
         xhr.setRequestHeader("Content-Type", ("application/x-www-form-urlencoded"));
-        xhr.setRequestHeader("Authorization", HeaderRequestGenerator.token);
+        xhr.setRequestHeader("Authorization", localStorage.getItem("token"));
     }
 
     public static isConnectedUser(userId: string): boolean {

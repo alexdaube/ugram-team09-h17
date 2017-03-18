@@ -72,7 +72,7 @@ export class AppRouter extends Backbone.Router {
 
     public showProfile() {
         this.loginRedirect();
-        this.showUserProfile(HeaderRequestGenerator.userId);
+        this.showUserProfile(localStorage.getItem("currentUser"));
     }
 
     public showFeed() {

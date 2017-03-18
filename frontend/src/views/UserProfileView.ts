@@ -34,7 +34,7 @@ export class UserProfileView extends Backbone.View<any> {
                 this.$el.html(this.template(
                     {
                         user: this.model,
-                        currentUser: HeaderRequestGenerator.userId,
+                        currentUser: localStorage.getItem("currentUser"),
                     }));
                 this.$el.first().removeClass("contentFeed");
 
