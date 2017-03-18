@@ -72,7 +72,7 @@ export class AppRouter extends Backbone.Router {
 
     public showProfile() {
         this.loginRedirect();
-        this.showUserProfile(localStorage.getItem("currentUser"));
+        this.showUserProfile(HeaderRequestGenerator.currentUser());
     }
 
     public showFeed() {
@@ -101,14 +101,14 @@ export class AppRouter extends Backbone.Router {
 
     public showUserSetting(param: string = "") {
         this.loginRedirect();
-        const userModel = new UserModel({id: HeaderRequestGenerator.userId});
+        const userModel = new UserModel({id: HeaderRequestGenerator.currentUser()});
         const userSettingsView = new UserSettingsView({model: userModel});
         userSettingsView.render();
     }
 
     public showAddPicture(param: string = "") {
         this.loginRedirect();
-        const userModel = new UserModel({id: HeaderRequestGenerator.userId});
+        const userModel = new UserModel({id: HeaderRequestGenerator.currentUser()});
         const userAddPictureView = new UserAddPictureView({model: userModel});
         userAddPictureView.render();
     }

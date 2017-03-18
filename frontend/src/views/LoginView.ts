@@ -2,6 +2,7 @@ import * as Backbone from "backbone";
 import * as $ from "jquery";
 import * as _ from "underscore";
 import * as hello from "hellojs";
+import * as jwt_decode from "jwt-decode";
 import * as request from "superagent";
 import {InputValidator} from "../util/InputValidator";
 import {LoginModel} from "../models/LoginModel";
@@ -102,7 +103,6 @@ export class LoginView extends Backbone.View<LoginModel> {
     private loginSucessCallback(response) {
         if (response.body.token) {
             localStorage.setItem("token", response.body.token);
-            localStorage.setItem("currentUser", response.body.currentUser);
             Backbone.history.navigate("profile", true);
         } else {
             this.signupNeeded = true;
@@ -116,7 +116,6 @@ export class LoginView extends Backbone.View<LoginModel> {
 
     private signupSuccessCallback(response) {
         localStorage.setItem("token", response.body.token);
-        localStorage.setItem("currentUser", response.body.currentUser);
         Backbone.history.navigate("profile", true);
     }
 

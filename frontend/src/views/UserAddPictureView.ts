@@ -66,7 +66,7 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
         if (InputValidator.extensionFileIsValid(filename)) {
             $.ajax({
                 // url: "http://api.ugram.net/users/" + HeaderRequestGenerator.userId + "/pictures",
-                url: "http://localhost:3000/users/" + HeaderRequestGenerator.userId + "/pictures",
+                url: "http://localhost:3000/users/" + HeaderRequestGenerator.currentUser() + "/pictures",
                 type: "POST",
                 data: formData,
                 processData: false,

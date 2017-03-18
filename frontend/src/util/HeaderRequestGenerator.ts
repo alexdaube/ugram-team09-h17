@@ -1,6 +1,13 @@
+import * as jwt_decode from "jwt-decode";
+
 export class HeaderRequestGenerator {
 
-    public static userId = localStorage.getItem("currentUser");
+    public static currentUser(): string {
+        const token = localStorage.getItem("token");
+        const decoded = jwt_decode(token);
+        const currentUser = decoded.sub.userName;
+        return currentUser;
+    }
 
     public static setContentTypeToJSON(xhr) {
         xhr.setRequestHeader("Content-Type", ("application/json"));
@@ -17,7 +24,7 @@ export class HeaderRequestGenerator {
     }
 
     public static isConnectedUser(userId: string): boolean {
-        return this.userId === userId;
+        return  this.currentUser() === userId;
     }
 
     // private static token: string = "bearer 24d6e087-51a0-465a-a19b-ce9570ad3169";
