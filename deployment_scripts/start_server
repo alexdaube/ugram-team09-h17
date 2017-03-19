@@ -1,17 +1,15 @@
 #!/bin/bash
-rm -R -f /www/* &&
-cd /home/ec2-user/deployment/ &&
-sudo chown ec2-user * -R -f &&
+cd /home/ec2-user &&
+source .bash_profile &&
+sudo chown ec2-user:ec2-user * -R -f &&
+cd deployment &&
 npm install &&
 npm install gulp -D &&
-gulp clean &&
-gulp ts &&
-gulp sass &&
-cp *.html /www/ &&
-cp dist /www/ -R &&
-cp img /www/ -R &&
-cd /home/ec2-user/backend/ &&
-sudo chown ec2-user * -R -f &&
+gulp build-prod
+cp *.html /www/ -f &&
+cp dist /www/ -R -f &&
+cp img /www/ -R -f &&
+cd ~/backend/ &&
 npm install &&
 forever stopall &&
 forever start /home/ec2-user/backend/src/index.js ~/ugram-config.json

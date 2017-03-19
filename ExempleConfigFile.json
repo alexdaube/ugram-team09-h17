@@ -1,6 +1,6 @@
 {
   "bookshelf": {
-    "dbDialect": "mariasql",
+    "dbDialect": "mysql",
     "dbConnection": {
       "host": "domainNameOrIP",
       "user": "dbUser",
@@ -21,16 +21,20 @@
   "server": {
     "port": 3000
   },
+  "session": {
+    "secret": "someSessionSecret"
+  },
   "repository": {
     "host": "https://localhost",
     "port": "/"
   },
+  "localUploadFolder": "./",
   "sequelizeConfig": {
     "user": "dbUser",
     "password": "dbPassword",
     "db": "databaseName",
     "config": {
-      "dialect": "mariadb",
+      "dialect": "mysql",
       "port": "3306"
     },
     "session": {

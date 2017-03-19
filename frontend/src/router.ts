@@ -23,6 +23,7 @@ import {PictureModel} from "./models/PictureModel";
 
 import {PostView} from "./views/PostView";
 import {HeaderRequestGenerator} from "./util/HeaderRequestGenerator";
+import {API_BASE_URL} from "./constants";
 
 export class AppRouter extends Backbone.Router {
 
@@ -74,8 +75,7 @@ export class AppRouter extends Backbone.Router {
 
     public showFeed() {
         this.loginRedirect();
-        // const feedCollection = new FeedCollection({url: "http://api.ugram.net/pictures"});
-        const feedCollection = new FeedCollection({url: "http://localhost:3000/pictures"});
+        const feedCollection = new FeedCollection({url: `${API_BASE_URL}pictures`});
         const feedCollectionView = new FeedCollectionView({el: "#content", collection: feedCollection});
         feedCollectionView.render();
     }
@@ -90,8 +90,7 @@ export class AppRouter extends Backbone.Router {
     public showUserProfile(userId: string = "") {
         this.loginRedirect();
         const userModel = new UserModel({id: userId});
-        // const feedCollection = new FeedCollection({url: "http://api.ugram.net/users/" + userModel.id + "/pictures"});
-        const feedCollection = new FeedCollection({url: "http://localhost:3000/users/" + userModel.id + "/pictures"});
+        const feedCollection = new FeedCollection({url: `${API_BASE_URL}users/${userModel.id}/pictures`});
         const userProfileView = new UserProfileView({el: "#content", model: userModel, collection: feedCollection});
         userProfileView.render();
     }
@@ -112,8 +111,7 @@ export class AppRouter extends Backbone.Router {
 
     public showUsers(param: string = "") {
         this.loginRedirect();
-        // const userCollection = new UserCollection({url: "http://api.ugram.net/users"});
-        const userCollection = new UserCollection({url: "http://localhost:3000/users"});
+        const userCollection = new UserCollection({url: `${API_BASE_URL}users`});
         const userCollectionView = new UserCollectionView({el: "#content", collection: userCollection});
         userCollectionView.render();
     }

@@ -4,8 +4,8 @@ import * as _ from "underscore";
 
 import { UserModel } from "../models/UserModel";
 import { HeaderRequestGenerator } from "../util/HeaderRequestGenerator";
-import { InputFormatter } from "../util/InputFormatter";
 import { InputValidator } from "../util/InputValidator";
+import {API_BASE_URL} from "../constants";
 
 export class UserAddPictureView extends Backbone.View<UserModel> {
 
@@ -66,7 +66,7 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
         if (InputValidator.extensionFileIsValid(filename)) {
             $.ajax({
                 // url: "http://api.ugram.net/users/" + HeaderRequestGenerator.userId + "/pictures",
-                url: "http://localhost:3000/users/" + HeaderRequestGenerator.currentUser() + "/pictures",
+                url: `${API_BASE_URL}users/${HeaderRequestGenerator.currentUser()}/pictures`,
                 type: "POST",
                 data: formData,
                 processData: false,

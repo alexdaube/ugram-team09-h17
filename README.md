@@ -1,9 +1,7 @@
 # ugram-h17-team-09
 
-Le site web est disponible à l'adresse suivante:
-http://db19aqpshtnup.cloudfront.net
-ou
-http://aide.moe
+Le frontend est situé sur https://aide.moe ; il se situe derrière cloudfront
+Le backend est situé sur https://api.aide.moe ; il se situe derrière cloudflare
 
 ##Instructions concernant les fonctionnalités implémentés
 

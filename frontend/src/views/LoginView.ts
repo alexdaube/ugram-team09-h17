@@ -5,6 +5,7 @@ import * as hello from "hellojs";
 import * as request from "superagent";
 import {InputValidator} from "../util/InputValidator";
 import {LoginModel} from "../models/LoginModel";
+import {API_BASE_URL, FB_CLIENT} from "../constants";
 
 export class LoginView extends Backbone.View<LoginModel> {
     private template: Function;
@@ -15,7 +16,7 @@ export class LoginView extends Backbone.View<LoginModel> {
     constructor(options?: Backbone.ViewOptions<LoginModel>) {
         super(_.extend({el: "#content"}, options));
         this.template = require("./LoginTemplate.ejs") as Function;
-        hello.init({facebook: "760512777458970"});
+        hello.init({facebook: FB_CLIENT});
         this.login = this.login.bind(this);
         this.signup = this.signup.bind(this);
         this.loginSucessCallback = this.loginSucessCallback.bind(this);
@@ -86,7 +87,7 @@ export class LoginView extends Backbone.View<LoginModel> {
     private authenticate(route, params) {
         return new Promise((resolve, reject) => {
             request
-                .post("http://localhost:3000/" + route)
+                .post(`${API_BASE_URL}${route}`)
                 .send(params)
                 .set("Accept", "application/json")
                 .end((err, res) => {

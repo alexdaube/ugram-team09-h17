@@ -9,7 +9,7 @@ var S3UploadService = function () {
 S3UploadService.prototype.uploadPicture = function (newPictureId, callback) {
 
 
-    var files = fs.readdirSync("./upload");
+    var files = fs.readdirSync(global.configs.localUploadFolder);
     var fileName = files[0];
 
     if(typeof fileName === 'undefined'){
@@ -21,7 +21,7 @@ S3UploadService.prototype.uploadPicture = function (newPictureId, callback) {
     aws.config.update(global.configs.s3Auth);
     var s3 = new aws.S3();
 
-    fs.readFile("upload/" + fileName, function (err, data) {
+    fs.readFile(global.configs.localUploadFolder + fileName, function (err, data) {
 
         var params = {
             Bucket: global.configs.s3Bucket.bucketName,
@@ -39,7 +39,7 @@ S3UploadService.prototype.uploadPicture = function (newPictureId, callback) {
     });
 
     for( var file in files){
-        fs.unlink("upload/" + files[file]);
+        fs.unlink(global.configs.localUploadFolder + files[file]);
     }
     return callback(newFileName);
 };
