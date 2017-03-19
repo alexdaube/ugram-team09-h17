@@ -144,6 +144,25 @@ userService.prototype.deleteUserPicture = function (request, returnObject) {
     });
 };
 
+userService.prototype.deleteUser = function (request, returnObject) {
+    var path = request.path;
+    var urlParts = path.split('/');
+    var userId = urlParts[2];    
+
+    if (userId != request.user.attributes.userName) {
+        returnObject.status(403).json("Editing on forbidden user account for current authentication");
+        return;
+    }
+    this.persistence.deleteUser(userId, function(err,response) {
+        if(!err && response) {
+            returnObject.status(204).send();
+        } else {
+            console.warn(err, response);
+            returnObject.status(err.statusCode).send(err,message);
+        }
+    });    
+};
+
 userService.prototype.getUserPicture = function (request, returnObject) {
     var path = request.path;
     var urlParts = path.split('/');

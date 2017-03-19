@@ -218,6 +218,22 @@ userRepository.prototype.deletePicture = function (userId, pictureId, callback) 
         });
 };
 
+userRepository.prototype.deleteUser = function (userId, callback) {
+    new User().where({userName: userId})
+    .fetch().then(function(user){
+        if(user){
+            user.destroy().then(function(){
+                return callback(null, "No content");
+            });
+        } else {
+            return callback({ statusCode: 400, message: "No such user"}, null);
+        }
+    }).catch(function (err) {
+        console.log(err);
+        handleError(400, null, callback);
+    });
+};
+
 // DONE
 userRepository.prototype.getUserPicture = function (userId, pictureId, callback) {
     var that = this;
