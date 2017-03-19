@@ -38,6 +38,11 @@ module.exports = function (app) {
         userService.deleteUserPicture(req, res);
     });
 
+    app.delete("/users/:userId", isLoggedIn, function (req,res){
+        var userService = new UserService(config);
+        userService.deleteUser(req,res);
+    });
+
     app.get("/users/:userId/pictures/:pictureId", isLoggedIn, function (req, res) {
         var userService = new UserService(config);
         userService.getUserPicture(req, res);

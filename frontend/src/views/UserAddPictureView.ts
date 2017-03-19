@@ -76,6 +76,7 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
                 success() {
                     $("#textSavePicture").show();
                     $("#textErrorPicture").hide();
+                    $("#description").val("");                    
                 },
                 error() {
                     $("#textErrorPicture").show();

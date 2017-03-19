@@ -218,9 +218,9 @@ userRepository.prototype.deletePicture = function (userId, pictureId, callback) 
         });
 };
 
-userRepository.prototype.delete = function (userId, callback) {
-    new User().where({userId: userId})
-    .fetch({withRelated:["pictures"]}).then(function(user){
+userRepository.prototype.deleteUser = function (userId, callback) {
+    new User().where({userName: userId})
+    .fetch().then(function(user){
         if(user){
             user.destroy().then(function(){
                 return callback(null, "No content");

@@ -43,25 +43,12 @@ export class AppRouter extends Backbone.Router {
         (<any> this)._bindRoutes();
     }
 
-    public initialize() {
-        const headerModel = new HeaderModel({});
-        // const feedCollection = new FeedCollection({url: "http://api.ugram.net/pictures"});
-        const feedCollection = new FeedCollection({url: "http://localhost:3000/pictures"});
-        const headerView = new HeaderView({model: headerModel, collection: feedCollection});
-        headerView.render();
-
-        const footerModel = new FooterModel({});
-        const footerView = new FooterView({model: footerModel});
-        footerView.render();
-    }
-
     public defaultRoute() {
         if (!localStorage.getItem("token")) {
             this.showLogin();
         } else {
             window.location.href = "/#home";
         }
-
     }
 
     public showLogin() {
@@ -71,6 +58,16 @@ export class AppRouter extends Backbone.Router {
     }
 
     public showProfile() {
+        const headerModel = new HeaderModel({});
+        // const feedCollection = new FeedCollection({url: "http://api.ugram.net/pictures"});
+        const feedCollection = new FeedCollection({url: "http://localhost:3000/pictures"});
+        const headerView = new HeaderView({model: headerModel, collection: feedCollection});
+        headerView.render();
+
+        const footerModel = new FooterModel({});
+        const footerView = new FooterView({model: footerModel});
+        footerView.render();
+        
         this.loginRedirect();
         this.showUserProfile(HeaderRequestGenerator.currentUser());
     }

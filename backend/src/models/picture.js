@@ -8,8 +8,7 @@ var Picture = bookshelf.Model.extend({
 
     tags: function(){
         return this.hasMany(Tag);
-    },
-
+    },    
     mentions: function(){
         return this.hasMany(Mention);
     }
