@@ -1,14 +1,15 @@
 #!/bin/bash
+source ~/.bash_profile &&
 cd /home/ec2-user/deployment/ &&
 sudo chown ec2-user * -R -f &&
-~/.nvm/versions/node/v6.9.4/bin/npm install &&
-~/.nvm/versions/node/v6.9.4/bin/npm install gulp -D &&
+npm install &&
+npm install gulp -D &&
 gulp build-prod
 cp *.html /www/ -f &&
 cp dist /www/ -R -f &&
 cp img /www/ -R -f &&
 cd /home/ec2-user/backend/ &&
 sudo chown ec2-user * -R -f &&
-~/.nvm/versions/node/v6.9.4/bin/npm install &&
+npm install &&
 forever stopall &&
 forever start /home/ec2-user/backend/src/index.js ~/ugram-config.json
