@@ -4,6 +4,7 @@ import * as $ from "jquery";
 
 import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 import {UserModel} from "../models/UserModel";
+import {API_BASE_URL} from "../constants";
 
 export class LoggedUserProfileView extends Backbone.View<UserModel> {
 
@@ -56,7 +57,7 @@ export class LoggedUserProfileView extends Backbone.View<UserModel> {
         $.ajax({
             // TODO on a laissé jlabonte hard coder dans le code?
             // url: "http://api.ugram.net/users/jlabonte/pictures",
-            url: "http://localhost:3000/users/jlabonte/pictures",
+            url: `${API_BASE_URL}users/jlabonte/pictures`,
             type: "POST",
             data: formData,
             processData: false,

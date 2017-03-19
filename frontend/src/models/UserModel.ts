@@ -1,13 +1,13 @@
 import * as Backbone from "backbone";
 
 import {InputFormatter} from "../util/InputFormatter";
+import {API_BASE_URL} from "../constants";
 
 export class UserModel extends Backbone.Model {
 
     constructor(options?: any) {
         super(options);
-        // this.urlRoot = "http://api.ugram.net/users";
-        this.urlRoot = "http://localhost:3000/users";
+        this.urlRoot = `${API_BASE_URL}users`;
     };
 
     public defaults() {

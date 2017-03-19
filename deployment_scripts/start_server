@@ -4,9 +4,7 @@ cd /home/ec2-user/deployment/ &&
 sudo chown ec2-user * -R -f &&
 npm install &&
 npm install gulp -D &&
-gulp clean &&
-gulp ts &&
-gulp sass &&
+gulp build-prod
 cp *.html /www/ &&
 cp dist /www/ -R &&
 cp img /www/ -R &&
