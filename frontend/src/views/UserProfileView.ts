@@ -84,7 +84,7 @@ export class UserProfileView extends Backbone.View<any> {
         }
     }
 
-    private deleteMyAccount() {        
+    private deleteMyAccount() {
         $("#confirmDelete").hide();
         const view = this;
         this.model.destroy({
