@@ -1,3 +1,6 @@
+# serveur
+
+Le backend est situé sur https://api.aide.moe ; il se situe derrière cloudflare
 
 # node-starter
 

@@ -22,12 +22,13 @@
     "port": 3000
   },
   "session": {
-      "secret": "someSessionSecret"
+    "secret": "someSessionSecret"
   },
   "repository": {
     "host": "https://localhost",
     "port": "/"
   },
+  "localUploadFolder": "./",
   "sequelizeConfig": {
     "user": "dbUser",
     "password": "dbPassword",
