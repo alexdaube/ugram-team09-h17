@@ -68,7 +68,7 @@ export class AppRouter extends Backbone.Router {
         const footerModel = new FooterModel({});
         const footerView = new FooterView({model: footerModel});
         footerView.render();
-        
+
         this.loginRedirect();
         this.showUserProfile(HeaderRequestGenerator.currentUser());
     }
