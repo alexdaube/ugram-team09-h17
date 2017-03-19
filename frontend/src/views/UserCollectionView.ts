@@ -26,7 +26,7 @@ export class UserCollectionView extends Backbone.View<any> {
         $(".searchBox").hide();
 
         $("#findInput").focusout( () => {
-            window.setTimeout( () => { $(".searchBox").hide(); }, 100);
+            window.setTimeout( () => { $(".searchBox").hide(); }, 250);
         });
 
         $("#findInput").click( () => {

@@ -23,7 +23,7 @@ export class HeaderView extends Backbone.View<any> {
         $(".searchBox2").hide();
 
         $("#findInput2").focusout( () => {
-            window.setTimeout( () => { $(".searchBox2").hide(); }, 100);
+            window.setTimeout( () => { $(".searchBox2").hide(); }, 250);
         });
 
         $("#findInput2").click( () => {
