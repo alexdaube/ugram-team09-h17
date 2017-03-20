@@ -5,6 +5,8 @@ Le backend est situé sur https://api.aide.moe ; il se situe derrière cloudflar
 
 ##Instructions concernant les fonctionnalités implémentés
 
+###Livrable 1
+
 ###L'usager doit pouvoir consulter son profil usager.
 
 Le profil usager est accessible en appuyant sur l'icon d'usagé en haut à droite de la page
@@ -46,3 +48,32 @@ L'usager peut consulter une image en particulier en appuyant sur celle-ci sur la
 ###L'usager doit pouvoir consulter une liste d'images ordonnées par date, tout usager confondu.
 
 La liste d'image, ordonnées par date, est disponible sur la page d'accueil de la page web
+
+###Livrable 2
+###L'usager doit pouvoir s'authentifier dans l'application en utilisant un fournisseur OAuth connu. (Facebook, Google etc.)
+
+L'usager peut s'authentifier via Facebook en cliquant sur le bouton "Login with Facebook" sur la page d'accueil.
+
+###S'il ne possède pas de compte, l'usager doit pouvoir s'enregistrer dans l'application.
+
+Lorsque l'usager clique sur le bouton "Login with Facebook", s'il ne possède pas de compte, on lui demande d'entrer le nom qu'il désire utiliser sur le site web. En cliquant sur "Signup with Facebook", un compte est créé pour cet utilisateur. 
+
+###L'usager doit pouvoir se déconnecter de l'application.
+
+L'usager peut se déconnecter en cliquant sur les trois points (...) situés à droite de son nom dans la page profile. Il doit ensuite cliquer sur "Log out"
+
+###L'usager doit pouvoir supprimer son compte.
+
+L'usager peut se déconnecter en cliquant sur les trois points (...) situés à droite de son nom dans la page profile. Il doit ensuite cliquer sur "Delete my account" puis en cliquant sur "Click here to delete your account".
+
+###L'usager doit pouvoir rechercher un autre usager.
+
+Sur la page des utilisateurs (accessibles par la boussole en haut à droite), un usager peut saisir le nom ou une partie du nom d'utilisateur de l'utilisateur qu'il recherche. Une liste apparaîtra et il pourra ensuite sélectionner celui qu'il désire.
+
+###L'usager doit pouvoir rechercher pour des images contenant un mot précis dans leur description.
+
+Dans l'entête du site, l'usager peut saisir du texte correspondant à la description d'une image. Une liste des publications correspondates sera affichée et l'usager pourra sélectionner celle qu'il désire.
+
+###L'usager doit pouvoir rechercher pour des images contenant un mot clé (hashtag) précis.
+
+Dans l'entête du site, l'usager peut saisir du texte correspondant à un mot clé définis par le caractère "#". Une liste des publications correspondates sera affichée et l'usager pourra sélectionner celle qu'il désire.
