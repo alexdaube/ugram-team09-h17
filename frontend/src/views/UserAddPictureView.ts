@@ -46,12 +46,14 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
 
         if (InputValidator.containsScriptInjection(description)) {
             $("#textErrorSetting").show();
+            $("#textSavePicture").hide();
             $("#textErrorSetting").find("p").text("Script are not authorized");
             return;
         }
 
         if (InputValidator.isTooLongText(description) || InputValidator.isNullOrEmpty(description)) {
             $("#textErrorPicture").show();
+            $("#textSavePicture").hide();
             $("#textErrorPicture").find("p").text("Invalid description");
             return;
         }
