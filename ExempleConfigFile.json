@@ -1,0 +1,53 @@
+{
+  "bookshelf": {
+    "dbDialect": "mysql",
+    "dbConnection": {
+      "host": "domainNameOrIP",
+      "user": "dbUser",
+      "password": "dbPassword",
+      "db": "databaseName",
+      "charset": "collation"
+    }
+  },
+  "auth": {
+    "facebook": {
+      "clientID": "facebookAppId",
+      "profileURL": "https://graph.facebook.com/ + infos"
+    },
+    "jwt": {
+      "secret": "sometokensecret"
+    }
+  },
+  "server": {
+    "port": 3000
+  },
+  "session": {
+    "secret": "someSessionSecret"
+  },
+  "repository": {
+    "host": "https://localhost",
+    "port": "/"
+  },
+  "localUploadFolder": "./",
+  "sequelizeConfig": {
+    "user": "dbUser",
+    "password": "dbPassword",
+    "db": "databaseName",
+    "config": {
+      "dialect": "mysql",
+      "port": "3306"
+    },
+    "session": {
+      "secret": "someSessionSecret"
+    },
+    "s3Auth": {
+      "secretAccessKey": "secretAccessKey",
+      "accessKeyId": "accessKeyId"
+    },
+    "s3Bucket": {
+      "bucketName": "teamName",
+      "imageFolderPath": "imagesPath",
+      "imageFolderUrl": "imageFolderUrl"
+    }
+  }
+}

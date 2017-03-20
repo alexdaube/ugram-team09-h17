@@ -1,16 +1,45 @@
 <div class="contentLogin">
 	<div class="imageLeftLogin mobileImageLogin"></div>
 	<div class="paddingZoneLogin">
-		<div class="whiteZoneLogin">
-			<h1 class="centerLogoLogin logoUgramLogin"></h1>
-			<div class="widthInputLogin"><input type="text" class="heightInputLogin" placeholder="Email Address"></div>
-			<div class="widthInputLogin"><input type="password" class="heightInputLogin" placeholder="Mot de passe"></div>
-			<div><div class="paddingConnectLogin"><button class="fontLoginButton colorLoginButton heigthLoginButton">Sign in</button></div></div>
-		</div>
+
+		<h1 class="centerLogoLogin navLogo"></h1>
+
+		<% if(signupNeeded){ %>
+			<h2 class="textUpLogin">
+				Welcome to ugram! To complete your registration: choose a user name that is shorter than 30 characters,
+				cannot have spaces and must be alphanumeric.
+			</h2>
+			<div class="widthInputLogin">
+				<input id="username-input" type="text" class="heightInputLogin" placeholder="User Name">
+
+				<div id="textErrorSetting" class="buttonSetting"><span><p class="validationTextSize errorTextColor"></p></span></div>
+			</div>
+			<div>
+				<div class="paddingConnectLogin">
+					<button id="registerButton" class="fontLoginButton colorLoginButton heigthLoginButton">
+						<div class="logoMediaLogin columnMediaLogin"></div>Signup with Facebook
+					</button>
+				</div>
+			</div>
+        <% } else { %>
+			<h2 class="textUpLogin">
+				Welcome to ugram.<br>Please Sign in!
+			</h2>
+			<div>
+				<div class="paddingConnectLogin">
+					<button id="loginButton" class="fontLoginButton colorLoginButton heigthLoginButton">
+						<div class="logoMediaLogin columnMediaLogin"></div>Login with Facebook
+					</button>
+				</div>
+			</div>
+        <% } %>
+
+
 		<div class="whiteZoneLogin">
 			<p class="paddingSignLogin">
-				You don't have an account? <a class="blueLinkLogin" href="">Register</a>
+				By signing in, you agree to our Terms of Use and Privacy Policy
 			</p>
 		</div>
+
 	</div>
 </div>

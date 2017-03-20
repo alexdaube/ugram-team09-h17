@@ -2,10 +2,10 @@ import * as Backbone from "backbone";
 import * as $ from "jquery";
 import * as _ from "underscore";
 
-import {UserModel} from "../models/UserModel";
-import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
-import {InputFormatter} from "../util/InputFormatter";
-import {InputValidator} from "../util/InputValidator";
+import { UserModel } from "../models/UserModel";
+import { HeaderRequestGenerator } from "../util/HeaderRequestGenerator";
+import { InputValidator } from "../util/InputValidator";
+import {API_BASE_URL} from "../constants";
 
 export class UserAddPictureView extends Backbone.View<UserModel> {
 
@@ -13,7 +13,7 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
     private userModel: UserModel;
 
     constructor(options?: Backbone.ViewOptions<UserModel>) {
-        super(_.extend({el: "#content"}, options));
+        super(_.extend({ el: "#content" }, options));
         this.template = require("./UserAddPictureTemplate.ejs") as Function;
         this.userModel = options["model"];
     }
@@ -21,8 +21,9 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
     public render() {
         const that = this;
         this.userModel.fetch({
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
             success() {
-                that.$el.html(that.template({userModel: that.userModel}));
+                that.$el.html(that.template({ userModel: that.userModel }));
             },
             error() {
                 this.$el.html(this.template("No user by that name!"));
@@ -45,12 +46,14 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
 
         if (InputValidator.containsScriptInjection(description)) {
             $("#textErrorSetting").show();
+            $("#textSavePicture").hide();
             $("#textErrorSetting").find("p").text("Script are not authorized");
             return;
         }
 
         if (InputValidator.isTooLongText(description) || InputValidator.isNullOrEmpty(description)) {
             $("#textErrorPicture").show();
+            $("#textSavePicture").hide();
             $("#textErrorPicture").find("p").text("Invalid description");
             return;
         }
@@ -64,7 +67,8 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
 
         if (InputValidator.extensionFileIsValid(filename)) {
             $.ajax({
-                url: "http://api.ugram.net/users/" + HeaderRequestGenerator.userId + "/pictures",
+                // url: "http://api.ugram.net/users/" + HeaderRequestGenerator.userId + "/pictures",
+                url: `${API_BASE_URL}users/${HeaderRequestGenerator.currentUser()}/pictures`,
                 type: "POST",
                 data: formData,
                 processData: false,
@@ -74,6 +78,7 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
                 success() {
                     $("#textSavePicture").show();
                     $("#textErrorPicture").hide();
+                    $("#description").val("");
                 },
                 error() {
                     $("#textErrorPicture").show();

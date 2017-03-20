@@ -2,10 +2,11 @@ language: node_js
 node_js:
   - "node"
 before_script:
-  - npm install -g tslint typescript gulp
-script: 
+  - npm install -g tslint typescript gulp jshint
+script:
   - npm install --prefix ./frontend
-  - gulp --cwd ./frontend clean
-  - gulp --cwd ./frontend ts
-  - gulp --cwd ./frontend sass
+  - gulp --cwd ./frontend build
   - tslint frontend/src/**/*.ts{,x}
+  - npm install --prefix ./backend
+  - jshint ./backend/src
+  - npm test --prefix ./backend

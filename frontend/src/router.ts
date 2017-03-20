@@ -16,8 +16,6 @@ import {HeaderModel} from "./models/HeaderModel";
 import {FooterView} from "./views/FooterView";
 import {FooterModel} from "./models/FooterModel";
 
-import {RegisterView} from "./views/RegisterView";
-
 import {LoginView} from "./views/LoginView";
 import {LoginModel} from "./models/LoginModel";
 
@@ -25,13 +23,14 @@ import {PictureModel} from "./models/PictureModel";
 
 import {PostView} from "./views/PostView";
 import {HeaderRequestGenerator} from "./util/HeaderRequestGenerator";
+import {API_BASE_URL} from "./constants";
 
 export class AppRouter extends Backbone.Router {
 
     public routes = {
         "": "defaultRoute",
         "login": "showLogin",
-        "register": "showRegister",
+        "home": "showFeed",
         "setting": "showUserSetting",
         "picture": "showAddPicture",
         "users": "showUsers",
@@ -45,24 +44,12 @@ export class AppRouter extends Backbone.Router {
         (<any> this)._bindRoutes();
     }
 
-    public initialize() {
-        const headerModel = new HeaderModel({});
-        const headerView = new HeaderView({model: headerModel});
-        headerView.render();
-
-        const footerModel = new FooterModel({});
-        const footerView = new FooterView({model: footerModel});
-        footerView.render();
-    }
-
     public defaultRoute() {
-        this.showRegister();
-    }
-
-    public showRegister() {
-        const loginModel = new LoginModel({});
-        const registerView = new RegisterView({model: loginModel});
-        registerView.render();
+        if (!localStorage.getItem("token")) {
+            this.showLogin();
+        } else {
+            window.location.href = "/#home";
+        }
     }
 
     public showLogin() {
@@ -72,43 +59,82 @@ export class AppRouter extends Backbone.Router {
     }
 
     public showProfile() {
-        this.showUserProfile(HeaderRequestGenerator.userId);
+        this.showHeaderFooter();
+
+        this.loginRedirect();
+        this.showUserProfile(HeaderRequestGenerator.currentUser());
     }
 
     public showFeed() {
-        const feedCollection = new FeedCollection({url: "http://api.ugram.net/pictures"});
+        this.showHeaderFooter();
+
+        this.loginRedirect();
+        const feedCollection = new FeedCollection({url: `${API_BASE_URL}pictures`});
         const feedCollectionView = new FeedCollectionView({el: "#content", collection: feedCollection});
         feedCollectionView.render();
     }
 
     public showPost(userFeedId: string, pictureId: string) {
+        this.showHeaderFooter();
+
+        this.loginRedirect();
         const pictureModel = new PictureModel({userId: userFeedId, id: pictureId});
         const postView = new PostView({el: "#content", model: pictureModel});
         postView.render();
     }
 
     public showUserProfile(userId: string = "") {
+        this.showHeaderFooter();
+
+        this.loginRedirect();
         const userModel = new UserModel({id: userId});
-        const feedCollection = new FeedCollection({url: "http://api.ugram.net/users/" + userModel.id + "/pictures"});
+        const feedCollection = new FeedCollection({url: `${API_BASE_URL}users/${userModel.id}/pictures`});
         const userProfileView = new UserProfileView({el: "#content", model: userModel, collection: feedCollection});
         userProfileView.render();
     }
 
     public showUserSetting(param: string = "") {
-        const userModel = new UserModel({id: HeaderRequestGenerator.userId});
+        this.showHeaderFooter();
+
+        this.loginRedirect();
+        const userModel = new UserModel({id: HeaderRequestGenerator.currentUser()});
         const userSettingsView = new UserSettingsView({model: userModel});
         userSettingsView.render();
     }
 
     public showAddPicture(param: string = "") {
-        const userModel = new UserModel({id: HeaderRequestGenerator.userId});
+        this.showHeaderFooter();
+
+        this.loginRedirect();
+        const userModel = new UserModel({id: HeaderRequestGenerator.currentUser()});
         const userAddPictureView = new UserAddPictureView({model: userModel});
         userAddPictureView.render();
     }
 
     public showUsers(param: string = "") {
-        const userCollection = new UserCollection({url: "http://api.ugram.net/users"});
+        this.showHeaderFooter();
+        
+        this.loginRedirect();
+        const userCollection = new UserCollection({url: `${API_BASE_URL}users`});
         const userCollectionView = new UserCollectionView({el: "#content", collection: userCollection});
         userCollectionView.render();
+    }
+
+    public loginRedirect() {
+        if (!localStorage.getItem("token")) {
+            window.location.href = "/";
+        }
+    }
+
+    public showHeaderFooter() {
+        const headerModel = new HeaderModel({});
+        // const feedCollection = new FeedCollection({url: "http://api.ugram.net/pictures"});
+        const feedCollection = new FeedCollection({url: "http://localhost:3000/pictures"});
+        const headerView = new HeaderView({model: headerModel, collection: feedCollection});
+        headerView.render();
+
+        const footerModel = new FooterModel({});
+        const footerView = new FooterView({model: footerModel});
+        footerView.render();
     }
 }

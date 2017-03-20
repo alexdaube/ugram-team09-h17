@@ -2,11 +2,13 @@ import * as Backbone from "backbone";
 
 import {InputFormatter} from "../util/InputFormatter";
 import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
+import {API_BASE_URL} from "../constants";
 
 export class PictureModel extends Backbone.Model {
     constructor(options?: any) {
         super(options);
-        this.urlRoot = "http://api.ugram.net/users/" + this.userId + "/pictures";
+        // this.urlRoot = "http://api.ugram.net/users/" + this.userId + "/pictures";
+        this.urlRoot = `${API_BASE_URL}users/${this.userId}/pictures`;
     }
 
     public defaults() {

@@ -25,6 +25,7 @@ export class PostView extends Backbone.View<PictureModel> {
 
     public render() {
         this.model.fetch({
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
             success: () => {
                 this.$el.html(this.template({post: this.model, isSingleFeed: true}));
                 this.$el.first().addClass("contentFeed");

@@ -15,8 +15,13 @@
     "object-literal-sort-keys": false,
     "ordered-imports": false,
     "no-angle-bracket-type-assertion": false,
-    "max-line-length": false
-  },
+    "max-line-length": false,
+    "ban-types": [true, ["Object", "Avoid using the `Object` type. Did you mean `object`?"],
+      ["Boolean", "Avoid using the `Boolean` type. Did you mean `boolean`?"],
+      ["Number", "Avoid using the `Number` type. Did you mean `number`?"],
+      ["String", "Avoid using the `String` type. Did you mean `string`?"],
+      ["Symbol", "Avoid using the `Symbol` type. Did you mean `symbol`?"]]
+    },
   "jsRules": {
     /*
      * Any rules specified here will override those from the base config we are extending.

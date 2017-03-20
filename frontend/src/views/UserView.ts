@@ -1,6 +1,7 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
 
+import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 import {UserModel} from "../models/UserModel";
 
 export class UserView extends Backbone.View<UserModel> {
@@ -13,6 +14,7 @@ export class UserView extends Backbone.View<UserModel> {
 
     public render() {
         this.model.fetch({
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
             success: () => {
                 this.$el.html(this.template({user: this.model}));
             },

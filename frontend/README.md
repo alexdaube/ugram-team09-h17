@@ -1,3 +1,7 @@
+# serveur
+
+Le frontend est situé sur https://aide.moe ; il se situe derrière cloudfront
+
 # backbone-starter
 
 Avant de commencer, jetez un coup d'oeil aux ressources suivantes:
