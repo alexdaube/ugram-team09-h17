@@ -59,21 +59,15 @@ export class AppRouter extends Backbone.Router {
     }
 
     public showProfile() {
-        const headerModel = new HeaderModel({});
-        // const feedCollection = new FeedCollection({url: "http://api.ugram.net/pictures"});
-        const feedCollection = new FeedCollection({url: "http://localhost:3000/pictures"});
-        const headerView = new HeaderView({model: headerModel, collection: feedCollection});
-        headerView.render();
-
-        const footerModel = new FooterModel({});
-        const footerView = new FooterView({model: footerModel});
-        footerView.render();
+        this.showHeaderFooter();
 
         this.loginRedirect();
         this.showUserProfile(HeaderRequestGenerator.currentUser());
     }
 
     public showFeed() {
+        this.showHeaderFooter();
+
         this.loginRedirect();
         const feedCollection = new FeedCollection({url: `${API_BASE_URL}pictures`});
         const feedCollectionView = new FeedCollectionView({el: "#content", collection: feedCollection});
@@ -81,6 +75,8 @@ export class AppRouter extends Backbone.Router {
     }
 
     public showPost(userFeedId: string, pictureId: string) {
+        this.showHeaderFooter();
+
         this.loginRedirect();
         const pictureModel = new PictureModel({userId: userFeedId, id: pictureId});
         const postView = new PostView({el: "#content", model: pictureModel});
@@ -88,6 +84,8 @@ export class AppRouter extends Backbone.Router {
     }
 
     public showUserProfile(userId: string = "") {
+        this.showHeaderFooter();
+
         this.loginRedirect();
         const userModel = new UserModel({id: userId});
         const feedCollection = new FeedCollection({url: `${API_BASE_URL}users/${userModel.id}/pictures`});
@@ -96,6 +94,8 @@ export class AppRouter extends Backbone.Router {
     }
 
     public showUserSetting(param: string = "") {
+        this.showHeaderFooter();
+
         this.loginRedirect();
         const userModel = new UserModel({id: HeaderRequestGenerator.currentUser()});
         const userSettingsView = new UserSettingsView({model: userModel});
@@ -103,6 +103,8 @@ export class AppRouter extends Backbone.Router {
     }
 
     public showAddPicture(param: string = "") {
+        this.showHeaderFooter();
+
         this.loginRedirect();
         const userModel = new UserModel({id: HeaderRequestGenerator.currentUser()});
         const userAddPictureView = new UserAddPictureView({model: userModel});
@@ -110,6 +112,8 @@ export class AppRouter extends Backbone.Router {
     }
 
     public showUsers(param: string = "") {
+        this.showHeaderFooter();
+        
         this.loginRedirect();
         const userCollection = new UserCollection({url: `${API_BASE_URL}users`});
         const userCollectionView = new UserCollectionView({el: "#content", collection: userCollection});
@@ -120,5 +124,17 @@ export class AppRouter extends Backbone.Router {
         if (!localStorage.getItem("token")) {
             window.location.href = "/";
         }
+    }
+
+    public showHeaderFooter() {
+        const headerModel = new HeaderModel({});
+        // const feedCollection = new FeedCollection({url: "http://api.ugram.net/pictures"});
+        const feedCollection = new FeedCollection({url: "http://localhost:3000/pictures"});
+        const headerView = new HeaderView({model: headerModel, collection: feedCollection});
+        headerView.render();
+
+        const footerModel = new FooterModel({});
+        const footerView = new FooterView({model: footerModel});
+        footerView.render();
     }
 }
