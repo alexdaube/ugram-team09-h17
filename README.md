@@ -76,3 +76,210 @@ Dans l'entête du site, l'usager peut saisir du texte correspondant à la descri
 ### L'usager doit pouvoir rechercher pour des images contenant un mot clé (hashtag) précis.
 
 Dans l'entête du site, l'usager peut saisir du texte correspondant à un mot clé définis par le caractère "#". Une liste des publications correspondates sera affichée et l'usager pourra sélectionner celle qu'il désire.
+
+## Documentation API
+Base URL: *https://api.aide.moe*
+
+### basic-api
+#### GET / 
+
+### global-pictures-api
+#### GET /pictures 
+
+Model Schema
+```json
+[
+  {
+    "createdDate": {
+      "afterNow": true,
+      "beforeNow": true,
+      "equalNow": true
+    },
+    "description": "string",
+    "id": 0,
+    "mentions": [
+      "string"
+    ],
+    "tags": [
+      "string"
+    ],
+    "url": "string",
+    "userId": "string"
+  }
+]
+```
+
+### user-pictures-api
+#### GET /users/{userId}/pictures
+
+Model Schema
+```json
+[
+  {
+    "createdDate": {
+      "afterNow": true,
+      "beforeNow": true,
+      "equalNow": true
+    },
+    "description": "string",
+    "id": 0,
+    "mentions": [
+      "string"
+    ],
+    "tags": [
+      "string"
+    ],
+    "url": "string",
+    "userId": "string"
+  }
+]
+```
+
+#### POST /users/{userId}/pictures
+
+Model Schema
+```json
+{
+  "description": "string",
+  "mentions": [
+    "string"
+  ],
+  "tags": [
+    "string"
+  ]
+}
+```
+Response
+```json
+{
+  "id": "string"
+}
+```
+
+#### DELETE /users/{userId}/pictures/{pictureId}
+
+#### GET /users/{userId}/pictures/{pictureId}
+
+Model Schema
+```json
+{
+  "createdDate": {
+    "afterNow": true,
+    "beforeNow": true,
+    "equalNow": true
+  },
+  "description": "string",
+  "id": 0,
+  "mentions": [
+    "string"
+  ],
+  "tags": [
+    "string"
+  ],
+  "url": "string",
+  "userId": "string"
+}
+```
+
+#### PUT /users/{userId}/pictures/{pictureId}
+
+Model Schema
+```json
+{
+  "description": "string",
+  "mentions": [
+    "string"
+  ],
+  "tags": [
+    "string"
+  ]
+}
+```
+Response
+```json
+{
+  "createdDate": {
+    "afterNow": true,
+    "beforeNow": true,
+    "equalNow": true
+  },
+  "description": "string",
+  "id": 0,
+  "mentions": [
+    "string"
+  ],
+  "tags": [
+    "string"
+  ],
+  "url": "string",
+  "userId": "string"
+}
+```
+
+### users-api
+#### GET /users
+
+Model Schema
+```json
+[
+  {
+    "email": "string",
+    "firstName": "string",
+    "id": "string",
+    "lastName": "string",
+    "phoneNumber": 0,
+    "pictureUrl": "string",
+    "registrationDate": {
+      "afterNow": true,
+      "beforeNow": true,
+      "equalNow": true
+    }
+  }
+]
+```
+
+#### GET /users/{userId}
+
+Model Schema
+```json
+{
+  "email": "string",
+  "firstName": "string",
+  "id": "string",
+  "lastName": "string",
+  "phoneNumber": 0,
+  "pictureUrl": "string",
+  "registrationDate": {
+    "afterNow": true,
+    "beforeNow": true,
+    "equalNow": true
+  }
+}
+```
+#### PUT /users/{userId} 
+
+Model Schema
+```json
+{
+  "email": "string",
+  "firstName": "string",
+  "id": "string",
+  "lastName": "string",
+  "phoneNumber": 0,
+  "pictureUrl": "string",
+  "registrationDate": {
+    "afterNow": true,
+    "beforeNow": true,
+    "equalNow": true
+  }
+}
+```
+Response
+```json
+{
+  "email": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "phoneNumber": 0
+}
+```

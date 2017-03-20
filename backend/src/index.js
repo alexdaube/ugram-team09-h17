@@ -39,27 +39,18 @@ const corsOptions = {
 // configuration ===============================================================
 const port = process.env.PORT || global.configs.server.port;
 
-//require('./services/passport')(passport); // pass passport for configuration
-
-// Use application-level middleware for common functionality, including
-// logging, parsing, and session handling.
 app.use(require('morgan')('combined'));
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({extended: true}));
 
-// required for passport
 app.use(session({
     secret: global.configs.session.secret, // session secret
     resave: true,
     saveUninitialized: true
 }));
-//app.use(passport.initialize());
-//app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
 
-//app.use(errors.genericErrorHandler);
-// Enables access-logs on each calls
+app.use(flash()); // use connect-flash for flash messages stored in session
 app.use(cors(corsOptions));
 
 // routes ======================================================================
