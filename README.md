@@ -3,8 +3,6 @@
 Le frontend est situé sur https://aide.moe ; il se situe derrière cloudfront
 Le backend est situé sur https://api.aide.moe ; il se situe derrière cloudflare
 
-## Instructions concernant les fonctionnalités implémentés
-
 ## Livrable 1
 
 ### L'usager doit pouvoir consulter son profil usager.
