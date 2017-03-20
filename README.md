@@ -5,7 +5,7 @@ Le backend est situé sur https://api.aide.moe ; il se situe derrière cloudflar
 
 ## Instructions concernant les fonctionnalités implémentés
 
-### Livrable 1
+## Livrable 1
 
 ### L'usager doit pouvoir consulter son profil usager.
 
@@ -49,7 +49,7 @@ L'usager peut consulter une image en particulier en appuyant sur celle-ci sur la
 
 La liste d'image, ordonnées par date, est disponible sur la page d'accueil de la page web
 
-### Livrable 2
+## Livrable 2
 
 ### L'usager doit pouvoir s'authentifier dans l'application en utilisant un fournisseur OAuth connu. (Facebook, Google etc.)
 
