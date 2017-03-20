@@ -8,6 +8,27 @@ function generateJsonWebToken(profile) {
         global.configs.auth.jwt.secret);
 }
 
+function validateUserName(userName) {
+    var validation = {};
+    if (userName === "" || userName === null) {
+        validation.isValid = false;
+        validation.message = "User name cannot be empty!";
+        return validation;
+    }
+    if(userName.length >= 30) {
+        validation.isValid = false;
+        validation.message = "User name must be shorter than 30 characters!";
+        return validation;
+    }
+    if(!(/^[a-zA-Z0-9_-]*$/.test(userName))) {
+        validation.isValid = false;
+        validation.message = "User name cannot contain anything other than numbers, letters, underscores or dashes. It must not have any spaces either!";
+        return validation;
+    }
+    validation.isValid = true;
+    return validation;
+}
+
 var providers = {
     facebook: {
         url: global.configs.auth.facebook.profileURL
@@ -35,6 +56,12 @@ exports.signup = function (req, res, next) {
     var network = req.body.network;
     var socialToken = req.body.socialToken;
     var userName = req.body.userName;
+
+    var userNameValidation = validateUserName(userName);
+    if (!userNameValidation.isValid) {
+        return res.status(400).send({signupError: userNameValidation.message});
+    }
+
     validateWithProvider(network, socialToken)
         .then(function (profile) {
             profile.userName = userName;

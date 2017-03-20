@@ -92,7 +92,9 @@ export class UserProfileView extends Backbone.View<any> {
             success() {
                 view.logout();
             },
-            error() {},
+            error() {
+                // TODO
+            },
         });
     }
 
