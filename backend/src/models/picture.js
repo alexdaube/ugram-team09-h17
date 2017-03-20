@@ -1,4 +1,3 @@
-//const bcrypt = require('bcrypt-nodejs');
 const bookshelf = require('../../config/bookshelf');
 const Tag = require("./tag");
 const Mention = require("./mention");

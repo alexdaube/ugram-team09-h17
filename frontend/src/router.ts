@@ -113,7 +113,6 @@ export class AppRouter extends Backbone.Router {
 
     public showUsers(param: string = "") {
         this.showHeaderFooter();
-        
         this.loginRedirect();
         const userCollection = new UserCollection({url: `${API_BASE_URL}users`});
         const userCollectionView = new UserCollectionView({el: "#content", collection: userCollection});
@@ -128,8 +127,7 @@ export class AppRouter extends Backbone.Router {
 
     public showHeaderFooter() {
         const headerModel = new HeaderModel({});
-        // const feedCollection = new FeedCollection({url: "http://api.ugram.net/pictures"});
-        const feedCollection = new FeedCollection({url: "http://localhost:3000/pictures"});
+        const feedCollection = new FeedCollection({url: `${API_BASE_URL}pictures`});
         const headerView = new HeaderView({model: headerModel, collection: feedCollection});
         headerView.render();
 

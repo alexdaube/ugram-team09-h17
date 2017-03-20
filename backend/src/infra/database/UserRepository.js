@@ -9,12 +9,10 @@ var DatabaseDTO = require("../../util/DatabaseDTO");
 var userRepository = function (config) {
     this.host = config.host;
     this.port = config.port;
-    // this.host = config.repository.host;
-    // this.port = config.repository.port;
+
     this.databaseDTO = new DatabaseDTO();
 };
 
-// DONE
 userRepository.prototype.getAll = function (page, perPage, callback) {
 
     var that = this;
@@ -45,7 +43,6 @@ userRepository.prototype.getAll = function (page, perPage, callback) {
         });
 };
 
-// DONE
 userRepository.prototype.get = function (userId, callback) {
 
     var that = this;
@@ -59,7 +56,6 @@ userRepository.prototype.get = function (userId, callback) {
         });
 };
 
-// DONE
 userRepository.prototype.update = function (userId, body, callback) {
 
     var newEmail = body.email;
@@ -90,7 +86,6 @@ userRepository.prototype.update = function (userId, body, callback) {
         });
 };
 
-// DONE
 userRepository.prototype.getUserPictures = function (userId, page, perPage, callback) {
 
     var that = this;
@@ -110,7 +105,6 @@ userRepository.prototype.getUserPictures = function (userId, page, perPage, call
                         .where({ userId: userId})
                         .where("url", "!=", "null")
                         .orderBy("createdDate", "DESC");
-                        //.where("url", "!=", "null")
                 }).fetch()
                     .then(function (newCollection) {
                         numberOfPictureInTotal = newCollection.length;
@@ -193,7 +187,6 @@ userRepository.prototype.updatePictureUrl = function (pictureName, callback) {
         });
 };
 
-// DONE
 userRepository.prototype.deletePicture = function (userId, pictureId, callback) {
     var that = this;
     var numberOfPictureInTotal;
@@ -204,7 +197,6 @@ userRepository.prototype.deletePicture = function (userId, pictureId, callback) 
     new Picture().where({ userId: userId, id: pictureId })
         .fetch({ withRelated: ["tags", "mentions"] }).then(function (picture) {
             if (picture) {
-                //delete picture here
                 picture.destroy().then(function () {
                     return callback(null, "No content");
                 });
@@ -234,7 +226,6 @@ userRepository.prototype.deleteUser = function (userId, callback) {
     });
 };
 
-// DONE
 userRepository.prototype.getUserPicture = function (userId, pictureId, callback) {
     var that = this;
     var numberOfPictureInTotal;
@@ -258,7 +249,6 @@ userRepository.prototype.getUserPicture = function (userId, pictureId, callback)
         });
 };
 
-// NOT DONE; Problem. See below
 userRepository.prototype.updateUserPicture = function (userId, pictureId, body, callback) {
 
     var that = this;
@@ -326,14 +316,6 @@ userRepository.prototype.updateUserPicture = function (userId, pictureId, body, 
                     }
                 });
         }).then(function () {
-            // TODO regler ça - Les tags et les mentions ont pas tout le temps de ce loader
-            // avant que la picture soit réenvoyé au client. Le client recoit donc une partie
-            // aléatoire des tags et des mentions.
-
-            // TODO Aussi, je comprend pas encore mais defois, le fetch des Mentions et de tags
-            // ont pas le temps de bien se faire et ils retournent un array vide.
-            // Les mentions/tags sont donc pas supprimer et les autres sont ajoutés en plus
-            // Ça semble arriver genre 1 fois sur 5 donc c'est pas si grave mais c'est quand même dérangeant
             Picture
                 .where({ userId: userId, id: pictureId })
                 .fetch({ withRelated: ["tags", "mentions"] })

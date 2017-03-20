@@ -26,6 +26,5 @@ export class HeaderRequestGenerator {
         return  this.currentUser() === userId;
     }
 
-    // private static token: string = "bearer 24d6e087-51a0-465a-a19b-ce9570ad3169";
     private static token: string = localStorage.getItem("token");
 }

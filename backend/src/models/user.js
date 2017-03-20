@@ -1,4 +1,3 @@
-//const bcrypt = require('bcrypt-nodejs');
 const bookshelf = require('../../config/bookshelf');
 const Picture = require("./picture");
 

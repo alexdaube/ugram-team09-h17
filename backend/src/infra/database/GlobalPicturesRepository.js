@@ -1,4 +1,3 @@
-//var Request = require('request');
 var ErrorHandler = require("../../common/errors");
 const Picture = require("../../models/picture");
 var DatabaseDTO = require("../../util/DatabaseDTO");
@@ -8,13 +7,9 @@ var globalPicturesRepository = function (config) {
     this.host = config.host;
     this.port = config.port;
 
-    // this.host = config.repository.host;
-    // this.port = config.repository.port;
-
     this.databaseDTO = new DatabaseDTO();
 };
 
-// DONE
 globalPicturesRepository.prototype.get = function (page, perPage, callback) {
 
     var that = this;
