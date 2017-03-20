@@ -78,7 +78,7 @@ Dans l'entête du site, l'usager peut saisir du texte correspondant à la descri
 Dans l'entête du site, l'usager peut saisir du texte correspondant à un mot clé définis par le caractère "#". Une liste des publications correspondates sera affichée et l'usager pourra sélectionner celle qu'il désire.
 
 ## Documentation API
-Base URL: *http://api.aide.moe*
+Base URL: *https://api.aide.moe*
 
 ### basic-api
 #### GET / 
