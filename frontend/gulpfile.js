@@ -16,10 +16,6 @@ var argv = require('yargs').argv;
 
 var SERVER_PORT = '8000';
 
-
-// npm install --save gulp-util
-// gulp util to read env variables passed in
-
 function swallowError(error) {
     console.log(error.toString());
     this.emit('end')

@@ -7,7 +7,6 @@ import {API_BASE_URL} from "../constants";
 export class PictureModel extends Backbone.Model {
     constructor(options?: any) {
         super(options);
-        // this.urlRoot = "http://api.ugram.net/users/" + this.userId + "/pictures";
         this.urlRoot = `${API_BASE_URL}users/${this.userId}/pictures`;
     }
 
