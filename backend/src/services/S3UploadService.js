@@ -6,11 +6,17 @@ var S3UploadService = function () {
 
 };
 
-S3UploadService.prototype.uploadPicture = function (newPictureId, callback) {
+S3UploadService.prototype.uploadPicture = function (localPictureName, newPictureId, callback) {
 
 
     var files = fs.readdirSync(global.configs.localUploadFolder);
-    var fileName = files[0];
+    var fileName;// = files[0];
+
+    for(var file in files){
+        if(files[file].includes(localPictureName)) {
+            fileName = files[file];
+        }
+    }
 
     if(typeof fileName === 'undefined'){
         return callback(null);
@@ -31,16 +37,14 @@ S3UploadService.prototype.uploadPicture = function (newPictureId, callback) {
 
         s3.putObject(params, function (perr, pres) {
             if (perr) {
-                console.log("Error uploading data: ", perr);
+                return callback(null);
             } else {
-                console.log("Successfully uploaded data to myBucket/myKey");
+                console.log("Successfully uploaded picture");
             }
         });
     });
 
-    for( var file in files){
-        fs.unlink(global.configs.localUploadFolder + files[file]);
-    }
+    fs.unlink(global.configs.localUploadFolder + fileName);
     return callback(newFileName);
 };
 

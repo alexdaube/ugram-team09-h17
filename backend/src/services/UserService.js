@@ -87,24 +87,28 @@ userService.prototype.getUserPictures = function (request, returnObject) {
 
 userService.prototype.createUserPicture = function (request, returnObject) {
 
-
     var urlPath = request.path;
     var urlParts = urlPath.split('/');
     var userId = urlParts[2];
     var body = request.body;
     var that = this;
 
-
     if (userId != request.user.attributes.userName) {
         returnObject.status(403).json("Editing on forbidden user account for current authentication");
         return;
     }
+    if (typeof request.file === 'undefined') {
+        
+        returnObject.status(400).json("Unauthorized file format");
+        return;
+    }
+    var localPictureName = request.file.filename;
 
     this.persistence.createPicture(userId, body, function (err, response) {
 
         if (!err && response) {
             var newPictureId = response.toJSON().id;
-            that.S3ImageUploader.uploadPicture(newPictureId, function (fileName) {
+            that.S3ImageUploader.uploadPicture(localPictureName, newPictureId, function (fileName) {
                 that.persistence.updatePictureUrl(fileName, function (err) {
                     if (!err) {
                         returnObject.status(201).send({ id: newPictureId });

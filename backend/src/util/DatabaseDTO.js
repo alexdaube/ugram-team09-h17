@@ -1,21 +1,3 @@
-// var databaseDTO = function(){
-
-// }
-
-// databaseDTO.prototype.getUserJSON = function(user){
-//     var userJSON = {
-//         email: user.email,
-//         firstName: user.firstName,
-//         id: user.userName,
-//         lastName: user.lastName,
-//         phoneNumber: user.phoneNumber,
-//         pictureUrl: user.pictureUrl,
-//         registrationDate: user.registrationDate
-//     }
-//     return userJSON;
-// }
-
-// exports.databaseDTO = databaseDTO;
 
 module.exports = class DatabaseDTO {
 
