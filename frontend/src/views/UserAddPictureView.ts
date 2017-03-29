@@ -24,6 +24,13 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
             beforeSend: HeaderRequestGenerator.sendAuthorization,
             success() {
                 that.$el.html(that.template({ userModel: that.userModel }));
+                const video: HTMLVideoElement = <HTMLVideoElement> document.getElementById("video");
+                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                    navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+                        video.src = window.URL.createObjectURL(stream);
+                        video.play();
+                    });
+                }
             },
             error() {
                 this.$el.html(this.template("No user by that name!"));
@@ -36,6 +43,10 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
         return <Backbone.EventsHash> {
             "click #postPictureButton": "postPicture",
             "click .inputSizeSetting textarea": "hideSaveFeedBack",
+            "click #snap": "takePicture",
+            "change #upload-file-input": "readURL",
+            "click #take-snapshot": "take_snapshot",
+            "click #sendPhotoButton": "postPictureFromWebcam",
         };
     }
 
@@ -62,9 +73,8 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
         formData.append("description", description);
         formData.append("mentions", mentions);
         formData.append("tags", tags);
-        formData.append("file", (<any> $("input[type=file]")[0]).files[0]);
-        const filename = $("input[type=file]").val().split("\\").pop();
-
+        formData.append("file", (<any> $("input[name=file]")[0]).files[0]);
+        const filename = $("input[name=file]").val().split("\\").pop();
         if (InputValidator.extensionFileIsValid(filename)) {
             $.ajax({
                 url: `${API_BASE_URL}users/${HeaderRequestGenerator.currentUser()}/pictures`,
@@ -92,8 +102,83 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
         }
     }
 
+    private postPictureFromWebcam() {
+        const description: string = $("#description").val();
+        const mentions: string[] = description.match(/@\w+/g);
+        const tags: string[] = description.match(/#\w+/g);
+
+        if (InputValidator.containsScriptInjection(description)) {
+            $("#textErrorSettingWebcam").show();
+            $("#textSavePictureWebcam").hide();
+            $("#textErrorSettingWebcam").find("p").text("Script are not authorized");
+            return;
+        }
+
+        if (InputValidator.isTooLongText(description) || InputValidator.isNullOrEmpty(description)) {
+            $("#textErrorPictureWebcam").show();
+            $("#textSavePictureWebcam").hide();
+            $("#textErrorPictureWebcam").find("p").text("Invalid description");
+            return;
+        }
+
+        const formData: FormData = new FormData();
+        formData.append("description", description);
+        formData.append("mentions", mentions);
+        formData.append("tags", tags);
+        formData.append("file", (<any> $("input[name=webcam]")[0]).files[0]);
+        $.ajax({
+            url: `${API_BASE_URL}users/${HeaderRequestGenerator.currentUser()}/pictures`,
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            cache: false,
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
+            success() {
+                $("#textSavePictureWebcam").show();
+                $("#textErrorPictureWebCam").hide();
+                $("#description").val("");
+            },
+            error() {
+                $("#textErrorPictureWebcam").show();
+                $("#textErrorPictureWebcam").find("p").text("One or more inputs was invalid");
+                $("#textSavePictureWebcam").hide();
+            },
+        });
+    }
+
     private hideSaveFeedBack() {
         $("#textSavePicture").hide();
         $("#textErrorPicture").hide();
+        $("#textSavePictureWebcam").hide();
+        $("#textErrorPictureWebcam").hide();
+    }
+
+    private takePicture() {
+        const canvas: HTMLCanvasElement = <HTMLCanvasElement> document.getElementById("canvas");
+        const context = canvas.getContext("2d");
+        const video: HTMLVideoElement = <HTMLVideoElement> document.getElementById("video");
+        context.drawImage(video, 0, 0, 320, 240);
+        const imageData = canvas.toDataURL("image/png");
+        $("#image-preview").attr("src", imageData);
+        canvas.toBlob((blob) => {
+            const fileBlob = new File([blob], "webcam.png", {type: "image/png"});
+            const webcamInput: HTMLInputElement = <HTMLInputElement> $("input[name=webcam]")[0];
+            webcamInput.files[0] = fileBlob;
+        });
+        $("#textErrorPictureWebcam").hide();
+    }
+
+    private readURL(e) {
+        const input = e.target;
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = (ev: any) => {
+                $("#file-preview").attr("src", ev.target.result);
+                $("#file-preview").show();
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
     }
 }
