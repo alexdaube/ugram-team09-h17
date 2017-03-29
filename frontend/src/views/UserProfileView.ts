@@ -76,18 +76,18 @@ export class UserProfileView extends Backbone.View<any> {
             pictureView.append();
         });
 
-        $(".pictureProfile").each(function() {
-            const imageHeight = $(this).height();
-            const imageWidth = $(this).width();
+        $(".pictureProfile").each((index, picture) => {
+            const imageHeight = $(picture).height();
+            const imageWidth = $(picture).width();
 
             if (imageHeight < imageWidth) {
-                $(this).height("100%");
-                $(this).css("max-width", "100%");
-                $(this).css("max-height", "10%");
+                $(picture).height("100%");
+                $(picture).css("max-width", "100%");
+                $(picture).css("max-height", "10%");
             } else if (imageHeight > imageWidth) {
-                $(this).width("100%");
-                $(this).css("max-width", "10%");
-                $(this).css("max-height", "100%");
+                $(picture).width("100%");
+                $(picture).css("max-width", "10%");
+                $(picture).css("max-height", "100%");
             }
         });
 
