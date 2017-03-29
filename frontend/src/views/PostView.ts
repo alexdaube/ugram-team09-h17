@@ -34,6 +34,7 @@ export class PostView extends Backbone.View<PictureModel> {
                 this.$el.html("There was an error");
             },
         });
+
         return this;
     }
 

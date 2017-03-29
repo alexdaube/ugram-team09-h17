@@ -1,10 +1,10 @@
 import * as Backbone from "backbone";
 import * as hello from "hellojs";
 
-import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
-import {PictureView} from "./PictureView";
-import {ShowMoreView} from "./ShowMoreView";
-import {InputValidator} from "../util/InputValidator";
+import { HeaderRequestGenerator } from "../util/HeaderRequestGenerator";
+import { PictureView } from "./PictureView";
+import { ShowMoreView } from "./ShowMoreView";
+import { InputValidator } from "../util/InputValidator";
 
 export class UserProfileView extends Backbone.View<any> {
     private template: Function;
@@ -72,9 +72,25 @@ export class UserProfileView extends Backbone.View<any> {
 
     private renderPictures() {
         this.collection.each((picture) => {
-            const pictureView = new PictureView({el: "#profile-pictures-list", model: picture});
+            const pictureView = new PictureView({ el: "#profile-pictures-list", model: picture });
             pictureView.append();
         });
+
+        $(".pictureProfile").each(function() {
+            const imageHeight = $(this).height();
+            const imageWidth = $(this).width();
+
+            if (imageHeight < imageWidth) {
+                $(this).height("100%");
+                $(this).css("max-width", "100%");
+                $(this).css("max-height", "10%");
+            } else if (imageHeight > imageWidth) {
+                $(this).width("100%");
+                $(this).css("max-width", "10%");
+                $(this).css("max-height", "100%");
+            }
+        });
+
         this.checkForMorePicturesAvailable();
     }
 
