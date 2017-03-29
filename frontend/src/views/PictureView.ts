@@ -3,7 +3,6 @@ import * as _ from "underscore";
 import { HeaderRequestGenerator } from "../util/HeaderRequestGenerator";
 import { PictureModel } from "../models/PictureModel";
 
-
 export class PictureView extends Backbone.View<PictureModel> {
     private template: Function;
 
