@@ -1,9 +1,9 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
 
-import {PictureModel} from "../models/PictureModel";
-import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
-import {InputValidator} from "../util/InputValidator";
+import { PictureModel } from "../models/PictureModel";
+import { HeaderRequestGenerator } from "../util/HeaderRequestGenerator";
+import { InputValidator } from "../util/InputValidator";
 
 export class PostView extends Backbone.View<PictureModel> {
     private template: Function;
@@ -18,8 +18,8 @@ export class PostView extends Backbone.View<PictureModel> {
             "click #optionButtonEdit": () => { $("#popupEditContent").show(); },
             "click #closeExitButtonPopup": () => { $("#popupEditContent").hide(); },
             "click #deleteButtonPopup": "delete",
-            "click #editButtonPopup" : "edit",
-            "click #saveButtonPopup" : "saveModif",
+            "click #editButtonPopup": "edit",
+            "click #saveButtonPopup": "saveModif",
         };
     }
 
@@ -27,7 +27,7 @@ export class PostView extends Backbone.View<PictureModel> {
         this.model.fetch({
             beforeSend: HeaderRequestGenerator.sendAuthorization,
             success: () => {
-                this.$el.html(this.template({post: this.model, isSingleFeed: true}));
+                this.$el.html(this.template({ post: this.model, isSingleFeed: true }));
                 this.$el.first().addClass("contentFeed");
             },
             error: () => {
@@ -38,7 +38,7 @@ export class PostView extends Backbone.View<PictureModel> {
     }
 
     public append() {
-        this.$el.append(this.template({post: this.model, isSingleFeed: false}));
+        this.$el.append(this.template({ post: this.model, isSingleFeed: false }));
         return this;
     }
 

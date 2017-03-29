@@ -113,7 +113,7 @@ export class AppRouter extends Backbone.Router {
 
     public showUsers(param: string = "") {
         this.showHeaderFooter();
-        
+
         this.loginRedirect();
         const userCollection = new UserCollection({url: `${API_BASE_URL}users`});
         const userCollectionView = new UserCollectionView({el: "#content", collection: userCollection});
