@@ -17,6 +17,9 @@
 	</div>
 	<div class="textContentFeed">
 		<div class="paddingLikeFeed">
+			<span class="likeTextFeed">... likes</span>
+		</div>
+		<div class="paddingLikeFeed">
 			<ul>	
 				<li class="textCommentFeed">
 					<a class="heightTextFeed blackTextFeed" href="/#users/<%- post.userId %>"><%- post.userId %></a>
@@ -24,14 +27,17 @@
 						<span id="descriptionEditable" ><%- post.description %></span>
 					<% } %>
 				</li>
-				
+				<li class="textCommentFeed">
+ 					<a class="heightTextFeed blackTextFeed" href="">{user name new comment}</a>
+ 					<span>{text new comment}</span>
+ 				</li>
 			</ul>
 		</div>
-		<% if(post.editable){ %>
-			<div class="addCommentFeed commentPaddingFeed">
-				<button id="optionButtonEdit" class="optionPostFeed optionIcon likeTextFeed2">More Options</button>
-			</div>
-		<% } %>
+		<div class="addCommentFeed commentPaddingFeed">
+			<a class="likeButtonFeed likePaddingFeed" href=""><span class="likeTextFeed2 heartIcon">J’aime</span></a>
+			<form class="flexCommentFeed"><input type="text" class="inputCommentFeed inputTextFeed" placeholder="Add Comment..." value=""></form>
+			<button class="optionPostFeed optionIcon likeTextFeed2">More Options</button>
+		</div>
 	</div>
 </div>
 
