@@ -71,8 +71,8 @@ export class PictureModel extends Backbone.Model {
         return this.get("user_userName");
     }
 
-    set userId(user_userName: string) {
-        this.set("user_userName", user_userName);
+    set userId(userId: string) {
+        this.set("user_userName", userId);
     }
 
     get editable(): boolean {

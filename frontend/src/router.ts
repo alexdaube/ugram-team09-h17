@@ -83,11 +83,11 @@ export class AppRouter extends Backbone.Router {
         postView.render();
     }
 
-    public showUserProfile(user_userName: string = "") {
+    public showUserProfile(userId: string = "") {
         this.showHeaderFooter();
 
         this.loginRedirect();
-        const userModel = new UserModel({id: user_userName});
+        const userModel = new UserModel({id: userId});
         const feedCollection = new FeedCollection({url: `${API_BASE_URL}users/${userModel.id}/pictures`});
         const userProfileView = new UserProfileView({el: "#content", model: userModel, collection: feedCollection});
         userProfileView.render();
