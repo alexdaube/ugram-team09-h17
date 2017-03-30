@@ -47,7 +47,7 @@ module.exports = class DatabaseDTO {
                 mentions: that.getMentionJSON(pictureJSON.mentions),
                 tags: that.getTagJSON(pictureJSON.tags),
                 url: pictureJSON.url,
-                userId: pictureJSON.userId
+                user_userName: pictureJSON.user_userName
             };
             return formattedPictureJSON;
         }
@@ -61,7 +61,7 @@ module.exports = class DatabaseDTO {
                     mentions: that.getMentionJSON(picture.mentions),
                     tags: that.getTagJSON(picture.tags),
                     url: picture.url,
-                    userId: picture.userId
+                    user_userName: picture.user_userName
                 };
                 picturesJSONArray.push(formattedPictureJSON);
             });

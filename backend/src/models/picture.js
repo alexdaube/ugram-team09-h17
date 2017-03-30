@@ -5,10 +5,10 @@ const Mention = require("./mention");
 var Picture = bookshelf.Model.extend({
     tableName: 'pictures',
 
-    tags: function(){
+    tags: function () {
         return this.hasMany(Tag);
-    },    
-    mentions: function(){
+    },
+    mentions: function () {
         return this.hasMany(Mention);
     }
 

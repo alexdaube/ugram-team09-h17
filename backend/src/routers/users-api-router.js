@@ -53,4 +53,10 @@ module.exports = function (app) {
         userService.updateUserPicture(req, res);
     });
 
+    //app.get("/users/popular", isLoggedIn, function(req, res) {
+    app.get("/popularUser", function(req, res) {
+        var userService = new UserService(config);
+        userService.getMostPopularUsers(req, res);
+    })
+
 };

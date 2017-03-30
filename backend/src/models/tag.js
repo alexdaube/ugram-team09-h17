@@ -1,7 +1,9 @@
 const bookshelf = require('../../config/bookshelf');
 
 var Tag = bookshelf.Model.extend({
-    tableName: 'tags'
+    tableName: 'tags',
 });
+
+
 
 module.exports = Tag;

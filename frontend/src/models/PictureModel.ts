@@ -17,14 +17,14 @@ export class PictureModel extends Backbone.Model {
             postedDate: "",
             tags: [],
             url: "",
-            userId: "",
+            user_userName: "",
             editable: false,
         };
     }
 
     public parse(response, options) {
         // TODO make it non constant
-        response["editable"] = HeaderRequestGenerator.isConnectedUser(response["userId"]);
+        response["editable"] = HeaderRequestGenerator.isConnectedUser(response["user_userName"]);
         response["imageUrl"] = response["url"];
         delete response["url"];
         return response;
@@ -68,11 +68,11 @@ export class PictureModel extends Backbone.Model {
     }
 
     get userId(): string {
-        return this.get("userId");
+        return this.get("user_userName");
     }
 
-    set userId(userId: string) {
-        this.set("userId", userId);
+    set userId(user_userName: string) {
+        this.set("user_userName", user_userName);
     }
 
     get editable(): boolean {

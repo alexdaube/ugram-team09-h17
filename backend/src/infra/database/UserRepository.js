@@ -102,7 +102,7 @@ userRepository.prototype.getUserPictures = function (userId, page, perPage, call
                 pictures.query(function (qb) {
                     qb.limit(perPage)
                         .offset(page * perPage)
-                        .where({ userId: userId})
+                        .where({ user_userName: userId})
                         .where("url", "!=", "null")
                         .orderBy("createdDate", "DESC");
                 }).fetch()
@@ -137,7 +137,7 @@ userRepository.prototype.createPicture = function (userId, body, callback) {
 
             new Picture({
                 description: body.description,
-                userId: userId,
+                user_userName: userId,
                 createdDate: new Date()
             })
                 .save()
@@ -194,7 +194,7 @@ userRepository.prototype.deletePicture = function (userId, pictureId, callback) 
 
     if (typeof perPage === 'undefined') { perPage = 20; }
 
-    new Picture().where({ userId: userId, id: pictureId })
+    new Picture().where({ user_userName: userId, id: pictureId })
         .fetch({ withRelated: ["tags", "mentions"] }).then(function (picture) {
             if (picture) {
                 picture.destroy().then(function () {
@@ -234,7 +234,7 @@ userRepository.prototype.getUserPicture = function (userId, pictureId, callback)
     if (typeof perPage === 'undefined') { perPage = 20; }
 
     new Picture()
-        .where({ userId: userId, id: pictureId })
+        .where({ user_userName: userId, id: pictureId })
         .fetch({ withRelated: ["tags", "mentions"] }).then(function (picture) {
             if (picture) {
                 var newCollectionJSON = that.databaseDTO.getPictureJSON(picture);
@@ -258,7 +258,7 @@ userRepository.prototype.updateUserPicture = function (userId, pictureId, body, 
     if (typeof perPage === 'undefined') { perPage = 20; }
 
     Picture
-        .where({ userId: userId, id: pictureId })
+        .where({ user_userName: userId, id: pictureId })
         .fetch({ withRelated: ["tags", "mentions"] })
         .then(function (picture) {
             if (picture) {
@@ -317,7 +317,7 @@ userRepository.prototype.updateUserPicture = function (userId, pictureId, body, 
                 });
         }).then(function () {
             Picture
-                .where({ userId: userId, id: pictureId })
+                .where({ user_userName: userId, id: pictureId })
                 .fetch({ withRelated: ["tags", "mentions"] })
                 .then(function (picture) {
                     return that.databaseDTO.getPictureJSON(picture);
@@ -330,6 +330,23 @@ userRepository.prototype.updateUserPicture = function (userId, pictureId, body, 
             handleError(400, null, callback);
         });
 };
+
+userRepository.prototype.getMostPopularUsers = function(callback) {
+    var userScore = {};
+    new User()
+        .fetchAll({ withRelated: "pictures"})
+        .then(function (userList) {
+            userList.forEach(function(user) {
+                var userJSON = user.toJSON();
+                var numberOfLikes = 0;
+                userJSON.pictures.forEach(function(picture) {
+                    numberOfLikes += picture.likes;
+                })
+                userScore[userJSON.userName] = numberOfLikes;
+            })
+            console.log(userScore)
+        })
+}
 
 var handleError = function (statusCode, body, callback) {
     var error = ErrorHandler.handleReturnCall(statusCode);
