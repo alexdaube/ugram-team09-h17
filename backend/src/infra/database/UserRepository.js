@@ -341,12 +341,12 @@ userRepository.prototype.getMostPopularUsers = function(callback) {
                 var numberOfLikes = 0;
                 userJSON.pictures.forEach(function(picture) {
                     numberOfLikes += picture.likes;
-                })
+                });
                 userScore[userJSON.userName] = numberOfLikes;
-            })
-            console.log(userScore)
-        })
-}
+            });
+            console.log(userScore);
+        });
+};
 
 var handleError = function (statusCode, body, callback) {
     var error = ErrorHandler.handleReturnCall(statusCode);

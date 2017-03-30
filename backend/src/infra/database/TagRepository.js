@@ -16,14 +16,14 @@ tagRepository.prototype.getPopularHashtags = function () {
                         .groupBy('tag')
                         .orderBy("count(*)", "desc")
                         .count()
-                        .limit(10)
+                        .limit(10);
                 }).fetch()
                     .then(function (newTags) {
                         console.log(newTags.toJSON());
-                    })
+                    });
             }
         });
-}
+};
 
 module.exports = tagRepository;
 

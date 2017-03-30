@@ -211,6 +211,6 @@ userService.prototype.getMostPopularUsers = function (request, returnObject) {
     this.persistence.getMostPopularUsers(function(err, response) {
 // TODO handle response;
     });
-}
+};
 
 module.exports = userService;
