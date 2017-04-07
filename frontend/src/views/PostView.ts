@@ -1,14 +1,14 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
 
-import { PictureModel } from "../models/PictureModel";
-import { HeaderRequestGenerator } from "../util/HeaderRequestGenerator";
-import { InputValidator } from "../util/InputValidator";
+import {PictureModel} from "../models/PictureModel";
+import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
+import {InputValidator} from "../util/InputValidator";
 
-export class PostView extends Backbone.View<PictureModel> {
+export class PostView extends Backbone.View<any> {
     private template: Function;
 
-    constructor(options?: Backbone.ViewOptions<PictureModel>) {
+    constructor(options?: Backbone.ViewOptions<any>) {
         super(_.extend({}, options));
         this.template = require("./PostTemplate.ejs") as Function;
     }
@@ -29,6 +29,7 @@ export class PostView extends Backbone.View<PictureModel> {
             success: () => {
                 this.$el.html(this.template({ post: this.model, isSingleFeed: true }));
                 this.$el.first().addClass("contentFeed");
+                this.showLikes();
             },
             error: () => {
                 this.$el.html("There was an error");
@@ -36,6 +37,51 @@ export class PostView extends Backbone.View<PictureModel> {
         });
 
         return this;
+    }
+
+    private showLikes() {
+        // this.collection.fetch({
+        //     beforeSend: HeaderRequestGenerator.sendAuthorization,
+        //     data: {
+        //         page: this.nextPageToFetch,
+        //         perPage: this.picturesPerPage,
+        //     },
+        //     success: () => {
+        //         this.nextPageToFetch += 1;
+        //         this.renderLikes();
+        //     },
+        //     error: () => {
+        //         $("#profile-pictures-list").append("<h3>You have no pictures yet!</h3>");
+        //         $("#show-more-container").hide();
+        //     },
+        // });
+    }
+
+    private renderLikes() {
+        // TODO :
+        // this.collection.size = nb like dans le html
+        // for each element, find if user is inside, if not plantegg1 or 2
+
+        
+        // this.collection.each((picture) => {
+        //     const pictureView = new PictureView({ el: "#profile-pictures-list", model: picture });
+        //     pictureView.append();
+        // });
+
+        // $(".pictureProfile").each((index, picture) => {
+        //     const imageHeight = $(picture).height();
+        //     const imageWidth = $(picture).width();
+
+        //     if (imageHeight < imageWidth) {
+        //         $(picture).height("100%");
+        //         $(picture).css("max-width", "100%");
+        //         $(picture).css("max-height", "10%");
+        //     } else if (imageHeight > imageWidth) {
+        //         $(picture).width("100%");
+        //         $(picture).css("max-width", "10%");
+        //         $(picture).css("max-height", "100%");
+        //     }
+        // });
     }
 
     public append() {
