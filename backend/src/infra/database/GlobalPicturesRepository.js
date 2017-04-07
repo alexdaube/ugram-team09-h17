@@ -45,7 +45,6 @@ globalPicturesRepository.prototype.get = function (page, perPage, callback) {
 };
 
 globalPicturesRepository.prototype.getPictureLikes = function (pictureId, callback) {
-    console.log("test11");
     var that = this;
     var numberOfLikesInTotal;
 

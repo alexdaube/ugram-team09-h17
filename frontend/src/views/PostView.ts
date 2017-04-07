@@ -45,12 +45,10 @@ export class PostView extends Backbone.View<any> {
     }
 
     private showLikes() {
-        console.log("yolo");
         this.collection.fetch({
             beforeSend: HeaderRequestGenerator.sendAuthorization,
             data: {},
             success: () => {
-                console.log("testxxx");
                 this.renderLikes();
             },
             error: () => {
@@ -60,13 +58,14 @@ export class PostView extends Backbone.View<any> {
     }
 
     private renderLikes() {
-        console.log("yolo2");
         console.log(this.collection);
-        //this.collection.each((like) => {
+        let nbLikes = this.collection.length;
 
-        //     // const pictureView = new PictureView({ el: "#profile-pictures-list", model: picture });
-        //     // pictureView.append();
-        //});
+        if (nbLikes >= 1) {
+            $("#countLikeText #countLikeTextSpan").text(nbLikes.toString() + " likes");
+        } else {
+            $("#countLikeText #countLikeTextSpan").text(nbLikes.toString() + " like");
+        }
     }
 
     private edit() {

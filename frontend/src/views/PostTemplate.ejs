@@ -16,8 +16,8 @@
 		<% if(!isSingleFeed){ %></a><% } %>
 	</div>
 	<div class="textContentFeed">
-		<div class="paddingLikeFeed">
-			<span class="likeTextFeed"><%- post.imageUrl %> likes</span>
+		<div id="countLikeText" class="paddingLikeFeed">
+			<span id="countLikeTextSpan" class="likeTextFeed"></span>
 		</div>
 		<div class="paddingLikeFeed">
 			<ul>	
@@ -34,7 +34,7 @@
 			</ul>
 		</div>
 		<div class="addCommentFeed commentPaddingFeed">
-			<a id="eggplant" class="likeButtonFeed likePaddingFeed" href=""><span class="likeTextFeed2 eggPlantIcon2">J’aime</span></a>
+			<a id="eggplant" class="likeButtonFeed likePaddingFeed" href=""><span class="likeTextFeed2 eggPlantIcon">J’aime</span></a>
 			<form class="flexCommentFeed"><input type="text" class="inputCommentFeed inputTextFeed" placeholder="Add Comment..." value=""></form>
 			<button class="optionPostFeed optionIcon likeTextFeed2">More Options</button>
 		</div>

@@ -104,7 +104,7 @@ module.exports = class DatabaseDTO {
             var formattedLikeJSON = {
                 id: likeJSON.id,                
                 userId: likeJSON.userId,
-                postId: likeJSON.postId
+                pictureId: likeJSON.pictureId
             };
             return formattedLikeJSON;
         }
@@ -112,13 +112,13 @@ module.exports = class DatabaseDTO {
             var likesJSONArray = [];
             likeJSON.forEach(function (like) {
                 var formattedLikeJSON = {
-                    id: likeJSON.id,                
-                    userId: likeJSON.userId,
-                    postId: likeJSON.postId
+                    id: like.id,                
+                    userId: like.userId,
+                    pictureId: like.pictureId
                 };
                 likesJSONArray.push(formattedLikeJSON);
             });
-            return formattedLikeJSON;
+            return likesJSONArray;
         }
     }
 };
