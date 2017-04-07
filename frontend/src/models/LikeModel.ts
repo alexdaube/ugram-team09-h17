@@ -7,13 +7,13 @@ export class LikeModel extends Backbone.Model {
 
     constructor(options?: any) {
         super(options);
-        this.urlRoot = `${API_BASE_URL}likes/${this.postId}`;
+        this.urlRoot = `${API_BASE_URL}picture/${this.pictureId}/likes`;
     }
 
     public defaults() {
         return {
             userId: "",
-            postId: ""
+            pictureId: "",
         };
     }
 
@@ -25,11 +25,11 @@ export class LikeModel extends Backbone.Model {
         this.set("id", userId);
     }
 
-    get postId(): string {
-        return this.get("postId");
+    get pictureId(): string {
+        return this.get("pictureId");
     }
 
-    set postId(postId: string) {
-        this.set("postId", postId);
+    set pictureId(pictureId: string) {
+        this.set("pictureId", pictureId);
     }
 }

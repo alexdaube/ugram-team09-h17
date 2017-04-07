@@ -11,12 +11,10 @@ var globalPicturesRepository = function (config) {
 };
 
 globalPicturesRepository.prototype.get = function (page, perPage, callback) {
-
     var that = this;
     var numberOfPictureInTotal;
     var numberOfPages;
     if (typeof perPage === 'undefined') { perPage = 20; }
-
 
     new Picture().fetchAll({ withRelated: ["tags", "mentions"] }).then(function (pictures) {
         if (pictures) {
@@ -28,12 +26,11 @@ globalPicturesRepository.prototype.get = function (page, perPage, callback) {
                   .orderBy("createdDate", "DESC");
             }).fetch()
                 .then(function (newCollection) {
-                    var newCollectionJSON =
-                        {
-                            items: that.databaseDTO.getPictureJSON(newCollection),
-                            totalPages: numberOfPages,
-                            totalEntries: numberOfPictureInTotal
-                        };
+                    var newCollectionJSON = {
+                        items: that.databaseDTO.getPictureJSON(newCollection),
+                        totalPages: numberOfPages,
+                        totalEntries: numberOfPictureInTotal
+                    };
                     return callback(null, newCollectionJSON);
                 });
         }
@@ -45,6 +42,37 @@ globalPicturesRepository.prototype.get = function (page, perPage, callback) {
         console.log(err);
         handleError(400, null, callback);
     });
+};
+
+globalPicturesRepository.prototype.getPictureLikes = function (postId,callback) {
+    console.log("test11");
+    var that = this;
+    var numberOfLikesInTotal;
+
+    new Like()
+        .fetchAll()
+        .then(function (likes) {
+            if (likes) {
+                numberOfLikesInTotal = likes.length;
+                
+                likes.query(function (qb) {
+                    qb.where({ postId: postId})                        
+                }).fetch()
+                    .then(function (newCollection) {
+                        numberOfLikesInTotal = newCollection.length;                        
+                        var newCollectionJSON = {
+                            items: that.databaseDTO.getLikeJSON(newCollection),                                
+                            totalEntries: numberOfLikesInTotal
+                        };
+                        return callback(null, newCollectionJSON);
+                    });
+            }
+            else {
+                return callback(null, {});
+            }
+        }).catch(function (err) {
+            handleError(400, null, callback);
+        });
 };
 
 var handleError = function (statusCode, body, callback) {

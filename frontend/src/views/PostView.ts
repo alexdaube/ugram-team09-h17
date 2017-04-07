@@ -29,6 +29,7 @@ export class PostView extends Backbone.View<any> {
             success: () => {
                 this.$el.html(this.template({ post: this.model, isSingleFeed: true }));
                 this.$el.first().addClass("contentFeed");
+                console.log("yolo");
                 this.showLikes();
             },
             error: () => {
@@ -39,60 +40,36 @@ export class PostView extends Backbone.View<any> {
         return this;
     }
 
-    private showLikes() {
-        // this.collection.fetch({
-        //     beforeSend: HeaderRequestGenerator.sendAuthorization,
-        //     data: {
-        //         page: this.nextPageToFetch,
-        //         perPage: this.picturesPerPage,
-        //     },
-        //     success: () => {
-        //         this.nextPageToFetch += 1;
-        //         this.renderLikes();
-        //     },
-        //     error: () => {
-        //         $("#profile-pictures-list").append("<h3>You have no pictures yet!</h3>");
-        //         $("#show-more-container").hide();
-        //     },
-        // });
-    }
-
-    private renderLikes() {
-        // TODO :
-        // this.collection.size = nb like dans le html
-        // for each element, find if user is inside, if not plantegg1 or 2
-
-        
-        // this.collection.each((picture) => {
-        //     const pictureView = new PictureView({ el: "#profile-pictures-list", model: picture });
-        //     pictureView.append();
-        // });
-
-        // $(".pictureProfile").each((index, picture) => {
-        //     const imageHeight = $(picture).height();
-        //     const imageWidth = $(picture).width();
-
-        //     if (imageHeight < imageWidth) {
-        //         $(picture).height("100%");
-        //         $(picture).css("max-width", "100%");
-        //         $(picture).css("max-height", "10%");
-        //     } else if (imageHeight > imageWidth) {
-        //         $(picture).width("100%");
-        //         $(picture).css("max-width", "10%");
-        //         $(picture).css("max-height", "100%");
-        //     }
-        // });
-    }
-
     public append() {
         this.$el.append(this.template({ post: this.model, isSingleFeed: false }));
         return this;
     }
 
+    private showLikes() {
+        this.collection.fetch({
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
+            data: {},
+            success: () => {
+                console.log("testxxx");
+                this.renderLikes();
+            },
+            error: () => {
+                // TODO Handle error
+            },
+        });
+    }
+
+    private renderLikes() {
+        this.collection.each((picture) => {
+            // const pictureView = new PictureView({ el: "#profile-pictures-list", model: picture });
+            // pictureView.append();
+            console.log("collectionX");
+        });
+    }
+
     private edit() {
         $("#buttonSave").show();
         $("#editInput").show();
-
     }
 
     private delete() {
