@@ -82,7 +82,7 @@ export class AppRouter extends Backbone.Router {
 
         this.loginRedirect();
         const pictureModel = new PictureModel({userId: userFeedId, id: pictureId});
-        const likeCollection = new LikeCollection({url: `${API_BASE_URL}picture/${pictureModel.id}/likes`});
+        const likeCollection = new LikeCollection({url: `${API_BASE_URL}pictures/${pictureModel.id}/likes`});
         const postView = new PostView({el: "#content", model: pictureModel, collection: likeCollection});
         postView.render();
     }

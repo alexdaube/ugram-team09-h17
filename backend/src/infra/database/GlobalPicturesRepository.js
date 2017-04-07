@@ -1,5 +1,6 @@
 var ErrorHandler = require("../../common/errors");
 const Picture = require("../../models/picture");
+const Like = require("../../models/like");
 var DatabaseDTO = require("../../util/DatabaseDTO");
 
 
@@ -44,35 +45,33 @@ globalPicturesRepository.prototype.get = function (page, perPage, callback) {
     });
 };
 
-globalPicturesRepository.prototype.getPictureLikes = function (postId,callback) {
+globalPicturesRepository.prototype.get = function (pictureId, callback) {
     console.log("test11");
     var that = this;
-    var numberOfLikesInTotal;
+    // var numberOfLikesInTotal;
 
-    new Like()
-        .fetchAll()
-        .then(function (likes) {
-            if (likes) {
-                numberOfLikesInTotal = likes.length;
-                
-                likes.query(function (qb) {
-                    qb.where({ postId: postId})                        
-                }).fetch()
-                    .then(function (newCollection) {
-                        numberOfLikesInTotal = newCollection.length;                        
-                        var newCollectionJSON = {
-                            items: that.databaseDTO.getLikeJSON(newCollection),                                
-                            totalEntries: numberOfLikesInTotal
-                        };
-                        return callback(null, newCollectionJSON);
-                    });
-            }
-            else {
-                return callback(null, {});
-            }
-        }).catch(function (err) {
-            handleError(400, null, callback);
-        });
+    new Like().fetchAll().then(function (likes) {
+        if (likes) {
+            // numberOfLikesInTotal = likes.length;
+            
+            likes.query(function (qb) {
+                qb.where({pictureId: pictureId});
+            }).fetch()
+                .then(function (newCollection) {
+                    // numberOfLikesInTotal = newCollection.length;                        
+                    var newCollectionJSON = {
+                        items: that.databaseDTO.getLikeJSON(newCollection),                                
+                        // totalEntries: numberOfLikesInTotal
+                    };
+                    return callback(null, newCollectionJSON);
+                });
+        }
+        else {
+            return callback(null, {});
+        }
+    }).catch(function (err) {
+        handleError(400, null, callback);
+    });
 };
 
 var handleError = function (statusCode, body, callback) {

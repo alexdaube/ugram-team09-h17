@@ -4,8 +4,9 @@ var Like = bookshelf.Model.extend({
     tableName: 'likes',
 
     //TODO refacto, pcq jpense c pas bon
+    id: 'id',
     userId: 'userId',
-    postId: 'postId'
+    postId: 'pictureId',
 });
 
 module.exports = Like;

@@ -27,9 +27,9 @@ globalPicturesService.prototype.getPictureLikes = function(request, returnObject
     console.log("test22");
     var path = request.path;
     var urlParts = path.split('/');
-    var postId = urlParts[2];
+    var pictureId = urlParts[2];
 
-    this.persistence.getPictureLikes(postId, function(err, response){
+    this.persistence.getPictureLikes(pictureId, function(err, response){
         if (!err && response) {
             returnObject.status(200).json(response);
         }

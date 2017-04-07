@@ -7,7 +7,7 @@ export class LikeModel extends Backbone.Model {
 
     constructor(options?: any) {
         super(options);
-        this.urlRoot = `${API_BASE_URL}picture/${this.pictureId}/likes`;
+        this.urlRoot = `${API_BASE_URL}pictures/${this.pictureId}/likes`;
     }
 
     public defaults() {

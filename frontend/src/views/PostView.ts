@@ -29,7 +29,6 @@ export class PostView extends Backbone.View<any> {
             success: () => {
                 this.$el.html(this.template({ post: this.model, isSingleFeed: true }));
                 this.$el.first().addClass("contentFeed");
-                console.log("yolo");
                 this.showLikes();
             },
             error: () => {
@@ -46,6 +45,7 @@ export class PostView extends Backbone.View<any> {
     }
 
     private showLikes() {
+        console.log("yolo");
         this.collection.fetch({
             beforeSend: HeaderRequestGenerator.sendAuthorization,
             data: {},
@@ -60,6 +60,7 @@ export class PostView extends Backbone.View<any> {
     }
 
     private renderLikes() {
+        console.log("yolo2");
         this.collection.each((picture) => {
             // const pictureView = new PictureView({ el: "#profile-pictures-list", model: picture });
             // pictureView.append();
