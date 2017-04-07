@@ -39,4 +39,28 @@ globalPicturesService.prototype.getPictureLikes = function(request, returnObject
     });
 };
 
+userService.prototype.addLike = function (request, returnObject) {
+    var urlPath = request.path;
+    var urlParts = urlPath.split('/');
+    var postId = urlParts[2];
+    var userId = urlParts[4];
+    var body = request.body;
+    var that = this;
+
+    if (userId != request.user.attributes.userName) {
+        returnObject.status(403).json("Unauthorized action");
+        return;
+    }    
+
+    this.persistence.addLike(postId, userId, function (err, response) {
+        if (!err && response) {
+            returnObject.status(201).json(response);            
+        }
+        else {
+            console.warn(err, response);
+            returnObject.status(err.statusCode).send(err.message);
+        }
+    });
+};
+
 module.exports = globalPicturesService;

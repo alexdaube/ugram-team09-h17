@@ -15,4 +15,9 @@ module.exports = function(app) {
         var globalPicturesService = new GlobalPicturesService(config);
         globalPicturesService.getPictureLikes(req, res);
     });
+
+    app.post("/pictures/:pictureId/likes/:userId", isLoggedIn, function (req, res) {
+        var globalPicturesService = new GlobalPicturesService(config);
+        globalPicturesService.addLikeToPicture(req, res);
+    });
 };
