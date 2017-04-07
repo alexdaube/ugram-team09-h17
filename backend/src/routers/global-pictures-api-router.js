@@ -6,7 +6,7 @@ var isLoggedIn = passport.authenticate('jwt', {session: false});
 
 module.exports = function(app) {
 
-app.get('/pictures', isLoggedIn, function(req, res) {
+    app.get('/pictures', isLoggedIn, function(req, res) {
         var globalPicturesService = new GlobalPicturesService(config);
         globalPicturesService.getAllPictures(req, res);
     });

@@ -61,11 +61,12 @@ export class PostView extends Backbone.View<any> {
 
     private renderLikes() {
         console.log("yolo2");
-        this.collection.each((picture) => {
-            // const pictureView = new PictureView({ el: "#profile-pictures-list", model: picture });
-            // pictureView.append();
-            console.log("collectionX");
-        });
+        console.log(this.collection);
+        // this.collection.each((like) => {
+        //     console.log("collectionX");
+        //     // const pictureView = new PictureView({ el: "#profile-pictures-list", model: picture });
+        //     // pictureView.append();
+        // });
     }
 
     private edit() {

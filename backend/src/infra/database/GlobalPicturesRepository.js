@@ -7,7 +7,6 @@ var DatabaseDTO = require("../../util/DatabaseDTO");
 var globalPicturesRepository = function (config) {
     this.host = config.host;
     this.port = config.port;
-
     this.databaseDTO = new DatabaseDTO();
 };
 
@@ -45,23 +44,23 @@ globalPicturesRepository.prototype.get = function (page, perPage, callback) {
     });
 };
 
-globalPicturesRepository.prototype.get = function (pictureId, callback) {
+globalPicturesRepository.prototype.getPictureLikes = function (pictureId, callback) {
     console.log("test11");
     var that = this;
-    // var numberOfLikesInTotal;
+    var numberOfLikesInTotal;
 
     new Like().fetchAll().then(function (likes) {
         if (likes) {
-            // numberOfLikesInTotal = likes.length;
+            numberOfLikesInTotal = likes.length;
             
             likes.query(function (qb) {
                 qb.where({pictureId: pictureId});
             }).fetch()
                 .then(function (newCollection) {
-                    // numberOfLikesInTotal = newCollection.length;                        
+                    numberOfLikesInTotal = newCollection.length;                        
                     var newCollectionJSON = {
                         items: that.databaseDTO.getLikeJSON(newCollection),                                
-                        // totalEntries: numberOfLikesInTotal
+                        totalEntries: numberOfLikesInTotal
                     };
                     return callback(null, newCollectionJSON);
                 });
