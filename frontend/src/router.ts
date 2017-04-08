@@ -21,6 +21,9 @@ import {LoginModel} from "./models/LoginModel";
 
 import {PictureModel} from "./models/PictureModel";
 
+import {LikeModel} from "./models/LikeModel";
+import {LikeCollection} from "./collections/LikeCollection";
+
 import {PostView} from "./views/PostView";
 import {HeaderRequestGenerator} from "./util/HeaderRequestGenerator";
 import {API_BASE_URL} from "./constants";
@@ -74,12 +77,14 @@ export class AppRouter extends Backbone.Router {
         feedCollectionView.render();
     }
 
-    public showPost(userFeedId: string, pictureId: string) {
+    public showPost(userFeedId: string, postId: string) {
         this.showHeaderFooter();
 
         this.loginRedirect();
-        const pictureModel = new PictureModel({userId: userFeedId, id: pictureId});
-        const postView = new PostView({el: "#content", model: pictureModel});
+        const pictureModel = new PictureModel({userId: userFeedId, id: postId});
+        const likeModel = new LikeModel({id: userFeedId, pictureId: postId});
+        const likeCollection = new LikeCollection({url: `${API_BASE_URL}pictures/${likeModel.pictureId}/likes`});
+        const postView = new PostView({el: "#content", model: pictureModel, collection: likeCollection});
         postView.render();
     }
 

@@ -1,16 +1,31 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
 
-import { PictureModel } from "../models/PictureModel";
-import { HeaderRequestGenerator } from "../util/HeaderRequestGenerator";
-import { InputValidator } from "../util/InputValidator";
+import {PictureModel} from "../models/PictureModel";
+import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
+import {InputValidator} from "../util/InputValidator";
 
-export class PostView extends Backbone.View<PictureModel> {
+export class PostView extends Backbone.View<any> {
     private template: Function;
 
-    constructor(options?: Backbone.ViewOptions<PictureModel>) {
+    constructor(options?: Backbone.ViewOptions<any>) {
         super(_.extend({}, options));
         this.template = require("./PostTemplate.ejs") as Function;
+    }
+
+    public render() {
+        this.model.fetch({
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
+            success: () => {
+                this.$el.html(this.template({ post: this.model, isSingleFeed: true }));
+                this.$el.first().addClass("contentFeed");
+                this.showLikes();
+            },
+            error: () => {
+                this.$el.html("There was an error");
+            },
+        });
+        return this;
     }
 
     public events() {
@@ -23,30 +38,38 @@ export class PostView extends Backbone.View<PictureModel> {
         };
     }
 
-    public render() {
-        this.model.fetch({
-            beforeSend: HeaderRequestGenerator.sendAuthorization,
-            success: () => {
-                this.$el.html(this.template({ post: this.model, isSingleFeed: true }));
-                this.$el.first().addClass("contentFeed");
-            },
-            error: () => {
-                this.$el.html("There was an error");
-            },
-        });
-
+    public append() {
+        this.showLikes();
+        this.$el.append(this.template({ post: this.model, isSingleFeed: false }));
         return this;
     }
 
-    public append() {
-        this.$el.append(this.template({ post: this.model, isSingleFeed: false }));
-        return this;
+    private showLikes() {
+        this.collection.fetch({
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
+            data: {},
+            success: () => {
+                this.renderLikes();
+            },
+            error: () => {
+                // TODO Handle error
+            },
+        });
+    }
+
+    private renderLikes() {
+        // console.log(this.collection);
+
+        if (this.collection.length >= 1) {
+            $("#countLikeText" + this.model.id + " " + "#countLikeTextSpan" + this.model.id).text(this.collection.length.toString() + " likes");
+        } else {
+            $("#countLikeText" + this.model.id + " " + "#countLikeTextSpan" + this.model.id).text(this.collection.length.toString() + " like");
+        }
     }
 
     private edit() {
         $("#buttonSave").show();
         $("#editInput").show();
-
     }
 
     private delete() {

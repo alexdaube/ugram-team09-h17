@@ -94,4 +94,31 @@ module.exports = class DatabaseDTO {
         });
         return mentionsArray;
     }
+
+    getLikeJSON(like) {
+        var likeJSON = like.toJSON();
+        var likeLength = likeJSON.length;
+        var that = this;
+
+        if (typeof likeLength === 'undefined') {
+            var formattedLikeJSON = {
+                id: likeJSON.id,                
+                userId: likeJSON.userId,
+                pictureId: likeJSON.pictureId
+            };
+            return formattedLikeJSON;
+        }
+        else {
+            var likesJSONArray = [];
+            likeJSON.forEach(function (like) {
+                var formattedLikeJSON = {
+                    id: like.id,                
+                    userId: like.userId,
+                    pictureId: like.pictureId
+                };
+                likesJSONArray.push(formattedLikeJSON);
+            });
+            return likesJSONArray;
+        }
+    }
 };

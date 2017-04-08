@@ -2,8 +2,10 @@ import * as Backbone from "backbone";
 import * as _ from "underscore";
 
 import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
+import {LikeCollection} from "../collections/LikeCollection";
 import {ShowMoreView} from "./ShowMoreView";
 import {PostView} from "./PostView";
+import {API_BASE_URL} from "../constants";
 
 export class FeedCollectionView extends Backbone.View<any> {
     private template: Function;
@@ -27,6 +29,12 @@ export class FeedCollectionView extends Backbone.View<any> {
         return this;
     }
 
+    public events() {
+        return <Backbone.EventsHash> {
+            "click #eggplant": "addOrDeleteLike",
+        };
+    }
+
     private showPictures() {
         this.collection.fetch({
             beforeSend: HeaderRequestGenerator.sendAuthorization,
@@ -43,7 +51,9 @@ export class FeedCollectionView extends Backbone.View<any> {
 
     private renderPictures() {
         this.collection.each((picture) => {
-            const postView = new PostView({el: "#posts-list", model: picture});
+            // console.log(picture.attributes.id);
+            const likeCollection = new LikeCollection({url: `${API_BASE_URL}pictures/${picture.attributes.id}/likes`});
+            const postView = new PostView({el: "#posts-list", model: picture, collection: likeCollection});
             postView.append();
         });
         this.checkForMorePicturesAvailable();
@@ -53,5 +63,9 @@ export class FeedCollectionView extends Backbone.View<any> {
         if (this.collection.length < this.picturesPerPage) {
             $("#show-more-container").hide();
         }
+    }
+
+    private addOrDeleteLike() {
+        // console.log("test");
     }
 }
