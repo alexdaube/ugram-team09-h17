@@ -13,16 +13,6 @@ export class PostView extends Backbone.View<any> {
         this.template = require("./PostTemplate.ejs") as Function;
     }
 
-    public events() {
-        return <Backbone.EventsHash> {
-            "click #optionButtonEdit": () => { $("#popupEditContent").show(); },
-            "click #closeExitButtonPopup": () => { $("#popupEditContent").hide(); },
-            "click #deleteButtonPopup": "delete",
-            "click #editButtonPopup": "edit",
-            "click #saveButtonPopup": "saveModif",
-        };
-    }
-
     public render() {
         this.model.fetch({
             beforeSend: HeaderRequestGenerator.sendAuthorization,
@@ -35,12 +25,22 @@ export class PostView extends Backbone.View<any> {
                 this.$el.html("There was an error");
             },
         });
-
         return this;
     }
 
+    public events() {
+        return <Backbone.EventsHash> {
+            "click #optionButtonEdit": () => { $("#popupEditContent").show(); },
+            "click #closeExitButtonPopup": () => { $("#popupEditContent").hide(); },
+            "click #deleteButtonPopup": "delete",
+            "click #editButtonPopup": "edit",
+            "click #saveButtonPopup": "saveModif",
+        };
+    }
+
     public append() {
-        this.$el.append(this.template({ post: this.model, isSingleFeed: false }));
+        this.showLikes();
+        this.$el.append(this.template({ post: this.model, isSingleFeed: false }));        
         return this;
     }
 
@@ -60,11 +60,12 @@ export class PostView extends Backbone.View<any> {
     private renderLikes() {
         console.log(this.collection);
         let nbLikes = this.collection.length;
+        let className = "#countLikeText" + this.model.id + " " + "#countLikeTextSpan" + this.model.id;
 
         if (nbLikes >= 1) {
-            $("#countLikeText #countLikeTextSpan").text(nbLikes.toString() + " likes");
+            $(className).text(nbLikes.toString() + " likes");
         } else {
-            $("#countLikeText #countLikeTextSpan").text(nbLikes.toString() + " like");
+            $(className).text(nbLikes.toString() + " like");
         }
     }
 
@@ -117,5 +118,9 @@ export class PostView extends Backbone.View<any> {
         $("#popupEditContent").hide();
         $("#buttonSave").hide();
         $("#editInput").hide();
+    }
+
+    private addOrDeleteLike() {
+        console.log("test");
     }
 }
