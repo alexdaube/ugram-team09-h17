@@ -31,7 +31,7 @@ export class FeedCollectionView extends Backbone.View<any> {
 
     public events() {
         return <Backbone.EventsHash> {
-            "click #eggplant": "addOrDeleteLike",
+            "click .likeButtonFeed": "addOrDeleteLike",
         };
     }
 
@@ -65,7 +65,21 @@ export class FeedCollectionView extends Backbone.View<any> {
         }
     }
 
-    private addOrDeleteLike() {
+    private addOrDeleteLike(e) {
         console.log("test");
+        var clickedEl = $(e.currentTarget);
+        var id = clickedEl.attr("data-id");
+        console.log(id);
+        $.ajax({
+                url: `${API_BASE_URL}pictures/${id}/likes/${HeaderRequestGenerator.currentUser()}`,
+                type: "POST",
+                beforeSend: HeaderRequestGenerator.sendAuthorization,
+                success() {
+                    alert("success");
+                },
+                error() {
+                    alert("not success");
+                },
+            });
     }
 }

@@ -39,7 +39,7 @@ globalPicturesService.prototype.getPictureLikes = function(request, returnObject
     });
 };
 
-globalPicturesService.prototype.addLike = function (request, returnObject) {
+globalPicturesService.prototype.addLikeToPicture = function (request, returnObject) {
     var urlPath = request.path;
     var urlParts = urlPath.split('/');
     var postId = urlParts[2];
