@@ -31,7 +31,7 @@ export class FeedCollectionView extends Backbone.View<any> {
 
     public events() {
         return <Backbone.EventsHash> {
-            "click .likeButtonFeed": "addOrDeleteLike",
+            "click .likeButtonFeed": "addLike",
         };
     }
 
@@ -51,7 +51,6 @@ export class FeedCollectionView extends Backbone.View<any> {
 
     private renderPictures() {
         this.collection.each((picture) => {
-            // console.log(picture.attributes.id);
             const likeCollection = new LikeCollection({url: `${API_BASE_URL}pictures/${picture.attributes.id}/likes`});
             const postView = new PostView({el: "#posts-list", model: picture, collection: likeCollection});
             postView.append();
@@ -65,11 +64,9 @@ export class FeedCollectionView extends Backbone.View<any> {
         }
     }
 
-    private addOrDeleteLike(e) {
-        console.log("test");
-        var clickedEl = $(e.currentTarget);
-        var id = clickedEl.attr("data-id");
-        console.log(id);
+    private addLike(e) {
+        const id = $(e.currentTarget).attr("data-id");
+
         $.ajax({
                 url: `${API_BASE_URL}pictures/${id}/likes/${HeaderRequestGenerator.currentUser()}`,
                 type: "POST",
