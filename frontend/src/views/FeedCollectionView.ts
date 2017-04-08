@@ -30,6 +30,12 @@ export class FeedCollectionView extends Backbone.View<any> {
         return this;
     }
 
+    public events() {
+        return <Backbone.EventsHash> {
+            "click #eggplant": "addOrDeleteLike",
+        };
+    }
+
     private showPictures() {
         this.collection.fetch({
             beforeSend: HeaderRequestGenerator.sendAuthorization,
@@ -57,5 +63,9 @@ export class FeedCollectionView extends Backbone.View<any> {
         if (this.collection.length < this.picturesPerPage) {
             $("#show-more-container").hide();
         }
+    }
+
+    private addOrDeleteLike() {
+        console.log("test");
     }
 }

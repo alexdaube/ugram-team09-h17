@@ -119,8 +119,4 @@ export class PostView extends Backbone.View<any> {
         $("#buttonSave").hide();
         $("#editInput").hide();
     }
-
-    private addOrDeleteLike() {
-        console.log("test");
-    }
 }
