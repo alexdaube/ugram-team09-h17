@@ -51,7 +51,7 @@ export class FeedCollectionView extends Backbone.View<any> {
 
     private renderPictures() {
         this.collection.each((picture) => {
-            console.log(picture.attributes.id);
+            // console.log(picture.attributes.id);
             const likeCollection = new LikeCollection({url: `${API_BASE_URL}pictures/${picture.attributes.id}/likes`});
             const postView = new PostView({el: "#posts-list", model: picture, collection: likeCollection});
             postView.append();
@@ -66,6 +66,6 @@ export class FeedCollectionView extends Backbone.View<any> {
     }
 
     private addOrDeleteLike() {
-        console.log("test");
+        // console.log("test");
     }
 }

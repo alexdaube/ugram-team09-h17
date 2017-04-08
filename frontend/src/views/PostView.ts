@@ -40,7 +40,7 @@ export class PostView extends Backbone.View<any> {
 
     public append() {
         this.showLikes();
-        this.$el.append(this.template({ post: this.model, isSingleFeed: false }));        
+        this.$el.append(this.template({ post: this.model, isSingleFeed: false }));
         return this;
     }
 
@@ -58,7 +58,7 @@ export class PostView extends Backbone.View<any> {
     }
 
     private renderLikes() {
-        console.log(this.collection);
+        // console.log(this.collection);
         let nbLikes = this.collection.length;
         let className = "#countLikeText" + this.model.id + " " + "#countLikeTextSpan" + this.model.id;
 
