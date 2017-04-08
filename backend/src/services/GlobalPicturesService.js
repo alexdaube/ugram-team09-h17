@@ -42,7 +42,7 @@ globalPicturesService.prototype.getPictureLikes = function(request, returnObject
 globalPicturesService.prototype.addLikeToPicture = function (request, returnObject) {
     var urlPath = request.path;
     var urlParts = urlPath.split('/');
-    var postId = urlParts[2];
+    var pictureId = urlParts[2];
     var userId = urlParts[4];
     var body = request.body;
     var that = this;
@@ -52,7 +52,7 @@ globalPicturesService.prototype.addLikeToPicture = function (request, returnObje
         return;
     }    
 
-    this.persistence.addLike(postId, userId, function (err, response) {
+    this.persistence.addLike(pictureId, userId, function (err, response) {
         if (!err && response) {
             returnObject.status(201).json(response);            
         }

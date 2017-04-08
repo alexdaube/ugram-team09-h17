@@ -73,7 +73,13 @@ globalPicturesRepository.prototype.getPictureLikes = function (pictureId, callba
 };
 
 globalPicturesRepository.prototype.addLike = function (pictureId, userId, callback) {
-    new Like({pictureId:pictureId, userId:userId}).save().then(function(like) {
+    var that = this;
+    new Like({
+        pictureId:pictureId,
+        userId:userId
+    })
+    .save()
+    .then(function(like) {
         var newLikeJSON = that.databaseDTO.getLikeJSON(like);
         return callback(null, newLikeJSON);
     }); 
