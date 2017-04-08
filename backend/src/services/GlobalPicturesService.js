@@ -63,4 +63,24 @@ globalPicturesService.prototype.addLikeToPicture = function (request, returnObje
     });
 };
 
+globalPicturesService.prototype.deleteLike = function (request, returnObject) {
+    var path = request.path;
+    var urlParts = path.split('/');
+    var pictureId = urlParts[2];
+    var userId = urlParts[4];   
+
+    if (userId != request.user.attributes.userName) {
+        returnObject.status(403).json("Editing on forbidden user account for current authentication");
+        return;
+    }
+    this.persistence.deleteLike(pictureId, userId, function(err,response) {
+        if(!err && response) {
+            returnObject.status(204).send();
+        } else {
+            console.warn(err, response);
+            returnObject.status(err.statusCode).send(err,message);
+        }
+    });    
+};
+
 module.exports = globalPicturesService;

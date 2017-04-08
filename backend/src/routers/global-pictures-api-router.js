@@ -20,4 +20,9 @@ module.exports = function(app) {
         var globalPicturesService = new GlobalPicturesService(config);
         globalPicturesService.addLikeToPicture(req, res);
     });
+
+    app.delete("/pictures/:picture/likes/:userId", isLoggedIn, function (req,res){
+        var globalPicturesService = new GlobalPicturesService(config);
+        globalPicturesService.deleteLike(req,res);
+    });
 };
