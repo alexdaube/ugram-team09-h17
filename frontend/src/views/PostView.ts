@@ -40,7 +40,7 @@ export class PostView extends Backbone.View<any> {
 
     public append() {
         this.showLikes();
-        this.$el.append(this.template({ post: this.model, isSingleFeed: false }));        
+        this.$el.append(this.template({ post: this.model, isSingleFeed: false }));
         return this;
     }
 
@@ -58,14 +58,12 @@ export class PostView extends Backbone.View<any> {
     }
 
     private renderLikes() {
-        console.log(this.collection);
-        let nbLikes = this.collection.length;
-        let className = "#countLikeText" + this.model.id + " " + "#countLikeTextSpan" + this.model.id;
+        // console.log(this.collection);
 
-        if (nbLikes >= 1) {
-            $(className).text(nbLikes.toString() + " likes");
+        if (this.collection.length >= 1) {
+            $("#countLikeText" + this.model.id + " " + "#countLikeTextSpan" + this.model.id).text(this.collection.length.toString() + " likes");
         } else {
-            $(className).text(nbLikes.toString() + " like");
+            $("#countLikeText" + this.model.id + " " + "#countLikeTextSpan" + this.model.id).text(this.collection.length.toString() + " like");
         }
     }
 
