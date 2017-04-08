@@ -59,13 +59,11 @@ export class PostView extends Backbone.View<any> {
 
     private renderLikes() {
         // console.log(this.collection);
-        let nbLikes = this.collection.length;
-        let className = "#countLikeText" + this.model.id + " " + "#countLikeTextSpan" + this.model.id;
 
-        if (nbLikes >= 1) {
-            $(className).text(nbLikes.toString() + " likes");
+        if (this.collection.length >= 1) {
+            $("#countLikeText" + this.model.id + " " + "#countLikeTextSpan" + this.model.id).text(this.collection.length.toString() + " likes");
         } else {
-            $(className).text(nbLikes.toString() + " like");
+            $("#countLikeText" + this.model.id + " " + "#countLikeTextSpan" + this.model.id).text(this.collection.length.toString() + " like");
         }
     }
 
