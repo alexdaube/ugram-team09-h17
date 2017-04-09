@@ -52,7 +52,6 @@ export class HeaderView extends Backbone.View<any> {
 
         $("#notificationButton").click( () => {
             $(".notificationZone").show();
-            this.showNotification();
         });
 
         return this;
@@ -94,9 +93,5 @@ export class HeaderView extends Backbone.View<any> {
         if (isEmpty) {
             $(".searchBox2").hide();
         }
-    }
-
-    private showNotification() {
-       
     }
 }
