@@ -44,14 +44,14 @@ export class HeaderView extends Backbone.View<any> {
 
         this.showSearch();
 
-        $(".showNotificationButton").hide();
+        $(".notificationZone").hide();
 
         $("#notificationButton").focusout( () => {
-            window.setTimeout( () => { $(".showNotificationButton").hide(); }, 250);
+            window.setTimeout( () => { $(".notificationZone").hide(); }, 250);
         });
 
         $("#notificationButton").click( () => {
-            $(".showNotificationButton").show();
+            $(".notificationZone").show();
             this.showNotification();
         });
 
@@ -97,16 +97,6 @@ export class HeaderView extends Backbone.View<any> {
     }
 
     private showNotification() {
-        this.collection.fetch({
-            beforeSend: HeaderRequestGenerator.sendAuthorization,
-            data: {
-                page: this.nextPageToFetch,
-                perPage: this.usersPerPageSearch,
-            },
-            success: () => {
-                this.nextPageToFetch += 1;
-                this.renderSearch();
-            },
-        });
+       
     }
 }
