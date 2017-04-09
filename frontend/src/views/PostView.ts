@@ -29,12 +29,15 @@ export class PostView extends Backbone.View<any> {
     }
 
     public events() {
+
         return <Backbone.EventsHash> {
             "click #optionButtonEdit": () => { $("#popupEditContent").show(); },
             "click #closeExitButtonPopup": () => { $("#popupEditContent").hide(); },
             "click #deleteButtonPopup": "delete",
             "click #editButtonPopup": "edit",
             "click #saveButtonPopup": "saveModif",
+            "click .eggPlantIcon": "addLike",
+            "click .eggPlantIcon2": "deleteLike",
         };
     }
 
@@ -60,16 +63,27 @@ export class PostView extends Backbone.View<any> {
     private renderLikes() {
         // console.log(this.collection);
 
-        if (this.collection.length >= 1) {
+        if (this.collection.length > 1) {
             $("#countLikeText" + this.model.id + " " + "#countLikeTextSpan" + this.model.id).text(this.collection.length.toString() + " likes");
         } else {
             $("#countLikeText" + this.model.id + " " + "#countLikeTextSpan" + this.model.id).text(this.collection.length.toString() + " like");
         }
+        this.addEggplantIconClass(this.collection);
     }
 
     private edit() {
         $("#buttonSave").show();
         $("#editInput").show();
+    }
+
+    private addEggplantIconClass(myCollection) {
+        $("#eggplanticonspan" + this.model.id).addClass("eggPlantIcon");
+        myCollection.each( (like) => {
+            if (like.attributes.userId === HeaderRequestGenerator.currentUser()) {
+                $("#eggplanticonspan" + this.model.id).removeClass("eggPlantIcon");
+                $("#eggplanticonspan" + this.model.id).addClass("eggPlantIcon2");
+            }
+        });
     }
 
     private delete() {

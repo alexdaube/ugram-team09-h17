@@ -73,10 +73,32 @@ globalPicturesRepository.prototype.getPictureLikes = function (pictureId, callba
 };
 
 globalPicturesRepository.prototype.addLike = function (pictureId, userId, callback) {
-    new Like({pictureId:pictureId, userId:userId}).save().then(function(like) {
+    var that = this;
+    new Like({
+        pictureId:pictureId,
+        userId:userId
+    })
+    .save()
+    .then(function(like) {
         var newLikeJSON = that.databaseDTO.getLikeJSON(like);
         return callback(null, newLikeJSON);
     }); 
+};
+
+globalPicturesRepository.prototype.deleteLike = function (pictureId, userId, callback) {
+    new Like().where({pictureId: pictureId, userId: userId})
+    .fetch().then(function(like){
+        if(like){
+            like.destroy().then(function(){
+                return callback(null, "No content");
+            });
+        } else {
+            return callback({ statusCode: 400, message: "No such like"}, null);
+        }
+    }).catch(function (err) {
+        console.log(err);
+        handleError(400, null, callback);
+    });
 };
 
 var handleError = function (statusCode, body, callback) {

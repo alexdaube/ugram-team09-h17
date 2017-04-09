@@ -34,9 +34,9 @@
 			</ul>
 		</div>
 		<div class="addCommentFeed commentPaddingFeed">
-			<a id="eggplant" class="likeButtonFeed likePaddingFeed"><span class="likeTextFeed2 eggPlantIcon">J’aime</span></a>
+			<a id="eggplant" class="likeButtonFeed likePaddingFeed" data-id="<%- post.id %>"><span id="eggplanticonspan<%- post.id %>" data-id="<%- post.id %>" class="likeTextFeed2">J’aime</span></a>
 			<form class="flexCommentFeed"><input type="text" class="inputCommentFeed inputTextFeed" placeholder="Add Comment..." value=""></form>
-			<button class="optionPostFeed optionIcon likeTextFeed2">More Options</button>
+			<!--button class="optionPostFeed optionIcon likeTextFeed2">More Options</button-->
 		</div>
 	</div>
 </div>

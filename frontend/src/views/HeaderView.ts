@@ -43,6 +43,18 @@ export class HeaderView extends Backbone.View<any> {
         });
 
         this.showSearch();
+
+        $(".showNotificationButton").hide();
+
+        $("#notificationButton").focusout( () => {
+            window.setTimeout( () => { $(".showNotificationButton").hide(); }, 250);
+        });
+
+        $("#notificationButton").click( () => {
+            $(".showNotificationButton").show();
+            this.showNotification();
+        });
+
         return this;
     }
 
@@ -82,5 +94,19 @@ export class HeaderView extends Backbone.View<any> {
         if (isEmpty) {
             $(".searchBox2").hide();
         }
+    }
+
+    private showNotification() {
+        this.collection.fetch({
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
+            data: {
+                page: this.nextPageToFetch,
+                perPage: this.usersPerPageSearch,
+            },
+            success: () => {
+                this.nextPageToFetch += 1;
+                this.renderSearch();
+            },
+        });
     }
 }
