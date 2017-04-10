@@ -47,7 +47,8 @@ module.exports = class DatabaseDTO {
                 mentions: that.getMentionJSON(pictureJSON.mentions),
                 tags: that.getTagJSON(pictureJSON.tags),
                 url: pictureJSON.url,
-                userId: pictureJSON.userId
+                userId: pictureJSON.userId,
+                comments:  that.getCommentJSON(pictureJSON.comments)
             };
             return formattedPictureJSON;
         }
@@ -61,7 +62,8 @@ module.exports = class DatabaseDTO {
                     mentions: that.getMentionJSON(picture.mentions),
                     tags: that.getTagJSON(picture.tags),
                     url: picture.url,
-                    userId: picture.userId
+                    userId: picture.userId,
+                    comments:  that.getCommentJSON(picture.comments)
                 };
                 picturesJSONArray.push(formattedPictureJSON);
             });
@@ -93,6 +95,22 @@ module.exports = class DatabaseDTO {
             mentionsArray.push(mention.mention);
         });
         return mentionsArray;
+    }
+
+    getCommentJSON(comments) {
+        var commentsArray = [];
+        if(typeof comments === 'undefined'){
+            return commentsArray;
+        }
+
+        comments.forEach(function (comment) {
+            var commentJson = {
+                user: comment.user_id,
+                comment: comment.comment,
+            };
+            commentsArray.push(commentJson);
+        });
+        return commentsArray;
     }
 
     getLikeJSON(like) {

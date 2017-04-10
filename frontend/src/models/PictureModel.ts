@@ -3,6 +3,7 @@ import * as Backbone from "backbone";
 import {InputFormatter} from "../util/InputFormatter";
 import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 import {API_BASE_URL} from "../constants";
+import {CommentModel} from "./CommentModel";
 
 export class PictureModel extends Backbone.Model {
     constructor(options?: any) {
@@ -19,6 +20,7 @@ export class PictureModel extends Backbone.Model {
             url: "",
             userId: "",
             editable: false,
+            comments: [],
         };
     }
 
@@ -26,6 +28,12 @@ export class PictureModel extends Backbone.Model {
         // TODO make it non constant
         response["editable"] = HeaderRequestGenerator.isConnectedUser(response["userId"]);
         response["imageUrl"] = response["url"];
+        const commentsModels: CommentModel[] = [];
+        response["comments"].forEach((s) => {
+            commentsModels.push(new CommentModel(s));
+            alert(s);
+        });
+        this.comments = commentsModels;
         delete response["url"];
         return response;
     }
@@ -57,6 +65,14 @@ export class PictureModel extends Backbone.Model {
 
     set tags(tags: string[]) {
         this.set("tags", tags);
+    }
+
+    get comments(): CommentModel[] {
+        return this.get("comments");
+    }
+
+    set comments(comments: CommentModel[]) {
+        this.set("comments", comments);
     }
 
     get imageUrl(): string {

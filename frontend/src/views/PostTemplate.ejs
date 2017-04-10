@@ -27,10 +27,12 @@
 						<span id="descriptionEditable" ><%- post.description %></span>
 					<% } %>
 				</li>
+                <% for(var i=0; i<post.comments.length; i++) { %>
 				<li class="textCommentFeed">
- 					<a class="heightTextFeed blackTextFeed" href="">{user name new comment}</a>
- 					<span>{text new comment}</span>
+ 					<a class="heightTextFeed blackTextFeed" href=""><%-post.comments[i].user %></a>
+ 					<span><%-post.comments[i].comment %></span>
  				</li>
+                <% } %>
 			</ul>
 		</div>
 		<div class="addCommentFeed commentPaddingFeed">
