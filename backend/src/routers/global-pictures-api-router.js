@@ -21,6 +21,11 @@ module.exports = function(app) {
         globalPicturesService.getPictureComments(req, res);
     });
 
+    app.post('/pictures/:pictureId/comments', isLoggedIn, function(req, res) {
+        var globalPicturesService = new GlobalPicturesService(config);
+        globalPicturesService.addPictureComments(req, res);
+    });
+
     app.post("/pictures/:pictureId/likes/:userId", isLoggedIn, function (req, res) {
         var globalPicturesService = new GlobalPicturesService(config);
         globalPicturesService.addLikeToPicture(req, res);

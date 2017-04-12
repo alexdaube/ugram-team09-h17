@@ -31,7 +31,6 @@ export class PictureModel extends Backbone.Model {
         const commentsModels: CommentModel[] = [];
         response["comments"].forEach((s) => {
             commentsModels.push(new CommentModel(s));
-            alert(s);
         });
         this.comments = commentsModels;
         delete response["url"];

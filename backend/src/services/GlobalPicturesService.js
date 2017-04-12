@@ -55,6 +55,23 @@ globalPicturesService.prototype.getPictureComments = function(request, returnObj
     });
 };
 
+globalPicturesService.prototype.addPictureComments = function (request, returnObject) {
+    var urlPath = request.path;
+    var urlParts = urlPath.split('/');
+    var pictureId = urlParts[2];
+    var userId = request.user.attributes.userName;
+    var comment = request.body.comment;
+    this.persistence.addPictureComment(pictureId, userId, comment, function (err, response) {
+        if (!err && response) {
+            returnObject.status(201).json(response);
+        }
+        else {
+            console.warn(err, response);
+            returnObject.status(err.statusCode).send(err.message);
+        }
+    });
+};
+
 globalPicturesService.prototype.addLikeToPicture = function (request, returnObject) {
     var urlPath = request.path;
     var urlParts = urlPath.split('/');

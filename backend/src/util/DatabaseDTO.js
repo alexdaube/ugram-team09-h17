@@ -48,7 +48,7 @@ module.exports = class DatabaseDTO {
                 tags: that.getTagJSON(pictureJSON.tags),
                 url: pictureJSON.url,
                 userId: pictureJSON.userId,
-                comments:  that.getCommentJSON(pictureJSON.comments)
+                comments:  that.getCommentListJSON(pictureJSON.comments)
             };
             return formattedPictureJSON;
         }
@@ -63,7 +63,7 @@ module.exports = class DatabaseDTO {
                     tags: that.getTagJSON(picture.tags),
                     url: picture.url,
                     userId: picture.userId,
-                    comments:  that.getCommentJSON(picture.comments)
+                    comments:  that.getCommentListJSON(picture.comments)
                 };
                 picturesJSONArray.push(formattedPictureJSON);
             });
@@ -97,14 +97,22 @@ module.exports = class DatabaseDTO {
         return mentionsArray;
     }
 
-    getCommentJSON(comments) {
+    getCommentJSON(comment) {
+        var commentJson = {
+            user: comment.user_id,
+            comment: comment.comment,
+        };
+        return commentJson;
+    }
+
+    getCommentListJSON(comments) {
         var commentsArray = [];
         if(typeof comments === 'undefined'){
             return commentsArray;
         }
 
         comments.forEach(function (comment) {
-            var commentJson = {
+            var commentJson =  {
                 user: comment.user_id,
                 comment: comment.comment,
             };
