@@ -71,7 +71,7 @@ export class PostView extends Backbone.View<any> {
             return;
         }
         const comment = new CommentModel({ comment: message, pictureId: postId, user: HeaderRequestGenerator.currentUser()});
-        comment.save({},{beforeSend: HeaderRequestGenerator.sendAuthorization});
+        comment.save({}, {beforeSend: HeaderRequestGenerator.sendAuthorization});
     }
 
     private renderLikes() {
