@@ -4,6 +4,7 @@ import * as _ from "underscore";
 import {PictureModel} from "../models/PictureModel";
 import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 import {InputValidator} from "../util/InputValidator";
+import {CommentModel} from "../models/CommentModel";
 
 export class PostView extends Backbone.View<any> {
     private template: Function;
@@ -38,6 +39,7 @@ export class PostView extends Backbone.View<any> {
             "click #saveButtonPopup": "saveModif",
             "click .eggPlantIcon": "addLike",
             "click .eggPlantIcon2": "deleteLike",
+            "submit .addCommentFeed" : "addComment",
         };
     }
 
@@ -58,6 +60,18 @@ export class PostView extends Backbone.View<any> {
                 // TODO Handle error
             },
         });
+    }
+
+    private addComment(e) {
+        const commentBox = $(e.currentTarget).find("input.inputCommentFeed");
+        const postId = commentBox.attr("data-id");
+        const message = commentBox.val();
+        if (message.length <= 0) {
+            alert("Comment too short");
+            return;
+        }
+        const comment = new CommentModel({ comment: message, pictureId: postId, user: HeaderRequestGenerator.currentUser()});
+        comment.save({}, {beforeSend: HeaderRequestGenerator.sendAuthorization});
     }
 
     private renderLikes() {

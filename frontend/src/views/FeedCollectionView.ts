@@ -6,6 +6,7 @@ import {LikeCollection} from "../collections/LikeCollection";
 import {ShowMoreView} from "./ShowMoreView";
 import {PostView} from "./PostView";
 import {API_BASE_URL} from "../constants";
+import {CommentModel} from "../models/CommentModel";
 
 export class FeedCollectionView extends Backbone.View<any> {
     private template: Function;
@@ -33,6 +34,7 @@ export class FeedCollectionView extends Backbone.View<any> {
         return <Backbone.EventsHash> {
             "click .eggPlantIcon": "addLike",
             "click .eggPlantIcon2": "deleteLike",
+            "submit .addCommentFeed" : "addComment",
         };
     }
 
@@ -63,6 +65,18 @@ export class FeedCollectionView extends Backbone.View<any> {
         if (this.collection.length < this.picturesPerPage) {
             $("#show-more-container").hide();
         }
+    }
+
+    private addComment(e) {
+        const commentBox = $(e.currentTarget).find("input.inputCommentFeed");
+        const postId = commentBox.attr("data-id");
+        const message = commentBox.val();
+        if (message.length <= 0) {
+            alert("Comment too short");
+            return;
+        }
+        const comment = new CommentModel({ comment: message, pictureId: postId, user: HeaderRequestGenerator.currentUser()});
+        comment.save({}, {beforeSend: HeaderRequestGenerator.sendAuthorization});
     }
 
     private addLike(e) {
