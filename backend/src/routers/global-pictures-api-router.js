@@ -12,6 +12,7 @@ module.exports = function(app) {
     });
 
     app.get('/pictures/:pictureId/likes', isLoggedIn, function(req, res) {
+        console.log("app.get");
         var globalPicturesService = new GlobalPicturesService(config);
         globalPicturesService.getPictureLikes(req, res);
     });

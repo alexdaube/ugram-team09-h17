@@ -6,6 +6,7 @@ import {API_BASE_URL} from "../constants";
 export class LikeModel extends Backbone.Model {
 
     constructor(options?: any) {
+        console.log("yolo");
         super(options);
         this.urlRoot = `${API_BASE_URL}pictures/${this.pictureId}/likes`;
     }

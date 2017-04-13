@@ -67,6 +67,7 @@ export class FeedCollectionView extends Backbone.View<any> {
     }
 
     private addLike(e) {
+        console.log("addLike");
         const likeText = $(e.currentTarget).find("a.eggplant");
         const postId = likeText.attr("data-id");
         const like = new CommentModel({pictureId: postId, user: HeaderRequestGenerator.currentUser()});
@@ -74,6 +75,7 @@ export class FeedCollectionView extends Backbone.View<any> {
     }
 
     private addComment(e) {
+        console.log("addComment");
         const commentBox = $(e.currentTarget).find("input.inputCommentFeed");
         const postId = commentBox.attr("data-id");
         const message = commentBox.val();

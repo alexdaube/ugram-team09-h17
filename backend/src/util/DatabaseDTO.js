@@ -105,19 +105,17 @@ module.exports = class DatabaseDTO {
     //     return commentJson;
     // }
 
-    getLikeListJSON(likes) {
-        var likesArray = [];
-        if (typeof likes === 'undefined'){
-            return likesArray;
-        }
+    getLikeJSON(likes) {
+        console.log("getLikeJSON");
+        var nbLikesPost = 0;
 
         likes.forEach(function (like) {
             var likeJson =  {
                 user: like.user_id,
-                nblikes: 10,
+                nblikes: nbLikesPost,
             };
-            likesArray.push(likeJson);
         });
+        console.log("test" + likesArray);
         return likesArray;
     }
 

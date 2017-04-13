@@ -74,11 +74,12 @@ globalPicturesRepository.prototype.get = function (page, perPage, callback) {
 // };
 
 globalPicturesRepository.prototype.getPictureLikes = function (pictureId, callback) {
+    console.log("getPictureLikes");
     var that = this;
 
     new Like().where('pictureId', pictureId).fetch().then(function (likes) {
         if (likes) {
-            callback(null, that.databaseDTO.getLikeListJSON(likes));
+            callback(null, that.databaseDTO.getLikeJSON(likes));
         }
         else {
             return callback(null, {});
