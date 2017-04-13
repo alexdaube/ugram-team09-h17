@@ -2,10 +2,15 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css');
 
 
-.contentTops {
+.contentPopular {
   body {
     font: 14px/1 'Open Sans', sans-serif;
     background: #eee;
+  }
+
+  p {
+    margin-top: 20px;
+    line-height: 1.5;
   }
 
   h1 {
@@ -14,13 +19,12 @@
     text-align: center;
   }
 
-  .centerTopsTitle {
+  .centerPopularTitle {
     text-align: center;
   }
 
   main {
-    min-width: 320px;
-    max-width: 800px;
+    width: 83%;
     padding: 50px;
     margin: 0 auto;
     background: #fff;
@@ -28,7 +32,6 @@
 
   section {
     display: none;
-    padding: 20px 0 0;
     border-top: 1px solid #ddd;
   }
 
@@ -52,8 +55,8 @@
     margin-right: 10px;
   }
 
-  label[for*='1']:before { content: '\f0c0'; }
-  label[for*='2']:before { content: '\f292'; }
+  label[for*="Users"]:before { content: '\f0c0'; }
+  label[for*="Hashtags"]:before { content: '\f292'; }
 
   label:hover {
     color: #888;
@@ -67,11 +70,24 @@
     border-bottom: 1px solid #fff;
   }
 
-  #tab1:checked ~ #content1,
-  #tab2:checked ~ #content2,
-  #tab3:checked ~ #content3,
-  #tab4:checked ~ #content4 {
+  #tabUsers:checked ~ #contentUsers,
+  #tabHashtags:checked ~ #contentHashtags {
     display: block;
+  }
+
+  .userEggplantCount {
+    color: #8dc840;
+    margin-top: 8px;
+    margin-left: 5px;
+    font-size: 22px;
+    font-family: "DIN Alternate";
+  }
+
+  .colorPopularHashtag {
+    color: #3897f0;
+    &:visited {
+      color: #3897f0;
+    }
   }
 }
 
@@ -89,7 +105,7 @@
 }
 
 @media screen and (max-width: 400px) {
-  .contentTops {
+  .contentPopular {
     label {
       padding: 15px;
     }

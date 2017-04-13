@@ -19,7 +19,7 @@ import {FooterModel} from "./models/FooterModel";
 import {LoginView} from "./views/LoginView";
 import {LoginModel} from "./models/LoginModel";
 
-import {TopsView} from "./views/TopsView";
+import {PopularView} from "./views/PopularView";
 
 import {PictureModel} from "./models/PictureModel";
 
@@ -42,7 +42,7 @@ export class AppRouter extends Backbone.Router {
         "users/:userId": "showUserProfile",
         "users/:userId/pictures/:pictureId": "showPost",
         "profile": "showProfile",
-        "tops": "showTops",
+        "popular": "showPopular",
     };
 
     constructor() {
@@ -64,11 +64,11 @@ export class AppRouter extends Backbone.Router {
         loginView.render();
     }
 
-    public showTops() {
+    public showPopular() {
         this.showHeaderFooter();
         this.loginRedirect();
-        const topsView = new TopsView({});
-        topsView.render();
+        const popularView = new PopularView({});
+        popularView.render();
     }
 
     public showProfile() {
