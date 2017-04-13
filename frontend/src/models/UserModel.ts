@@ -8,7 +8,7 @@ export class UserModel extends Backbone.Model {
     constructor(options?: any) {
         super(options);
         this.urlRoot = `${API_BASE_URL}users`;
-    };
+    }
 
     public defaults() {
         return {
