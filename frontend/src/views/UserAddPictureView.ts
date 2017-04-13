@@ -161,6 +161,7 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
         context.drawImage(video, 0, 0, 320, 240);
         const imageData = canvas.toDataURL("image/png");
         $("#image-preview").attr("src", imageData);
+        $("#image-preview").removeAttr("hidden");
         canvas.toBlob((blob) => {
             const fileBlob = new File([blob], "webcam.png", {type: "image/png"});
             const webcamInput: HTMLInputElement = <HTMLInputElement> $("input[name=webcam]")[0];
@@ -175,7 +176,7 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
             const reader = new FileReader();
             reader.onload = (ev: any) => {
                 $("#file-preview").attr("src", ev.target.result);
-                $("#file-preview").show();
+                $("#file-preview").removeAttr("hidden");
             };
 
             reader.readAsDataURL(input.files[0]);

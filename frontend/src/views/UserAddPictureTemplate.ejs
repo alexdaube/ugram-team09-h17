@@ -21,9 +21,8 @@
                     <div class="widthSetting"><input id="upload-file-input" type="file" name="file" accept="image/*"></div>
                 </div>
                 <div class="infoSetting">
-                    <div class="paddingInfoSetting privateSetting"><label></label></div>
                     <div class="widthSetting">
-                        <div><img id="file-preview" alt="File preview" height="240" width="320"></div>
+                        <div><img id="file-preview" alt="File preview" height="240" width="320" hidden="true"></div>
                         <div class="buttonSetting paddingInfoSetting"><span><button id="postPictureButton" class="styleButtonSetting colorButtonSetting sizeButtonSetting">Send</button></span></div>
                         <div id="textSavePicture" class="buttonSetting"><span><p class="validationTextSize successTextColor">Post created</p></span></div>
                         <div id="textErrorPicture" class="buttonSetting"><span><p class="validationTextSize errorTextColor">You can't add this post</p></span></div>
@@ -34,7 +33,7 @@
                 </div>
                 <div class="infoSetting">
                     <video id="video" height="240" width="320" autoplay></video>
-                    <span><img id="image-preview" alt="Image preview" height="240" width="320"></span>
+                    <span><img id="image-preview" alt="Webcam preview" height="240" width="320" hidden="true"></span>
                     <canvas id="canvas" height="240" width="320" hidden="true"></canvas>
                 </div>
                 <div class="infoSetting">
