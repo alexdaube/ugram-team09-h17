@@ -57,6 +57,6 @@ module.exports = function (app) {
     app.get("/popularUser", function(req, res) {
         var userService = new UserService(config);
         userService.getMostPopularUsers(req, res);
-    })
+    });
 
 };

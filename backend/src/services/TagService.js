@@ -14,7 +14,7 @@ taskService.prototype.getPopularHashtags = function (request, responseObject) {
             returnObject.status(err.statusCode).send(err.message);
         }
     });
-}
+};
 
 
 module.exports = taskService;

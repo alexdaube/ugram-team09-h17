@@ -8,7 +8,8 @@ var tagRepository = function (config) {
 };
 
 tagRepository.prototype.getPopularHashtags = function () {
-    new Tag().fetchAll()
+    new Tag()
+        .fetchAll()
         .then(function (tags) {
             if (tags) {
                 tags.query(function (qb) {
