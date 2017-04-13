@@ -27,7 +27,6 @@ module.exports = function(app) {
     // });
 
     app.get('/pictures/:pictureId/comments', isLoggedIn, function(req, res) {
-        console.log("salut");
         var globalPicturesService = new GlobalPicturesService(config);
         globalPicturesService.getPictureComments(req, res);
     });

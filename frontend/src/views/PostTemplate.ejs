@@ -17,7 +17,11 @@
 	</div>
 	<div class="textContentFeed">
 		<div class="paddingLikeFeed">
-			<span class="likeTextFeed" data-id="<%- post.id %>"> likes</span>
+			<% if (post.likes.length <= 1) { %>
+				<span class="likeTextFeed"><%-post.likes.length %> like</span>
+			<% } else { %>
+				<span class="likeTextFeed"><%-post.likes.length %> likes</span>
+			<% } %>
 		</div>
 		<div class="paddingLikeFeed">
 			<ul>	

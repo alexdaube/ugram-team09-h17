@@ -17,7 +17,7 @@ globalPicturesRepository.prototype.get = function (page, perPage, callback) {
     var numberOfPages;
     if (typeof perPage === 'undefined') { perPage = 20; }
 
-    new Picture().fetchAll({ withRelated: ["tags", "mentions","comments"] }).then(function (pictures) {
+    new Picture().fetchAll({ withRelated: ["tags", "mentions", "comments", "likes"] }).then(function (pictures) {
         if (pictures) {
             numberOfPictureInTotal = pictures.length;
             numberOfPages = Math.ceil(numberOfPictureInTotal / perPage);
@@ -25,7 +25,7 @@ globalPicturesRepository.prototype.get = function (page, perPage, callback) {
                 qb.limit(perPage)
                   .offset(page * perPage)
                   .orderBy("createdDate", "DESC");
-            }).fetch({ withRelated: ["tags", "mentions","comments"] })
+            }).fetch({ withRelated: ["tags", "mentions", "comments", "likes"] })
                 .then(function (newCollection) {
                     var newCollectionJSON = {
                         items: that.databaseDTO.getPictureJSON(newCollection),
@@ -74,12 +74,11 @@ globalPicturesRepository.prototype.get = function (page, perPage, callback) {
 // };
 
 globalPicturesRepository.prototype.getPictureLikes = function (pictureId, callback) {
-    console.log("salut je suis un test");
     var that = this;
 
     new Like().where('pictureId', pictureId).fetch().then(function (likes) {
         if (likes) {
-            callback(null, that.databaseDTO.getLikeJSON(likes));
+            callback(null, that.databaseDTO.getLikeListJSON(likes));
         }
         else {
             return callback(null, {});

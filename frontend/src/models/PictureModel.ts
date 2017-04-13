@@ -37,12 +37,11 @@ export class PictureModel extends Backbone.Model {
         });
         this.comments = commentsModels;
 
-        console.log("parse");
-        // const likesModels: LikeModel[] = [];
-        // response["likes"].forEach((s) => {
-        //     likesModels.push(new LikeModel(s));
-        // });
-        // this.likes = likesModels;
+        const likesModels: LikeModel[] = [];
+        response["likes"].forEach((s) => {
+            likesModels.push(new LikeModel(s));
+        });
+        this.likes = likesModels;
 
         delete response["url"];
         return response;

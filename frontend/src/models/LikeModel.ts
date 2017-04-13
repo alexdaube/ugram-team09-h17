@@ -8,7 +8,6 @@ export class LikeModel extends Backbone.Model {
     constructor(options?: any) {
         super(options);
         this.urlRoot = `${API_BASE_URL}pictures/${this.pictureId}/likes`;
-        console.log(this.pictureId);
     }
 
     public defaults() {

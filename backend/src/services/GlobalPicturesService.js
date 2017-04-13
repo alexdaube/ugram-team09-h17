@@ -40,7 +40,6 @@ globalPicturesService.prototype.getAllPictures = function(request, returnObject)
 // };
 
 globalPicturesService.prototype.getPictureLikes = function(request, returnObject) {
-    console.log("salut je suis un test");
     var path = request.path;
     var urlParts = path.split('/');
     var pictureId = urlParts[2];
