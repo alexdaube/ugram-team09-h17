@@ -67,11 +67,8 @@ export class FeedCollectionView extends Backbone.View<any> {
     }
 
     private addLike(e) {
-        console.log("add like");
         const likeText = $(e.currentTarget).find("span.eggPlantIcon.likeTextFeed2");
-        console.log(likeText);
         const postId = likeText.attr("data-id");
-        console.log(postId);
         const like = new LikeModel({pictureId: postId, user: HeaderRequestGenerator.currentUser()});
         like.save({}, {beforeSend: HeaderRequestGenerator.sendAuthorization});
     }

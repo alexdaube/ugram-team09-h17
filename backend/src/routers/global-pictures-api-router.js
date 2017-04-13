@@ -16,10 +16,10 @@ module.exports = function(app) {
         globalPicturesService.getPictureLikes(req, res);
     });
 
-    // app.post("/pictures/:pictureId/likes", isLoggedIn, function (req, res) {
-    //     var globalPicturesService = new GlobalPicturesService(config);
-    //     globalPicturesService.addPictureLikes(req, res);
-    // });
+    app.post("/pictures/:pictureId/likes", isLoggedIn, function (req, res) {
+        var globalPicturesService = new GlobalPicturesService(config);
+        globalPicturesService.addPictureLikes(req, res);
+    });
 
     // app.delete("/pictures/:pictureId/likes", isLoggedIn, function (req,res){
     //     var globalPicturesService = new GlobalPicturesService(config);

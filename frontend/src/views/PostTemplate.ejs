@@ -18,22 +18,23 @@
 	<div class="textContentFeed">
 		<div class="paddingLikeFeed">
 			<% if (post.likes.length <= 1) { %>
-				<span class="likeTextFeed"><%-post.likes.length %> like</span>
+				<span class="likeTextFeed blackTextFeed"><%-post.likes.length %> like</span>
 			<% } else { %>
-				<span class="likeTextFeed"><%-post.likes.length %> likes</span>
+				<span class="likeTextFeed blackTextFeed"><%-post.likes.length %> likes</span>
 			<% } %>
 		</div>
 		<div class="paddingLikeFeed">
 			<ul>	
-				<li class="textCommentFeed">
+				<li class="texDescriptionFeed">
 					<a class="heightTextFeed blackTextFeed" href="/#users/<%- post.userId %>"><%- post.userId %></a>
 					<% if(post.description){ %>
 						<span id="descriptionEditable" ><%- post.description %></span>
 					<% } %>
 				</li>
+				<br>
                 <% for(var i=0; i<post.comments.length; i++) { %>
 				<li class="textCommentFeed">
- 					<a class="heightTextFeed blackTextFeed" href=""><%-post.comments[i].user %></a>
+ 					<a class="heightTextFeed blackTextFeed" href="/#users/<%- post.userId %>"><%-post.comments[i].user %></a>
  					<span><%-post.comments[i].comment %></span>
  				</li>
                 <% } %>

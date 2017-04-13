@@ -88,6 +88,18 @@ globalPicturesRepository.prototype.getPictureLikes = function (pictureId, callba
     });
 };
 
+globalPicturesRepository.prototype.addPictureLike = function (pictureId, userId, callback) {
+    var that = this;
+
+    new Like({
+        picture_id:pictureId,
+        user_id:userId,
+    }).save().then(function(newLike) {
+        var likeJson = that.databaseDTO.getLikeJSON(newLike);
+        return callback(null, likeJson);
+    });
+};
+
 globalPicturesRepository.prototype.getPictureComments = function (pictureId, callback) {
     var that = this;
 
@@ -105,30 +117,16 @@ globalPicturesRepository.prototype.getPictureComments = function (pictureId, cal
 
 globalPicturesRepository.prototype.addPictureComment = function (pictureId, userId, comment, callback) {
     var that = this;
+
     new Comment({
         picture_id:pictureId,
         user_id:userId,
         comment:comment
-    })
-        .save()
-        .then(function(newComment) {
-            var commentJson = that.databaseDTO.getCommentJSON(newComment);
-            return callback(null, commentJson);
-        });
+    }).save().then(function(newComment) {
+        var commentJson = that.databaseDTO.getCommentJSON(newComment);
+        return callback(null, commentJson);
+    });
 };
-
-// globalPicturesRepository.prototype.addLike = function (pictureId, userId, callback) {
-//     var that = this;
-//     new Like({
-//         pictureId:pictureId,
-//         userId:userId
-//     })
-//     .save()
-//     .then(function(like) {
-//         var newLikeJSON = that.databaseDTO.getLikeJSON(like);
-//         return callback(null, newLikeJSON);
-//     });
-// };
 
 // globalPicturesRepository.prototype.deleteLike = function (pictureId, userId, callback) {
 //     new Like().where({pictureId: pictureId, userId: userId})

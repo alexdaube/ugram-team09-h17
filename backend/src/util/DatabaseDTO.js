@@ -68,7 +68,6 @@ module.exports = class DatabaseDTO {
                     likes: that.getLikeListJSON(picture.likes),
                 };
                 picturesJSONArray.push(formattedPictureJSON);
-                console.log(picturesJSONArray);
             });
             return picturesJSONArray;
         }
@@ -110,7 +109,6 @@ module.exports = class DatabaseDTO {
             };
             likesArray.push(likeJson);
         });
-        console.log(likesArray);
         return likesArray;
     }
 
