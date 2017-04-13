@@ -2,6 +2,8 @@ var passportService = require('../services/passport');
 var passport = require('passport');
 var TagService = require("../services/TagService");
 
+var UserService = require("../services/UserService");
+
 var isLoggedIn = passport.authenticate('jwt', { session: false });
 
 module.exports = function (app) {

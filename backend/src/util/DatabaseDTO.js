@@ -47,7 +47,9 @@ module.exports = class DatabaseDTO {
                 mentions: that.getMentionJSON(pictureJSON.mentions),
                 tags: that.getTagJSON(pictureJSON.tags),
                 url: pictureJSON.url,
-                user_userName: pictureJSON.user_userName
+                //user_userName: pictureJSON.user_userName
+                userId: pictureJSON.userId,
+                comments:  that.getCommentListJSON(pictureJSON.comments)
             };
             return formattedPictureJSON;
         }
@@ -61,12 +63,27 @@ module.exports = class DatabaseDTO {
                     mentions: that.getMentionJSON(picture.mentions),
                     tags: that.getTagJSON(picture.tags),
                     url: picture.url,
-                    user_userName: picture.user_userName
+                    //user_userName: picture.user_userName
+                    userId: picture.userId,
+                    comments:  that.getCommentListJSON(picture.comments)
                 };
                 picturesJSONArray.push(formattedPictureJSON);
             });
             return picturesJSONArray;
         }
+    }
+
+getpopularUsersJSON(users) {
+        
+        var usersArray = [];
+        if(typeof users === 'undefined'){
+            return usersArray;
+        }
+
+        users.forEach(function (user) {
+            usersArray.push(user.userId);
+        });
+        return usersArray;
     }
 
     getTagJSON(tags) {
@@ -88,10 +105,61 @@ module.exports = class DatabaseDTO {
         if(typeof mentions === 'undefined'){
             return mentionsArray;
         }
-
+        console.log(mentions);
         mentions.forEach(function (mention) {
             mentionsArray.push(mention.mention);
         });
         return mentionsArray;
+    }
+
+    getCommentJSON(comment) {
+        var commentJson = {
+            user: comment.user_id,
+            comment: comment.comment,
+        };
+        return commentJson;
+    }
+
+    getCommentListJSON(comments) {
+        var commentsArray = [];
+        if(typeof comments === 'undefined'){
+            return commentsArray;
+        }
+
+        comments.forEach(function (comment) {
+            var commentJson =  {
+                user: comment.user_id,
+                comment: comment.comment,
+            };
+            commentsArray.push(commentJson);
+        });
+        return commentsArray;
+    }
+
+    getLikeJSON(like) {
+        var likeJSON = like.toJSON();
+        var likeLength = likeJSON.length;
+        var that = this;
+
+        if (typeof likeLength === 'undefined') {
+            var formattedLikeJSON = {
+                id: likeJSON.id,                
+                userId: likeJSON.userId,
+                pictureId: likeJSON.pictureId
+            };
+            return formattedLikeJSON;
+        }
+        else {
+            var likesJSONArray = [];
+            likeJSON.forEach(function (like) {
+                var formattedLikeJSON = {
+                    id: like.id,                
+                    userId: like.userId,
+                    pictureId: like.pictureId
+                };
+                likesJSONArray.push(formattedLikeJSON);
+            });
+            return likesJSONArray;
+        }
     }
 };

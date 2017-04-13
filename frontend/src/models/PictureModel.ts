@@ -3,6 +3,7 @@ import * as Backbone from "backbone";
 import {InputFormatter} from "../util/InputFormatter";
 import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 import {API_BASE_URL} from "../constants";
+import {CommentModel} from "./CommentModel";
 
 export class PictureModel extends Backbone.Model {
     constructor(options?: any) {
@@ -17,15 +18,22 @@ export class PictureModel extends Backbone.Model {
             postedDate: "",
             tags: [],
             url: "",
-            user_userName: "",
+            //user_userName: "",
+            userId: "",
             editable: false,
+            comments: [],
         };
     }
 
     public parse(response, options) {
         // TODO make it non constant
-        response["editable"] = HeaderRequestGenerator.isConnectedUser(response["user_userName"]);
+        response["editable"] = HeaderRequestGenerator.isConnectedUser(response["userId"]);
         response["imageUrl"] = response["url"];
+        const commentsModels: CommentModel[] = [];
+        response["comments"].forEach((s) => {
+            commentsModels.push(new CommentModel(s));
+        });
+        this.comments = commentsModels;
         delete response["url"];
         return response;
     }
@@ -59,6 +67,14 @@ export class PictureModel extends Backbone.Model {
         this.set("tags", tags);
     }
 
+    get comments(): CommentModel[] {
+        return this.get("comments");
+    }
+
+    set comments(comments: CommentModel[]) {
+        this.set("comments", comments);
+    }
+
     get imageUrl(): string {
         return this.get("imageUrl");
     }
@@ -68,11 +84,11 @@ export class PictureModel extends Backbone.Model {
     }
 
     get userId(): string {
-        return this.get("user_userName");
+        return this.get("userId");
     }
 
     set userId(userId: string) {
-        this.set("user_userName", userId);
+        this.set("userId", userId);
     }
 
     get editable(): boolean {

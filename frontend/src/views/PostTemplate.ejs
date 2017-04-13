@@ -16,6 +16,9 @@
 		<% if(!isSingleFeed){ %></a><% } %>
 	</div>
 	<div class="textContentFeed">
+		<div id="countLikeText<%-post.id %>" class="paddingLikeFeed">
+			<span id="countLikeTextSpan<%-post.id %>" class="likeTextFeed"></span>
+		</div>
 		<div class="paddingLikeFeed">
 			<ul>	
 				<li class="textCommentFeed">
@@ -24,14 +27,19 @@
 						<span id="descriptionEditable" ><%- post.description %></span>
 					<% } %>
 				</li>
-				
+                <% for(var i=0; i<post.comments.length; i++) { %>
+				<li class="textCommentFeed">
+ 					<a class="heightTextFeed blackTextFeed" href=""><%-post.comments[i].user %></a>
+ 					<span><%-post.comments[i].comment %></span>
+ 				</li>
+                <% } %>
 			</ul>
 		</div>
-		<% if(post.editable){ %>
-			<div class="addCommentFeed commentPaddingFeed">
-				<button id="optionButtonEdit" class="optionPostFeed optionIcon likeTextFeed2">More Options</button>
-			</div>
-		<% } %>
+		<div class="addCommentFeed commentPaddingFeed">
+			<a id="eggplant" class="likeButtonFeed likePaddingFeed" data-id="<%- post.id %>"><span id="eggplanticonspan<%- post.id %>" data-id="<%- post.id %>" class="likeTextFeed2">J’aime</span></a>
+			<form class="flexCommentFeed"><input type="text" class="inputCommentFeed inputTextFeed" data-id="<%- post.id %>" placeholder="Add Comment..." value=""></form>
+			<!--button class="optionPostFeed optionIcon likeTextFeed2">More Options</button-->
+		</div>
 	</div>
 </div>
 

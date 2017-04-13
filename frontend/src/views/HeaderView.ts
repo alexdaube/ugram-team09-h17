@@ -43,6 +43,17 @@ export class HeaderView extends Backbone.View<any> {
         });
 
         this.showSearch();
+
+        $(".notificationZone").hide();
+
+        $("#notificationButton").focusout( () => {
+            window.setTimeout( () => { $(".notificationZone").hide(); }, 250);
+        });
+
+        $("#notificationButton").click( () => {
+            $(".notificationZone").show();
+        });
+
         return this;
     }
 

@@ -8,12 +8,12 @@ globalPicturesService.prototype.setPersistence = function(persistence){
     this.persistence = persistence;
 };
 
-globalPicturesService.prototype.getAllPictures = function(request, returnObject){
+globalPicturesService.prototype.getAllPictures = function(request, returnObject) {
     var page = request.query.page;
     var perPage = request.query.perPage;
 
     this.persistence.get(page, perPage, function(err, response){
-        if(!err && response){
+        if (!err && response) {
             returnObject.status(200).json(response);
         }
         else {
@@ -23,5 +23,97 @@ globalPicturesService.prototype.getAllPictures = function(request, returnObject)
     });
 };
 
-module.exports = globalPicturesService;
+globalPicturesService.prototype.getPictureLikes = function(request, returnObject) {
+    var path = request.path;
+    var urlParts = path.split('/');
+    var pictureId = urlParts[2];
 
+    this.persistence.getPictureLikes(pictureId, function(err, response){
+        if (!err && response) {
+            returnObject.status(200).json(response);
+        }
+        else {
+            console.warn(err, response);
+            returnObject.status(err.statusCode).send(err.message);
+        }
+    });
+};
+
+globalPicturesService.prototype.getPictureComments = function(request, returnObject) {
+    var path = request.path;
+    var urlParts = path.split('/');
+    var pictureId = urlParts[2];
+
+    this.persistence.getPictureComments(pictureId, function(err, response){
+        if (!err && response) {
+            returnObject.status(200).json(response);
+        }
+        else {
+            console.warn(err, response);
+            returnObject.status(err.statusCode).send(err.message);
+        }
+    });
+};
+
+globalPicturesService.prototype.addPictureComments = function (request, returnObject) {
+    var urlPath = request.path;
+    var urlParts = urlPath.split('/');
+    var pictureId = urlParts[2];
+    var userId = request.user.attributes.userName;
+    var comment = request.body.comment;
+    this.persistence.addPictureComment(pictureId, userId, comment, function (err, response) {
+        if (!err && response) {
+            returnObject.status(201).json(response);
+        }
+        else {
+            console.warn(err, response);
+            returnObject.status(err.statusCode).send(err.message);
+        }
+    });
+};
+
+globalPicturesService.prototype.addLikeToPicture = function (request, returnObject) {
+    var urlPath = request.path;
+    var urlParts = urlPath.split('/');
+    var pictureId = urlParts[2];
+    var userId = urlParts[4];
+    var body = request.body;
+    var that = this;
+
+    if (userId != request.user.attributes.userName) {
+        returnObject.status(403).json("Unauthorized action");
+        return;
+    }    
+
+    this.persistence.addLike(pictureId, userId, function (err, response) {
+        if (!err && response) {
+            returnObject.status(201).json(response);            
+        }
+        else {
+            console.warn(err, response);
+            returnObject.status(err.statusCode).send(err.message);
+        }
+    });
+};
+
+globalPicturesService.prototype.deleteLike = function (request, returnObject) {
+    var path = request.path;
+    var urlParts = path.split('/');
+    var pictureId = urlParts[2];
+    var userId = urlParts[4];   
+
+    if (userId != request.user.attributes.userName) {
+        returnObject.status(403).json("Editing on forbidden user account for current authentication");
+        return;
+    }
+    this.persistence.deleteLike(pictureId, userId, function(err,response) {
+        if(!err && response) {
+            returnObject.status(204).send();
+        } else {
+            console.warn(err, response);
+            returnObject.status(err.statusCode).send(err,message);
+        }
+    });    
+};
+
+module.exports = globalPicturesService;

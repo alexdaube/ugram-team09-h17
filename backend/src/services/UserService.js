@@ -98,7 +98,7 @@ userService.prototype.createUserPicture = function (request, returnObject) {
         return;
     }
     if (typeof request.file === 'undefined') {
-        
+
         returnObject.status(400).json("Unauthorized file format");
         return;
     }
@@ -151,20 +151,20 @@ userService.prototype.deleteUserPicture = function (request, returnObject) {
 userService.prototype.deleteUser = function (request, returnObject) {
     var path = request.path;
     var urlParts = path.split('/');
-    var userId = urlParts[2];    
+    var userId = urlParts[2];
 
     if (userId != request.user.attributes.userName) {
         returnObject.status(403).json("Editing on forbidden user account for current authentication");
         return;
     }
-    this.persistence.deleteUser(userId, function(err,response) {
-        if(!err && response) {
+    this.persistence.deleteUser(userId, function (err, response) {
+        if (!err && response) {
             returnObject.status(204).send();
         } else {
             console.warn(err, response);
-            returnObject.status(err.statusCode).send(err,message);
+            returnObject.status(err.statusCode).send(err, message);
         }
-    });    
+    });
 };
 
 userService.prototype.getUserPicture = function (request, returnObject) {
@@ -208,8 +208,14 @@ userService.prototype.updateUserPicture = function (request, returnObject) {
 };
 
 userService.prototype.getMostPopularUsers = function (request, returnObject) {
-    this.persistence.getMostPopularUsers(function(err, response) {
-// TODO handle response;
+    this.persistence.getMostPopularUsers(function (err, response) {
+        if (!err && response) {
+            returnObject.status(201).json(response);
+        }
+        else {
+            console.warn(err, response);
+            returnObject.status(err.statusCode).send(err.message);
+        }
     });
 };
 

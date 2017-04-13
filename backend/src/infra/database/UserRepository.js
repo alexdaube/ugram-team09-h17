@@ -3,6 +3,7 @@ const User = require('../../models/user');
 const Picture = require("../../models/picture");
 const Mention = require("../../models/mention");
 const Tag = require("../../models/tag");
+const Like = require("../../models/like");
 var DatabaseDTO = require("../../util/DatabaseDTO");
 
 
@@ -80,7 +81,6 @@ userRepository.prototype.update = function (userId, body, callback) {
                     var formattedUserJSON = that.databaseDTO.getUserJSON(user);
                     return callback(null, formattedUserJSON);
                 }
-                console.log(err);
                 handleError(400, null, callback);
             });
         });
@@ -102,7 +102,8 @@ userRepository.prototype.getUserPictures = function (userId, page, perPage, call
                 pictures.query(function (qb) {
                     qb.limit(perPage)
                         .offset(page * perPage)
-                        .where({ user_userName: userId})
+                        //.where({ user_userName: userId})
+                        .where({ userId: userId })
                         .where("url", "!=", "null")
                         .orderBy("createdDate", "DESC");
                 }).fetch()
@@ -137,7 +138,8 @@ userRepository.prototype.createPicture = function (userId, body, callback) {
 
             new Picture({
                 description: body.description,
-                user_userName: userId,
+                //user_userName: userId,
+                userId: userId,
                 createdDate: new Date()
             })
                 .save()
@@ -162,24 +164,24 @@ userRepository.prototype.createPicture = function (userId, body, callback) {
 };
 
 userRepository.prototype.updatePictureUrl = function (pictureName, callback) {
-    
-    if(pictureName === null){
-        return callback("Error"); 
+
+    if (pictureName === null) {
+        return callback("Error");
     }
-    
+
     var pictureNameBuffer = pictureName.split(".");
-    
+
     new Picture({ id: pictureNameBuffer[0] })
         .fetch()
         .then(function (picture) {
-            if(picture){
+            if (picture) {
                 picture
-                .save({ url: global.configs.s3Bucket.imageFolderUrl + pictureName })
-                .then(function () {
-                    return callback(null);
-                }).catch(function (err) {
-                    return callback(err);
-                });
+                    .save({ url: global.configs.s3Bucket.imageFolderUrl + pictureName })
+                    .then(function () {
+                        return callback(null);
+                    }).catch(function (err) {
+                        return callback(err);
+                    });
             }
             else {
                 return callback("Error");
@@ -194,7 +196,9 @@ userRepository.prototype.deletePicture = function (userId, pictureId, callback) 
 
     if (typeof perPage === 'undefined') { perPage = 20; }
 
-    new Picture().where({ user_userName: userId, id: pictureId })
+    new Picture()
+        //.where({ user_userName: userId, id: pictureId })
+        .where({ userId: userId, id: pictureId })
         .fetch({ withRelated: ["tags", "mentions"] }).then(function (picture) {
             if (picture) {
                 picture.destroy().then(function () {
@@ -211,19 +215,19 @@ userRepository.prototype.deletePicture = function (userId, pictureId, callback) 
 };
 
 userRepository.prototype.deleteUser = function (userId, callback) {
-    new User().where({userName: userId})
-    .fetch().then(function(user){
-        if(user){
-            user.destroy().then(function(){
-                return callback(null, "No content");
-            });
-        } else {
-            return callback({ statusCode: 400, message: "No such user"}, null);
-        }
-    }).catch(function (err) {
-        console.log(err);
-        handleError(400, null, callback);
-    });
+    new User().where({ userName: userId })
+        .fetch().then(function (user) {
+            if (user) {
+                user.destroy().then(function () {
+                    return callback(null, "No content");
+                });
+            } else {
+                return callback({ statusCode: 400, message: "No such user" }, null);
+            }
+        }).catch(function (err) {
+            console.log(err);
+            handleError(400, null, callback);
+        });
 };
 
 userRepository.prototype.getUserPicture = function (userId, pictureId, callback) {
@@ -234,8 +238,8 @@ userRepository.prototype.getUserPicture = function (userId, pictureId, callback)
     if (typeof perPage === 'undefined') { perPage = 20; }
 
     new Picture()
-        .where({ user_userName: userId, id: pictureId })
-        .fetch({ withRelated: ["tags", "mentions"] }).then(function (picture) {
+        .where({ userId: userId, id: pictureId })
+        .fetch({ withRelated: ["tags", "mentions", "comments"] }).then(function (picture) {
             if (picture) {
                 var newCollectionJSON = that.databaseDTO.getPictureJSON(picture);
                 return callback(null, newCollectionJSON);
@@ -258,7 +262,8 @@ userRepository.prototype.updateUserPicture = function (userId, pictureId, body, 
     if (typeof perPage === 'undefined') { perPage = 20; }
 
     Picture
-        .where({ user_userName: userId, id: pictureId })
+        //.where({ user_userName: userId, id: pictureId })
+        .where({ userId: userId, id: pictureId })
         .fetch({ withRelated: ["tags", "mentions"] })
         .then(function (picture) {
             if (picture) {
@@ -317,7 +322,8 @@ userRepository.prototype.updateUserPicture = function (userId, pictureId, body, 
                 });
         }).then(function () {
             Picture
-                .where({ user_userName: userId, id: pictureId })
+                //.where({ user_userName: userId, id: pictureId })
+                .where({ userId: userId, id: pictureId })
                 .fetch({ withRelated: ["tags", "mentions"] })
                 .then(function (picture) {
                     return that.databaseDTO.getPictureJSON(picture);
@@ -331,20 +337,26 @@ userRepository.prototype.updateUserPicture = function (userId, pictureId, body, 
         });
 };
 
-userRepository.prototype.getMostPopularUsers = function(callback) {
-    var userScore = {};
-    new User()
-        .fetchAll({ withRelated: "pictures"})
-        .then(function (userList) {
-            userList.forEach(function(user) {
-                var userJSON = user.toJSON();
-                var numberOfLikes = 0;
-                userJSON.pictures.forEach(function(picture) {
-                    numberOfLikes += picture.likes;
-                });
-                userScore[userJSON.userName] = numberOfLikes;
-            });
-            console.log(userScore);
+userRepository.prototype.getMostPopularUsers = function (callback) {
+    var that = this;
+    new Like()
+        .fetchAll()
+        .then(function (likes) {
+            if (likes) {
+                likes.query(function (qb) {
+                    qb.select('userId')
+                        .groupBy('userId')
+                        .orderBy("count(*)", "desc")
+                        .count()
+                        .limit(10);
+                }).fetch()
+                    .then(function (popularUsers) {
+                        return callback(null, that.databaseDTO.getpopularUsersJSON(popularUsers.toJSON()));
+                    });
+            }
+            else {
+                return callback({ statusCode: 400, message: "No likes found" }, null);
+            }
         });
 };
 

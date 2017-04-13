@@ -5,11 +5,16 @@
   width: 44px;
 }
 
-.heartIcon {
-  background-image: url(/img/ugram.png);
-  background-position: -207px -229px;
-  height: 24px;
-  width: 24px;
+.eggPlantIcon {
+  background-image: url(/img/eggplant1.png);
+  height: 35px;
+  width: 35px;
+}
+
+.eggPlantIcon2 {
+  background-image: url(/img/eggplant2.png);
+  height: 35px;
+  width: 35px;
 }
 
 .imageFeed {
@@ -230,10 +235,6 @@
 .logoSize {
   width: 30px;
   height: 30px;
-}
-
-.imagePaddingFeed {
-  //padding-bottom: 100%;
 }
 
 #buttonSave,
