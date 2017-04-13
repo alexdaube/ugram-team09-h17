@@ -74,7 +74,7 @@ globalPicturesRepository.prototype.get = function (page, perPage, callback) {
 // };
 
 globalPicturesRepository.prototype.getPictureLikes = function (pictureId, callback) {
-    console.log("getPictureLikes");
+    console.log("salut je suis un test");
     var that = this;
 
     new Like().where('pictureId', pictureId).fetch().then(function (likes) {
@@ -104,19 +104,19 @@ globalPicturesRepository.prototype.getPictureComments = function (pictureId, cal
     });
 };
 
-// globalPicturesRepository.prototype.addPictureComment = function (pictureId, userId, comment, callback) {
-//     var that = this;
-//     new Comment({
-//         picture_id:pictureId,
-//         user_id:userId,
-//         comment:comment
-//     })
-//         .save()
-//         .then(function(newComment) {
-//             var commentJson = that.databaseDTO.getCommentJSON(newComment);
-//             return callback(null, commentJson);
-//         });
-// };
+globalPicturesRepository.prototype.addPictureComment = function (pictureId, userId, comment, callback) {
+    var that = this;
+    new Comment({
+        picture_id:pictureId,
+        user_id:userId,
+        comment:comment
+    })
+        .save()
+        .then(function(newComment) {
+            var commentJson = that.databaseDTO.getCommentJSON(newComment);
+            return callback(null, commentJson);
+        });
+};
 
 // globalPicturesRepository.prototype.addLike = function (pictureId, userId, callback) {
 //     var that = this;

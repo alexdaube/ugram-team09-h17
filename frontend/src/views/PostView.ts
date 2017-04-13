@@ -5,6 +5,7 @@ import {PictureModel} from "../models/PictureModel";
 import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 import {InputValidator} from "../util/InputValidator";
 import {CommentModel} from "../models/CommentModel";
+import {LikeModel} from "../models/LikeModel";
 
 export class PostView extends Backbone.View<any> {
     private template: Function;
@@ -48,10 +49,12 @@ export class PostView extends Backbone.View<any> {
     }
 
     private addLike(e) {
-        const likeText = $(e.currentTarget).find("a.eggplant");
+        console.log("testttt");
+        const likeText = $(e.currentTarget).find("span.eggPlantIcon.likeTextFeed2");
+        console.log(likeText);
         const postId = likeText.attr("data-id");
-        const like = new CommentModel({pictureId: postId, user: HeaderRequestGenerator.currentUser()});
-        console.log(like);
+        console.log(postId);
+        const like = new LikeModel({pictureId: postId, user: HeaderRequestGenerator.currentUser()});
         like.save({}, {beforeSend: HeaderRequestGenerator.sendAuthorization});
     }
 

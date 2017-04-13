@@ -97,14 +97,6 @@ module.exports = class DatabaseDTO {
         return mentionsArray;
     }
 
-    // getLikeJSON(comment) {
-    //     var commentJson = {
-    //         user: comment.user_id,
-    //         comment: comment.comment,
-    //     };
-    //     return commentJson;
-    // }
-
     getLikeJSON(likes) {
         console.log("getLikeJSON");
         var nbLikesPost = 0;
@@ -119,13 +111,13 @@ module.exports = class DatabaseDTO {
         return likesArray;
     }
 
-    // getCommentJSON(comment) {
-    //     var commentJson = {
-    //         user: comment.user_id,
-    //         comment: comment.comment,
-    //     };
-    //     return commentJson;
-    // }
+    getCommentJSON(comment) {
+        var commentJson = {
+            user: comment.user_id,
+            comment: comment.comment,
+        };
+        return commentJson;
+    }
 
     getCommentListJSON(comments) {
         var commentsArray = [];
@@ -140,6 +132,7 @@ module.exports = class DatabaseDTO {
             };
             commentsArray.push(commentJson);
         });
+        console.log("comment :" + commentsArray)
         return commentsArray;
     }
 
