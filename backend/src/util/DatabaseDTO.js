@@ -97,17 +97,41 @@ module.exports = class DatabaseDTO {
         return mentionsArray;
     }
 
-    getCommentJSON(comment) {
-        var commentJson = {
-            user: comment.user_id,
-            comment: comment.comment,
-        };
-        return commentJson;
+    // getLikeJSON(comment) {
+    //     var commentJson = {
+    //         user: comment.user_id,
+    //         comment: comment.comment,
+    //     };
+    //     return commentJson;
+    // }
+
+    getLikeListJSON(likes) {
+        var likesArray = [];
+        if (typeof likes === 'undefined'){
+            return likesArray;
+        }
+
+        likes.forEach(function (like) {
+            var likeJson =  {
+                user: like.user_id,
+                nblikes: 10,
+            };
+            likesArray.push(likeJson);
+        });
+        return likesArray;
     }
+
+    // getCommentJSON(comment) {
+    //     var commentJson = {
+    //         user: comment.user_id,
+    //         comment: comment.comment,
+    //     };
+    //     return commentJson;
+    // }
 
     getCommentListJSON(comments) {
         var commentsArray = [];
-        if(typeof comments === 'undefined'){
+        if (typeof comments === 'undefined'){
             return commentsArray;
         }
 
@@ -121,30 +145,30 @@ module.exports = class DatabaseDTO {
         return commentsArray;
     }
 
-    getLikeJSON(like) {
-        var likeJSON = like.toJSON();
-        var likeLength = likeJSON.length;
-        var that = this;
+    // getLikeJSON(like) {
+    //     var likeJSON = like.toJSON();
+    //     var likeLength = likeJSON.length;
+    //     var that = this;
 
-        if (typeof likeLength === 'undefined') {
-            var formattedLikeJSON = {
-                id: likeJSON.id,                
-                userId: likeJSON.userId,
-                pictureId: likeJSON.pictureId
-            };
-            return formattedLikeJSON;
-        }
-        else {
-            var likesJSONArray = [];
-            likeJSON.forEach(function (like) {
-                var formattedLikeJSON = {
-                    id: like.id,                
-                    userId: like.userId,
-                    pictureId: like.pictureId
-                };
-                likesJSONArray.push(formattedLikeJSON);
-            });
-            return likesJSONArray;
-        }
-    }
+    //     if (typeof likeLength === 'undefined') {
+    //         var formattedLikeJSON = {
+    //             id: likeJSON.id,                
+    //             userId: likeJSON.userId,
+    //             pictureId: likeJSON.pictureId
+    //         };
+    //         return formattedLikeJSON;
+    //     }
+    //     else {
+    //         var likesJSONArray = [];
+    //         likeJSON.forEach(function (like) {
+    //             var formattedLikeJSON = {
+    //                 id: like.id,                
+    //                 userId: like.userId,
+    //                 pictureId: like.pictureId
+    //             };
+    //             likesJSONArray.push(formattedLikeJSON);
+    //         });
+    //         return likesJSONArray;
+    //     }
+    // }
 };

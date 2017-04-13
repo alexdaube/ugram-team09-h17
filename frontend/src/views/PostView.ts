@@ -20,7 +20,6 @@ export class PostView extends Backbone.View<any> {
             success: () => {
                 this.$el.html(this.template({ post: this.model, isSingleFeed: true }));
                 this.$el.first().addClass("contentFeed");
-                this.showLikes();
             },
             error: () => {
                 this.$el.html("There was an error");
@@ -38,28 +37,22 @@ export class PostView extends Backbone.View<any> {
             "click #editButtonPopup": "edit",
             "click #saveButtonPopup": "saveModif",
             "click .eggPlantIcon": "addLike",
-            "click .eggPlantIcon2": "deleteLike",
+            // "click .eggPlantIcon2": "deleteLike",
             "submit .addCommentFeed" : "addComment",
         };
     }
 
     public append() {
-        this.showLikes();
-        this.$el.append(this.template({ post: this.model, isSingleFeed: false }));
+        this.$el.append(this.template({post: this.model, isSingleFeed: false}));
         return this;
     }
 
-    private showLikes() {
-        this.collection.fetch({
-            beforeSend: HeaderRequestGenerator.sendAuthorization,
-            data: {},
-            success: () => {
-                this.renderLikes();
-            },
-            error: () => {
-                // TODO Handle error
-            },
-        });
+    private addLike(e) {
+        const likeText = $(e.currentTarget).find("a.eggplant");
+        const postId = likeText.attr("data-id");
+        const like = new CommentModel({pictureId: postId, user: HeaderRequestGenerator.currentUser()});
+        console.log(like);
+        like.save({}, {beforeSend: HeaderRequestGenerator.sendAuthorization});
     }
 
     private addComment(e) {
@@ -70,35 +63,35 @@ export class PostView extends Backbone.View<any> {
             alert("Comment too short");
             return;
         }
-        const comment = new CommentModel({ comment: message, pictureId: postId, user: HeaderRequestGenerator.currentUser()});
+        const comment = new CommentModel({comment: message, pictureId: postId, user: HeaderRequestGenerator.currentUser()});
         comment.save({}, {beforeSend: HeaderRequestGenerator.sendAuthorization});
     }
 
-    private renderLikes() {
-        // console.log(this.collection);
+    // private renderLikes() {
+    //     // console.log(this.collection);
 
-        if (this.collection.length > 1) {
-            $("#countLikeText" + this.model.id + " " + "#countLikeTextSpan" + this.model.id).text(this.collection.length.toString() + " likes");
-        } else {
-            $("#countLikeText" + this.model.id + " " + "#countLikeTextSpan" + this.model.id).text(this.collection.length.toString() + " like");
-        }
-        this.addEggplantIconClass(this.collection);
-    }
+    //     if (this.collection.length > 1) {
+    //         $("#countLikeText" + this.model.id + " " + "#countLikeTextSpan" + this.model.id).text(this.collection.length.toString() + " likes");
+    //     } else {
+    //         $("#countLikeText" + this.model.id + " " + "#countLikeTextSpan" + this.model.id).text(this.collection.length.toString() + " like");
+    //     }
+    //     this.addEggplantIconClass(this.collection);
+    // }
 
     private edit() {
         $("#buttonSave").show();
         $("#editInput").show();
     }
 
-    private addEggplantIconClass(myCollection) {
-        $("#eggplanticonspan" + this.model.id).addClass("eggPlantIcon");
-        myCollection.each( (like) => {
-            if (like.attributes.userId === HeaderRequestGenerator.currentUser()) {
-                $("#eggplanticonspan" + this.model.id).removeClass("eggPlantIcon");
-                $("#eggplanticonspan" + this.model.id).addClass("eggPlantIcon2");
-            }
-        });
-    }
+    // private addEggplantIconClass(myCollection) {
+    //     $("#eggplanticonspan" + this.model.id).addClass("eggPlantIcon");
+    //     myCollection.each( (like) => {
+    //         if (like.attributes.userId === HeaderRequestGenerator.currentUser()) {
+    //             $("#eggplanticonspan" + this.model.id).removeClass("eggPlantIcon");
+    //             $("#eggplanticonspan" + this.model.id).addClass("eggPlantIcon2");
+    //         }
+    //     });
+    // }
 
     private delete() {
         $("#popupEditContent").hide();
