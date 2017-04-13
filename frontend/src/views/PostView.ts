@@ -70,8 +70,30 @@ export class PostView extends Backbone.View<any> {
             alert("Comment too short");
             return;
         }
-        const comment = new CommentModel({ comment: message, pictureId: postId, user: HeaderRequestGenerator.currentUser()});
-        comment.save({}, {beforeSend: HeaderRequestGenerator.sendAuthorization});
+        const comment = new CommentModel({
+            comment: message,
+            pictureId: postId,
+            user: HeaderRequestGenerator.currentUser(),
+        });
+        comment.save({}, {
+            beforeSend: HeaderRequestGenerator.sendAuthorization,
+            success: (model, response) => {
+                commentBox.val("");
+                const commentList =  $(e.currentTarget).parent().find(".commentFeedList");
+                console.log(commentList);
+                console.log("<li class=\"textCommentFeed\">\
+                <a class=\"heightTextFeed blackTextFeed\" href=\"\">"+model.user+"</a>\
+                    <span>"+_.escape(model.comment)+"</span>\
+                    </li>");
+                commentList.append("<li class=\"textCommentFeed\">\
+                <a class=\"heightTextFeed blackTextFeed\" href=\"\">"+model.user+"</a>\
+                    <span>"+_.escape(model.comment)+"</span>\
+                    </li>");
+            },
+            error: () => {
+                alert("error posting message");
+            },
+        });
     }
 
     private renderLikes() {
