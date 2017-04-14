@@ -13,6 +13,11 @@ module.exports = function (app) {
         userService.getAllUsers(req, res);
     });
 
+    app.get("/users/popular", isLoggedIn, function(req, res) {
+        var userService = new UserService(config);
+        userService.getMostPopularUsers(req, res);
+    });
+
     app.get("/users/:userId", isLoggedIn, function (req, res) {
         var userService = new UserService(config);
         userService.getUser(req, res);
@@ -52,10 +57,4 @@ module.exports = function (app) {
         var userService = new UserService(config);
         userService.updateUserPicture(req, res);
     });
-
-    app.get("/users/popularUsers", isLoggedIn, function(req, res) {
-        var userService = new UserService(config);
-        userService.getMostPopularUsers(req, res);
-    });
-
 };

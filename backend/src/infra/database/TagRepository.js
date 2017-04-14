@@ -24,7 +24,7 @@ tagRepository.prototype.getPopularHashtags = function (callback) {
                         .limit(10);
                 }).fetch()
                     .then(function (newTags) {
-                        return callback(null, that.databaseDTO.getTagJSON(newTags.toJSON()));
+                        return callback(null, that.databaseDTO.getTagsWithCountJSON(newTags.toJSON()));
                     });
             }
             else {

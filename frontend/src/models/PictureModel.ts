@@ -18,7 +18,7 @@ export class PictureModel extends Backbone.Model {
             postedDate: "",
             tags: [],
             url: "",
-            //user_userName: "",
+            // user_userName: "",
             userId: "",
             editable: false,
             comments: [],

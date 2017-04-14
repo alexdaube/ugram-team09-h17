@@ -12,8 +12,10 @@ export class UserCollection extends Backbone.Collection<UserModel> {
 
     public parse(response) {
         _.each(response.items, (item) => {
-            item["imageUrl"] = item["url"];
-            delete item["url"];
+            if (item["url"]) {
+                item["imageUrl"] = item["url"];
+                delete item["url"];
+            }
         });
         return response.items;
     }

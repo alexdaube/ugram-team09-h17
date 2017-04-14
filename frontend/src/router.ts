@@ -10,6 +10,8 @@ import {UserAddPictureView} from "./views/UserAddPictureView";
 import {FeedCollection} from "./collections/FeedCollection";
 import {FeedCollectionView} from "./views/FeedCollectionView";
 
+import {TagCollection} from "./collections/TagCollection";
+
 import {HeaderView} from "./views/HeaderView";
 import {HeaderModel} from "./models/HeaderModel";
 
@@ -67,7 +69,11 @@ export class AppRouter extends Backbone.Router {
     public showPopular() {
         this.showHeaderFooter();
         this.loginRedirect();
-        const popularView = new PopularView({});
+
+        const userCollection = new UserCollection({url: `${API_BASE_URL}users/popular`});
+        const tagCollection = new TagCollection({url: `${API_BASE_URL}tags/popular`});
+
+        const popularView = new PopularView({users: userCollection, tags: tagCollection});
         popularView.render();
     }
 

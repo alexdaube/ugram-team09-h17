@@ -1,7 +1,6 @@
 @import url('http://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css');
 
-
 .contentPopular {
   body {
     font: 14px/1 'Open Sans', sans-serif;
@@ -75,14 +74,6 @@
     display: block;
   }
 
-  .userEggplantCount {
-    color: #8dc840;
-    margin-top: 8px;
-    margin-left: 5px;
-    font-size: 22px;
-    font-family: "DIN Alternate";
-  }
-
   .colorPopularHashtag {
     color: #3897f0;
     &:visited {
@@ -90,7 +81,6 @@
     }
   }
 }
-
 
 @media screen and (max-width: 650px) {
   .contentTops {

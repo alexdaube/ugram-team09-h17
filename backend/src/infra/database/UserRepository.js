@@ -351,7 +351,7 @@ userRepository.prototype.getMostPopularUsers = function (callback) {
                         .limit(10);
                 }).fetch()
                     .then(function (popularUsers) {
-                        return callback(null, that.databaseDTO.getpopularUsersJSON(popularUsers.toJSON()));
+                        return callback(null, {items: that.databaseDTO.getpopularUsersJSON(popularUsers.toJSON())});
                     });
             }
             else {

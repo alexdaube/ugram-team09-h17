@@ -81,7 +81,7 @@ getpopularUsersJSON(users) {
         }
 
         users.forEach(function (user) {
-            usersArray.push(user.userId);
+            usersArray.push({id: user.userId, likes: user["count(*)"]});
         });
         return usersArray;
     }
@@ -95,6 +95,18 @@ getpopularUsersJSON(users) {
 
         tags.forEach(function (tag) {
             tagsArray.push(tag.tag);
+        });
+        return tagsArray;
+    }
+
+    getTagsWithCountJSON(tags) {
+        var tagsArray = [];
+        if(typeof tags === 'undefined'){
+            return tagsArray;
+        }
+
+        tags.forEach(function (tag) {
+            tagsArray.push({tag: tag.tag, count: tag["count(*)"]});
         });
         return tagsArray;
     }
