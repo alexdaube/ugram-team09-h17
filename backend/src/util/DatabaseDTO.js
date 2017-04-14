@@ -117,7 +117,6 @@ getpopularUsersJSON(users) {
         if(typeof mentions === 'undefined'){
             return mentionsArray;
         }
-        console.log(mentions);
         mentions.forEach(function (mention) {
             mentionsArray.push(mention.mention);
         });
