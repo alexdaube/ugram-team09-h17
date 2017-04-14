@@ -31,15 +31,10 @@ export class FeedCollectionView extends Backbone.View<any> {
     }
 
     public events() {
-<<<<<<< HEAD
         return <Backbone.EventsHash> {
             // "click .eggPlantIcon": "addLike",
             // "click .eggPlantIcon2": "deleteLike",
             // "submit .addCommentFeed" : "addComment",
-=======
-        return <Backbone.EventsHash> {            
-            "submit .addCommentFeed" : "addComment",
->>>>>>> c4ef91156aa25d1335d7bd20b48d2daa45e03a35
         };
     }
 
