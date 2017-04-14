@@ -19,13 +19,13 @@ export class PostView extends Backbone.View<any> {
         this.model.fetch({
             beforeSend: HeaderRequestGenerator.sendAuthorization,
             success: () => {
-                this.$el.html(this.template({ post: this.model, isSingleFeed: true }));
-                this.$el.first().addClass("contentFeed");
+                this.$el.html(this.template({ post: this.model, isSingleFeed: true }));                
+                this.$el.first().addClass("contentFeed");                                
             },
             error: () => {
                 this.$el.html("There was an error");
             },
-        });
+        });        
         return this;
     }
 
@@ -43,8 +43,9 @@ export class PostView extends Backbone.View<any> {
         };
     }
 
-    public append() {
-        this.$el.append(this.template({post: this.model, isSingleFeed: false}));
+    public append() {    
+        this.addEggplantIconClass(this.model.likes);     
+        this.$el.append(this.template({post: this.model, isSingleFeed: false}));        
         return this;
     }
 
@@ -83,15 +84,24 @@ export class PostView extends Backbone.View<any> {
         $("#editInput").show();
     }
 
-    // private addEggplantIconClass(myCollection) {
-    //     $("#eggplanticonspan" + this.model.id).addClass("eggPlantIcon");
-    //     myCollection.each( (like) => {
-    //         if (like.attributes.userId === HeaderRequestGenerator.currentUser()) {
-    //             $("#eggplanticonspan" + this.model.id).removeClass("eggPlantIcon");
-    //             $("#eggplanticonspan" + this.model.id).addClass("eggPlantIcon2");
-    //         }
-    //     });
-    // }
+     private addEggplantIconClass(myCollection) {
+         console.log(myCollection);
+         var that = this;
+         $("#eggplanticonspan" + that.model.id).addClass("eggPlantIcon");
+         /*myCollection.each( (like) => {
+             if (like.attributes.userId === HeaderRequestGenerator.currentUser()) {
+                 $("#eggplanticonspan" + this.model.id).removeClass("eggPlantIcon");
+                 $("#eggplanticonspan" + this.model.id).addClass("eggPlantIcon2");
+             }
+         });*/
+         $.each(myCollection, function(index, value){
+             console.log(value.user);
+            if (value.user === HeaderRequestGenerator.currentUser()) {                
+                 $("#eggplanticondiv" + that.model.id+" a span").removeClass("eggPlantIcon");
+                 $("#eggplanticondiv" + that.model.id+" a span").addClass("eggPlantIcon2");
+             }
+         });
+     }
 
     private delete() {
         $("#popupEditContent").hide();

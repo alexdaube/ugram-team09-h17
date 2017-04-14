@@ -66,11 +66,12 @@ export class FeedCollectionView extends Backbone.View<any> {
         }
     }
 
-    private addLike(e) {
-        const likeText = $(e.currentTarget).find("span.eggPlantIcon.likeTextFeed2");
-        const postId = likeText.attr("data-id");
-        const like = new LikeModel({pictureId: postId, user: HeaderRequestGenerator.currentUser()});
+    private addLike(e) {        
+        const id = $(e.currentTarget).attr("data-id");
+        console.log(id);        
+        const like = new LikeModel({pictureId: id, user: HeaderRequestGenerator.currentUser()});
         like.save({}, {beforeSend: HeaderRequestGenerator.sendAuthorization});
+        this.updateLikesCountTemp(true,id,e);
     }
 
     private addComment(e) {
@@ -120,24 +121,22 @@ export class FeedCollectionView extends Backbone.View<any> {
     //     });
     // }
 
-    // private updateLikesCountTemp(add, id, e) {
-    //     const numberLikeString = $("#countLikeText" + id + " " + "#countLikeTextSpan" + id).text().split(" ")[0];
-    //     let numberLike = parseInt(numberLikeString, 10);
-
-    //     if (add) {
-    //         $(e.currentTarget).removeClass("eggPlantIcon");
-    //         $(e.currentTarget).addClass("eggPlantIcon2");
-    //         numberLike++;
-    //     } else {
-    //         $(e.currentTarget).removeClass("eggPlantIcon2");
-    //         $(e.currentTarget).addClass("eggPlantIcon");
-    //         numberLike--;
-    //     }
-
-    //     if (numberLike > 1) {
-    //         $("#countLikeText" + id + " " + "#countLikeTextSpan" + id).text(numberLike + " " + "likes");
-    //     } else {
-    //         $("#countLikeText" + id + " " + "#countLikeTextSpan" + id).text(numberLike + " " + "like");
-    //     }
-    // }
+     private updateLikesCountTemp(add, id, e) {
+         const numberLikeString = $("#countLikeText" + id + " " + "#countLikeTextSpan" + id).text().split(" ")[0];
+         let numberLike = parseInt(numberLikeString, 10);
+        if (add) {
+             $(e.currentTarget).removeClass("eggPlantIcon");
+             $(e.currentTarget).addClass("eggPlantIcon2");
+             numberLike++;
+         } else {
+             $(e.currentTarget).removeClass("eggPlantIcon2");
+             $(e.currentTarget).addClass("eggPlantIcon");             
+             numberLike--;
+         }
+        if (numberLike > 1) {
+             $("#countLikeText" + id + " " + "#countLikeTextSpan" + id).text(numberLike + " " + "likes");
+         } else {
+             $("#countLikeText" + id + " " + "#countLikeTextSpan" + id).text(numberLike + " " + "like");
+         }
+     }
 }

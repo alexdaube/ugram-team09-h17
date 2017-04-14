@@ -70,7 +70,7 @@ module.exports = class DatabaseDTO {
                 picturesJSONArray.push(formattedPictureJSON);
             });
             return picturesJSONArray;
-        }
+        }        
     }
 
     getTagJSON(tags) {
