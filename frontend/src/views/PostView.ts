@@ -37,8 +37,8 @@ export class PostView extends Backbone.View<any> {
             "click #deleteButtonPopup": "delete",
             "click #editButtonPopup": "edit",
             "click #saveButtonPopup": "saveModif",
-            "click .eggPlantIcon": "addLike",
-            // "click .eggPlantIcon2": "deleteLike",
+            "click .eggPlantIcon": "addLikePV",
+            "click .eggPlantIcon2": "deleteLikePV",
             "submit .addCommentFeed" : "addComment",
         };
     }
@@ -49,11 +49,27 @@ export class PostView extends Backbone.View<any> {
         return this;
     }
 
-    private addLike(e) {
+    private addLikePV(e) {
         const postId = $(e.currentTarget).attr("data-id");
         const like = new LikeModel({pictureId: postId, user: HeaderRequestGenerator.currentUser()});
         like.save({}, {beforeSend: HeaderRequestGenerator.sendAuthorization});
         this.updateLikesCountTemp(true, postId, e);
+    }
+
+    private deleteLikePV(e) {
+        const postId = $(e.currentTarget).attr("data-id");
+        const like = new LikeModel({pictureId: postId, user: HeaderRequestGenerator.currentUser()});
+        const that = this;
+
+        like.destroy({
+            beforeSend: HeaderRequestGenerator.setContentTypeToJSON,
+            success() {
+                that.updateLikesCountTemp(false, postId, e);
+            },
+            error() {
+                // TODO handle error
+            },
+        });
     }
 
     private addComment(e) {

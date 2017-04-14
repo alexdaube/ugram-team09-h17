@@ -32,8 +32,8 @@ export class FeedCollectionView extends Backbone.View<any> {
 
     public events() {
         return <Backbone.EventsHash> {
-            "click .eggPlantIcon": "addLike",
-            "click .eggPlantIcon2": "deleteLike",
+            // "click .eggPlantIcon": "addLike",
+            // "click .eggPlantIcon2": "deleteLike",
             "submit .addCommentFeed" : "addComment",
         };
     }
