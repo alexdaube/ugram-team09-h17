@@ -128,10 +128,10 @@ export class PostView extends Backbone.View<any> {
             $(e.currentTarget).addClass("eggPlantIcon");
             numberLike--;
         }
-        if (numberLike > 1) {
-            $("#countLikeText" + postId + " " + "#countLikeTextSpan" + postId).text(numberLike + " " + "likes");
+         if (numberLike > 1) {           
+            $("#countLikeText" + postId + " " + "#countLikeTextSpan" + postId).html("<span class='likeTextFeed blackTextFeed'>" + numberLike + " " + "likes" + "</span>");
         } else {
-            $("#countLikeText" + postId + " " + "#countLikeTextSpan" + postId).text(numberLike + " " + "like");
+            $("#countLikeText" + postId + " " + "#countLikeTextSpan" + postId).html("<span class='likeTextFeed blackTextFeed'>" + numberLike + " " + "like" + "</span>");
         }
     }
 
