@@ -45,34 +45,6 @@ globalPicturesRepository.prototype.get = function (page, perPage, callback) {
     });
 };
 
-// globalPicturesRepository.prototype.getPictureLikes = function (pictureId, callback) {
-//     var that = this;
-//     var numberOfLikesInTotal;
-
-//     new Like().fetchAll().then(function (likes) {
-//         if (likes) {
-//             numberOfLikesInTotal = likes.length;
-
-//             likes.query(function (qb) {
-//                 qb.where({pictureId: pictureId});
-//             }).fetch()
-//                 .then(function (newCollection) {
-//                     numberOfLikesInTotal = newCollection.length;
-//                     var newCollectionJSON = {
-//                         items: that.databaseDTO.getLikeJSON(newCollection),
-//                         totalEntries: numberOfLikesInTotal
-//                     };
-//                     return callback(null, newCollectionJSON);
-//                 });
-//         }
-//         else {
-//             return callback(null, {});
-//         }
-//     }).catch(function (err) {
-//         handleError(400, null, callback);
-//     });
-// };
-
 globalPicturesRepository.prototype.getPictureLikes = function (pictureId, callback) {
     var that = this;
 
@@ -97,6 +69,21 @@ globalPicturesRepository.prototype.addPictureLike = function (pictureId, userId,
     }).save().then(function(newLike) {
         var likeJson = that.databaseDTO.getLikeJSON(newLike);
         return callback(null, likeJson);
+    });
+};
+
+globalPicturesRepository.prototype.deleteLike = function (pictureId, userId, callback) {
+    new Like().where({pictureId: pictureId, userId: userId}).fetch().then(function(like){
+        if (like) {
+            like.destroy().then(function() {
+                return callback(null, "No content");
+            });
+        } else {
+            return callback({statusCode: 400, message: "No such like"}, null);
+        }
+    }).catch(function (err) {
+        console.log(err);
+        handleError(400, null, callback);
     });
 };
 
@@ -127,22 +114,6 @@ globalPicturesRepository.prototype.addPictureComment = function (pictureId, user
         return callback(null, commentJson);
     });
 };
-
-// globalPicturesRepository.prototype.deleteLike = function (pictureId, userId, callback) {
-//     new Like().where({pictureId: pictureId, userId: userId})
-//     .fetch().then(function(like){
-//         if(like){
-//             like.destroy().then(function(){
-//                 return callback(null, "No content");
-//             });
-//         } else {
-//             return callback({ statusCode: 400, message: "No such like"}, null);
-//         }
-//     }).catch(function (err) {
-//         console.log(err);
-//         handleError(400, null, callback);
-//     });
-// };
 
 var handleError = function (statusCode, body, callback) {
     var error = ErrorHandler.handleReturnCall(statusCode);
