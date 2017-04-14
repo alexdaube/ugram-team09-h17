@@ -87,13 +87,7 @@ export class PostView extends Backbone.View<any> {
      private addEggplantIconClass(myCollection) {
          console.log(myCollection);
          var that = this;
-         $("#eggplanticonspan" + that.model.id).addClass("eggPlantIcon");
-         /*myCollection.each( (like) => {
-             if (like.attributes.userId === HeaderRequestGenerator.currentUser()) {
-                 $("#eggplanticonspan" + this.model.id).removeClass("eggPlantIcon");
-                 $("#eggplanticonspan" + this.model.id).addClass("eggPlantIcon2");
-             }
-         });*/
+         $("#eggplanticonspan" + that.model.id).addClass("eggPlantIcon");        
          $.each(myCollection, function(index, value){
              console.log(value.user);
             if (value.user === HeaderRequestGenerator.currentUser()) {                
