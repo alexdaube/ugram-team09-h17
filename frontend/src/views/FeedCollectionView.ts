@@ -31,9 +31,7 @@ export class FeedCollectionView extends Backbone.View<any> {
     }
 
     public events() {
-        return <Backbone.EventsHash> {
-            // "click .eggPlantIcon": "addLike",
-            // "click .eggPlantIcon2": "deleteLike",
+        return <Backbone.EventsHash> {            
             "submit .addCommentFeed" : "addComment",
         };
     }
@@ -66,29 +64,6 @@ export class FeedCollectionView extends Backbone.View<any> {
         }
     }
 
-    private addLike(e) {
-        const postId = $(e.currentTarget).attr("data-id");
-        const like = new LikeModel({pictureId: postId, user: HeaderRequestGenerator.currentUser()});
-        like.save({}, {beforeSend: HeaderRequestGenerator.sendAuthorization});
-        this.updateLikesCountTemp(true, postId, e);
-    }
-
-    private deleteLike(e) {
-        const postId = $(e.currentTarget).attr("data-id");
-        const like = new LikeModel({pictureId: postId, user: HeaderRequestGenerator.currentUser()});
-        const that = this;
-
-        like.destroy({
-            beforeSend: HeaderRequestGenerator.setContentTypeToJSON,
-            success() {
-                that.updateLikesCountTemp(false, postId, e);
-            },
-            error() {
-                // TODO handle error
-            },
-        });
-    }
-
     private addComment(e) {
         const postId = $(e.currentTarget).attr("data-id");
         const message = $(e.currentTarget).find("input.inputCommentFeed").val();
@@ -98,24 +73,5 @@ export class FeedCollectionView extends Backbone.View<any> {
         }
         const comment = new CommentModel({comment: message, pictureId: postId, user: HeaderRequestGenerator.currentUser()});
         comment.save({}, {beforeSend: HeaderRequestGenerator.sendAuthorization});
-    }
-
-    private updateLikesCountTemp(add, postId, e) {
-        const numberLikeString = $("#countLikeText" + postId + " " + "#countLikeTextSpan" + postId).text().split(" ")[0];
-        let numberLike = parseInt(numberLikeString, 10);
-        if (add) {
-            $(e.currentTarget).removeClass("eggPlantIcon");
-            $(e.currentTarget).addClass("eggPlantIcon2");
-            numberLike++;
-        } else {
-            $(e.currentTarget).removeClass("eggPlantIcon2");
-            $(e.currentTarget).addClass("eggPlantIcon");
-            numberLike--;
-        }
-        if (numberLike > 1) {
-            $("#countLikeText" + postId + " " + "#countLikeTextSpan" + postId).text(numberLike + " " + "likes");
-        } else {
-            $("#countLikeText" + postId + " " + "#countLikeTextSpan" + postId).text(numberLike + " " + "like");
-        }
     }
 }

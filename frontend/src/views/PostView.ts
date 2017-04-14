@@ -19,7 +19,8 @@ export class PostView extends Backbone.View<any> {
         this.model.fetch({
             beforeSend: HeaderRequestGenerator.sendAuthorization,
             success: () => {
-                this.$el.html(this.template({ post: this.model, isSingleFeed: true }));
+                const didUserLiked = this.addEggplantIconClass(this.model.likes);
+                this.$el.html(this.template({ post: this.model, isSingleFeed: true ,userLiked: didUserLiked}));
                 this.$el.first().addClass("contentFeed");
             },
             error: () => {
