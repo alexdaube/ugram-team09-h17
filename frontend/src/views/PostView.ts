@@ -44,8 +44,8 @@ export class PostView extends Backbone.View<any> {
     }
 
     public append() {    
-        this.addEggplantIconClass(this.model.likes);     
-        this.$el.append(this.template({post: this.model, isSingleFeed: false}));        
+        var didUserLiked = this.addEggplantIconClass(this.model.likes);     
+        this.$el.append(this.template({post: this.model, isSingleFeed: false, userLiked: didUserLiked}));        
         return this;
     }
 
@@ -86,15 +86,15 @@ export class PostView extends Backbone.View<any> {
 
      private addEggplantIconClass(myCollection) {
          console.log(myCollection);
-         var that = this;
-         $("#eggplanticonspan" + that.model.id).addClass("eggPlantIcon");        
+         var that = this;               
+         var result = false;
          $.each(myCollection, function(index, value){
-             console.log(value.user);
-            if (value.user === HeaderRequestGenerator.currentUser()) {                
-                 $("#eggplanticondiv" + that.model.id+" a span").removeClass("eggPlantIcon");
-                 $("#eggplanticondiv" + that.model.id+" a span").addClass("eggPlantIcon2");
+            if (value.user === HeaderRequestGenerator.currentUser()) { 
+                console.log("return true");
+                result = true;
              }
-         });
+         });  
+         return result       
      }
 
     private delete() {

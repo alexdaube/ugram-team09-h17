@@ -33,7 +33,7 @@ export class FeedCollectionView extends Backbone.View<any> {
     public events() {
         return <Backbone.EventsHash> {
             "click .eggPlantIcon": "addLike",
-            // "click .eggPlantIcon2": "deleteLike",
+            "click .eggPlantIcon2": "deleteLike",
             "submit .addCommentFeed" : "addComment",
         };
     }
@@ -74,6 +74,19 @@ export class FeedCollectionView extends Backbone.View<any> {
         this.updateLikesCountTemp(true,id,e);
     }
 
+     private deleteLike(e) {        
+        const id = $(e.currentTarget).attr("data-id");               
+        const like = new LikeModel({pictureId: id, user: HeaderRequestGenerator.currentUser()});
+        like.destroy({
+            beforeSend: HeaderRequestGenerator.setContentTypeToJSON,
+            success() {                
+            },
+            error() {                
+            },
+        });
+        this.updateLikesCountTemp(false,id,e);
+    }
+
     private addComment(e) {
         console.log("addComment");
         const commentBox = $(e.currentTarget).find("input.inputCommentFeed");
@@ -104,22 +117,22 @@ export class FeedCollectionView extends Backbone.View<any> {
     //     });
     // }
 
-    // private deleteLike(e) {
-    //     const id = $(e.currentTarget).attr("data-id");
-    //     const that = this;
-    //     $.ajax({
-    //         url: `${API_BASE_URL}pictures/${id}/likes/${HeaderRequestGenerator.currentUser()}`,
-    //         type: "DELETE",
-    //         beforeSend: HeaderRequestGenerator.sendAuthorization,
-    //         success() {
-    //             that.updateLikesCountTemp(false, id, e);
-    //         },
-    //         error() {
-    //             // TODO handle error not alert
-    //             alert("not success");
-    //         },
-    //     });
-    // }
+     private deleteLike2(e) {
+         const id = $(e.currentTarget).attr("data-id");
+         const that = this;
+         $.ajax({
+             url: `${API_BASE_URL}pictures/${id}/likes/${HeaderRequestGenerator.currentUser()}`,
+             type: "DELETE",
+             beforeSend: HeaderRequestGenerator.sendAuthorization,
+             success() {
+                 that.updateLikesCountTemp(false, id, e);
+             },
+             error() {
+                 // TODO handle error not alert
+                 alert("not success");
+             },
+         });
+     }
 
      private updateLikesCountTemp(add, id, e) {
          const numberLikeString = $("#countLikeText" + id + " " + "#countLikeTextSpan" + id).text().split(" ")[0];
