@@ -30,14 +30,6 @@ export class FeedCollectionView extends Backbone.View<any> {
         return this;
     }
 
-    public events() {
-        return <Backbone.EventsHash> {
-            // "click .eggPlantIcon": "addLike",
-            // "click .eggPlantIcon2": "deleteLike",
-            // "submit .addCommentFeed" : "addComment",
-        };
-    }
-
     private showPictures() {
         this.collection.fetch({
             beforeSend: HeaderRequestGenerator.sendAuthorization,
@@ -65,6 +57,14 @@ export class FeedCollectionView extends Backbone.View<any> {
             $("#show-more-container").hide();
         }
     }
+
+    // public events() {
+        // return <Backbone.EventsHash> {
+            // "click .eggPlantIcon": "addLike",
+            // "click .eggPlantIcon2": "deleteLike",
+            // "submit .addCommentFeed" : "addComment",
+        // };
+    // }
 
     // private addLike(e) {
     //     const postId = $(e.currentTarget).attr("data-id");
