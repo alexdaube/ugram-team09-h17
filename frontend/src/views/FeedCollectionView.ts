@@ -66,90 +66,56 @@ export class FeedCollectionView extends Backbone.View<any> {
         }
     }
 
-    private addLike(e) {        
-        const id = $(e.currentTarget).attr("data-id");
-        console.log(id);        
-        const like = new LikeModel({pictureId: id, user: HeaderRequestGenerator.currentUser()});
+    private addLike(e) {
+        const postId = $(e.currentTarget).attr("data-id");
+        const like = new LikeModel({pictureId: postId, user: HeaderRequestGenerator.currentUser()});
         like.save({}, {beforeSend: HeaderRequestGenerator.sendAuthorization});
-        this.updateLikesCountTemp(true,id,e);
+        this.updateLikesCountTemp(true, postId, e);
     }
 
-     private deleteLike(e) {        
-        const id = $(e.currentTarget).attr("data-id");               
-        const like = new LikeModel({pictureId: id, user: HeaderRequestGenerator.currentUser()});
+    private deleteLike(e) {
+        const postId = $(e.currentTarget).attr("data-id");
+        const like = new LikeModel({pictureId: postId, user: HeaderRequestGenerator.currentUser()});
+        const that = this;
+
         like.destroy({
             beforeSend: HeaderRequestGenerator.setContentTypeToJSON,
-            success() {                
+            success() {
+                that.updateLikesCountTemp(false, postId, e);
             },
-            error() {                
+            error() {
+                // TODO handle error
             },
         });
-        this.updateLikesCountTemp(false,id,e);
     }
 
     private addComment(e) {
-        console.log("addComment");
-        const commentBox = $(e.currentTarget).find("input.inputCommentFeed");
-        const postId = commentBox.attr("data-id");
-        const message = commentBox.val();
+        const postId = $(e.currentTarget).attr("data-id");
+        const message = $(e.currentTarget).find("input.inputCommentFeed").val();
         if (message.length <= 0) {
             alert("Comment too short");
             return;
         }
-        const comment = new CommentModel({ comment: message, pictureId: postId, user: HeaderRequestGenerator.currentUser()});
+        const comment = new CommentModel({comment: message, pictureId: postId, user: HeaderRequestGenerator.currentUser()});
         comment.save({}, {beforeSend: HeaderRequestGenerator.sendAuthorization});
     }
 
-    // private addLike(e) {
-    //     const id = $(e.currentTarget).attr("data-id");
-    //     const that = this;
-    //     $.ajax({
-    //         url: `${API_BASE_URL}pictures/${id}/likes/${HeaderRequestGenerator.currentUser()}`,
-    //         type: "POST",
-    //         beforeSend: HeaderRequestGenerator.sendAuthorization,
-    //         success() {
-    //             that.updateLikesCountTemp(true, id, e);
-    //         },
-    //         error() {
-    //             // TODO handle error not alert
-    //             alert("not success");
-    //         },
-    //     });
-    // }
-
-     private deleteLike2(e) {
-         const id = $(e.currentTarget).attr("data-id");
-         const that = this;
-         $.ajax({
-             url: `${API_BASE_URL}pictures/${id}/likes/${HeaderRequestGenerator.currentUser()}`,
-             type: "DELETE",
-             beforeSend: HeaderRequestGenerator.sendAuthorization,
-             success() {
-                 that.updateLikesCountTemp(false, id, e);
-             },
-             error() {
-                 // TODO handle error not alert
-                 alert("not success");
-             },
-         });
-     }
-
-     private updateLikesCountTemp(add, id, e) {
-         const numberLikeString = $("#countLikeText" + id + " " + "#countLikeTextSpan" + id).text().split(" ")[0];
-         let numberLike = parseInt(numberLikeString, 10);
+    private updateLikesCountTemp(add, postId, e) {
+        const numberLikeString = $("#countLikeText" + postId + " " + "#countLikeTextSpan" + postId).text().split(" ")[0];
+        let numberLike = parseInt(numberLikeString, 10);
         if (add) {
-             $(e.currentTarget).removeClass("eggPlantIcon");
-             $(e.currentTarget).addClass("eggPlantIcon2");
-             numberLike++;
-         } else {
-             $(e.currentTarget).removeClass("eggPlantIcon2");
-             $(e.currentTarget).addClass("eggPlantIcon");             
-             numberLike--;
-         }
+            $(e.currentTarget).removeClass("eggPlantIcon");
+            $(e.currentTarget).addClass("eggPlantIcon2");
+            numberLike++;
+        } else {
+            $(e.currentTarget).removeClass("eggPlantIcon2");
+            $(e.currentTarget).addClass("eggPlantIcon");
+            numberLike--;
+        }
         if (numberLike > 1) {
-             $("#countLikeText" + id + " " + "#countLikeTextSpan" + id).text(numberLike + " " + "likes");
-         } else {
-             $("#countLikeText" + id + " " + "#countLikeTextSpan" + id).text(numberLike + " " + "like");
-         }
-     }
+            $("#countLikeText" + postId + " " + "#countLikeTextSpan" + postId).text(numberLike + " " + "likes");
+        } else {
+            $("#countLikeText" + postId + " " + "#countLikeTextSpan" + postId).text(numberLike + " " + "like");
+        }
+    }
 }

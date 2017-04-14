@@ -19,13 +19,13 @@ export class PostView extends Backbone.View<any> {
         this.model.fetch({
             beforeSend: HeaderRequestGenerator.sendAuthorization,
             success: () => {
-                this.$el.html(this.template({ post: this.model, isSingleFeed: true }));                
-                this.$el.first().addClass("contentFeed");                                
+                this.$el.html(this.template({ post: this.model, isSingleFeed: true }));
+                this.$el.first().addClass("contentFeed");
             },
             error: () => {
                 this.$el.html("There was an error");
             },
-        });        
+        });
         return this;
     }
 
@@ -43,17 +43,17 @@ export class PostView extends Backbone.View<any> {
         };
     }
 
-    public append() {    
-        var didUserLiked = this.addEggplantIconClass(this.model.likes);     
-        this.$el.append(this.template({post: this.model, isSingleFeed: false, userLiked: didUserLiked}));        
+    public append() {
+        const didUserLiked = this.addEggplantIconClass(this.model.likes);
+        this.$el.append(this.template({post: this.model, isSingleFeed: false, userLiked: didUserLiked}));
         return this;
     }
 
     private addLike(e) {
-        const likeText = $(e.currentTarget).find("span.eggPlantIcon.likeTextFeed2");
-        const postId = likeText.attr("data-id");
+        const postId = $(e.currentTarget).attr("data-id");
         const like = new LikeModel({pictureId: postId, user: HeaderRequestGenerator.currentUser()});
         like.save({}, {beforeSend: HeaderRequestGenerator.sendAuthorization});
+        this.updateLikesCountTemp(true, postId, e);
     }
 
     private addComment(e) {
@@ -68,33 +68,21 @@ export class PostView extends Backbone.View<any> {
         comment.save({}, {beforeSend: HeaderRequestGenerator.sendAuthorization});
     }
 
-    // private renderLikes() {
-    //     // console.log(this.collection);
-
-    //     if (this.collection.length > 1) {
-    //         $("#countLikeText" + this.model.id + " " + "#countLikeTextSpan" + this.model.id).text(this.collection.length.toString() + " likes");
-    //     } else {
-    //         $("#countLikeText" + this.model.id + " " + "#countLikeTextSpan" + this.model.id).text(this.collection.length.toString() + " like");
-    //     }
-    //     this.addEggplantIconClass(this.collection);
-    // }
-
     private edit() {
         $("#buttonSave").show();
         $("#editInput").show();
     }
 
-     private addEggplantIconClass(myCollection) {
-         console.log(myCollection);
-         var that = this;               
-         var result = false;
-         $.each(myCollection, function(index, value){
-            if (value.user === HeaderRequestGenerator.currentUser()) { 
-                console.log("return true");
+    private addEggplantIconClass(myCollection) {
+        const that = this;
+        let result = false;
+
+        $.each(myCollection, (index, value) => {
+            if (value.user === HeaderRequestGenerator.currentUser()) {
                 result = true;
-             }
-         });  
-         return result       
+            }
+        });
+        return result;
      }
 
     private delete() {
@@ -109,6 +97,26 @@ export class PostView extends Backbone.View<any> {
                 // TODO Handle error
             },
         });
+    }
+
+    private updateLikesCountTemp(add, postId, e) {
+        const numberLikeString = $("#countLikeText" + postId + " " + "#countLikeTextSpan" + postId).text().split(" ")[0];
+        let numberLike = parseInt(numberLikeString, 10);
+
+        if (add) {
+            $(e.currentTarget).removeClass("eggPlantIcon");
+            $(e.currentTarget).addClass("eggPlantIcon2");
+            numberLike++;
+        } else {
+            $(e.currentTarget).removeClass("eggPlantIcon2");
+            $(e.currentTarget).addClass("eggPlantIcon");
+            numberLike--;
+        }
+        if (numberLike > 1) {
+            $("#countLikeText" + postId + " " + "#countLikeTextSpan" + postId).text(numberLike + " " + "likes");
+        } else {
+            $("#countLikeText" + postId + " " + "#countLikeTextSpan" + postId).text(numberLike + " " + "like");
+        }
     }
 
     private saveModif() {
