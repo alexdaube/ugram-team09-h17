@@ -14,7 +14,7 @@ export class LoginView extends Backbone.View<LoginModel> {
     private signupNeeded: boolean = false;
 
     constructor(options?: Backbone.ViewOptions<LoginModel>) {
-        super(_.extend({el: "#content"}, options));
+        super(_.extend({}, options));
         this.template = require("./LoginTemplate.ejs") as Function;
         hello.init({facebook: FB_CLIENT});
         this.login = this.login.bind(this);

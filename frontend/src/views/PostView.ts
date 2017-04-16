@@ -29,8 +29,12 @@ export class PostView extends Backbone.View<any> {
         return this;
     }
 
-    public events() {
+    public close() {
+        this.remove();
+        this.unbind();
+    }
 
+    public events() {
         return <Backbone.EventsHash> {
             "click #optionButtonEdit": () => { $("#popupEditContent").show(); },
             "click #closeExitButtonPopup": () => { $("#popupEditContent").hide(); },
@@ -92,8 +96,6 @@ export class PostView extends Backbone.View<any> {
     }
 
     private renderLikes() {
-        // console.log(this.collection);
-
         if (this.collection.length > 1) {
             $("#countLikeText" + this.model.id + " " + "#countLikeTextSpan" + this.model.id).text(this.collection.length.toString() + " likes");
         } else {
