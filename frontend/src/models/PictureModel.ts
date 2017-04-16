@@ -115,4 +115,7 @@ export class PictureModel extends Backbone.Model {
     set editable(editable: boolean) {
         this.set("editable", editable);
     }
+
+    // TODO prendre ce like là et faire un destroy dessus
+    // get currentuserlike()
 }

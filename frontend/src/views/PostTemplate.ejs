@@ -47,7 +47,9 @@
 				<a id="eggplantA" class="likeButtonFeed likePaddingFeed" data-id="<%- post.id %>"><span id="eggplanticonspan" data-id="<%- post.id %>" class="likeTextFeed2 eggPlantIcon">Like</span></a>
 			<% } %>			
 			<form class="flexCommentFeed"><input type="text" class="inputCommentFeed inputTextFeed" data-id="<%- post.id %>" placeholder="Add Comment..." value=""></form>
-			<!--button class="optionPostFeed optionIcon likeTextFeed2">More Options</button-->
+			<% if(post.editable){ %>
+				<button id="optionButtonEdit" class="optionPostFeed optionIcon likeTextFeed2">More Options</button>
+			<% } %>
 		</div>
 	</div>
 </div>

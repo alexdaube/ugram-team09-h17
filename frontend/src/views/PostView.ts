@@ -20,7 +20,7 @@ export class PostView extends Backbone.View<any> {
             beforeSend: HeaderRequestGenerator.sendAuthorization,
             success: () => {
                 const didUserLiked = this.addEggplantIconClass(this.model.likes);
-                this.$el.html(this.template({ post: this.model, isSingleFeed: true ,userLiked: didUserLiked}));
+                this.$el.html(this.template({post: this.model, isSingleFeed: true, userLiked: didUserLiked}));
                 this.$el.first().addClass("contentFeed");
             },
             error: () => {
@@ -59,10 +59,10 @@ export class PostView extends Backbone.View<any> {
 
     private deleteLikePV(e) {
         const postId = $(e.currentTarget).attr("data-id");
-        const like = new LikeModel({pictureId: postId, user: HeaderRequestGenerator.currentUser()});
         const that = this;
+        const likeToDestroy = _.findWhere(this.model.likes, {user : HeaderRequestGenerator.currentUser()}) as LikeModel;
 
-        like.destroy({
+        likeToDestroy.destroy({
             beforeSend: HeaderRequestGenerator.setContentTypeToJSON,
             success() {
                 that.updateLikesCountTemp(false, postId, e);
@@ -90,11 +90,11 @@ export class PostView extends Backbone.View<any> {
         $("#editInput").show();
     }
 
-    private addEggplantIconClass(myCollection) {
+    private addEggplantIconClass(modelLike) {
         const that = this;
         let result = false;
 
-        $.each(myCollection, (index, value) => {
+        $.each(modelLike, (index, value) => {
             if (value.user === HeaderRequestGenerator.currentUser()) {
                 result = true;
             }
@@ -129,7 +129,8 @@ export class PostView extends Backbone.View<any> {
             $(e.currentTarget).addClass("eggPlantIcon");
             numberLike--;
         }
-         if (numberLike > 1) {           
+
+        if (numberLike > 1) {
             $("#countLikeText" + postId + " " + "#countLikeTextSpan" + postId).html("<span class='likeTextFeed blackTextFeed'>" + numberLike + " " + "likes" + "</span>");
         } else {
             $("#countLikeText" + postId + " " + "#countLikeTextSpan" + postId).html("<span class='likeTextFeed blackTextFeed'>" + numberLike + " " + "like" + "</span>");

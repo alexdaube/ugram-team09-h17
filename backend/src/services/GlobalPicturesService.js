@@ -75,8 +75,9 @@ globalPicturesService.prototype.deleteLike = function (request, returnObject) {
     var path = request.path;
     var urlParts = path.split('/');
     var pictureId = urlParts[2];
- 
-    this.persistence.deleteLike(pictureId, function(err, response) {
+    var userId = request.user.attributes.userName;
+
+    this.persistence.deleteLike(pictureId, userId, function(err, response) {
         if (!err && response) {
             returnObject.status(204).send();
         } else {
