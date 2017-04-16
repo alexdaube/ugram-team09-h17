@@ -63,8 +63,17 @@
   font-weight: 600;
 }
 
+.texDescriptionFeed {
+  margin-bottom: 7px;
+  position: relative;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
 .textCommentFeed {
   margin-bottom: 7px;
+  margin-left: 5px;
   position: relative;
   &:last-child {
     margin-bottom: 0;

@@ -235,7 +235,7 @@ userRepository.prototype.getUserPicture = function (userId, pictureId, callback)
 
     new Picture()
         .where({ userId: userId, id: pictureId })
-        .fetch({ withRelated: ["tags", "mentions","comments"] }).then(function (picture) {
+        .fetch({ withRelated: ["tags", "mentions", "comments", "likes"] }).then(function (picture) {
             if (picture) {
                 var newCollectionJSON = that.databaseDTO.getPictureJSON(picture);
                 return callback(null, newCollectionJSON);
