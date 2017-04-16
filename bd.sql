@@ -31,15 +31,18 @@ CREATE TABLE IF NOT EXISTS `comments` (
   CONSTRAINT `FK_comments_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`userName`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
--- Dumping structure for table ugram.likes
+-- Dumping structure for table ugram.comments
 DROP TABLE IF EXISTS `likes`;
 CREATE TABLE IF NOT EXISTS `likes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userId` varchar(255) NOT NULL,
-  `pictureId` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `user_id` varchar(255) NOT NULL DEFAULT 'default',
+  `picture_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_likes_users` (`user_id`),
+  KEY `FK_likes_pictures` (`picture_id`),
+  CONSTRAINT `FK_likes_pictures` FOREIGN KEY (`picture_id`) REFERENCES `pictures` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_likes_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`userName`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 -- Dumping structure for table ugram.mentions

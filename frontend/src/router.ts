@@ -24,7 +24,6 @@ import {LoginModel} from "./models/LoginModel";
 import {PictureModel} from "./models/PictureModel";
 
 import {LikeModel} from "./models/LikeModel";
-import {LikeCollection} from "./collections/LikeCollection";
 
 import {PostView} from "./views/PostView";
 import {HeaderRequestGenerator} from "./util/HeaderRequestGenerator";
@@ -87,8 +86,7 @@ export class AppRouter extends Backbone.Router {
         this.loginRedirect();
         const pictureModel = new PictureModel({userId: userFeedId, id: postId});
         const likeModel = new LikeModel({id: userFeedId, pictureId: postId});
-        const likeCollection = new LikeCollection({url: `${API_BASE_URL}pictures/${likeModel.pictureId}/likes`});
-        const postView = new PostView({model: pictureModel, collection: likeCollection});
+        const postView = new PostView({model: pictureModel, model: pictureModel});
         this.appView.showView(postView);
     }
 
@@ -100,7 +98,6 @@ export class AppRouter extends Backbone.Router {
         const feedCollection = new FeedCollection({url: `${API_BASE_URL}users/${userModel.id}/pictures`});
         const userProfileView = new UserProfileView({model: userModel, collection: feedCollection});
         this.appView.showView(userProfileView);
-        // userProfileView.render();
     }
 
     public showUserSetting(param: string = "") {
@@ -110,7 +107,6 @@ export class AppRouter extends Backbone.Router {
         const userModel = new UserModel({id: HeaderRequestGenerator.currentUser()});
         const userSettingsView = new UserSettingsView({model: userModel});
         this.appView.showView(userSettingsView);
-        // userSettingsView.render();
     }
 
     public showAddPicture(param: string = "") {
@@ -120,7 +116,6 @@ export class AppRouter extends Backbone.Router {
         const userModel = new UserModel({id: HeaderRequestGenerator.currentUser()});
         const userAddPictureView = new UserAddPictureView({model: userModel});
         this.appView.showView(userAddPictureView);
-        // userAddPictureView.render();
     }
 
     public showUsers(param: string = "") {
@@ -130,7 +125,6 @@ export class AppRouter extends Backbone.Router {
         const userCollection = new UserCollection({url: `${API_BASE_URL}users`});
         const userCollectionView = new UserCollectionView({collection: userCollection});
         this.appView.showView(userCollectionView);
-        // userCollectionView.render();
     }
 
     public loginRedirect() {
@@ -142,6 +136,10 @@ export class AppRouter extends Backbone.Router {
     public showHeaderFooter() {
         const headerModel = new HeaderModel({});
         const feedCollection = new FeedCollection({url: `${API_BASE_URL}pictures`});
+
+        // const feedCollection2 = new FeedCollection({url: `${API_BASE_URL}pictures`});
+        // const headerView = new HeaderView({model: headerModel, collections: {test: feedCollection, test2: feedCollection2}});
+        // voir picture model aussi
         const headerView = new HeaderView({model: headerModel, collection: feedCollection});
         headerView.render();
 

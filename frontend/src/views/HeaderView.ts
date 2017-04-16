@@ -10,10 +10,11 @@ export class HeaderView extends Backbone.View<any> {
     private usersPerPageSearch: number = 100000;
     private textList: SearchTextView[];
 
-    constructor(options?: Backbone.ViewOptions<any>) {
+    constructor(options?: any) {
         super(_.extend({el: "#header"}, options));
         this.textList = new Array<SearchTextView>();
         this.template = require("./HeaderTemplate.ejs") as Function;
+        // _.bindAll(this, 'render');
     }
 
     public render() {
@@ -44,15 +45,15 @@ export class HeaderView extends Backbone.View<any> {
 
         this.showSearch();
 
-        $(".notificationZone").hide();
+        // $(".notificationZone").hide();
 
-        $("#notificationButton").focusout( () => {
-            window.setTimeout( () => { $(".notificationZone").hide(); }, 250);
-        });
+        // $("#notificationButton").focusout( () => {
+        //     window.setTimeout( () => { $(".notificationZone").hide(); }, 250);
+        // });
 
-        $("#notificationButton").click( () => {
-            $(".notificationZone").show();
-        });
+        // $("#notificationButton").click( () => {
+        //     $(".notificationZone").show();
+        // });
 
         return this;
     }
