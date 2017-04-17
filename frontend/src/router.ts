@@ -77,7 +77,6 @@ export class AppRouter extends Backbone.Router {
         const feedCollection = new FeedCollection({url: `${API_BASE_URL}pictures`});
         const feedCollectionView = new FeedCollectionView({collection: feedCollection});
         this.appView.showView(feedCollectionView);
-        // feedCollectionView.render();
     }
 
     public showPost(userFeedId: string, postId: string) {
@@ -86,7 +85,7 @@ export class AppRouter extends Backbone.Router {
         this.loginRedirect();
         const pictureModel = new PictureModel({userId: userFeedId, id: postId});
         const likeModel = new LikeModel({id: userFeedId, pictureId: postId});
-        const postView = new PostView({model: pictureModel, model: pictureModel});
+        const postView = new PostView({model: pictureModel});
         this.appView.showView(postView);
     }
 

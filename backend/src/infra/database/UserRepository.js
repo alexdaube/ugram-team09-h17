@@ -94,7 +94,7 @@ userRepository.prototype.getUserNotifications = function (userName) {
         .query('orderBy', 'date', 'desc')
         .fetchAll({ withRelated: [ "pictures"] })
         .then(function (notification) {
-            return callback(null, that.databaseDTO.getNotificationListJSON(notification))
+            return callback(null, that.databaseDTO.getNotificationListJSON(notification));
         }).catch(function (err) {
         handleError(400, null, callback);
     });
