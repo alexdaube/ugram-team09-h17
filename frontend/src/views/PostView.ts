@@ -69,7 +69,7 @@ export class PostView extends Backbone.View<any> {
         const that = this;
         if (this.model.id.toString() === postId) {
             const likeToDestroy = _.findWhere(this.model.likes, {user : HeaderRequestGenerator.currentUser()}) as LikeModel;
-            const myNewLike = new LikeModel(likeToDestroy);        
+            const myNewLike = new LikeModel(likeToDestroy);
             myNewLike.destroy({
                 beforeSend: HeaderRequestGenerator.sendAuthorization,
                 success() {
@@ -77,11 +77,9 @@ export class PostView extends Backbone.View<any> {
                 },
                 error() {
                     // TODO handle error
-                }
+                },
             });
         }
-        
-        
     }
 
     private addComment(e) {

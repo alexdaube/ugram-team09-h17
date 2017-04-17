@@ -11,11 +11,11 @@ export class LikeModel extends Backbone.Model {
     }
 
     public defaults() {
-        return {            
+        return {
             user: "",
             pictureId: "",
         };
-    }    
+    }
 
     get user(): string {
         return this.get("user");
