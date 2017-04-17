@@ -29,17 +29,20 @@ CREATE TABLE IF NOT EXISTS `comments` (
   KEY `FK_comments_pictures` (`picture_id`),
   CONSTRAINT `FK_comments_pictures` FOREIGN KEY (`picture_id`) REFERENCES `pictures` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_comments_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`userName`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
--- Dumping structure for table ugram.likes
+-- Dumping structure for table ugram.comments
 DROP TABLE IF EXISTS `likes`;
 CREATE TABLE IF NOT EXISTS `likes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userId` varchar(255) NOT NULL,
-  `pictureId` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `user_id` varchar(255) NOT NULL DEFAULT 'default',
+  `picture_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_likes_users` (`user_id`),
+  KEY `FK_likes_pictures` (`picture_id`),
+  CONSTRAINT `FK_likes_pictures` FOREIGN KEY (`picture_id`) REFERENCES `pictures` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_likes_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`userName`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 -- Dumping structure for table ugram.mentions
@@ -54,25 +57,6 @@ CREATE TABLE IF NOT EXISTS `mentions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
--- Dumping structure for table ugram.notifications
-DROP TABLE IF EXISTS `notifications`;
-CREATE TABLE IF NOT EXISTS `notifications` (
-  `id` int(10) unsigned NOT NULL,
-  `user_id` int(10) unsigned NOT NULL,
-  `owner_id` int(10) unsigned NOT NULL,
-  `picture_id` int(11) NOT NULL,
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `type` tinyint(4) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK__users` (`user_id`),
-  KEY `FK__pictures` (`picture_id`),
-  KEY `FK__owner` (`owner_id`),
-  CONSTRAINT `FK__owner` FOREIGN KEY (`owner_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `FK__pictures` FOREIGN KEY (`picture_id`) REFERENCES `pictures` (`id`),
-  CONSTRAINT `FK__users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Data exporting was unselected.
 -- Dumping structure for table ugram.pictures
 DROP TABLE IF EXISTS `pictures`;
 CREATE TABLE IF NOT EXISTS `pictures` (
@@ -84,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `pictures` (
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   CONSTRAINT `pictures_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`userName`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 -- Dumping structure for table ugram.tags

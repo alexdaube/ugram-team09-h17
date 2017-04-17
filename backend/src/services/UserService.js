@@ -85,20 +85,6 @@ userService.prototype.getUserPictures = function (request, returnObject) {
     });
 };
 
-userService.prototype.getUserNotifications = function (request, returnObject) {
-    var userName = request.user.attributes.userName;;
-
-    this.persistence.getUserNotifications(userName, function (err, response) {
-        if (!err && response) {
-            returnObject.status(200).json(response);
-        }
-        else {
-            console.warn(err, response);
-            returnObject.status(err.statusCode).send(err.message);
-        }
-    });
-};
-
 userService.prototype.createUserPicture = function (request, returnObject) {
 
     var urlPath = request.path;
