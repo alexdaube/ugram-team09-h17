@@ -12,7 +12,7 @@ export class UserSettingsView extends Backbone.View<UserModel> {
     private userModel: UserModel;
 
     constructor(options?: Backbone.ViewOptions<UserModel>) {
-        super(_.extend({el: "#content"}, options));
+        super(_.extend({}, options));
         this.template = require("./UserSettingsTemplate.ejs") as Function;
         this.userModel = options["model"];
     }
@@ -29,6 +29,11 @@ export class UserSettingsView extends Backbone.View<UserModel> {
             },
         });
         return this;
+    }
+
+    public close() {
+        this.remove();
+        this.unbind();
     }
 
     public events() {
