@@ -38,7 +38,7 @@ export class PictureModel extends Backbone.Model {
         this.comments = commentsModels;
 
         const likesModels: LikeModel[] = [];
-        response["likes"].forEach((s) => {
+        response["likes"].forEach((s) => {            
             likesModels.push(new LikeModel(s));
         });
         this.likes = likesModels;

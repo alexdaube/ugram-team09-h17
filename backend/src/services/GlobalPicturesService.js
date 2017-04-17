@@ -74,10 +74,10 @@ globalPicturesService.prototype.getPictureComments = function(request, returnObj
 globalPicturesService.prototype.deleteLike = function (request, returnObject) {
     var path = request.path;
     var urlParts = path.split('/');
-    var pictureId = urlParts[2];
-    var userId = request.user.attributes.userName;
+    var likeId = urlParts[4];
+    //var userId = request.user.attributes.userName;
 
-    this.persistence.deleteLike(pictureId, userId, function(err, response) {
+    this.persistence.deleteLike(likeId, function(err, response) {
         if (!err && response) {
             returnObject.status(204).send();
         } else {

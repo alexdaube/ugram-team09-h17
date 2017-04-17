@@ -11,11 +11,11 @@ export class LikeModel extends Backbone.Model {
     }
 
     public defaults() {
-        return {
+        return {            
             user: "",
-            like: "",
+            pictureId: "",
         };
-    }
+    }    
 
     get user(): string {
         return this.get("user");
@@ -23,14 +23,6 @@ export class LikeModel extends Backbone.Model {
 
     set user(user: string) {
         this.set("user", user);
-    }
-
-    get like(): string {
-        return this.get("like");
-    }
-
-    set like(like: string) {
-        this.set("like", like);
     }
 
     get pictureId(): string {
