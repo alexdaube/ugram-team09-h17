@@ -73,7 +73,7 @@ globalPicturesRepository.prototype.addPictureLike = function (pictureId, userId,
             user_id:userId,
             type:0
         }).save();
-        var likeJson = that.databaseDTO.getLikeJSON(newLike);
+        var likeJson = that.databaseDTO.getLikeJSON(newLike.attributes);
         return callback(null, likeJson);
     });
 };
@@ -120,7 +120,8 @@ globalPicturesRepository.prototype.addPictureComment = function (pictureId, user
             user_id:userId,
             type:1
         }).save();
-        var commentJson = that.databaseDTO.getCommentJSON(newComment);
+        var commentJson = that.databaseDTO.getCommentJSON(newComment.attributes);
+        console.log(commentJson);
         return callback(null, commentJson);
     });
 };

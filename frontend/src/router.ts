@@ -53,7 +53,7 @@ export class AppRouter extends Backbone.Router {
         if (!localStorage.getItem("token")) {
             this.showLogin();
         } else {
-            window.location.href = "/#home";
+            window.location.href = "/?#home";
         }
     }
 

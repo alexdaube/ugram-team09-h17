@@ -90,7 +90,20 @@ export class PostView extends Backbone.View<any> {
                 return;
             }
             const comment = new CommentModel({comment: message, pictureId: postId, user: HeaderRequestGenerator.currentUser()});
-            comment.save({}, {beforeSend: HeaderRequestGenerator.sendAuthorization});
+            comment.save({}, {
+                beforeSend: HeaderRequestGenerator.sendAuthorization,
+                success: (model, response) => {
+                    commentBox.val("");
+                    const commentList =  $(e.currentTarget).parent().find(".commentFeedList");
+                    commentList.append("<li class=\"textCommentFeed\">\
+                <a class=\"heightTextFeed blackTextFeed\" href=\"\">" + model.user + "</a>\
+                    <span>" + _.escape(model.comment) + "</span>\
+                    </li>");
+                },
+                error: () => {
+                    alert("error posting message");
+                },
+            });
         }
     }
 
