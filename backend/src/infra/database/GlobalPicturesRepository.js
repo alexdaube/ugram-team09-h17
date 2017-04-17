@@ -11,6 +11,25 @@ var globalPicturesRepository = function (config) {
     this.databaseDTO = new DatabaseDTO();
 };
 
+globalPicturesRepository.prototype.getForTag = function (page, perPage, tag, callback) {
+    var that = this;
+    var numberOfPictureInTotal;
+    var numberOfPages;
+    if (typeof perPage === 'undefined') { perPage = 20; }
+    new Picture().fetchAll({ withRelated: ["tags", "mentions", "comments", "likes"] }).then(function (pictures) {
+        if(pictures) {
+            pictures.toJSON();
+        }
+        else {
+            return callback(null, {});
+        }
+    }).catch(function (err) {
+        console.log(err);
+        handleError(400, null, callback);
+    });
+};
+
+
 globalPicturesRepository.prototype.get = function (page, perPage, callback) {
     var that = this;
     var numberOfPictureInTotal;
