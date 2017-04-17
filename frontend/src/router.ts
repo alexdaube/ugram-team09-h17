@@ -77,7 +77,6 @@ export class AppRouter extends Backbone.Router {
         const feedCollection = new FeedCollection({url: `${API_BASE_URL}pictures`});
         const feedCollectionView = new FeedCollectionView({collection: feedCollection});
         this.appView.showView(feedCollectionView);
-        // feedCollectionView.render();
     }
 
     public showPost(userFeedId: string, postId: string) {
