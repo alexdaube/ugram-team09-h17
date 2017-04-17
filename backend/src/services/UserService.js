@@ -86,9 +86,10 @@ userService.prototype.getUserPictures = function (request, returnObject) {
 };
 
 userService.prototype.getUserNotifications = function (request, returnObject) {
-    var userName = request.user.attributes.userName;
-
-    this.persistence.getUserNotifications(userName, function (err, response) {
+    var path = request.path;
+    var urlParts = path.split('/');
+    var userId = urlParts[2];
+    this.persistence.getUserNotifications(userId, function (err, response) {
         if (!err && response) {
             returnObject.status(200).json(response);
         }

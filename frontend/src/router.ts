@@ -25,6 +25,9 @@ import {PictureModel} from "./models/PictureModel";
 
 import {LikeModel} from "./models/LikeModel";
 
+import {NotificationCollection} from "./collections/NotificationCollection";
+import {NotificationModel} from "./models/NotificationModel";
+
 import {PostView} from "./views/PostView";
 import {HeaderRequestGenerator} from "./util/HeaderRequestGenerator";
 import {API_BASE_URL} from "./constants";
@@ -135,15 +138,13 @@ export class AppRouter extends Backbone.Router {
     public showHeaderFooter() {
         const headerModel = new HeaderModel({});
         const feedCollection = new FeedCollection({url: `${API_BASE_URL}pictures`});
-
-        // const feedCollection2 = new FeedCollection({url: `${API_BASE_URL}pictures`});
-        // const headerView = new HeaderView({model: headerModel, collections: {test: feedCollection, test2: feedCollection2}});
-        // voir picture model aussi
         const headerView = new HeaderView({model: headerModel, collection: feedCollection});
         headerView.render();
 
-        const footerModel = new FooterModel({});
-        const footerView = new FooterView({model: footerModel});
+        const user = HeaderRequestGenerator.currentUser();
+        const notificationModel = new NotificationModel({user: user});
+        const notificationCollection = new NotificationCollection({url: `${API_BASE_URL}users/${user}/notifications`});
+        const footerView = new FooterView({model: notificationModel, collection: notificationCollection});
         footerView.render();
     }
 }

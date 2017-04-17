@@ -2,7 +2,7 @@ const bookshelf = require('../../config/bookshelf');
 
 var Comment = bookshelf.Model.extend({
     tableName: 'comments',
-    idAttribute: 'id'
+    idAttribute: 'id',
 });
 
 module.exports = Comment;
