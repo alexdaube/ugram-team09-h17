@@ -3,6 +3,7 @@ const User = require('../../models/user');
 const Picture = require("../../models/picture");
 const Mention = require("../../models/mention");
 const Tag = require("../../models/tag");
+const Notification = require("../../models/notifications");
 var DatabaseDTO = require("../../util/DatabaseDTO");
 
 
@@ -86,6 +87,17 @@ userRepository.prototype.update = function (userId, body, callback) {
         });
 };
 
+
+userRepository.prototype.getUserNotifications = function (userName) {
+
+    new Notification()
+        .fetchAll({ withRelated: ["users", "pictures"] })
+        .then(function (notification) {
+            return callback(null, that.databaseDTO.getNotificationListJSON(notification))
+        }).catch(function (err) {
+        handleError(400, null, callback);
+    });
+};
 userRepository.prototype.getUserPictures = function (userId, page, perPage, callback) {
 
     var that = this;

@@ -28,6 +28,11 @@ module.exports = function (app) {
         userService.getUserPictures(req, res);
     });
 
+    app.get("/users/:userId/notifications", isLoggedIn, function (req, res) {
+        var userService = new UserService(config);
+        userService.getUserNotifications(req, res);
+    });
+
     app.post("/users/:userId/pictures", isLoggedIn, LocalUploadService.upload.single("file"), function (req, res) {
         var userService = new UserService(config);
         userService.createUserPicture(req, res);

@@ -142,4 +142,22 @@ module.exports = class DatabaseDTO {
         });
         return commentsArray;
     }
+
+    getNotificationListJSON(notifications) {
+        var notificationsArray = [];
+        if (typeof comments === 'undefined') {
+            return notificationsArray;
+        }
+
+        notifications.forEach(function (notification) {
+            var notificationJson =  {
+                user: notification.user_id,
+                type: (notification.type==1 ? "liked your picture" : "commented on your picture"),
+                date: notification.date,
+                picture: notification.picture_id,
+            };
+            notificationsArray.push(notificationJson);
+        });
+        return notificationsArray;
+    }
 };
