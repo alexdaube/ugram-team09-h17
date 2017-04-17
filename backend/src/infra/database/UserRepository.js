@@ -91,7 +91,8 @@ userRepository.prototype.update = function (userId, body, callback) {
 userRepository.prototype.getUserNotifications = function (userName) {
 
     new Notification()
-        .fetchAll({ withRelated: ["users", "pictures"] })
+        .query('orderBy', 'date', 'desc')
+        .fetchAll({ withRelated: [ "pictures"] })
         .then(function (notification) {
             return callback(null, that.databaseDTO.getNotificationListJSON(notification))
         }).catch(function (err) {

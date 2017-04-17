@@ -9,7 +9,7 @@ var User = bookshelf.Model.extend({
         return this.hasMany(Picture);
     },
     pictures: function(){
-        return this.hasMany(Notification, "owner_id");
+        return this.hasMany(Notification);
     }
 });
 
