@@ -16,6 +16,16 @@ module.exports = function(app) {
         globalPicturesService.getPictureLikes(req, res);
     });
 
+    app.post("/pictures/:pictureId/likes", isLoggedIn, function (req, res) {
+        var globalPicturesService = new GlobalPicturesService(config);
+        globalPicturesService.addPictureLikes(req, res);
+    });
+
+    app.delete("/pictures/:pictureId/likes", isLoggedIn, function (req, res) {
+        var globalPicturesService = new GlobalPicturesService(config);
+        globalPicturesService.deletePictureLikes(req, res);
+    });
+
     app.get('/pictures/:pictureId/comments', isLoggedIn, function(req, res) {
         var globalPicturesService = new GlobalPicturesService(config);
         globalPicturesService.getPictureComments(req, res);
@@ -24,15 +34,5 @@ module.exports = function(app) {
     app.post('/pictures/:pictureId/comments', isLoggedIn, function(req, res) {
         var globalPicturesService = new GlobalPicturesService(config);
         globalPicturesService.addPictureComments(req, res);
-    });
-
-    app.post("/pictures/:pictureId/likes/:userId", isLoggedIn, function (req, res) {
-        var globalPicturesService = new GlobalPicturesService(config);
-        globalPicturesService.addLikeToPicture(req, res);
-    });
-
-    app.delete("/pictures/:picture/likes/:userId", isLoggedIn, function (req,res){
-        var globalPicturesService = new GlobalPicturesService(config);
-        globalPicturesService.deleteLike(req,res);
     });
 };
