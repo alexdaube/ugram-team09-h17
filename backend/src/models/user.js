@@ -8,7 +8,7 @@ var User = bookshelf.Model.extend({
     pictures: function(){
         return this.hasMany(Picture);
     },
-    pictures: function(){
+    notifications: function(){
         return this.hasMany(Notification);
     }
 });
