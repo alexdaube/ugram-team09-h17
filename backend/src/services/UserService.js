@@ -112,7 +112,6 @@ userService.prototype.createUserPicture = function (request, returnObject) {
         return;
     }
     if (typeof request.file === 'undefined') {
-        
         returnObject.status(400).json("Unauthorized file format");
         return;
     }
