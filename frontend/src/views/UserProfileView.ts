@@ -52,6 +52,11 @@ export class UserProfileView extends Backbone.View<any> {
         return this;
     }
 
+    public close() {
+        this.remove();
+        this.unbind();
+    }
+
     private showPictures() {
         this.collection.fetch({
             beforeSend: HeaderRequestGenerator.sendAuthorization,

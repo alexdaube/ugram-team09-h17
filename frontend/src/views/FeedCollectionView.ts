@@ -2,11 +2,11 @@ import * as Backbone from "backbone";
 import * as _ from "underscore";
 
 import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
+import {LikeCollection} from "../collections/LikeCollection";
 import {ShowMoreView} from "./ShowMoreView";
 import {PostView} from "./PostView";
 import {API_BASE_URL} from "../constants";
 import {CommentModel} from "../models/CommentModel";
-import {LikeModel} from "../models/LikeModel";
 
 export class FeedCollectionView extends Backbone.View<any> {
     private template: Function;
@@ -28,6 +28,11 @@ export class FeedCollectionView extends Backbone.View<any> {
         });
         showMoreView.render();
         return this;
+    }
+
+    public close() {
+        this.remove();
+        this.unbind();
     }
 
     private showPictures() {

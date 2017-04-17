@@ -14,7 +14,7 @@ export class UserCollectionView extends Backbone.View<any> {
     private userList: SearchUserView[];
 
     constructor(options?: Backbone.ViewOptions<any>) {
-        super(_.extend({el: "#content"}, options));
+        super(_.extend({}, options));
         this.userList = new Array<SearchUserView>();
         this.template = require("./UserCollectionTemplate.ejs") as Function;
     }
@@ -55,6 +55,11 @@ export class UserCollectionView extends Backbone.View<any> {
 
         showMoreView.render();
         return this;
+    }
+
+    public close() {
+        this.remove();
+        this.unbind();
     }
 
     private showPictures() {

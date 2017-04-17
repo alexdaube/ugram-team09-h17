@@ -30,6 +30,11 @@ export class PostView extends Backbone.View<any> {
         return this;
     }
 
+    public close() {
+        this.remove();
+        this.unbind();
+    }
+
     public events() {
 
         return <Backbone.EventsHash> {

@@ -13,7 +13,7 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
     private userModel: UserModel;
 
     constructor(options?: Backbone.ViewOptions<UserModel>) {
-        super(_.extend({ el: "#content" }, options));
+        super(_.extend({}, options));
         this.template = require("./UserAddPictureTemplate.ejs") as Function;
         this.userModel = options["model"];
     }
@@ -48,6 +48,11 @@ export class UserAddPictureView extends Backbone.View<UserModel> {
             "click #take-snapshot": "take_snapshot",
             "click #sendPhotoButton": "postPictureFromWebcam",
         };
+    }
+
+    public close() {
+        this.remove();
+        this.unbind();
     }
 
     private postPicture() {
