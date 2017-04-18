@@ -19,6 +19,7 @@ export class UserModel extends Backbone.Model {
             phoneNumber: "",
             inscriptionDate: "",
             profilePictureUrl: "",
+            likes: 0,
         };
     }
 
@@ -77,5 +78,13 @@ export class UserModel extends Backbone.Model {
 
     set profilePictureUrl(profilePictureUrl: string) {
         this.set("pictureUrl", profilePictureUrl);
+    }
+
+    get likes() {
+        return this.get("likes");
+    }
+
+    set likes(likes: number) {
+        this.set("likes", likes);
     }
 }

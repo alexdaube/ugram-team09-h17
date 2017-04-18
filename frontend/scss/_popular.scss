@@ -1,0 +1,103 @@
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css');
+
+.contentPopular {
+  body {
+    font: 14px/1 'Open Sans', sans-serif;
+    background: #eee;
+  }
+
+  p {
+    margin-top: 20px;
+    line-height: 1.5;
+  }
+
+  h1 {
+    padding: 50px 0;
+    font-weight: 400;
+    text-align: center;
+  }
+
+  .centerPopularTitle {
+    text-align: center;
+  }
+
+  main {
+    width: 83%;
+    padding: 50px;
+    margin: 0 auto;
+    background: #fff;
+  }
+
+  section {
+    display: none;
+    border-top: 1px solid #ddd;
+  }
+
+  input {
+    display: none;
+  }
+
+  label {
+    display: inline-block;
+    margin: 0 0 -1px;
+    padding: 15px 25px;
+    font-weight: 600;
+    text-align: center;
+    color: #bbb;
+    border: 1px solid transparent;
+  }
+
+  label:before {
+    font-family: fontawesome;
+    font-weight: normal;
+    margin-right: 10px;
+  }
+
+  label[for*="Users"]:before { content: '\f0c0'; }
+  label[for*="Hashtags"]:before { content: '\f292'; }
+
+  label:hover {
+    color: #888;
+    cursor: pointer;
+  }
+
+  input:checked + label {
+    color: #555;
+    border: 1px solid #ddd;
+    border-top: 2px solid #3897f0;
+    border-bottom: 1px solid #fff;
+  }
+
+  #tabUsers:checked ~ #contentUsers,
+  #tabHashtags:checked ~ #contentHashtags {
+    display: block;
+  }
+
+  .colorPopularHashtag {
+    color: #3897f0;
+    &:visited {
+      color: #3897f0;
+    }
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .contentTops {
+    label {
+      font-size: 0;
+    }
+    label:before {
+      margin: 0;
+      font-size: 18px;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .contentPopular {
+    label {
+      padding: 15px;
+    }
+  }
+}

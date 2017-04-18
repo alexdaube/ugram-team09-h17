@@ -8,7 +8,7 @@ const Notification = require("./notifications");
 var Picture = bookshelf.Model.extend({
     tableName: 'pictures',
 
-    tags: function(){
+    tags: function () {
         return this.hasMany(Tag);
     },
     mentions: function(){

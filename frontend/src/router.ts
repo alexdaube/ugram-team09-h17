@@ -12,6 +12,8 @@ import {UserAddPictureView} from "./views/UserAddPictureView";
 import {FeedCollection} from "./collections/FeedCollection";
 import {FeedCollectionView} from "./views/FeedCollectionView";
 
+import {TagCollection} from "./collections/TagCollection";
+
 import {HeaderView} from "./views/HeaderView";
 import {HeaderModel} from "./models/HeaderModel";
 
@@ -20,6 +22,8 @@ import {FooterModel} from "./models/FooterModel";
 
 import {LoginView} from "./views/LoginView";
 import {LoginModel} from "./models/LoginModel";
+
+import {PopularView} from "./views/PopularView";
 
 import {PictureModel} from "./models/PictureModel";
 
@@ -42,6 +46,8 @@ export class AppRouter extends Backbone.Router {
         "users/:userId": "showUserProfile",
         "users/:userId/pictures/:pictureId": "showPost",
         "profile": "showProfile",
+        "popular": "showPopular",
+        "tags/:tag": "showTagFeed",
     };
 
     constructor() {
@@ -63,6 +69,17 @@ export class AppRouter extends Backbone.Router {
         this.appView.showView(loginView);
     }
 
+    public showPopular() {
+        this.showHeaderFooter();
+        this.loginRedirect();
+
+        const userCollection = new UserCollection({url: `${API_BASE_URL}users/popular`});
+        const tagCollection = new TagCollection({url: `${API_BASE_URL}tags/popular`});
+
+        const popularView = new PopularView({users: userCollection, tags: tagCollection});
+        this.appView.showView(popularView);
+    }
+
     public showProfile() {
         this.showHeaderFooter();
 
@@ -75,6 +92,15 @@ export class AppRouter extends Backbone.Router {
 
         this.loginRedirect();
         const feedCollection = new FeedCollection({url: `${API_BASE_URL}pictures`});
+        const feedCollectionView = new FeedCollectionView({collection: feedCollection});
+        this.appView.showView(feedCollectionView);
+    }
+
+    public showTagFeed(tag: string) {
+        this.showHeaderFooter();
+
+        this.loginRedirect();
+        const feedCollection = new FeedCollection({url: `${API_BASE_URL}tags/${tag}/pictures`});
         const feedCollectionView = new FeedCollectionView({collection: feedCollection});
         this.appView.showView(feedCollectionView);
     }

@@ -5,6 +5,7 @@ const Notification = require("./notifications");
 var User = bookshelf.Model.extend({
     tableName: 'users',
     idAttribute: 'userName',
+
     pictures: function(){
         return this.hasMany(Picture);
     },
