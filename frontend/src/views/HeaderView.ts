@@ -3,6 +3,7 @@ import * as _ from "underscore";
 
 import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 import {SearchTextView} from "./SearchTextView";
+import {NotificationCollectionView} from "./NotificationCollectionView";
 
 export class HeaderView extends Backbone.View<any> {
     private template: Function;
@@ -14,7 +15,6 @@ export class HeaderView extends Backbone.View<any> {
         super(_.extend({el: "#header"}, options));
         this.textList = new Array<SearchTextView>();
         this.template = require("./HeaderTemplate.ejs") as Function;
-        // _.bindAll(this, 'render');
     }
 
     public render() {
@@ -45,15 +45,17 @@ export class HeaderView extends Backbone.View<any> {
 
         this.showSearch();
 
-        // $(".notificationZone").hide();
+        $(".notificationZone").hide();
 
-        // $("#notificationButton").focusout( () => {
-        //     window.setTimeout( () => { $(".notificationZone").hide(); }, 250);
-        // });
+        $(".notificationZone").focusout( () => {
+            window.setTimeout( () => { $(".notificationZone").hide(); }, 250);
+        });
 
-        // $("#notificationButton").click( () => {
-        //     $(".notificationZone").show();
-        // });
+        $("#notificationButton").click( () => {
+            $(".notificationZone").show();
+        });
+
+        this.renderNotification();
 
         return this;
     }
@@ -77,6 +79,11 @@ export class HeaderView extends Backbone.View<any> {
             const searchTextView = new SearchTextView({el: "#searchList2", model: picture});
             this.textList.push(searchTextView);
         });
+    }
+
+    private renderNotification() {
+        const notificationCollectionView = new NotificationCollectionView({el: "#notificationCollection"});
+        notificationCollectionView.render();
     }
 
     private searchText() {

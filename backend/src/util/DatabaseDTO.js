@@ -144,16 +144,14 @@ module.exports = class DatabaseDTO {
     }
 
     getNotificationListJSON(notifications) {
+        var notificationsJSON = notifications.toJSON();
+        var notificationsLength = notificationsJSON.length;
         var notificationsArray = [];
-        if (typeof notifications === 'undefined') {
+        if (notificationsLength === 0) {
             return notificationsArray;
         }
 
-        notifications.forEach(function (notification) {
-            console.log("notif" + notification.user_id);
-            console.log("notif2" + notification.picture_id);
-            console.log("notif3" + notification.date);
-            console.log("notif4" + notification.type);
+        notificationsJSON.forEach(function (notification) {
             var notificationJson =  {
                  userId: notification.user_id,
                  picture: notification.picture_id,
@@ -162,7 +160,7 @@ module.exports = class DatabaseDTO {
             };
             notificationsArray.push(notificationJson);
         });
-        console.log("test2" + notificationsArray);
+
         return notificationsArray;
     }
 };

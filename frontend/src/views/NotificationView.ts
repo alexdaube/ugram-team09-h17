@@ -1,5 +1,6 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
+
 import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 import {NotificationModel} from "../models/NotificationModel";
 

@@ -87,49 +87,29 @@ userRepository.prototype.update = function (userId, body, callback) {
         });
 };
 
+
 userRepository.prototype.getUserNotifications = function (userId, callback) {
     var that = this;
     new Notification()
-        .query('orderBy', 'date', 'desc')
-        .fetchAll()
-        .then(function (newCollection) {
-            var newCollectionJSON =
-            {
-                items: that.databaseDTO.getNotificationListJSON(newCollection),
-            };
-            return callback(null, newCollectionJSON);
+        .fetchAll() // TODO .where relatedpicture (pictureid) si picture userid = userid
+        .then(function (notifications) {
+            notifications.query(function (qb) {
+                qb.limit(10)
+                    .where("user_id", "!=", userId)
+                    .orderBy("date", "DESC");;
+            }).fetch()
+                .then(function (newCollection) {
+                    console.log("criss");
+                    var newCollectionJSON = {
+                        items: that.databaseDTO.getNotificationListJSON(newCollection),
+                    };
+                    return callback(null, newCollectionJSON);
+                })
         }).catch(function (err) {
             handleError(400, null, callback);
         });
-
-
-    // console.log("mémé");
-    // var that = this;
-    // new Notification()
-    //     .fetchAll()
-    //     //.query('orderBy', 'date', 'desc')       
-    //     .then(function (notification) {
-    //         var newUserJSON = that.databaseDTO.getNotificationListJSON(notification);
-    //         console.log("mémé2" + newUserJSON.toString());
-    //         return callback(null, newUserJSON);
-    //     }).catch(function (err) {
-    //         handleError(400, null, callback);
-    //     });
-
-    // var that = this;
-    // new Notification()
-    //     .query('orderBy', 'date', 'desc')
-    //     .fetchAll({ withRelated: [ "pictures"] })
-    //     .then(function (notification) {
-    //         console.log("mamasita");
-    //         var formattedUserJSON = that.databaseDTO.getNotificationListJSON(notification);
-    //         console.log("salut" + formattedUserJSON);
-    //         return callback(null, formattedUserJSON);
-    //     }).catch(function (err) {
-    //         console.log(err);
-    //         handleError(400, null, callback);
-    //     });
 };
+
 userRepository.prototype.getUserPictures = function (userId, page, perPage, callback) {
 
     var that = this;
