@@ -11,7 +11,6 @@ export class NotificationCollection extends Backbone.Collection<NotificationMode
     }
 
     public parse(response) {
-        console.log("response" + response.items);
         return response.items;
     }
 }

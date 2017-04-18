@@ -18,10 +18,15 @@ export class PopularView extends Backbone.View<any> {
     private tags: TagCollection;
 
     constructor(collections: ICollections, options?: Backbone.ViewOptions<any>) {
-        super(_.extend({el: "#content"}, options));
+        super(options);
         this.users = collections.users;
         this.tags = collections.tags;
         this.template = require("./PopularTemplate.ejs") as Function;
+    }
+
+    public close() {
+        this.remove();
+        this.unbind();
     }
 
     public render() {
@@ -46,22 +51,22 @@ export class PopularView extends Backbone.View<any> {
     private renderUsers(collection) {
         if (collection.length !== 0 ) {
             collection.each((user) => {
-                const userView = new UserView({el: "#usersList", model: user});
+                const userView = new UserView({el: "#popularUsersList", model: user});
                 userView.append();
             });
         } else {
-            $("#usersList").append(`<div class="centerPopularTitle"><p>There are no users with likes</p></div>`);
+            $("#popularUsersList").append(`<div class="centerPopularTitle"><p>There are no users with likes</p></div>`);
         }
     }
 
     private renderTags(collection) {
         if (collection.length !== 0 ) {
             collection.each((tag) => {
-                const tagView = new TagView({el: "#tagsList", model: tag});
+                const tagView = new TagView({el: "#popularTagsList", model: tag});
                 tagView.append();
             });
         } else {
-            $("#tagsList").append(`<div class="centerPopularTitle"><p>There are no hashtags mentioned</p></div>`);
+            $("#popularTagsList").append(`<div class="centerPopularTitle"><p>There are no hashtags mentioned</p></div>`);
         }
     }
 }

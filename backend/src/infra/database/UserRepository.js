@@ -388,8 +388,8 @@ userRepository.prototype.getMostPopularUsers = function (callback) {
         .then(function (likes) {
             if (likes) {
                 likes.query(function (qb) {
-                    qb.select('userId')
-                        .groupBy('userId')
+                    qb.select('user_id')
+                        .groupBy('user_id')
                         .orderBy("count(*)", "desc")
                         .count()
                         .limit(10);

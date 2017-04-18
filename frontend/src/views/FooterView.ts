@@ -22,7 +22,6 @@ export class FooterView extends Backbone.View<NotificationModel> {
     }
 
     private showNotification() {
-        console.log("mathieu vez1");
         this.collection.fetch({
             beforeSend: HeaderRequestGenerator.sendAuthorization,
             data: {},
@@ -33,12 +32,9 @@ export class FooterView extends Backbone.View<NotificationModel> {
     }
 
     private renderNotification() {
-        console.log("mathieu vez2");
-        console.log(this.collection);
         this.collection.each((notification) => {
             const notificationView = new NotificationView({el: "#notification2", model: notification});
             this.textList.push(notificationView);
         });
-        console.log(this.textList);
     }
 }

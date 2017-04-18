@@ -7,7 +7,6 @@ export class NotificationModel extends Backbone.Model {
 
     constructor(options?: any) {
         super(options);
-        console.log("user out" + this.user);
         this.urlRoot = `${API_BASE_URL}users/${this.user}/notifications`;
     }
 

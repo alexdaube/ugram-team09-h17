@@ -79,7 +79,7 @@ export class AppRouter extends Backbone.Router {
         const tagCollection = new TagCollection({url: `${API_BASE_URL}tags/popular`});
 
         const popularView = new PopularView({users: userCollection, tags: tagCollection});
-        popularView.render();
+        this.appView.showView(popularView);
     }
 
     public showProfile() {
@@ -158,7 +158,7 @@ export class AppRouter extends Backbone.Router {
         headerView.render();
 
         const user = HeaderRequestGenerator.currentUser();
-        const notificationModel = new NotificationModel({user: user});
+        const notificationModel = new NotificationModel({user});
         const notificationCollection = new NotificationCollection({url: `${API_BASE_URL}users/${user}/notifications`});
         const footerView = new FooterView({model: notificationModel, collection: notificationCollection});
         footerView.render();
