@@ -53,7 +53,7 @@ module.exports = class DatabaseDTO {
             picturesJSONArray.push(formattedPictureJSON);
         });
         return picturesJSONArray;
-    };
+    }
 
     getPictureJSON(picture) {
         var pictureJSON = picture.toJSON();
