@@ -96,15 +96,17 @@ userRepository.prototype.getUserNotifications = function (userName) {
         .then(function (notification) {
             return callback(null, that.databaseDTO.getNotificationListJSON(notification));
         }).catch(function (err) {
-        handleError(400, null, callback);
+        handleError(400, null, callback)
     });
 };
 userRepository.prototype.getUserPictures = function (userId, page, perPage, callback) {
-
     var that = this;
     var numberOfPictureInTotal;
     var numberOfPages;
-    if (typeof perPage === 'undefined') { perPage = 20; }
+
+    if (typeof perPage === 'undefined') {
+        perPage = 20;
+    }
 
     new Picture()
         .fetchAll({ withRelated: ["tags", "mentions"] })
