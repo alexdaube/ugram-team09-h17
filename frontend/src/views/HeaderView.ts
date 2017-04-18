@@ -17,6 +17,12 @@ export class HeaderView extends Backbone.View<any> {
         this.template = require("./HeaderTemplate.ejs") as Function;
     }
 
+    public events() {
+        return <Backbone.EventsHash> {
+            "click #notificationButton": () => { $(".notificationZone").show(); },
+        };
+    }
+
     public render() {
         const html = this.template();
         this.$el.html(html);
@@ -44,16 +50,6 @@ export class HeaderView extends Backbone.View<any> {
         });
 
         this.showSearch();
-
-        $(".notificationZone").hide();
-
-        $(".notificationZone").focusout( () => {
-            window.setTimeout( () => { $(".notificationZone").hide(); }, 250);
-        });
-
-        $("#notificationButton").click( () => {
-            $(".notificationZone").show();
-        });
 
         this.renderNotification();
 

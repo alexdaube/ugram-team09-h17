@@ -23,6 +23,14 @@ export class NotificationCollectionView extends Backbone.View<any> {
         const html = this.template();
         this.$el.html(html);
         this.showNotification();
+
+        $(".notificationZone").hide();
+
+        $(".notificationZone").mousedown( (event) => {
+            event.stopPropagation();
+            window.setTimeout( () => { $(".notificationZone").hide(); }, 250);
+        });
+
         return this;
     }
 

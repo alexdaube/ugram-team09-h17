@@ -91,7 +91,7 @@ userRepository.prototype.update = function (userId, body, callback) {
 userRepository.prototype.getUserNotifications = function (userId, callback) {
     var that = this;
     new Notification()
-        .fetchAll() // TODO .where relatedpicture (pictureid) si picture userid = userid
+        .fetchAll() // TODO .where withrelatedpicture (pictureid) si picture userid = userid
         .then(function (notifications) {
             notifications.query(function (qb) {
                 qb.limit(10)
@@ -99,7 +99,6 @@ userRepository.prototype.getUserNotifications = function (userId, callback) {
                     .orderBy("date", "DESC");;
             }).fetch()
                 .then(function (newCollection) {
-                    console.log("criss");
                     var newCollectionJSON = {
                         items: that.databaseDTO.getNotificationListJSON(newCollection),
                     };
