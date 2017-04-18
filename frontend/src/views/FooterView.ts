@@ -1,40 +1,18 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
 
-import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
-import {NotificationModel} from "../models/NotificationModel";
-import {NotificationView} from "./NotificationView";
+import {FooterModel} from "../models/FooterModel";
 
-export class FooterView extends Backbone.View<NotificationModel> {
+export class FooterView extends Backbone.View<FooterModel> {
     private template: Function;
-    private textList: NotificationView[];
 
-    constructor(options?: Backbone.ViewOptions<NotificationModel>) {
+    constructor(options?: Backbone.ViewOptions<FooterModel>) {
         super(_.extend({el: "#footer"}, options));
-        this.textList = new Array<NotificationView>();
         this.template = require("./FooterTemplate.ejs") as Function;
     }
 
     public render() {
         this.$el.html(this.template(this.model.toJSON()));
-        this.showNotification();
         return this;
-    }
-
-    private showNotification() {
-        this.collection.fetch({
-            beforeSend: HeaderRequestGenerator.sendAuthorization,
-            data: {},
-            success: () => {
-                this.renderNotification();
-            },
-        });
-    }
-
-    private renderNotification() {
-        this.collection.each((notification) => {
-            const notificationView = new NotificationView({el: "#notification2", model: notification});
-            this.textList.push(notificationView);
-        });
     }
 }

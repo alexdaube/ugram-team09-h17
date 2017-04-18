@@ -36,7 +36,6 @@ export class PostView extends Backbone.View<any> {
     }
 
     public events() {
-
         return <Backbone.EventsHash> {
             "click #optionButtonEdit": () => { $("#popupEditContent").show(); },
             "click #closeExitButtonPopup": () => { $("#popupEditContent").hide(); },
