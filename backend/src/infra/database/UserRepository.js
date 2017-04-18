@@ -104,7 +104,7 @@ userRepository.prototype.getUserNotifications = function (userId, callback) {
                 return callback(null, newCollectionJSON);
             });
         }).catch(function (err) {
-        handleError(400, null, callback)
+        handleError(400, null, callback);
     });
 };
 
