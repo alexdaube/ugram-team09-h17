@@ -103,7 +103,7 @@ userRepository.prototype.getUserNotifications = function (userId, callback) {
                         items: that.databaseDTO.getNotificationListJSON(newCollection),
                     };
                     return callback(null, newCollectionJSON);
-                })
+                });
         }).catch(function (err) {
         handleError(400, null, callback)
     });
