@@ -21,9 +21,9 @@ module.exports = function(app) {
         globalPicturesService.addPictureLikes(req, res);
     });
 
-    app.delete("/pictures/:pictureId/likes", isLoggedIn, function (req, res) {
+    app.delete("/pictures/:pictureId/likes/:id", isLoggedIn, function (req, res) {        
         var globalPicturesService = new GlobalPicturesService(config);
-        globalPicturesService.deletePictureLikes(req, res);
+        globalPicturesService.deleteLike(req, res);
     });
 
     app.get('/pictures/:pictureId/comments', isLoggedIn, function(req, res) {

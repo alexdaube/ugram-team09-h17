@@ -159,7 +159,9 @@ getpopularUsersJSON(users) {
 
         likes.forEach(function (like) {
             var likeJson =  {
-                user: like.user_id,
+                id: like.id,
+                user: like.user_id, 
+                pictureId: like.picture_id,               
             };
             likesArray.push(likeJson);
         });
