@@ -131,7 +131,7 @@ export class PostView extends Backbone.View<any> {
         this.model.destroy({
             beforeSend: HeaderRequestGenerator.setContentTypeToJSON,
             success() {
-                window.location.href = "#profile";
+                window.location.href = "?#profile";
             },
             error() {
                 // TODO Handle error
