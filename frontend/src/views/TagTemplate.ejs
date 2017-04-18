@@ -4,7 +4,11 @@
             <div class="paddingUser">
                 <div class="widthUser">
                     <div class="centerTitleUser">
-                        <div><a class="boldNameUser colorPopularHashtag" href="/#users/alexdaube"><%- tag.tag %></a></div>
+                        <div>
+                            <a class="boldNameUser colorPopularHashtag" href="/#tags/<%- tag.tag.substring(1) %>">
+                                <%- tag.tag %>
+                            </a>
+                        </div>
                         <div class="fontNameUser">mentioned <%- tag.count %> times</div>
                     </div>
                 </div>

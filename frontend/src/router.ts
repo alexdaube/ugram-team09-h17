@@ -47,6 +47,7 @@ export class AppRouter extends Backbone.Router {
         "users/:userId/pictures/:pictureId": "showPost",
         "profile": "showProfile",
         "popular": "showPopular",
+        "tags/:tag": "showTagFeed",
     };
 
     constructor() {
@@ -91,6 +92,15 @@ export class AppRouter extends Backbone.Router {
 
         this.loginRedirect();
         const feedCollection = new FeedCollection({url: `${API_BASE_URL}pictures`});
+        const feedCollectionView = new FeedCollectionView({collection: feedCollection});
+        this.appView.showView(feedCollectionView);
+    }
+
+    public showTagFeed(tag: string) {
+        this.showHeaderFooter();
+
+        this.loginRedirect();
+        const feedCollection = new FeedCollection({url: `${API_BASE_URL}tags/${tag}/pictures`});
         const feedCollectionView = new FeedCollectionView({collection: feedCollection});
         this.appView.showView(feedCollectionView);
     }

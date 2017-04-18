@@ -15,6 +15,6 @@ module.exports = function (app) {
 
     app.get("/tags/:tag/pictures", isLoggedIn, function (req, res) {
         var pictureService = new GlobalPicturesService(global.configs.repository);
-        pictureService.getWit(req, res);
+        pictureService.getAllPicturesForTag(req, res);
     });
 };

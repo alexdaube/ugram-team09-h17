@@ -17,9 +17,42 @@ globalPicturesRepository.prototype.getForTag = function (page, perPage, tag, cal
     var numberOfPictureInTotal;
     var numberOfPages;
     if (typeof perPage === 'undefined') { perPage = 20; }
+
     new Picture().fetchAll({ withRelated: ["tags", "mentions", "comments", "likes"] }).then(function (pictures) {
         if(pictures) {
-            pictures.toJSON();
+            var picturesWithTag = pictures.toJSON().filter(function(picture) {
+                return picture.tags.some(function(pictureTag) {
+                    return pictureTag.tag === tag;
+                });
+            });
+
+            if(picturesWithTag.length === 0) {
+                return callback(null, {});
+            }
+
+            picturesWithTag.sort(function(a, b) {
+                return Number(b.likes.length) - Number(a.likes.length);
+            });
+
+            numberOfPictureInTotal = pictures.length;
+            numberOfPages = Math.ceil(numberOfPictureInTotal / perPage);
+            var picturesWithTagInNextPage = [];
+            var offset = page * perPage;
+            var maxIndex = offset + perPage;
+            for (offset; offset < maxIndex; offset++) {
+                if(offset === numberOfPictureInTotal) {
+                    break;
+                }
+                picturesWithTagInNextPage.push(picturesWithTag[offset]);
+            }
+
+            var newCollectionJSON = {
+                items: that.databaseDTO.getPicturesFromArray(picturesWithTagInNextPage),
+                totalPages: numberOfPages,
+                totalEntries: numberOfPictureInTotal
+            };
+
+            return callback(null, newCollectionJSON);
         }
         else {
             return callback(null, {});

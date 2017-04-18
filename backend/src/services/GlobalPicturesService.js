@@ -11,7 +11,8 @@ globalPicturesService.prototype.setPersistence = function(persistence){
 globalPicturesService.prototype.getAllPicturesForTag = function(request, returnObject) {
     var page = request.query.page;
     var perPage = request.query.perPage;
-    var tag = request.query.tag;
+    var urlParts = request.path.split('/');
+    var tag = "#" + urlParts[2];
 
     this.persistence.getForTag(page, perPage, tag, function(err, response){
         if (!err && response) {

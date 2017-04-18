@@ -45,15 +45,25 @@ export class FeedCollectionView extends Backbone.View<any> {
                 this.nextPageToFetch += 1;
                 this.renderPictures();
             },
+            error: () => {
+                this.renderEmpty();
+            },
         });
     }
 
     private renderPictures() {
+        if (this.collection.length === 0) {
+            return this.renderEmpty();
+        }
         this.collection.each((picture) => {
             const postView = new PostView({el: "#posts-list", model: picture});
             postView.append();
         });
         this.checkForMorePicturesAvailable();
+    }
+
+    private renderEmpty() {
+        $("#posts-list").append(`<div class="noPicturesInFeed"><p>There are no pictures available. )-:</p></div>`);
     }
 
     private checkForMorePicturesAvailable() {

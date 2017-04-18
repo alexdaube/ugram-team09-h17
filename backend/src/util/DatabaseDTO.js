@@ -34,6 +34,27 @@ module.exports = class DatabaseDTO {
         }
     }
 
+    getPicturesFromArray(pictures) {
+        var that = this;
+        var picturesJSONArray = [];
+        pictures.forEach(function (picture) {
+            var formattedPictureJSON = {
+                id: picture.id,
+                createdDate: Date.parse(picture.createdDate),
+                description: picture.description,
+                mentions: that.getMentionJSON(picture.mentions),
+                tags: that.getTagJSON(picture.tags),
+                url: picture.url,
+                //user_userName: picture.user_userName
+                userId: picture.userId,
+                comments: that.getCommentListJSON(picture.comments),
+                likes: that.getLikeListJSON(picture.likes)
+            };
+            picturesJSONArray.push(formattedPictureJSON);
+        });
+        return picturesJSONArray;
+    };
+
     getPictureJSON(picture) {
         var pictureJSON = picture.toJSON();
         var pictureLength = pictureJSON.length;
@@ -83,7 +104,7 @@ getpopularUsersJSON(users) {
         }
 
         users.forEach(function (user) {
-            usersArray.push({id: user.userId, likes: user["count(*)"]});
+            usersArray.push({id: user.user_id, likes: user["count(*)"]});
         });
         return usersArray;
     }
