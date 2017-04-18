@@ -3,6 +3,7 @@ const Tag = require("./tag");
 const Mention = require("./mention");
 const Comment = require("./comment");
 const Like = require("./like");
+const Notification = require("./notifications");
 
 var Picture = bookshelf.Model.extend({
     tableName: 'pictures',
@@ -10,7 +11,7 @@ var Picture = bookshelf.Model.extend({
     tags: function () {
         return this.hasMany(Tag);
     },
-    mentions: function () {
+    mentions: function(){
         return this.hasMany(Mention);
     },
     comments: function(){
@@ -18,6 +19,9 @@ var Picture = bookshelf.Model.extend({
     },
     likes: function(){
         return this.hasMany(Like);
+    },
+    notifications: function(){
+        return this.hasMany(Notification);
     },
 });
 

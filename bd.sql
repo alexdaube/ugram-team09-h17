@@ -1,7 +1,7 @@
 -- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               10.1.21-MariaDB - mariadb.org binary distribution
--- Server OS:                    Win64
+-- Host:                         ugram-prod.ck2y0apau6gu.us-east-1.rds.amazonaws.com
+-- Server version:               10.1.19-MariaDB - MariaDB Server
+-- Server OS:                    Linux
 -- HeidiSQL Version:             9.4.0.5125
 -- --------------------------------------------------------
 
@@ -29,9 +29,10 @@ CREATE TABLE IF NOT EXISTS `comments` (
   KEY `FK_comments_pictures` (`picture_id`),
   CONSTRAINT `FK_comments_pictures` FOREIGN KEY (`picture_id`) REFERENCES `pictures` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_comments_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`userName`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 
--- Dumping structure for table ugram.comments
+-- Data exporting was unselected.
+-- Dumping structure for table ugram.likes
 DROP TABLE IF EXISTS `likes`;
 CREATE TABLE IF NOT EXISTS `likes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -42,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `likes` (
   KEY `FK_likes_pictures` (`picture_id`),
   CONSTRAINT `FK_likes_pictures` FOREIGN KEY (`picture_id`) REFERENCES `pictures` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_likes_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`userName`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 -- Dumping structure for table ugram.mentions
@@ -57,6 +58,22 @@ CREATE TABLE IF NOT EXISTS `mentions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
+-- Dumping structure for table ugram.notifications
+DROP TABLE IF EXISTS `notifications`;
+CREATE TABLE IF NOT EXISTS `notifications` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(255) DEFAULT NULL,
+  `picture_id` int(11) NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `type` tinyint(4) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK__users` (`user_id`),
+  KEY `FK__pictures` (`picture_id`),
+  CONSTRAINT `FK__pictures` FOREIGN KEY (`picture_id`) REFERENCES `pictures` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK__users` FOREIGN KEY (`user_id`) REFERENCES `users` (`userName`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
 -- Dumping structure for table ugram.pictures
 DROP TABLE IF EXISTS `pictures`;
 CREATE TABLE IF NOT EXISTS `pictures` (
@@ -68,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `pictures` (
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   CONSTRAINT `pictures_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`userName`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 -- Dumping structure for table ugram.tags
@@ -98,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `facebookId` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`userName`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

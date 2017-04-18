@@ -168,4 +168,27 @@ getpopularUsersJSON(users) {
         });
         return commentsArray;
     }
+
+    getNotificationListJSON(notifications) {
+        var notificationsArray = [];
+        if (typeof notifications === 'undefined') {
+            return notificationsArray;
+        }
+
+        notifications.forEach(function (notification) {
+            console.log("notif" + notification.user_id);
+            console.log("notif2" + notification.picture_id);
+            console.log("notif3" + notification.date);
+            console.log("notif4" + notification.type);
+            var notificationJson =  {
+                 userId: notification.user_id,
+                 picture: notification.picture_id,
+                 date: notification.date,
+                 type: (notification.type==1 ? "liked your picture" : "commented on your picture"),
+            };
+            notificationsArray.push(notificationJson);
+        });
+        console.log("test2" + notificationsArray);
+        return notificationsArray;
+    }
 };

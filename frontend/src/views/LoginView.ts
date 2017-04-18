@@ -25,6 +25,11 @@ export class LoginView extends Backbone.View<LoginModel> {
         this.signupErrorCallback = this.signupErrorCallback.bind(this);
     }
 
+    public close() {
+        this.remove();
+        this.unbind();
+    }
+
     public events() {
         return <Backbone.EventsHash> {
             "click #loginButton": () => { this.login(); },

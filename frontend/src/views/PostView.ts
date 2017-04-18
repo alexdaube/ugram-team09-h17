@@ -57,9 +57,11 @@ export class PostView extends Backbone.View<any> {
 
     private addLikePV(e) {
         const postId = $(e.currentTarget).attr("data-id");
-        const like = new LikeModel({pictureId: postId, user: HeaderRequestGenerator.currentUser()});
-        like.save({}, {beforeSend: HeaderRequestGenerator.sendAuthorization});
-        this.updateLikesCountTemp(true, postId, e);
+        if (this.model.id.toString() === postId) {
+            const like = new LikeModel({pictureId: postId, user: HeaderRequestGenerator.currentUser()});
+            like.save({}, {beforeSend: HeaderRequestGenerator.sendAuthorization});
+            this.updateLikesCountTemp(true, postId, e);
+        }
     }
 
     private deleteLikePV(e) {
@@ -81,13 +83,28 @@ export class PostView extends Backbone.View<any> {
     private addComment(e) {
         const commentBox = $(e.currentTarget).find("input.inputCommentFeed");
         const postId = commentBox.attr("data-id");
-        const message = commentBox.val();
-        if (message.length <= 0) {
-            alert("Comment too short");
-            return;
+        if (this.model.id.toString() === postId) {
+            const message = commentBox.val();
+            if (message.length <= 0) {
+                alert("Comment too short");
+                return;
+            }
+            const comment = new CommentModel({comment: message, pictureId: postId, user: HeaderRequestGenerator.currentUser()});
+            comment.save({}, {
+                beforeSend: HeaderRequestGenerator.sendAuthorization,
+                success: (model, response) => {
+                    commentBox.val("");
+                    const commentList =  $(e.currentTarget).parent().find(".commentFeedList");
+                    commentList.append("<li class=\"textCommentFeed\">\
+                <a class=\"heightTextFeed blackTextFeed\" href=\"\">" + model.user + "</a>\
+                    <span>" + _.escape(model.comment) + "</span>\
+                    </li>");
+                },
+                error: () => {
+                    alert("error posting message");
+                },
+            });
         }
-        const comment = new CommentModel({comment: message, pictureId: postId, user: HeaderRequestGenerator.currentUser()});
-        comment.save({}, {beforeSend: HeaderRequestGenerator.sendAuthorization});
     }
 
     private edit() {

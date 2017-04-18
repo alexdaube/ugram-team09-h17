@@ -2,7 +2,6 @@ import * as Backbone from "backbone";
 import * as _ from "underscore";
 
 import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
-import {LikeCollection} from "../collections/LikeCollection";
 import {ShowMoreView} from "./ShowMoreView";
 import {PostView} from "./PostView";
 import {API_BASE_URL} from "../constants";

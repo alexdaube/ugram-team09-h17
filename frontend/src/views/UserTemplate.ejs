@@ -4,14 +4,15 @@
             <div class="paddingUser">
                 <div class="widthUser">
                     <% if(user.profilePictureUrl) { %>
-                        <a class="roundImgUser tabImgUser" href="/#users/<%- user.id %>">
+                        <a class="roundImgUser tabImgUser" href="/?#users/<%- user.id %>">
                             <img src="<%- user.profilePictureUrl %>">
                         </a>
                     <% } %>
 
-
                     <div class="centerTitleUser">
-                        <div><a class="boldNameUser colorNameUser" href="/#users/<%- user.id %>"><%- user.id %></a></div>
+                        <div>
+                            <a class="boldNameUser colorNameUser" href="/?#users/<%- user.id %>"><%- user.id %></a>
+                        </div>
                         <% if(user.email) { %>
                             <div class="fontNameUser"><%- user.email %></div>
                         <% } %>

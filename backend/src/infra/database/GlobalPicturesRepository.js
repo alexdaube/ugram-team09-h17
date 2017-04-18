@@ -1,6 +1,7 @@
 var ErrorHandler = require("../../common/errors");
 const Picture = require("../../models/picture");
 const Like = require("../../models/like");
+const Notification = require("../../models/notifications");
 const Comment = require("../../models/comment");
 var DatabaseDTO = require("../../util/DatabaseDTO");
 
@@ -86,7 +87,12 @@ globalPicturesRepository.prototype.addPictureLike = function (pictureId, userId,
         picture_id:pictureId,
         user_id:userId,
     }).save().then(function(newLike) {
-        var likeJson = that.databaseDTO.getLikeJSON(newLike);
+        new Notification({
+            picture_id:pictureId,
+            user_id:userId,
+            type:0
+        }).save();
+        var likeJson = that.databaseDTO.getLikeJSON(newLike.attributes);
         return callback(null, likeJson);
     });
 };
@@ -123,13 +129,18 @@ globalPicturesRepository.prototype.getPictureComments = function (pictureId, cal
 
 globalPicturesRepository.prototype.addPictureComment = function (pictureId, userId, comment, callback) {
     var that = this;
-
     new Comment({
         picture_id:pictureId,
         user_id:userId,
         comment:comment
     }).save().then(function(newComment) {
-        var commentJson = that.databaseDTO.getCommentJSON(newComment);
+        new Notification({
+            picture_id:pictureId,
+            user_id:userId,
+            type:1
+        }).save();
+        var commentJson = that.databaseDTO.getCommentJSON(newComment.attributes);
+        console.log(commentJson);
         return callback(null, commentJson);
     });
 };
