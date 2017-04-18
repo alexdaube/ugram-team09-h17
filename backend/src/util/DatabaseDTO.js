@@ -146,20 +146,23 @@ module.exports = class DatabaseDTO {
     }
 
     getNotificationListJSON(notifications) {
+        var notificationsJSON = notifications.toJSON();
+        var notificationsLength = notificationsJSON.length;
         var notificationsArray = [];
-        if (typeof comments === 'undefined') {
+        if (notificationsLength === 0) {
             return notificationsArray;
         }
 
-        notifications.forEach(function (notification) {
+        notificationsJSON.forEach(function (notification) {
             var notificationJson =  {
-                user: notification.user_id,
-                type: (notification.type==1 ? "liked your picture" : "commented on your picture"),
-                date: notification.date,
-                picture: notification.picture_id,
+                 userId: notification.user_id,
+                 picture: notification.picture_id,
+                 date: notification.date,
+                 type: (notification.type==1 ? "liked your picture" : "commented on your picture"),
             };
             notificationsArray.push(notificationJson);
         });
+
         return notificationsArray;
     }
 };

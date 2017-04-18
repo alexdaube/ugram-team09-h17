@@ -88,17 +88,27 @@ userRepository.prototype.update = function (userId, body, callback) {
 };
 
 
-userRepository.prototype.getUserNotifications = function (userName) {
-
+userRepository.prototype.getUserNotifications = function (userId, callback) {
+    var that = this;
     new Notification()
-        .query('orderBy', 'date', 'desc')
-        .fetchAll({ withRelated: [ "pictures"] })
-        .then(function (notification) {
-            return callback(null, that.databaseDTO.getNotificationListJSON(notification));
+        .fetchAll() // TODO .where withrelatedpicture (pictureid) si picture userid = userid
+        .then(function (notifications) {
+            notifications.query(function (qb) {
+                qb.limit(10)
+                    .where("user_id", "!=", userId)
+                    .orderBy("date", "DESC");;
+            }).fetch()
+                .then(function (newCollection) {
+                    var newCollectionJSON = {
+                        items: that.databaseDTO.getNotificationListJSON(newCollection),
+                    };
+                    return callback(null, newCollectionJSON);
+                })
         }).catch(function (err) {
         handleError(400, null, callback)
     });
 };
+
 userRepository.prototype.getUserPictures = function (userId, page, perPage, callback) {
     var that = this;
     var numberOfPictureInTotal;

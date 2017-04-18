@@ -77,7 +77,7 @@ gulp.task('connect', function() {
   connect.server({
     root: '',
     port: (argv.port ? argv.port : SERVER_PORT),
-    livereload: true
+    livereload: false
   });
 });
 

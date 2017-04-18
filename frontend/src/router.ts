@@ -53,7 +53,7 @@ export class AppRouter extends Backbone.Router {
         if (!localStorage.getItem("token")) {
             this.showLogin();
         } else {
-            window.location.href = "/#home";
+            window.location.href = "/?#home";
         }
     }
 
@@ -135,10 +135,6 @@ export class AppRouter extends Backbone.Router {
     public showHeaderFooter() {
         const headerModel = new HeaderModel({});
         const feedCollection = new FeedCollection({url: `${API_BASE_URL}pictures`});
-
-        // const feedCollection2 = new FeedCollection({url: `${API_BASE_URL}pictures`});
-        // const headerView = new HeaderView({model: headerModel, collections: {test: feedCollection, test2: feedCollection2}});
-        // voir picture model aussi
         const headerView = new HeaderView({model: headerModel, collection: feedCollection});
         headerView.render();
 
