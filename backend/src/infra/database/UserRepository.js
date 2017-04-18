@@ -96,7 +96,7 @@ userRepository.prototype.getUserNotifications = function (userId, callback) {
             notifications.query(function (qb) {
                 qb.limit(10)
                     .where("user_id", "!=", userId)
-                    .orderBy("date", "DESC");;
+                    .orderBy("date", "DESC");
             }).fetch()
                 .then(function (newCollection) {
                     var newCollectionJSON = {
