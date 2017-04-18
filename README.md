@@ -80,6 +80,12 @@ Dans l'entête du site, l'usager peut saisir du texte correspondant à la descri
 
 Dans l'entête du site, l'usager peut saisir du texte correspondant à un mot clé définis par le caractère "#". Une liste des publications correspondates sera affichée et l'usager pourra sélectionner celle qu'il désire.
 
+## Livrable 3
+
+### Lien(s) vers vos dashboards Google Analytics
+
+https://analytics.google.com/analytics/web/#dashboard/JuxuGIuIQ9ihGbnHuFib5g/a1984981w143663348p148297469/%3F_u.date00%3D20170101%26_u.date01%3D20170417/
+
 ## Documentation API
 Base URL: *https://api.aide.moe*
 
