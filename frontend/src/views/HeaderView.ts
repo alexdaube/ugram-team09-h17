@@ -50,7 +50,6 @@ export class HeaderView extends Backbone.View<any> {
         });
 
         this.showSearch();
-
         this.renderNotification();
 
         return this;

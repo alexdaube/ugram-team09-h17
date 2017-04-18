@@ -1,6 +1,7 @@
 import * as Backbone from "backbone";
 import * as $ from "jquery";
 import * as _ from "underscore";
+
 import { HeaderRequestGenerator } from "../util/HeaderRequestGenerator";
 import {ShowMoreView} from "./ShowMoreView";
 import {UserView} from "./UserView";
@@ -23,28 +24,6 @@ export class UserCollectionView extends Backbone.View<any> {
         const html = this.template();
         this.$el.html(html);
 
-        $(".searchBox").hide();
-
-        $("#findInput").focusout( () => {
-            window.setTimeout( () => { $(".searchBox").hide(); }, 250);
-        });
-
-        $("#findInput").click( () => {
-            if ($("#findInput").val().length > 0) {
-                $(".searchBox").show();
-                this.searchText();
-            }
-        });
-
-        $("#findInput").keyup( () => {
-            if ($("#findInput").val().length > 0) {
-                $(".searchBox").show();
-                this.searchText();
-            } else {
-                $(".searchBox").hide();
-            }
-        });
-
         this.showPictures();
         this.showSearch();
 
@@ -54,6 +33,7 @@ export class UserCollectionView extends Backbone.View<any> {
         });
 
         showMoreView.render();
+
         return this;
     }
 
@@ -105,6 +85,28 @@ export class UserCollectionView extends Backbone.View<any> {
     }
 
     private renderSearch() {
+        $(".searchBox").hide();
+
+        $("#findInput").focusout( () => {
+            window.setTimeout( () => { $(".searchBox").hide(); }, 250);
+        });
+
+        $("#findInput").click( () => {
+            if ($("#findInput").val().length > 0) {
+                $(".searchBox").show();
+                this.searchText();
+            }
+        });
+
+        $("#findInput").keyup( () => {
+            if ($("#findInput").val().length > 0) {
+                $(".searchBox").show();
+                this.searchText();
+            } else {
+                $(".searchBox").hide();
+            }
+        });
+
         this.collection.each((user) => {
             const searchUserView = new SearchUserView({el: "#searchList", model: user});
             this.userList.push(searchUserView);
