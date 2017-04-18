@@ -40,7 +40,7 @@ globalPicturesRepository.prototype.getForTag = function (page, perPage, tag, cal
             var offset = page * perPage;
             var maxIndex = offset + perPage;
             for (offset; offset < maxIndex; offset++) {
-                if(offset === numberOfPictureInTotal) {
+                if(offset === picturesWithTag.length) {
                     break;
                 }
                 picturesWithTagInNextPage.push(picturesWithTag[offset]);
