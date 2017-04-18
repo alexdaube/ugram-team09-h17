@@ -12,5 +12,4 @@ export class AppView extends Backbone.View<any> {
         this.currentView.render();
         this.currentView.$el.appendTo("#content");
     }
-
 }

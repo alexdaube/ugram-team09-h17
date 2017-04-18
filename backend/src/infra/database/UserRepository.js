@@ -104,16 +104,18 @@ userRepository.prototype.getUserNotifications = function (userId, callback) {
                 return callback(null, newCollectionJSON);
             });
         }).catch(function (err) {
-            handleError(400, null, callback);
-        });
+        handleError(400, null, callback);
+    });
 };
 
 userRepository.prototype.getUserPictures = function (userId, page, perPage, callback) {
-
     var that = this;
     var numberOfPictureInTotal;
     var numberOfPages;
-    if (typeof perPage === 'undefined') { perPage = 20; }
+
+    if (typeof perPage === 'undefined') {
+        perPage = 20;
+    }
 
     new Picture()
         .fetchAll({ withRelated: ["tags", "mentions"] })

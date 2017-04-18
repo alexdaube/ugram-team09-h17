@@ -78,8 +78,8 @@ globalPicturesRepository.prototype.addPictureLike = function (pictureId, userId,
     });
 };
 
-globalPicturesRepository.prototype.deleteLike = function (pictureId, userId, callback) {
-    new Like().where('pictureId', pictureId).andWhere('userId', userId).fetch().then(function(like){
+globalPicturesRepository.prototype.deleteLike = function (likeId, callback) {
+    new Like().where('id', likeId).fetch().then(function(like){
         if (like) {
             like.destroy().then(function() {
                 return callback(null, "No content");

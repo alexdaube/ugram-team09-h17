@@ -66,17 +66,19 @@ export class PostView extends Backbone.View<any> {
     private deleteLikePV(e) {
         const postId = $(e.currentTarget).attr("data-id");
         const that = this;
-        const likeToDestroy = _.findWhere(this.model.likes, {user : HeaderRequestGenerator.currentUser()}) as LikeModel;
-
-        likeToDestroy.destroy({
-            beforeSend: HeaderRequestGenerator.setContentTypeToJSON,
-            success() {
-                that.updateLikesCountTemp(false, postId, e);
-            },
-            error() {
-                // TODO handle error
-            },
-        });
+        if (this.model.id.toString() === postId) {
+            const likeToDestroy = _.findWhere(this.model.likes, {user : HeaderRequestGenerator.currentUser()}) as LikeModel;
+            const myNewLike = new LikeModel(likeToDestroy);
+            myNewLike.destroy({
+                beforeSend: HeaderRequestGenerator.sendAuthorization,
+                success() {
+                    that.updateLikesCountTemp(false, postId, e);
+                },
+                error() {
+                    // TODO handle error
+                },
+            });
+        }
     }
 
     private addComment(e) {
