@@ -209,8 +209,8 @@ module.exports = class DatabaseDTO {
                     type: (notification.type == 1 ? "liked your picture" : "commented on your picture"),
                 };
                 notificationsArray.push(notificationJson);
-            })
-        })
+            });
+        });
         return notificationsArray;
     }
 };
