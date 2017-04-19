@@ -101,9 +101,9 @@ userRepository.prototype.getUserNotifications = function (userId, callback) {
                         .where("url", "!=", "null")
                         .orderBy("createdDate", "DESC");
                 }).fetch()
-                    .then(function (newCollection) {
+                    .then(function (picture) {
                         var newCollectionJSON = {
-                            items: that.databaseDTO.getNotificationListJSON(newCollection),
+                            items: that.databaseDTO.getNotificationListJSON(picture),
                         };
                         return callback(null, newCollectionJSON);
                     });

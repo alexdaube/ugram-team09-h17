@@ -1,3 +1,5 @@
+var moment = require("moment");
+
 module.exports = class DatabaseDTO {
 
     getUserJSON(user) {
@@ -201,14 +203,18 @@ module.exports = class DatabaseDTO {
         }
 
         pictures.forEach(function (picture) {
-            picture.toJSON().notifications.forEach(function (notification) {
+            const pictureJson = picture.toJSON();
+            pictureJson.notifications.forEach(function (notification) {
                 var notificationJson = {
                     userId: notification.user_id,
                     picture: notification.picture_id,
-                    date: notification.date,
+                    pictureOwnerId : pictureJson.userId,
+                    pictureUrl : pictureJson.url,
+                    date: moment(notification.date).format('MM/DD/YYYY HH:mm'),
                     type: (notification.type == 1 ? "liked your picture" : "commented on your picture"),
                 };
-                notificationsArray.push(notificationJson);
+                if (notificationJson.pictureOwnerId != notificationJson.userId)
+                    notificationsArray.push(notificationJson);
             });
         });
         return notificationsArray;

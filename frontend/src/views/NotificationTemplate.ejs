@@ -1,12 +1,12 @@
 <li class="notificationList">
-    <a class="notificationRoundImg" href="?#users/<%- notification.attributes.userId %>">
-        <img class="notificationCenterImg" src="">
-    </a>
     <div class="notificationList2">
-        <a class="notificationBold notificationBlack" href="?#users/<%- notification.attributes.userId %>"><%- notification.attributes.userId %></a> <%- notification.attributes.type %>
+        <a class="notificationBold notificationBlack" href="?#users/<%- notification.attributes.userId %>"><%- notification.attributes.userId %></a>
+        <a href="?#users/<%- notification.attributes.pictureOwnerId %>/pictures/<%- notification.attributes.picture %>">
+            <%- notification.attributes.type %><br>
         <time class="notificationBlackTime notificationSizeTime"><%- notification.attributes.date %></time>
+        </a>
     </div>
-    <a href="">
-        <img class="notificationSizeImg" src="">
+    <a href="?#users/<%- notification.attributes.pictureOwnerId %>/pictures/<%- notification.attributes.picture %>">
+        <img class="notificationSizeImg" src="<%- notification.attributes.pictureUrl %>">
     </a>
 </li>

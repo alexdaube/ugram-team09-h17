@@ -2,16 +2,16 @@
 	<div class="topAlignFeed">
 		<a class="userImageFeed userAlignFeed logoSize" href=""><img class="logoUserFeed" src="/img/test2.jpg"></a>
 		<div class="userNameFeed">
-			<a class="heightTextFeed widthTextFeed" href=""><%- post.userId %></a>
+			<a class="heightTextFeed widthTextFeed" href="/?#users/<%- post.userId %>"><%- post.userId %></a>
 		</div>
 		<div class="hourFeed" href="">
 			<time><%- post.postedDate %></time>
 		</div>
 	</div>
 	<div class="imageFeed">
-		<% if(!isSingleFeed){ %><a><% } %>
+		<% if(!isSingleFeed){ %><a href="/?#users/<%- post.userId %>/pictures/<%- post.id %>"><% } %>
 			<div class="imagePaddingFeed">
-				<img class="sizeImageFeed" src="<%- post.imageUrl %>" />
+					<img class="sizeImageFeed" src="<%- post.imageUrl %>" />
 			</div>
 		<% if(!isSingleFeed){ %></a><% } %>
 	</div>
