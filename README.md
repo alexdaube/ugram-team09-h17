@@ -82,6 +82,42 @@ Dans l'entête du site, l'usager peut saisir du texte correspondant à un mot cl
 
 ## Livrable 3
 
+### L'usager doit pouvoir réagir aux images d'un autre usager.
+
+Il est possible pour l'usager d'Eggplanté une image lorsque celle-ci lui plait en cliquant sur la courge en-dessous de chaque image. 
+
+### L'usager doit pouvoir commenter les images d'un autre usager.
+
+Il est possible pour l'usager d'ajouter un commentaire à une image en ajoutant du texte dans le champ prévue à cet effet et en appuyant sur la touche "Enter".
+
+### L'usager doit pouvoir consulter les réactions et commentaires sur l'une de ses images.
+
+Le nombre de Eggplant et les commentaire d'une photos se retrouve sous ladite photo.
+
+### L'usager doit pouvoir recevoir des notifications lorsqu'un usager réagit ou commente sur l'une de ses images.
+
+L'usager peut consulter ses notifications lorsqu'un usagé Eggplant ou commente une de ses photos en appuyant sur le coeur dans le menu en haut à droite.
+
+### L’application doit gérer le resizing des images téléchargées et offrir les images en différents formats.
+
+Toutes les photos sont reszsées pour qu'elles aient la même largeur en gardant leur ratio largeur/longueur d'origine. Les images présentées sur le feed et sur une page de consultation ont tous la même largeur et ont des longeurs différentes. Les images sont aussi resizées sur la muraille de la page du profil d'utilisateur pour qu'elles prennent toute la taille de la division où elles sont présentées.
+
+### L'application doit produire des analytiques sur le comportement de ses usagers.
+
+Les analytiques du comportement des usagés sont disponibles sur Google Analytique.
+
+### L'usager doit pouvoir se faire recommander les comptes d'usager les plus populaires
+
+L'usager peut voir la liste des compte utilisateurs les plus populaires en cliquant sur l'étoile dans le menu en haut à droite.
+
+### L'usager doit pouvoir consulter les mots-clés les plus populaires
+
+L'usager peut voir la liste des mots-clés les plus populaires en cliquant sur l'étoile dans le menu en haut à droite.
+
+### L'usager doit pouvoir prendre une photo avec sa webcam
+
+L'usager peut prendre une photo avec sa webcam dans la page d'upload d'une photo disponible à partir de la page de son profil d'utilisateur.
+
 ### Lien(s) vers vos dashboards Google Analytics
 
 https://analytics.google.com/analytics/web/#dashboard/JuxuGIuIQ9ihGbnHuFib5g/a1984981w143663348p148297469/%3F_u.date00%3D20170101%26_u.date01%3D20170417/
