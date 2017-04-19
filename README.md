@@ -106,15 +106,15 @@ Toutes les photos sont reszsées pour qu'elles aient la même largeur en gardant
 
 Les analytiques du comportement des usagés sont disponibles sur Google Analytique.
 
-### (8) L'usager doit pouvoir se faire recommander les comptes d'usager les plus populaires
+### L'usager doit pouvoir se faire recommander les comptes d'usager les plus populaires
 
 L'usager peut voir la liste des compte utilisateurs les plus populaires en cliquant sur l'étoile dans le menu en haut à droite.
 
-### (5) L'usager doit pouvoir consulter les mots-clés les plus populaires
+### L'usager doit pouvoir consulter les mots-clés les plus populaires
 
 L'usager peut voir la liste des mots-clés les plus populaires en cliquant sur l'étoile dans le menu en haut à droite.
 
-### (5) L'usager doit pouvoir prendre une photo avec sa webcam
+### L'usager doit pouvoir prendre une photo avec sa webcam
 
 L'usager peut prendre une photo avec sa webcam dans la page d'upload d'une photo disponible à partir de la page de son profil d'utilisateur.
 
