@@ -154,6 +154,44 @@ Model Schema
 ]
 ```
 
+#### POST /pictures/{pictureId}/likes
+
+Model Schema
+```json
+{
+  "user": "string",
+  "pictureId": 0
+}
+```
+
+Response
+```json
+{
+  "user": "string"
+}
+```
+
+#### DELETE /pictures/{pictureId}/likes/{id}
+
+#### POST /pictures/{pictureId}/comments
+
+Model Schema
+```json
+{ 
+  "user": "string", 
+  "comment": "string", 
+  "pictureId": "0" 
+}
+```
+
+Response
+```json
+{ 
+  "user": "string", 
+  "comment": "string"
+}
+```
+
 ### user-pictures-api
 #### GET /users/{userId}/pictures
 
@@ -328,3 +366,37 @@ Response
   "phoneNumber": 0
 }
 ```
+
+#### GET /users/popular
+
+```json
+{
+  "items": 
+  [
+    {
+      "id": "string",
+      "like": 0
+    },
+    ...
+  ]
+}
+```
+
+### tag-api
+#### GET /tags/popular
+
+Response
+
+```json
+{
+  "items": 
+  [
+    {
+      "tag": "string",
+      "counts": 0
+    },
+    ...
+  ]
+}
+```
+
