@@ -93,18 +93,18 @@ module.exports = class DatabaseDTO {
                 picturesJSONArray.push(formattedPictureJSON);
             });
             return picturesJSONArray;
-        }        
+        }
     }
 
-getpopularUsersJSON(users) {
-        
+    getpopularUsersJSON(users) {
+
         var usersArray = [];
-        if(typeof users === 'undefined'){
+        if (typeof users === 'undefined') {
             return usersArray;
         }
 
         users.forEach(function (user) {
-            usersArray.push({id: user.user_id, likes: user["count(*)"]});
+            usersArray.push({ id: user.user_id, likes: user["count(*)"] });
         });
         return usersArray;
     }
@@ -123,12 +123,12 @@ getpopularUsersJSON(users) {
 
     getTagsWithCountJSON(tags) {
         var tagsArray = [];
-        if(typeof tags === 'undefined'){
+        if (typeof tags === 'undefined') {
             return tagsArray;
         }
 
         tags.forEach(function (tag) {
-            tagsArray.push({tag: tag.tag, count: tag["count(*)"]});
+            tagsArray.push({ tag: tag.tag, count: tag["count(*)"] });
         });
         return tagsArray;
     }
@@ -158,10 +158,10 @@ getpopularUsersJSON(users) {
         }
 
         likes.forEach(function (like) {
-            var likeJson =  {
+            var likeJson = {
                 id: like.id,
-                user: like.user_id, 
-                pictureId: like.picture_id,               
+                user: like.user_id,
+                pictureId: like.picture_id,
             };
             likesArray.push(likeJson);
         });
@@ -183,7 +183,7 @@ getpopularUsersJSON(users) {
         }
 
         comments.forEach(function (comment) {
-            var commentJson =  {
+            var commentJson = {
                 user: comment.user_id,
                 comment: comment.comment,
             };
@@ -192,24 +192,25 @@ getpopularUsersJSON(users) {
         return commentsArray;
     }
 
-    getNotificationListJSON(notifications) {
-        var notificationsJSON = notifications.toJSON();
-        var notificationsLength = notificationsJSON.length;
+    getNotificationListJSON(pictures) {
+        var picturesJSON = pictures.toJSON();
+        var picturesLength = picturesJSON.length;
         var notificationsArray = [];
-        if (notificationsLength === 0) {
+        if (picturesLength === 0) {
             return notificationsArray;
         }
 
-        notificationsJSON.forEach(function (notification) {
-            var notificationJson =  {
-                 userId: notification.user_id,
-                 picture: notification.picture_id,
-                 date: notification.date,
-                 type: (notification.type==1 ? "liked your picture" : "commented on your picture"),
-            };
-            notificationsArray.push(notificationJson);
+        pictures.forEach(function (picture) {
+            picture.toJSON().notifications.forEach(function (notification) {
+                var notificationJson = {
+                    userId: notification.user_id,
+                    picture: notification.picture_id,
+                    date: notification.date,
+                    type: (notification.type == 1 ? "liked your picture" : "commented on your picture"),
+                };
+                notificationsArray.push(notificationJson);
+            });
         });
-
         return notificationsArray;
     }
 };
