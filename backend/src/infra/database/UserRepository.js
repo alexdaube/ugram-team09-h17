@@ -90,22 +90,46 @@ userRepository.prototype.update = function (userId, body, callback) {
 
 userRepository.prototype.getUserNotifications = function (userId, callback) {
     var that = this;
-    new Notification()
-        // TODO .where withrelatedpicture (pictureid) si picture userid = userid
-        .fetchAll().then(function (notifications) {
-            notifications.query(function (qb) {
-                qb.limit(10)
-                  .where("user_id", "!=", userId)
-                  .orderBy("date", "DESC");
-            }).fetch().then(function (newCollection) {
-                var newCollectionJSON = {
-                    items: that.databaseDTO.getNotificationListJSON(newCollection),
-                };
-                return callback(null, newCollectionJSON);
-            });
+    // new Notification()
+    //     .fetchAll().then(function (notifications) {
+    //         notifications.query(function (qb) {
+    //             qb.limit(10)
+    //               .where("user_id", "!=", userId)
+    //               .orderBy("date", "DESC");
+    //         }).fetch().then(function (newCollection) {
+    //             console.log(newCollection);
+    //             var newCollectionJSON = {
+    //                 items: that.databaseDTO.getNotificationListJSON(newCollection),
+    //             };
+    //             return callback(null, newCollectionJSON);
+    //         });
+    //     }).catch(function (err) {
+    //     handleError(400, null, callback);
+    // });
+
+    new Picture()
+        .fetchAll({ withRelated: "notifications" })
+        .then(function (pictures) {
+            if (pictures) {
+                pictures.query(function (qb) {
+                    qb.limit(10)
+                        .where({ userId: userId })
+                        .where("url", "!=", "null")
+                        .orderBy("createdDate", "DESC");
+                }).fetch()
+                    .then(function (newCollection) {
+                        var newCollectionJSON = {
+                            items: that.databaseDTO.getNotificationListJSON(newCollection),
+                        };
+                        return callback(null, newCollectionJSON);
+                    });
+            }
+            else {
+                return callback(null, {});
+            }
         }).catch(function (err) {
-        handleError(400, null, callback);
-    });
+            handleError(400, null, callback);
+        });
 };
 
 userRepository.prototype.getUserPictures = function (userId, page, perPage, callback) {
@@ -375,7 +399,7 @@ userRepository.prototype.getMostPopularUsers = function (callback) {
                         .limit(10);
                 }).fetch()
                     .then(function (popularUsers) {
-                        return callback(null, {items: that.databaseDTO.getpopularUsersJSON(popularUsers.toJSON())});
+                        return callback(null, { items: that.databaseDTO.getpopularUsersJSON(popularUsers.toJSON()) });
                     });
             }
             else {
