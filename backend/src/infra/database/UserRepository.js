@@ -241,7 +241,6 @@ userRepository.prototype.deletePicture = function (userId, pictureId, callback) 
                 return callback({ statusCode: 400, message: "No such picture" }, null);
             }
         }).catch(function (err) {
-            console.log(err);
             handleError(400, null, callback);
         });
 };
@@ -257,7 +256,6 @@ userRepository.prototype.deleteUser = function (userId, callback) {
                 return callback({ statusCode: 400, message: "No such user" }, null);
             }
         }).catch(function (err) {
-            console.log(err);
             handleError(400, null, callback);
         });
 };
@@ -280,7 +278,6 @@ userRepository.prototype.getUserPicture = function (userId, pictureId, callback)
                 return callback({ statusCode: 400, message: "No such picture" }, null);
             }
         }).catch(function (err) {
-            console.log(err);
             handleError(400, null, callback);
         });
 };
@@ -364,7 +361,6 @@ userRepository.prototype.updateUserPicture = function (userId, pictureId, body, 
                     return callback(null, formattedPictureJSON);
                 });
         }).catch(function (err) {
-            console.log(err);
             handleError(400, null, callback);
         });
 };

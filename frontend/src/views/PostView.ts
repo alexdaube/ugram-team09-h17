@@ -96,10 +96,9 @@ export class PostView extends Backbone.View<any> {
                 success: (model, response) => {
                     commentBox.val("");
                     const commentList =  $(e.currentTarget).parent().find(".commentFeedList");
-                    commentList.append("<li class=\"textCommentFeed\">\
-                <a class=\"heightTextFeed blackTextFeed\" href=\"\">" + model.user + "</a>\
-                    <span>" + _.escape(model.comment) + "</span>\
-                    </li>");
+                    commentList.append(`<li class="textCommentFeed">
+                            <a class="heightTextFeed blackTextFeed" href="/?#users/${model.user}">${model.user}</a>
+                            <span>${_.escape(model.comment)}</span></li>`);
                 },
                 error: () => {
                     alert("error posting message");
