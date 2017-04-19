@@ -58,7 +58,6 @@ globalPicturesRepository.prototype.getForTag = function (page, perPage, tag, cal
             return callback(null, {});
         }
     }).catch(function (err) {
-        console.log(err);
         handleError(400, null, callback);
     });
 };
@@ -93,7 +92,6 @@ globalPicturesRepository.prototype.get = function (page, perPage, callback) {
         }
 
     }).catch(function (err) {
-        console.log(err);
         handleError(400, null, callback);
     });
 };
@@ -140,7 +138,6 @@ globalPicturesRepository.prototype.deleteLike = function (likeId, callback) {
             return callback({statusCode: 400, message: "No such like"}, null);
         }
     }).catch(function (err) {
-        console.log(err);
         handleError(400, null, callback);
     });
 };
@@ -173,7 +170,6 @@ globalPicturesRepository.prototype.addPictureComment = function (pictureId, user
             type:1
         }).save();
         var commentJson = that.databaseDTO.getCommentJSON(newComment.attributes);
-        console.log(commentJson);
         return callback(null, commentJson);
     });
 };
