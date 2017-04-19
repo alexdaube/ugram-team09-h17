@@ -90,22 +90,6 @@ userRepository.prototype.update = function (userId, body, callback) {
 
 userRepository.prototype.getUserNotifications = function (userId, callback) {
     var that = this;
-    // new Notification()
-    //     .fetchAll().then(function (notifications) {
-    //         notifications.query(function (qb) {
-    //             qb.limit(10)
-    //               .where("user_id", "!=", userId)
-    //               .orderBy("date", "DESC");
-    //         }).fetch().then(function (newCollection) {
-    //             console.log(newCollection);
-    //             var newCollectionJSON = {
-    //                 items: that.databaseDTO.getNotificationListJSON(newCollection),
-    //             };
-    //             return callback(null, newCollectionJSON);
-    //         });
-    //     }).catch(function (err) {
-    //     handleError(400, null, callback);
-    // });
 
     new Picture()
         .fetchAll({ withRelated: "notifications" })
