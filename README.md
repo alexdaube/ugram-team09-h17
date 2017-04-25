@@ -2,16 +2,21 @@
 
 ## Frontend:
 Lancer les commandes suivantes dans le dossier frontend :
-  npm install
-  gulp serve
+```bash
+npm install
+gulp serve
+```
   
 ## Backend:
 Lancer les commandes suivantes dans le dossier backend :
-  npm install
-  npm start
+```bash
+npm install
+npm start
+```
 
 ## Database
 Créer une base de donnée vide nommé : ugram
+
 Importer le fichier bd qui est située à racine du projet pour créer la bd locale (ex : SQLyog Community)
 
 ## Note:
