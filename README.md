@@ -1,5 +1,19 @@
 # ugram-h17-team-09
 
+## Frontend:
+Lancer les commandes suivantes dans le dossier frontend :
+  npm install
+  gulp serve
+  
+## Backend:
+Lancer les commandes suivantes dans le dossier backend :
+  npm install
+  npm start
+
+## Database
+Créer une base de donnée vide nommé : ugram
+Importer le fichier bd qui est située à racine du projet pour créer la bd locale (ex : SQLyog Community)
+
 ## Note:
 Le site web présente un problème avec le *rendering* des différentes pages. Sans vouloir rentrer dans le technique, à toutes les fois qu'une vue et *renderé* et *derenderé*, les *bindings* sur les différents objets de la page activée lors du *rendering* restent actif et donc sont tous lancés lorsqu'une action est exécutée. Par exemple, si un utilisateur accède à la page pour ajouter une photo plusieurs fois et, que par la suite, il ajoute une photo, la photo sera ajoutée autant de fois que l'utilisateur a accédé à la page. L'équipe est consciente du problème et tente de le régler le plus rapidement possible, mais elle n'a pas été en mesure de le régler avant la deuxième remise.
 
