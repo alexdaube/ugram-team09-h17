@@ -1,8 +1,8 @@
 <div class="contentPaddingSetting">
     <div class="whiteBackground contentSetting">
         <ul class="menuSetting">
-            <li><a class="textMenuSetting boldTextSetting" href="#picture">Add picture</a></li>
-            <li><a class="textMenuSetting" href="#setting">Modify profile</a></li>
+            <li><a class="textMenuSetting boldTextSetting" href="?#picture">Add picture</a></li>
+            <li><a class="textMenuSetting" href="?#setting">Modify profile</a></li>
         </ul>
         <div class="inputSizeSetting">         
             <div class="usernameSetting">
@@ -12,22 +12,36 @@
                 <h1 class="userTextSetting"><%- userModel.userName %></h1>
             </div>
             <div class="heightSetting">
-            <div class="infoSetting">
-                <div class="paddingInfoSetting"><label>Description</label></div>
-                <textarea id="description" class="widthSettingArea"></textarea>
-            </div>
-            <div class="infoSetting">
-                <div class="paddingInfoSetting"><label>Upload your file:</label></div>
-                <div class="widthSetting"><input id="upload-file-input" type="file" name="file" accept="image/*"></div>
-            </div>
-            <div class="infoSetting">
-                <div class="paddingInfoSetting privateSetting"><label></label></div>
-                <div class="widthSetting">
-                    <div class="buttonSetting"><span><button id="postPictureButton" class="styleButtonSetting colorButtonSetting sizeButtonSetting">Send</button></span></div>
-                    &nbsp;&nbsp;&nbsp;
-                    <div id="textSavePicture" class="buttonSetting"><span><p class="validationTextSize successTextColor">Post created</p></span></div>
-                    &nbsp;&nbsp;&nbsp;
-                    <div id="textErrorPicture" class="buttonSetting"><span><p class="validationTextSize errorTextColor">You can't add this post</p></span></div>
+                <div class="infoSetting">
+                    <div class="paddingInfoSetting"><label>Description</label></div>
+                    <textarea id="description" class="widthSettingArea"></textarea>
+                </div>
+                <div class="infoSetting">
+                    <div class="paddingInfoSetting"><label>Upload your file:</label></div>
+                    <div class="widthSetting"><input id="upload-file-input" type="file" name="file" accept="image/*"></div>
+                </div>
+                <div class="infoSetting">
+                    <div class="widthSetting">
+                        <div><img id="file-preview" alt="File preview" height="240" width="320" hidden="true"></div>
+                        <div class="buttonSetting paddingInfoSetting"><span><button id="postPictureButton" class="styleButtonSetting colorButtonSetting sizeButtonSetting">Send</button></span></div>
+                        <div id="textSavePicture" class="buttonSetting"><span><p class="validationTextSize successTextColor">Post created</p></span></div>
+                        <div id="textErrorPicture" class="buttonSetting"><span><p class="validationTextSize errorTextColor">You can't add this post</p></span></div>
+                    </div>
+                </div>
+                <div class="infoSetting">
+                    <div class="paddingInfoSetting"><label>Upload from Webcam:</label></div>
+                </div>
+                <div class="infoSetting">
+                    <video id="video" height="240" width="320" autoplay></video>
+                    <span><img id="image-preview" alt="Webcam preview" height="240" width="320" hidden="true"></span>
+                    <canvas id="canvas" height="240" width="320" hidden="true"></canvas>
+                </div>
+                <div class="infoSetting">
+                    <div class="buttonSetting paddingInfoSetting"><span><button id="snap" class="styleButtonSetting colorButtonSetting sizeButtonSetting">Snap photo</button></span></div>
+                    <div class="buttonSetting paddingInfoSetting"><span><button id="sendPhotoButton" class="styleButtonSetting colorButtonSetting sizeButtonSetting">Send photo</button></span></div>
+                    <div id="textSavePictureWebcam" class="buttonSetting"><span><p class="validationTextSize successTextColor">Post created</p></span></div>
+                    <div id="textErrorPictureWebcam" class="buttonSetting"><span><p class="validationTextSize errorTextColor">You can't add this post</p></span></div>
+                    <div class="widthSetting"><input id="upload-webcam-input" type="file" name="webcam" accept="image/*" hidden="true"></div>
                 </div>
             </div>
         </div>

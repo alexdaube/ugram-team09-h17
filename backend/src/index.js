@@ -13,6 +13,7 @@ const Database = require("./infra/database/Database");
 const authentificationRouter = require("./routers/authentification-router");
 const globalPicturesApiRouter = require("./routers/global-pictures-api-router");
 const userApiRouter = require("./routers/users-api-router");
+const tagRouter = require("./routers/tag-router");
 
 const app = express();
 const flash    = require('connect-flash');
@@ -57,6 +58,7 @@ app.use(cors(corsOptions));
 authentificationRouter(app); // load our routes and pass in our app and fully configured passport
 globalPicturesApiRouter(app);// load our routes and pass in our app and fully configured passport
 userApiRouter(app);
+tagRouter(app);
 
 // launch ======================================================================
 app.listen(port);

@@ -1,10 +1,10 @@
 import * as Backbone from "backbone";
 import * as hello from "hellojs";
 
-import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
-import {PictureView} from "./PictureView";
-import {ShowMoreView} from "./ShowMoreView";
-import {InputValidator} from "../util/InputValidator";
+import { HeaderRequestGenerator } from "../util/HeaderRequestGenerator";
+import { PictureView } from "./PictureView";
+import { ShowMoreView } from "./ShowMoreView";
+import { InputValidator } from "../util/InputValidator";
 
 export class UserProfileView extends Backbone.View<any> {
     private template: Function;
@@ -52,6 +52,11 @@ export class UserProfileView extends Backbone.View<any> {
         return this;
     }
 
+    public close() {
+        this.remove();
+        this.unbind();
+    }
+
     private showPictures() {
         this.collection.fetch({
             beforeSend: HeaderRequestGenerator.sendAuthorization,
@@ -72,9 +77,25 @@ export class UserProfileView extends Backbone.View<any> {
 
     private renderPictures() {
         this.collection.each((picture) => {
-            const pictureView = new PictureView({el: "#profile-pictures-list", model: picture});
+            const pictureView = new PictureView({ el: "#profile-pictures-list", model: picture });
             pictureView.append();
         });
+
+        $(".pictureProfile").each((index, picture) => {
+            const imageHeight = $(picture).height();
+            const imageWidth = $(picture).width();
+
+            if (imageHeight < imageWidth) {
+                $(picture).height("100%");
+                $(picture).css("max-width", "100%");
+                $(picture).css("max-height", "10%");
+            } else if (imageHeight > imageWidth) {
+                $(picture).width("100%");
+                $(picture).css("max-width", "10%");
+                $(picture).css("max-height", "100%");
+            }
+        });
+
         this.checkForMorePicturesAvailable();
     }
 
@@ -93,7 +114,7 @@ export class UserProfileView extends Backbone.View<any> {
                 view.logout();
             },
             error() {
-                // TODO
+                // TODO handle error
             },
         });
     }

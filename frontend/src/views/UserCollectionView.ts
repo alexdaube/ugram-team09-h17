@@ -1,6 +1,7 @@
 import * as Backbone from "backbone";
 import * as $ from "jquery";
 import * as _ from "underscore";
+
 import { HeaderRequestGenerator } from "../util/HeaderRequestGenerator";
 import {ShowMoreView} from "./ShowMoreView";
 import {UserView} from "./UserView";
@@ -14,7 +15,7 @@ export class UserCollectionView extends Backbone.View<any> {
     private userList: SearchUserView[];
 
     constructor(options?: Backbone.ViewOptions<any>) {
-        super(_.extend({el: "#content"}, options));
+        super(_.extend({}, options));
         this.userList = new Array<SearchUserView>();
         this.template = require("./UserCollectionTemplate.ejs") as Function;
     }
@@ -22,28 +23,6 @@ export class UserCollectionView extends Backbone.View<any> {
     public render() {
         const html = this.template();
         this.$el.html(html);
-
-        $(".searchBox").hide();
-
-        $("#findInput").focusout( () => {
-            window.setTimeout( () => { $(".searchBox").hide(); }, 250);
-        });
-
-        $("#findInput").click( () => {
-            if ($("#findInput").val().length > 0) {
-                $(".searchBox").show();
-                this.searchText();
-            }
-        });
-
-        $("#findInput").keyup( () => {
-            if ($("#findInput").val().length > 0) {
-                $(".searchBox").show();
-                this.searchText();
-            } else {
-                $(".searchBox").hide();
-            }
-        });
 
         this.showPictures();
         this.showSearch();
@@ -54,7 +33,13 @@ export class UserCollectionView extends Backbone.View<any> {
         });
 
         showMoreView.render();
+
         return this;
+    }
+
+    public close() {
+        this.remove();
+        this.unbind();
     }
 
     private showPictures() {
@@ -100,6 +85,28 @@ export class UserCollectionView extends Backbone.View<any> {
     }
 
     private renderSearch() {
+        $(".searchBox").hide();
+
+        $("#findInput").focusout( () => {
+            window.setTimeout( () => { $(".searchBox").hide(); }, 250);
+        });
+
+        $("#findInput").click( () => {
+            if ($("#findInput").val().length > 0) {
+                $(".searchBox").show();
+                this.searchText();
+            }
+        });
+
+        $("#findInput").keyup( () => {
+            if ($("#findInput").val().length > 0) {
+                $(".searchBox").show();
+                this.searchText();
+            } else {
+                $(".searchBox").hide();
+            }
+        });
+
         this.collection.each((user) => {
             const searchUserView = new SearchUserView({el: "#searchList", model: user});
             this.userList.push(searchUserView);

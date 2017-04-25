@@ -1,7 +1,7 @@
 import * as Backbone from "backbone";
 import * as _ from "underscore";
-import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
-import {PictureModel} from "../models/PictureModel";
+import { HeaderRequestGenerator } from "../util/HeaderRequestGenerator";
+import { PictureModel } from "../models/PictureModel";
 
 export class PictureView extends Backbone.View<PictureModel> {
     private template: Function;
@@ -25,7 +25,7 @@ export class PictureView extends Backbone.View<PictureModel> {
     }
 
     public append() {
-        this.$el.append(this.template({picture: this.model}));
+        this.$el.append(this.template({ picture: this.model }));
         return this;
     }
 }

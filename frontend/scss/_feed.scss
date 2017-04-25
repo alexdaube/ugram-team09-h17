@@ -5,11 +5,16 @@
   width: 44px;
 }
 
-.heartIcon {
-  background-image: url(/img/ugram.png);
-  background-position: -207px -229px;
-  height: 24px;
-  width: 24px;
+.eggPlantIcon {
+  background-image: url(/img/eggplant1.png);
+  height: 35px;
+  width: 35px;
+}
+
+.eggPlantIcon2 {
+  background-image: url(/img/eggplant2.png);
+  height: 35px;
+  width: 35px;
 }
 
 .imageFeed {
@@ -19,12 +24,9 @@
 }
 
 .sizeImageFeed {
-  position: absolute;
-  max-height: 10%;
-  max-width: 10%;
-  transform: scale(10);
+  max-width: 100%;
   transform-origin: center top;
-  right: 45%;
+  width: 100%;
 }
 
 .likeTextFeed2 {
@@ -61,8 +63,17 @@
   font-weight: 600;
 }
 
+.texDescriptionFeed {
+  margin-bottom: 7px;
+  position: relative;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
 .textCommentFeed {
   margin-bottom: 7px;
+  margin-left: 5px;
   position: relative;
   &:last-child {
     margin-bottom: 0;
@@ -235,8 +246,8 @@
   height: 30px;
 }
 
-.imagePaddingFeed {
-  padding-bottom: 100%;
+.noPicturesInFeed {
+  text-align: center;
 }
 
 #buttonSave,

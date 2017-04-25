@@ -3,6 +3,8 @@ import * as Backbone from "backbone";
 import {InputFormatter} from "../util/InputFormatter";
 import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 import {API_BASE_URL} from "../constants";
+import {CommentModel} from "./CommentModel";
+import {LikeModel} from "./LikeModel";
 
 export class PictureModel extends Backbone.Model {
     constructor(options?: any) {
@@ -17,8 +19,11 @@ export class PictureModel extends Backbone.Model {
             postedDate: "",
             tags: [],
             url: "",
+            // user_userName: "",
             userId: "",
             editable: false,
+            comments: [],
+            likes: [],
         };
     }
 
@@ -26,6 +31,19 @@ export class PictureModel extends Backbone.Model {
         // TODO make it non constant
         response["editable"] = HeaderRequestGenerator.isConnectedUser(response["userId"]);
         response["imageUrl"] = response["url"];
+
+        const commentsModels: CommentModel[] = [];
+        response["comments"].forEach((s) => {
+            commentsModels.push(new CommentModel(s));
+        });
+        this.comments = commentsModels;
+
+        const likesModels: LikeModel[] = [];
+        response["likes"].forEach((s) => {
+            likesModels.push(new LikeModel(s));
+        });
+        this.likes = likesModels;
+
         delete response["url"];
         return response;
     }
@@ -59,6 +77,22 @@ export class PictureModel extends Backbone.Model {
         this.set("tags", tags);
     }
 
+    get comments(): CommentModel[] {
+        return this.get("comments");
+    }
+
+    set comments(comments: CommentModel[]) {
+        this.set("comments", comments);
+    }
+
+    get likes(): LikeModel[] {
+        return this.get("likes");
+    }
+
+    set likes(likes: LikeModel[]) {
+        this.set("likes", likes);
+    }
+
     get imageUrl(): string {
         return this.get("imageUrl");
     }
@@ -82,4 +116,7 @@ export class PictureModel extends Backbone.Model {
     set editable(editable: boolean) {
         this.set("editable", editable);
     }
+
+    // TODO prendre ce like là et faire un destroy dessus
+    // get currentuserlike()
 }

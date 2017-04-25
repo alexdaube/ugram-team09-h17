@@ -4,6 +4,8 @@ import * as _ from "underscore";
 import {HeaderRequestGenerator} from "../util/HeaderRequestGenerator";
 import {ShowMoreView} from "./ShowMoreView";
 import {PostView} from "./PostView";
+import {API_BASE_URL} from "../constants";
+import {CommentModel} from "../models/CommentModel";
 
 export class FeedCollectionView extends Backbone.View<any> {
     private template: Function;
@@ -27,6 +29,11 @@ export class FeedCollectionView extends Backbone.View<any> {
         return this;
     }
 
+    public close() {
+        this.remove();
+        this.unbind();
+    }
+
     private showPictures() {
         this.collection.fetch({
             beforeSend: HeaderRequestGenerator.sendAuthorization,
@@ -38,15 +45,25 @@ export class FeedCollectionView extends Backbone.View<any> {
                 this.nextPageToFetch += 1;
                 this.renderPictures();
             },
+            error: () => {
+                this.renderEmpty();
+            },
         });
     }
 
     private renderPictures() {
+        if (this.collection.length === 0) {
+            return this.renderEmpty();
+        }
         this.collection.each((picture) => {
             const postView = new PostView({el: "#posts-list", model: picture});
             postView.append();
         });
         this.checkForMorePicturesAvailable();
+    }
+
+    private renderEmpty() {
+        $("#posts-list").append(`<div class="noPicturesInFeed"><p>There are no pictures available. )-:</p></div>`);
     }
 
     private checkForMorePicturesAvailable() {

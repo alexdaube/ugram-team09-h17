@@ -149,11 +149,24 @@
   margin-left: 30px;
 }
 
-.navActivity, .navExplore, .navLogo {
+.navActivity, .navExplore, .navLogo{
   background-image: url(/img/ugram.png);
   background-position: -181px -229px;
   height: 24px;
   width: 24px;
+}
+
+
+.navTop {
+  /*<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>*/
+  background-image: url(/img/top-games-star-gold.png);
+  background-repeat: no-repeat;
+  height: 24px;
+  width: 24px;
+}
+
+.navActivity {
+  cursor: pointer;
 }
 
 .navExplore {
@@ -181,12 +194,24 @@
   width: 24px;
 }
 
+@media(min-width: 500px) and (max-width: 650px) {
+  .navLogo {
+    background-position: -50px -226px;
+    height: 29px;
+    width: 26px;
+    margin-top:2px;
+  }
+}
+
 @media (max-width: 500px) {
   .flexSearch {
     display: none;
   }
   .displayNav {
     padding-left: 0;
+  }
+  .marginNav:not(:first-child) {
+    margin-left: 24.5px;
   }
 }
 

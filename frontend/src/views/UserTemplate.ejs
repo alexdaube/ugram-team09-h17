@@ -3,11 +3,26 @@
         <li id="userSection" class="titleUser">
             <div class="paddingUser">
                 <div class="widthUser">
-                    <a class="roundImgUser tabImgUser" href="/#users/<%- user.id %>"><img src="<%- user.profilePictureUrl %>"></a>
+                    <% if(user.profilePictureUrl) { %>
+                        <a class="roundImgUser tabImgUser" href="/?#users/<%- user.id %>">
+                            <img src="<%- user.profilePictureUrl %>">
+                        </a>
+                    <% } %>
+
                     <div class="centerTitleUser">
-                        <div><a class="boldNameUser colorNameUser" href="/#users/<%- user.id %>"><%- user.id %></a></div>
-                        <div class="fontNameUser"><%- user.email %></div>
+                        <div>
+                            <a class="boldNameUser colorNameUser" href="/?#users/<%- user.id %>"><%- user.id %></a>
+                        </div>
+                        <% if(user.email) { %>
+                            <div class="fontNameUser"><%- user.email %></div>
+                        <% } %>
                     </div>
+
+                    <% if(user.likes) { %>
+                        <div class="eggPlantIcon2"></div>
+                        <span class="userEggplantCount"><%- user.likes %></span>
+                    <% } %>
+
                 </div>
                 <!--<div class="heightButtonUser"><span><button class="styleButtonUser colorButtonUser sizeButtonUser">Subscribe</button></span></div>-->
             </div>

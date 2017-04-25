@@ -1,3 +1,5 @@
+var moment = require("moment");
+
 module.exports = class DatabaseDTO {
 
     getUserJSON(user) {
@@ -34,6 +36,27 @@ module.exports = class DatabaseDTO {
         }
     }
 
+    getPicturesFromArray(pictures) {
+        var that = this;
+        var picturesJSONArray = [];
+        pictures.forEach(function (picture) {
+            var formattedPictureJSON = {
+                id: picture.id,
+                createdDate: Date.parse(picture.createdDate),
+                description: picture.description,
+                mentions: that.getMentionJSON(picture.mentions),
+                tags: that.getTagJSON(picture.tags),
+                url: picture.url,
+                //user_userName: picture.user_userName
+                userId: picture.userId,
+                comments: that.getCommentListJSON(picture.comments),
+                likes: that.getLikeListJSON(picture.likes)
+            };
+            picturesJSONArray.push(formattedPictureJSON);
+        });
+        return picturesJSONArray;
+    }
+
     getPictureJSON(picture) {
         var pictureJSON = picture.toJSON();
         var pictureLength = pictureJSON.length;
@@ -47,7 +70,10 @@ module.exports = class DatabaseDTO {
                 mentions: that.getMentionJSON(pictureJSON.mentions),
                 tags: that.getTagJSON(pictureJSON.tags),
                 url: pictureJSON.url,
-                userId: pictureJSON.userId
+                //user_userName: pictureJSON.user_userName
+                userId: pictureJSON.userId,
+                comments: that.getCommentListJSON(pictureJSON.comments),
+                likes: that.getLikeListJSON(pictureJSON.likes),
             };
             return formattedPictureJSON;
         }
@@ -61,7 +87,10 @@ module.exports = class DatabaseDTO {
                     mentions: that.getMentionJSON(picture.mentions),
                     tags: that.getTagJSON(picture.tags),
                     url: picture.url,
-                    userId: picture.userId
+                    //user_userName: picture.user_userName
+                    userId: picture.userId,
+                    comments: that.getCommentListJSON(picture.comments),
+                    likes: that.getLikeListJSON(picture.likes),
                 };
                 picturesJSONArray.push(formattedPictureJSON);
             });
@@ -69,10 +98,22 @@ module.exports = class DatabaseDTO {
         }
     }
 
+    getpopularUsersJSON(users) {
+
+        var usersArray = [];
+        if (typeof users === 'undefined') {
+            return usersArray;
+        }
+
+        users.forEach(function (user) {
+            usersArray.push({ id: user.user_id, likes: user["count(*)"] });
+        });
+        return usersArray;
+    }
+
     getTagJSON(tags) {
-        
         var tagsArray = [];
-        if(typeof tags === 'undefined'){
+        if (typeof tags === 'undefined') {
             return tagsArray;
         }
 
@@ -82,16 +123,100 @@ module.exports = class DatabaseDTO {
         return tagsArray;
     }
 
-    getMentionJSON(mentions) {
-
-        var mentionsArray = [];
-        if(typeof mentions === 'undefined'){
-            return mentionsArray;
+    getTagsWithCountJSON(tags) {
+        var tagsArray = [];
+        if (typeof tags === 'undefined') {
+            return tagsArray;
         }
 
+        tags.forEach(function (tag) {
+            tagsArray.push({ tag: tag.tag, count: tag["count(*)"] });
+        });
+        return tagsArray;
+    }
+
+    getMentionJSON(mentions) {
+        var mentionsArray = [];
+        if (typeof mentions === 'undefined') {
+            return mentionsArray;
+        }
         mentions.forEach(function (mention) {
             mentionsArray.push(mention.mention);
         });
         return mentionsArray;
+    }
+
+    getLikeJSON(like) {
+        var likeJson = {
+            user: like.user_id,
+        };
+        return likeJson;
+    }
+
+    getLikeListJSON(likes) {
+        var likesArray = [];
+        if (typeof likes === 'undefined') {
+            return likesArray;
+        }
+
+        likes.forEach(function (like) {
+            var likeJson = {
+                id: like.id,
+                user: like.user_id,
+                pictureId: like.picture_id,
+            };
+            likesArray.push(likeJson);
+        });
+        return likesArray;
+    }
+
+    getCommentJSON(comment) {
+        var commentJson = {
+            user: comment.user_id,
+            comment: comment.comment,
+        };
+        return commentJson;
+    }
+
+    getCommentListJSON(comments) {
+        var commentsArray = [];
+        if (typeof comments === 'undefined') {
+            return commentsArray;
+        }
+
+        comments.forEach(function (comment) {
+            var commentJson = {
+                user: comment.user_id,
+                comment: comment.comment,
+            };
+            commentsArray.push(commentJson);
+        });
+        return commentsArray;
+    }
+
+    getNotificationListJSON(pictures) {
+        var picturesJSON = pictures.toJSON();
+        var picturesLength = picturesJSON.length;
+        var notificationsArray = [];
+        if (picturesLength === 0) {
+            return notificationsArray;
+        }
+
+        pictures.forEach(function (picture) {
+            const pictureJson = picture.toJSON();
+            pictureJson.notifications.forEach(function (notification) {
+                var notificationJson = {
+                    userId: notification.user_id,
+                    picture: notification.picture_id,
+                    pictureOwnerId : pictureJson.userId,
+                    pictureUrl : pictureJson.url,
+                    date: moment(notification.date).format('MM/DD/YYYY HH:mm'),
+                    type: (notification.type == 1 ? "liked your picture" : "commented on your picture"),
+                };
+                if (notificationJson.pictureOwnerId != notificationJson.userId)
+                    notificationsArray.push(notificationJson);
+            });
+        });
+        return notificationsArray;
     }
 };

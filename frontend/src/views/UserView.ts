@@ -22,6 +22,7 @@ export class UserView extends Backbone.View<UserModel> {
                 this.$el.html("There was an error");
             },
         });
+
         return this;
     }
 

@@ -13,6 +13,11 @@ module.exports = function (app) {
         userService.getAllUsers(req, res);
     });
 
+    app.get("/users/popular", isLoggedIn, function(req, res) {
+        var userService = new UserService(config);
+        userService.getMostPopularUsers(req, res);
+    });
+
     app.get("/users/:userId", isLoggedIn, function (req, res) {
         var userService = new UserService(config);
         userService.getUser(req, res);
@@ -26,6 +31,11 @@ module.exports = function (app) {
     app.get("/users/:userId/pictures", isLoggedIn, function (req, res) {
         var userService = new UserService(config);
         userService.getUserPictures(req, res);
+    });
+
+    app.get("/users/:userId/notifications", isLoggedIn, function (req, res) {
+        var userService = new UserService(config);
+        userService.getUserNotifications(req, res);
     });
 
     app.post("/users/:userId/pictures", isLoggedIn, LocalUploadService.upload.single("file"), function (req, res) {
@@ -52,5 +62,4 @@ module.exports = function (app) {
         var userService = new UserService(config);
         userService.updateUserPicture(req, res);
     });
-
 };
